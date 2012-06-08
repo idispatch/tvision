@@ -1,0 +1,30 @@
+#!/usr/bin/make
+#
+# Copyright (c) 2003-2004 by Salvador E. Tropea
+# Covered by the GPL license.
+#
+# That's the makefile for Borland C++ compiler.
+# I used BC++ 5.5 free command line tools for testing.
+#
+
+!ifndef FOR_NMAKE
+MKF_EXT=.bmk
+!else
+MKF_EXT=.nmk
+MAKE=nmake
+!endif
+
+#
+# Main targets
+#
+all: librhtv
+
+librhtv:
+	-cd makes
+	$(MAKE) MKF_EXT="$(MKF_EXT)" -f librhtv.bmk
+	-cd ..
+
+clean:
+	-del makes\obj\*.obj
+	-del makes\*.lib
+
