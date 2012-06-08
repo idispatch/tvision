@@ -11,7 +11,7 @@ Modified by Robert H”hne to be used for RHIDE.
  *
  */
 // SET: Moved the standard headers here because according to DJ
-// they can inconditionally declare symbols like NULL
+// they can unconditionally declare symbols like NULL
 #define Uses_string
 
 #define Uses_TKeys
@@ -48,7 +48,7 @@ void TColorDisplay::draw()
         b.moveStr( i*len, text, c );
     writeLine( 0, 0, size.x, size.y, b );
 }
- 
+
 void TColorDisplay::handleEvent( TEvent& event )
 {
     TView::handleEvent( event );
@@ -63,6 +63,7 @@ void TColorDisplay::handleEvent( TEvent& event )
             case cmColorForegroundChanged:
                 *color = (*color & 0xF0) | (event.message.infoLong & 0x0F);
                 drawView();
+                break;
             }
 }
 

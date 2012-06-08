@@ -1,4 +1,7 @@
 /* Generated automatically by the configure script */
+#ifndef NO_STREAM
+#define NO_STREAM 1
+#endif
 
 /* ncurses library */
 #undef HAVE_NCURSES
@@ -55,6 +58,6 @@
 #else
 #define TVComp_GCC
 #define TVOS_UNIX
-#define TVOSf_QNX4
+#define TVOSf_BBOS10
 #endif
 

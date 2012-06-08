@@ -21,7 +21,7 @@
    You should have received a copy of the GNU General Public License
    along with this program; if not, write to the Free Software
    Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.  */
-
+
 
 #include <cl/needs.h>
 
@@ -92,7 +92,7 @@ char *alloca ();
 #endif	/* GNU C library.  */
 
 /* SET: more headers needed, __alloca isn't valid */
-#if defined(TVCompf_djgpp) || defined(TVOS_Win32) || defined(TVOSf_Solaris) || defined(TVOSf_QNX4)
+#if defined(TVCompf_djgpp) || defined(TVOS_Win32) || defined(TVOSf_Solaris) || defined(TVOSf_QNX4) || defined(TVOSf_BBOS10)
 #include <stdlib.h>
 #endif
 
@@ -197,9 +197,9 @@ static enum
 {
   REQUIRE_ORDER, PERMUTE, RETURN_IN_ORDER
 } ordering;
-
+
 /* SET: I don't understand why hello.c doesn't make it */
-#if defined(__GNU_LIBRARY__) || defined(TVCompf_djgpp) || defined(TVOS_Win32) || defined(TVOSf_Solaris) || defined(TVOSf_QNX4)
+#if defined(__GNU_LIBRARY__) || defined(TVCompf_djgpp) || defined(TVOS_Win32) || defined(TVOSf_Solaris) || defined(TVOSf_QNX4) || defined( || defined(TVOSf_BBOS10)
 /* We want to avoid inclusion of string.h with non-GNU libraries
    because there are many ways it can cause trouble.
    On some systems, it contains special magic macros that don't work
@@ -239,7 +239,7 @@ my_bcopy (from, to, size)
     to[i] = from[i];
 }
 #endif				/* GNU C library.  */
-
+
 /* Handle permutation of arguments.  */
 
 /* Describe the part of ARGV that contains non-options that have
@@ -278,7 +278,7 @@ exchange (char **argv)
   first_nonopt += (CLY_optind - last_nonopt);
   last_nonopt = CLY_optind;
 }
-
+
 /* Scan elements of ARGV (whose length is ARGC) for option characters
    given in OPTSTRING.
 
@@ -675,7 +675,7 @@ CLY_getopt(int argc, char *const *argv, const char *optstring)
 }
 
 #endif	/* _LIBC or not __GNU_LIBRARY__.  */
-
+
 #ifdef TEST
 
 /* Compile with -DTEST to make an executable for use in testing

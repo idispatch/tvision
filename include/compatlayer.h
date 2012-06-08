@@ -90,7 +90,7 @@ typedef          __int64 int64;
 #endif /* CLY_DoNotDefineSizedTypes */
 
 #if defined(CLY_DefineUTypes) || defined(__cplusplus)
-/* The following are just aliases and the size is platform dependant */
+/* The following are just aliases and the size is platform dependent */
 typedef unsigned char  uchar;
 typedef unsigned short ushort;
 typedef unsigned int   uint;

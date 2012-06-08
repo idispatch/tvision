@@ -62,7 +62,7 @@ const char *TVConfigFile::Errors[]=
   Description:
   Initializes the class and reads the contents of the specified file to a
 tree in memory.
-  
+
 ***************************************************************************/
 
 TVConfigFile::TVConfigFile()
@@ -78,11 +78,11 @@ TVConfigFile::TVConfigFile()
   Description:
   Searchs for the indicated key in the tree. Separate nested sections using
 forward slashes.
-  
+
   Return: not 0 if the key was found, the return value is in @<var>{p} if
 the key is an string. Otherwise @<var>{p} is NULL and the value is in
 @<var>{n}.
-  
+
 ***************************************************************************/
 
 int TVConfigFile::Search(const char *key, char *&p, long &n)
@@ -168,6 +168,7 @@ char *TVConfigFile::GetString()
                 break;
            default:
                 *dest=*ori;
+                break;
           }
        }
      else
@@ -427,7 +428,7 @@ int TVConfigFile::SearchInBranch(TVConfigFileTreeNode *b, char *key, char *&p, l
                break;
           case tInteger:
                n=b->integer;
-               break;               
+               break;
          }
        return 1;
       }
@@ -523,11 +524,11 @@ int TVConfigFile::Add(const char *key, TVConfigFileTreeNode *node)
 Possible priority values are justHint (25), fromFile (50) or fromApplication
 (75). It is used to determine if a current value should be replaced by the
 new value. The name is copied.
-  
+
   Return: !=0 if the variable was added.
   Example: TVConfigFile::AddInt("TV/X11","ScreenWidth",90,
 TVConfigFile::fromFile)
-  
+
 ***************************************************************************/
 
 int TVConfigFile::AddInt(const char *key, const char *name, long value, int priority)
@@ -555,11 +556,11 @@ int TVConfigFile::AddInt(const char *key, const char *name, long value, int prio
 Possible priority values are justHint (25), fromFile (50) or fromApplication
 (75). It is used to determine if a current value should be replaced by the
 new value. The name and the content are copied.
-  
+
   Return: !=0 if the variable was added.
   Example: TVConfigFile::AddInt("TV/X11","ExtProgVideoMode","A_Program",
 TVConfigFile::fromFile)
-  
+
 ***************************************************************************/
 
 int TVConfigFile::AddString(const char *key, const char *name,
@@ -637,7 +638,7 @@ void TVConfigFile::PrintBranch(TVConfigFileTreeNode *base, int indent, FILE *f)
        case tInteger:
             PrintIndent(indent,f);
             fprintf(f,"%s=%ld\n",base->name,base->integer);
-            break;               
+            break;
       }
     base=base->next;
    }
@@ -649,7 +650,7 @@ void TVConfigFile::PrintBranch(TVConfigFileTreeNode *base, int indent, FILE *f)
   Prints the current tree to the specified file. It's main purpose is to
 debug programs, but you can use it to generate valid configuration files
 from data found in memory.
-    
+
 ***************************************************************************/
 
 void TVConfigFile::Print(FILE *f)
@@ -692,7 +693,7 @@ const char *configFileNameH=".tvrc";
 of TVConfigFile used for the Turbo Vision configuration file. Note you can
 store application specific information in the configuration file using a
 section different than TV.
-  
+
 ***************************************************************************/
 
 TVMainConfigFile::TVMainConfigFile()
@@ -709,9 +710,9 @@ HOME environment variable, the path indicated by the HOMEDIR environment
 variable, /etc and /dev/env/DJDIR/etc (%DJDIR%/etc). The default name for
 the file is tvrc, if the OS uses a point in the name to make it a hidden file
 the library also tries with .tvrc.
-  
+
   Return: The error status. 0 is OK.
-  
+
 ***************************************************************************/
 
 int TVMainConfigFile::Load()
@@ -762,7 +763,7 @@ int TVMainConfigFile::Load()
 
   Description:
   Destroys the global TVConfigFile that contains the configuration.
-  
+
 ***************************************************************************/
 
 TVMainConfigFile::~TVMainConfigFile()
@@ -798,9 +799,9 @@ char *TVMainConfigFile::TestForFileIn(const char *where)
   Description:
   Looks for the specified key in the TV section. If found the result is
 stored in @<var>{val}, but only if that's an integer.
-  
+
   Return: True if the key exists, even when that's an string.
-  
+
 ***************************************************************************/
 
 Boolean TVMainConfigFile::Search(const char *key, long &val)
@@ -819,9 +820,9 @@ Boolean TVMainConfigFile::Search(const char *key, long &val)
   Looks for the specified @var{variable} in the TV section using the
 specified @var{section} as subsection. If found the result is
 stored in @<var>{val}, but only if that's an integer.
-  
+
   Return: True if the key exists, even when that's an string.
-  
+
 ***************************************************************************/
 
 Boolean TVMainConfigFile::Search(const char *section, const char *variable, long &val)
@@ -841,9 +842,9 @@ Boolean TVMainConfigFile::Search(const char *section, const char *variable, long
   Description:
   Looks for the specified key in the TV section. If found the result is
 returned but only if that's a string.
-  
+
   Return: The string or NULL.
-  
+
 ***************************************************************************/
 
 char *TVMainConfigFile::Search(const char *key)
@@ -863,9 +864,9 @@ char *TVMainConfigFile::Search(const char *key)
   Looks for the specified @var{variable} in the TV section using the
 specified @var{section} as subsection. If found the result is returned but
 only if that's a string.
-  
+
   Return: The string or NULL.
-  
+
 ***************************************************************************/
 
 char *TVMainConfigFile::Search(const char *section, const char *variable)
@@ -887,9 +888,9 @@ char *TVMainConfigFile::Search(const char *section, const char *variable)
   Adds a new variable of integer type to the TV subtree in the specified
 @<var>{section} and using the specified @<var>{name}. The priority for this
 variable is TVConfigFile::fromApplication. @x{TVConfigFile::AddInt}.
-  
+
   Return: !=0 if added.
-  
+
 ***************************************************************************/
 
 int TVMainConfigFile::Add(const char *section, const char *name, long value)
@@ -912,9 +913,9 @@ int TVMainConfigFile::Add(const char *section, const char *name, long value)
 @<var>{section} and using the specified @<var>{name}. The priority for this
 variable is TVConfigFile::fromApplication. The string is copied.
 @x{TVConfigFile::AddInt}.
-  
+
   Return: !=0 if added.
-  
+
 ***************************************************************************/
 
 int TVMainConfigFile::Add(const char *section, const char *name,

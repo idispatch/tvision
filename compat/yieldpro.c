@@ -12,9 +12,12 @@ void CLY_YieldProcessor(int micros)
 }
 #endif
 
+#if defined(TFOSf_BBOS10)
+   #include <time.h>
+#endif
 #if defined(TVOSf_QNX4)
    #include <time.h>
-#if 0
+
    static void usleep(useconds_t sleeptime)
    {
       struct timespec wait;
@@ -29,7 +32,6 @@ void CLY_YieldProcessor(int micros)
          }
       } while(1);
    }
-#endif
 #endif // TVOSf_QNX4
 
 #ifdef TVOS_UNIX

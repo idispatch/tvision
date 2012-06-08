@@ -103,7 +103,7 @@ inline int range( int val, int min, int max )
     else
         return val;
 }
-                
+
 void TView::calcBounds( TRect& bounds, TPoint delta )
 {
     bounds = getBounds();
@@ -252,14 +252,14 @@ void TView::dragView( TEvent& event,
         }
     else
         {
-        static TPoint 
-            goLeft      =   {-1, 0}, 
-            goRight     =   { 1, 0}, 
-            goUp        =   { 0,-1}, 
-            goDown      =   { 0, 1}, 
-            goCtrlLeft  =   {-8, 0}, 
+        static TPoint
+            goLeft      =   {-1, 0},
+            goRight     =   { 1, 0},
+            goUp        =   { 0,-1},
+            goDown      =   { 0, 1},
+            goCtrlLeft  =   {-8, 0},
             goCtrlRight =   { 8, 0};
-            
+
         saveBounds = getBounds();
         do  {
             p = origin;
@@ -669,7 +669,7 @@ void TView::select()
 }
 
 void TView::setBounds( const TRect& bounds )
-{            
+{
     origin = bounds.a;
     size = bounds.b - bounds.a;
 }
@@ -840,7 +840,7 @@ uchar TView::mapColor( uchar color )
 
 /**[txh]********************************************************************
 
-  Description: 
+  Description:
    This routine enables/disables the screen cursor.
    Two details are important:
    1) If our object is really visible (not under another)
@@ -849,7 +849,7 @@ uchar TView::mapColor( uchar color )
   have the screen (owner==0) is reached or we determine we are under
   another view and hence the cursor isn't visible.
   SET: I recoded it for clarity.
-  
+
 ***************************************************************************/
 
 void TView::resetCursor()
@@ -921,10 +921,10 @@ static Boolean lineExposed(TView *view, int Line, int x1, int x2, TView *target=
 must split the search in two. In this case the routine calls itself
 providing a value for the target TView so we know that's just a continuation
 and the initialization is skipped.
-  
+
   Return:
   True if exposed, false if not.
-  
+
 ***************************************************************************/
 
 static
@@ -944,7 +944,7 @@ Boolean lineExposed(TView *view, int line, int x1, int x2, TView *target)
        line+=view->origin.y;
        x1+=view->origin.x;
        x2+=view->origin.x;
-     
+
        // Apply clipping, and check if the coordinate gets outside
        TRect &clip=view->owner->clip;
        if (line<clip.a.y || line>=clip.b.y)
@@ -955,11 +955,11 @@ Boolean lineExposed(TView *view, int line, int x1, int x2, TView *target)
           x2=clip.b.x;
        if (x1>=x2)
           return False;
-     
+
        // Go to last in the owner's list
        view=view->owner->last;
       }
-  
+
     while (1)
       {
        view=view->next;
@@ -972,16 +972,16 @@ Boolean lineExposed(TView *view, int line, int x1, int x2, TView *target)
           target=NULL;
           break;
          }
-     
+
        // If not visible forget it
        if (!(view->state & sfVisible)) continue;
-     
+
        // Check the Y range
        Ytest=view->origin.y;
        if (line<Ytest)  continue;
        Ytest+=view->size.y;
        if (line>=Ytest) continue;
-     
+
        // Check the X range
        Xtest=view->origin.x;
        if (x1>=Xtest)
@@ -1100,7 +1100,7 @@ void blitBuffer(TView *view, int line, int xStart, int xEnd, int offset,
           toBlit=(const ushort *)aux;
          }
       }
-   
+
     if (isScreen)
        TScreen::setCharacters(destOffset,(ushort *)toBlit,count);
     else
@@ -1148,14 +1148,14 @@ void WriteView(int xStart, int line, int xEnd, const void *buffer,
        {// Pass to the owner or init if that's the first call
         if (!(view->state & sfVisible) ||
             !view->owner) return;
-      
+
         // Make coordinates relative to the owner
         line+=view->origin.y;
         x=view->origin.x;
         xStart+=x;
         xEnd  +=x;
         offset+=x;
-      
+
         // Apply clipping, and check if the coordinate gets outside
         TRect &clip=view->owner->clip;
         if (line<clip.a.y || line>=clip.b.y) return;
@@ -1164,7 +1164,7 @@ void WriteView(int xStart, int line, int xEnd, const void *buffer,
         if (xEnd>clip.b.x)
            xEnd=clip.b.x;
         if (xStart>=xEnd) return;
-       
+
         target=view;
         view=view->owner->last;
        }
@@ -1266,7 +1266,7 @@ void WriteView(int xStart, int line, int xEnd, const void *buffer,
            continue;
           }
        }
-     // The mouse is in the draw area or an event has occoured during
+     // The mouse is in the draw area or an event has occurred during
      // the above drawing
      HideMouse();
      blitBuffer(view,line,xStart,xEnd,offset,((const ushort *)buffer),inShadow);

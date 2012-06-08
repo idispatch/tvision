@@ -98,7 +98,6 @@ private:
 	{ return name; }
 
 protected:
-
     TGroup( StreamableInit );
     virtual void write( opstream& );
     virtual void *read( ipstream& );
@@ -109,7 +108,6 @@ public:
     static TStreamable *build();
 #endif // NO_STREAM
 };
-
 #if !defined( NO_STREAM )
 inline ipstream& operator >> ( ipstream& is, TGroup& cl )
     { return is >> (TStreamable&)cl; }

@@ -253,7 +253,7 @@ TView *TGroup::firstMatch( ushort aState, ushort aOptions )
     TView* temp = last;
     while(1)
         {
-        if( ((temp->state & aState) == aState) && 
+        if( ((temp->state & aState) == aState) &&
             ((temp->options & aOptions) ==  aOptions))
             return temp;
 
@@ -261,6 +261,7 @@ TView *TGroup::firstMatch( ushort aState, ushort aOptions )
         if( temp == last )
             return 0;
         }
+    return 0;
 }
 
 void TGroup::freeBuffer()
@@ -343,7 +344,7 @@ void TGroup::handleEvent( TEvent& event )
     TView::handleEvent( event );
 
     handleStruct hs( event, *this );
-    
+
     if( (event.what & focusedEvents) != 0 )
         {
         phase = phPreProcess;
@@ -476,8 +477,8 @@ void TGroup::setCurrent( TView* p, selectMode mode )
              (current->state & sfFocused)
            )
            {
-            unlock(); 
-            return; 
+            unlock();
+            return;
            }
         if( mode != enterSelect )
             if( current != 0 )
@@ -531,7 +532,7 @@ void TGroup::setState( ushort aState, Boolean enable )
     TView::setState( aState, enable );
 
     if( (aState & (sfActive | sfDragging)) != 0 )
-        { 
+        {
         lock();
         forEach( doSetState, &sb );
         unlock();
@@ -611,7 +612,7 @@ void *TGroup::read( ipstream& is )
     ushort index;
 
     TView::read( is );
-    clip = getExtent(); 
+    clip = getExtent();
     TGroup *ownerSave = owner;
     owner = this;
     last = 0;

@@ -2,7 +2,7 @@
 
   Copyright 2001-2003 by Salvador E. Tropea
   This file is covered by the GPL license.
-  
+
   Module: Screen
   Include: TScreen
   Comments:
@@ -229,7 +229,10 @@ stDriver Drivers[]=
    #ifdef TVOSf_QNX4
     { TV_QNX4DriverCheck, 90, "QNX4" },
    #endif // TVOSf_QNX4
+   #ifdef TVOSf_BBOS10
+   #else
    { TV_XTermDriverCheck, 60, "XTerm" },
+   #endif
    #ifdef HAVE_NCURSES
    { TV_UNIXDriverCheck, 10, "UNIX" },
    #endif
@@ -272,7 +275,7 @@ object.@*
   Actually it calls the detection routines to determine the best driver
 available. If non is found prints and error to the stderr output and aborts
 the execution.
-  
+
 ***************************************************************************/
 
 TScreen::TScreen() :

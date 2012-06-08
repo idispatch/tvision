@@ -54,7 +54,7 @@ supposed to call it.@*
 rows, but a class (like TDesktop) should use TScreen::getRows(), it will
 return a cached data that can additionally have some translation applied to
 the value returned by TDisplay::getRows().@*
-  It should be posible to split the physical screen in 4 different screens
+  It should be possible to split the physical screen in 4 different screens
 handled by a special TScreen class. In this case TDisplay::getRows will
 return a different value than TScreen, lets say the double. Then calling
 TScreen::clearScreen will erase the current "screen" and not the whole
@@ -62,7 +62,7 @@ physical screen.@*
   JASC have the idea of making some of the members pointers that can be
 changed by the hardware layers. I implemented it but with many
 differences.@*
-  
+
 ***************************************************************************/
 
 class TDisplay
@@ -162,7 +162,7 @@ public:
  static Boolean searchDOSModeInfo(ushort mode, unsigned &w, unsigned &h, int &fW, int &fH);
  // Used to know the format needed for buffers passed to setCharacters
  static int     getDrawingMode() { return drawingMode; }
- 
+
  // Tables for the DOS video modes, used to look for similar modes by other drivers
  static TScreenResolution dosModesRes[];
  static TScreenResolution dosModesCell[];
@@ -222,7 +222,7 @@ protected:
  static char paletteModified;
  // This is the palette parsed from the tvrc file or the application
  static TScreenColor UserStartPalette[16];
- // Code page initializator
+ // Code page initializer
  static TVCodePage *codePage;
  // Initialization call back
  static TVScreenDriverDetectCallBack dCB;
@@ -230,7 +230,7 @@ protected:
  static Boolean busyState;
  // Format used for the drawing calls (codepage, unicode16, etc.)
  static int     drawingMode;
- 
+
  // Default behaviors
  static void        defaultClearScreen(uchar, uchar);
  static ushort      defaultGetRows();
@@ -288,7 +288,7 @@ public:
  static Boolean  checkSnow;
  // Current cursor shape
  static ushort   cursorLines;
- // Pointer to the screen arranged as Attribut/Character array.
+ // Pointer to the screen arranged as Attribute/Character array.
  // This is optional and in some particular platform could be a NULL pointer.
  // SET: Changed to avoid problems, in fact some casts to int failed in
  // Alpha/Linux. We found it with Dim Zegebart.
@@ -453,7 +453,7 @@ private:
 };
 
 #if 0
-// SET: Added the following functionallity:
+// SET: Added the following functionality:
 // Linux specific stuff, enclose it in TVOSf_Linux section:
 //   If you want to setup a specific value define this variable in your code
 // and assign a value. If the variable isn't in your code the linker will use

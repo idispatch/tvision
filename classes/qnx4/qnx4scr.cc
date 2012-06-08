@@ -83,7 +83,7 @@ TScreenQNX4::TScreenQNX4()
    {
       return;
    }
-   
+
    if (dCB) dCB();
 
    // Added by SET:
@@ -140,10 +140,10 @@ TScreenQNX4::TScreenQNX4()
    TScreen::System_p=System;
    TScreen::fixCrtMode=FixCrtMode;
 
-   TGKeyQNX4::Init();   
+   TGKeyQNX4::Init();
    THWMouseQNX4::Init(ConsoleMode);
 
-   term_flush();   
+   term_flush();
    initialized=1;
 }
 
@@ -166,7 +166,7 @@ TScreenQNX4::~TScreenQNX4()
       DeleteArray(screenBuffer);
       screenBuffer=NULL;
    }
-   
+
    SpecialKeysRestore(fileno(stdin));
 
    setVideoMode(startupMode);
@@ -229,13 +229,13 @@ int TScreenQNX4::InitTermLib()
 void TScreenQNX4::Resume()
 {
    SetCrtData();
-   
+
    if ((oldScreenSizeX!=TScreen::screenWidth) || (oldScreenSizeY!=TScreen::screenHeight))
    {
       TDisplayQNX4::ConsoleResizing=1;
       ForceModeChange=1;
    }
-   
+
    for (int i=0; i<oldScreenSizeY; i++)
    {
       term_cur(i, 0);
@@ -521,11 +521,11 @@ void TScreenQNX4::setCharacters(unsigned dst, ushort* src, unsigned len)
             term_cur(TScreen::screenHeight-1, 0);
          }
          term_flush();
-	  
+
          term_cur(y, x);
          term_flush();
       }
-      
+
       term_restore_image(y, x, (char*)old, len);
       term_flush();
 
@@ -565,7 +565,7 @@ int TScreenQNX4::System(const char *command, pid_t* pidChild, int in, int out, i
       {
          _exit(127);
       }
-   
+
       // If the caller asks for redirection replace the requested handles
       if (in!=-1)
          dup2(in,STDIN_FILENO);
@@ -706,6 +706,7 @@ ushort TScreenQNX4::FixCrtMode(ushort mode)
       default:
                       _cols=(mode & 0x0000FF00UL) >> 8;
                       _rows=(mode & 0x000000FFUL);
+                      break;
    }
 
    internalmode=_rows | (_cols << 8);
