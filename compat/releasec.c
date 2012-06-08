@@ -41,7 +41,7 @@ void CLY_ReleaseCPU()
 
 #if defined(TVOSf_QNX4)
    #include <time.h>
-   
+#if 0
    static void usleep(unsigned long sleeptime)
    {
       struct timespec wait;
@@ -56,6 +56,7 @@ void CLY_ReleaseCPU()
          }
       } while(1);
    }
+#endif
 #endif
 
 #ifdef TVOS_UNIX

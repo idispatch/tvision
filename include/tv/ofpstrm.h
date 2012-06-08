@@ -24,6 +24,7 @@ Andris Pavenis and Christoph Bauer.
 #if defined( Uses_ofpstream ) && !defined( __ofpstream )
 #define __ofpstream
 
+#if !defined( NO_STREAM )
 class ofpstream : public fpbase, public opstream
 {
 public:
@@ -40,6 +41,7 @@ public:
            CLY_OpenModeT = CLY_IOSOut,
            int = CLY_FBOpenProtDef);
 };
+#endif
 
 #endif  // Uses_ofpstream
 

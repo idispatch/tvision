@@ -26,7 +26,7 @@ public:
                ushort aCommand,
                ushort aKeyCode,
                ushort aHelpCtx = hcNoContext,
-               char *p = 0,
+               const char *p = 0,
                TMenuItem *aNext = 0
              );
     TMenuItem( const char *aName,
@@ -63,7 +63,7 @@ inline TMenuItem& operator + ( TMenuItem& s, TMenuItem& i )
 }
 
 // SET: From TVTools
-inline void operator += ( TMenuItem& i1, TMenuItem& i2 )                        
+inline void operator += ( TMenuItem& i1, TMenuItem& i2 )
 {
     i1 = i1 + i2;
 }

@@ -10,7 +10,7 @@
 character to all the supported terminals.@p
   It was originally designed for SETEdit and moved to Turbo Vision in 2002.@p
   The internal encoding system maps the first 256 to CP 437.@p
-  Important: The Turbo Vision never had such a thing and this is completly
+  Important: The Turbo Vision never had such a thing and this is completely
 new code that affects a lot of TV components.@p
   The mechanism used is similar to what Linux kernel uses, why? simple:@*
 1) That's the most complex mechanism I found in all the targets so far.@*
@@ -42,7 +42,7 @@ it, then you change the application code page and you can properly see
 documents encoded in the target code page. But in order to edit them you
 need to translate the codes that come from keyboard to the target code page.
 That's a good use for the input code page.
-  
+
 ***************************************************************************/
 
 #define Uses_stdio
@@ -1369,7 +1369,7 @@ void TVCodePage::CreateCodePagesCol()
   Description:
   Initializes the code page system selecting the indicated code pages. This
 is only used iternally. @x{::SetCodePage}.
-  
+
 ***************************************************************************/
 
 TVCodePage::TVCodePage(int idApp, int idScr, int idInp)
@@ -1691,9 +1691,9 @@ ccIndex TVCodePage::IDToIndex(int id)
   Description:
   Converts an index in the code page collection into a code page id. No
 check of range is done.
-  
+
   Return: The code page id for the indicated index.
-  
+
 ***************************************************************************/
 
 int TVCodePage::IndexToID(ccIndex index)
@@ -1708,12 +1708,12 @@ int TVCodePage::IndexToID(ccIndex index)
   Description:
   Used to get a map to translate code page symbols into internal symbols for
 the indicated code page id.
-  
+
   Return: A pointer to a static buffer containing the translation values. Or
 NULL if not initialized. The index 256 indicates 128 if only the upper 128
 values are really different from CP 437 or 256 if all the values are
 different. In any case all the values are usable.
-  
+
 ***************************************************************************/
 
 ushort *TVCodePage::GetTranslate(int id)
@@ -1741,7 +1741,7 @@ ushort *TVCodePage::GetTranslate(int id)
   Description:
   Fills a table with pairs Unicode/code in CP. The table is sorted and the
 user must provide an array with at least 256 elements to fill.
-  
+
 ***************************************************************************/
 
 void TVCodePage::GetUnicodesForCP(int id, stIntCodePairs *unicodes)
@@ -1764,9 +1764,9 @@ void TVCodePage::GetUnicodesForCP(int id, stIntCodePairs *unicodes)
   Used to get a TStringCollection listing all the available code pages.
 Useful to make the user choose one. This is a read-only value, don't modify
 it.
-  
+
   Return: The internal collection casted to TStringCollection.
-  
+
 ***************************************************************************/
 
 TStringCollection *TVCodePage::GetList(void)
@@ -1779,10 +1779,10 @@ TStringCollection *TVCodePage::GetList(void)
   Description:
   Remaps the desired character using the provided map. The original character
 should be in CP437 encoding. @x{::GetTranslate}.
-  
+
   Return: The remapped character. It can be a direct translation or the
 closest found.
-  
+
 ***************************************************************************/
 
 uchar TVCodePage::RemapChar(uchar c, ushort *map)
@@ -1812,7 +1812,7 @@ uchar TVCodePage::RemapChar(uchar c, ushort *map)
   Description:
   Remaps the @<var>{o} string using the provided map and storing it in the
 @<var>{n} string. The string should be terminated by a 0. @x{::RemapChar}.
-  
+
 ***************************************************************************/
 
 void TVCodePage::RemapString(uchar *n, uchar *o, ushort *map)
@@ -1828,7 +1828,7 @@ void TVCodePage::RemapString(uchar *n, uchar *o, ushort *map)
   Remaps the @var{o} string using the provided map and storing it in the
 @var{n} string. The number of items to remap is indicated with @var{len}.
 @x{::RemapChar}.
-  
+
 ***************************************************************************/
 
 void TVCodePage::RemapNString(uchar *n, uchar *o, ushort *map, int len)
@@ -1843,7 +1843,7 @@ void TVCodePage::RemapNString(uchar *n, uchar *o, ushort *map, int len)
   Used to remap a buffer from any of the supported code pages into another.
 The process doesn't have to be reversible.@p
   Tabs, carriage returns, new lines and the null code aren't remapped.
-  
+
 ***************************************************************************/
 
 void TVCodePage::RemapBufferGeneric(int sourID, int destID, uchar *buffer, unsigned len,
@@ -2000,9 +2000,9 @@ void TVCodePage::RemapTVStrings(ushort *map)
   Description:
   Sets the function to be called after changing the code page. This should
 remap the special strings used by the application.
-  
+
   Return: The previous function. If it's != NULL you should call it.
-  
+
 ***************************************************************************/
 
 TVCodePageCallBack TVCodePage::SetCallBack(TVCodePageCallBack cb)
@@ -2016,9 +2016,9 @@ TVCodePageCallBack TVCodePage::SetCallBack(TVCodePageCallBack cb)
 
   Description:
   Protected member used to find the code page structure for a provided id.
-  
+
   Return: A CodePage structure pointer.
-  
+
 ***************************************************************************/
 
 CodePage *TVCodePage::CodePageOfID(int id)
@@ -2700,9 +2700,9 @@ const int TVCodePage::providedUnicodesBL=sizeof(TVCodePage::InternalMapBrokenLin
   Description:
   Finds which unicode is represented by the specified internal code.
 Currently that's an slow search because isn't used very much.
-  
+
   Return: The first unicode found.
-  
+
 ***************************************************************************/
 
 uint16 TVCodePage::UnicodeForInternalCode(uint16 value)
@@ -2718,9 +2718,9 @@ uint16 TVCodePage::UnicodeForInternalCode(uint16 value)
 
   Description:
   Finds which internal code can render an Unicode value.
-  
+
   Return: The internal or -1 if none can do it.
-  
+
 ***************************************************************************/
 
 int TVCodePage::InternalCodeForUnicode(ushort unicode)
@@ -2739,7 +2739,7 @@ int TVCodePage::InternalCodeForUnicode(ushort unicode)
   Creates a new code page from an arry containing the unicodes for each
 symbol. Use an id over than 0x7FFF8000 to avoid collisions. This is used by
 the Linux driver when the unicodes maps doesn't match with known cp.
-  
+
 ***************************************************************************/
 
 void TVCodePage::CreateCPFromUnicode(CodePage *cp, int id, const char *name,
@@ -2784,7 +2784,7 @@ void TVCodePage::CreateCPFromUnicode(CodePage *cp, int id, const char *name,
 array containing the Unicodes for each symbol. @x{::CreateCPFromUnicode}.
 
   Return: The index of the new code page in the collection.
-  
+
 ***************************************************************************/
 
 ccIndex TVCodePage::AddCodePage(CodePage *cp)
@@ -2801,9 +2801,9 @@ ccIndex TVCodePage::AddCodePage(CodePage *cp)
 function could change in the future.@*
   Basically it finds a replacement for a missing symbol in a font. It allows
 using incomplete font.
-  
+
   Return: The replacement or -1 if none known.
-  
+
 ***************************************************************************/
 
 int TVCodePage::LookSimilarInRange(int code, int last)
@@ -2827,9 +2827,9 @@ to Unicode and viceversa.
 
   Description:
   Converts an Unicode value to application code page.
-  
+
   Return: application code page value, 0 is the fallback.
-  
+
 ***************************************************************************/
 
 char TVCodePage::convertU16_2_CP(uint16 val)
@@ -2842,9 +2842,9 @@ char TVCodePage::convertU16_2_CP(uint16 val)
 
   Description:
   Converts an application code page value to Unicode.
-  
+
   Return: The Unicode that represents this value.
-  
+
 ***************************************************************************/
 
 uint16 TVCodePage::convertCP_2_U16(char val)
@@ -2856,9 +2856,9 @@ uint16 TVCodePage::convertCP_2_U16(char val)
 
   Description:
   Converts an Unicode value to input code page.
-  
+
   Return: application code page value, 0 is the fallback.
-  
+
 ***************************************************************************/
 
 char TVCodePage::convertU16_2_InpCP(uint16 val)
@@ -2873,9 +2873,9 @@ char TVCodePage::convertU16_2_InpCP(uint16 val)
 
   Description:
   Converts an input code page value to Unicode.
-  
+
   Return: The Unicode that represents this value.
-  
+
 ***************************************************************************/
 
 uint16 TVCodePage::convertInpCP_2_U16(char val)
@@ -2888,9 +2888,9 @@ uint16 TVCodePage::convertInpCP_2_U16(char val)
   Description:
   Converts a buffer containing Unicode/Attribute to Application Code Page/
 Attribute.
-  
+
   Return: The destination buffer.
-  
+
 ***************************************************************************/
 
 void *TVCodePage::convertBufferU16_2_CP(void *dest, const void *orig,
@@ -2912,9 +2912,9 @@ void *TVCodePage::convertBufferU16_2_CP(void *dest, const void *orig,
   Description:
   Converts a buffer containing Application Code Page/Attribute to
 Unicode/Attribute.
-  
+
   Return: The destination buffer.
-  
+
 ***************************************************************************/
 
 void *TVCodePage::convertBufferCP_2_U16(void *dest, const void *orig,
@@ -2935,9 +2935,9 @@ void *TVCodePage::convertBufferCP_2_U16(void *dest, const void *orig,
   Description:
   Converts a string containing Unicode to Application Code Page. The len is
 as returned by strlen and the destination must be len+1 bytes for the EOS.
-  
+
   Return: The destination string.
-  
+
 ***************************************************************************/
 
 void *TVCodePage::convertStrU16_2_CP(void *dest, const void *orig,
@@ -2959,9 +2959,9 @@ void *TVCodePage::convertStrU16_2_CP(void *dest, const void *orig,
   Description:
   Converts a string containing Application Code Page to Unicode. The
 destination must be (len+1)*2 bytes for the EOS.
-  
+
   Return: The destination string.
-  
+
 ***************************************************************************/
 
 void *TVCodePage::convertStrCP_2_U16(void *dest, const void *orig,

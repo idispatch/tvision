@@ -170,6 +170,7 @@ void TSortedListBox::newList( TSortedCollection *aList )
     searchPos = USHRT_MAX;
 }
 
+#if !defined( NO_STREAM )
 TStreamable *TSortedListBox::build()
 {
     return new TSortedListBox( streamableInit );
@@ -186,3 +187,4 @@ void *TSortedListBox::read( ipstream& is )
 
     return this;
 }
+#endif

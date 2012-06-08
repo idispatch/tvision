@@ -30,23 +30,29 @@ void TRadioButtons::press( int item )
 {
     value = item;
     TCluster::press(item);
+#if !defined( NO_STREAM )
     evaluateMasks();
+#endif
 }
 
 void TRadioButtons::movedTo( int item )
 {
     value = item;
     TCluster::movedTo(item);
+#if !defined( NO_STREAM )
     evaluateMasks();
+#endif
 }
 
 void TRadioButtons::setData( void * rec )
 {
     TCluster::setData(rec);
     sel = value;
+#if !defined( NO_STREAM )
     evaluateMasks();
+#endif
 }
-
+#if !defined( NO_STREAM )
 void TRadioButtons::evaluateMasks()
 {
     if( !enableMasks )
@@ -76,7 +82,6 @@ uint32 TRadioButtons32::dataSize()
     return 4;
 }
 
-#if !defined( NO_STREAM )
 TStreamable *TRadioButtons::build()
 {
     return new TRadioButtons( streamableInit );

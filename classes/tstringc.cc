@@ -11,7 +11,7 @@ Modified by Robert H”hne to be used for RHIDE.
  *
  */
 // SET: Moved the standard headers here because according to DJ
-// they can inconditionally declare symbols like NULL
+// they can unconditionally declare symbols like NULL
 #define Uses_string
 
 #define Uses_TStringCollection
@@ -49,7 +49,6 @@ void *TStringCollection::readItem( ipstream& is )
 {
     return is.readString();
 }
-#endif // NO_STREAM
 
 TStringCollection & TStringCollection::operator = (const TStringCollection & pl)
 {
@@ -62,4 +61,5 @@ TStringCollection & TStringCollection::operator = (const TStringCollection & pl)
   }
   return *this;
 }
+#endif // NO_STREAM
 

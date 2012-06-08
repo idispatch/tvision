@@ -23,7 +23,7 @@ Andris Pavenis.
 #include <tv.h>
 
 UsingNamespaceStd
-
+#if !defined( NO_STREAM )
 const long rStreamMagic = 0x52504246uL; // 'FBPR'
 
 #pragma pack(1)
@@ -82,7 +82,7 @@ TResourceFile::TResourceFile( fpstream *aStream ) : TObject()
                    found = 1;
                else
                    {
-                   basePos += 
+                   basePos +=
                       header->info.infoSize + 16 - (header->info.infoSize)%16;
                    repeat = 1;
                    }
@@ -191,4 +191,4 @@ void TResourceFile::put(TStreamable *item, const char *key)
     p->size  = indexPos - CLY_StreamPosT(p->pos);
     modified = True;
 }
-
+#endif

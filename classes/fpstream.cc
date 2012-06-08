@@ -22,7 +22,7 @@ Added filelength member by Salvador E. Tropea (SET)
 #include <tv.h>
 
 UsingNamespaceStd
-
+#if !defined( NO_STREAM )
 fpstream::fpstream()
 {
 }
@@ -54,7 +54,6 @@ void fpstream::open( const char *name, CLY_OpenModeT omode, int prot )
     fpbase::open( name, omode | CLY_IOSIn | CLY_IOSOut | CLY_IOSBin, prot );
 }
 
-
 // SET: I added this member because a lot of applications tries to get
 // the file descriptor just to find the filelength. This mechanism doesn't
 // work with the ISO C++ 1998 standard so here I hide the difference using
@@ -72,5 +71,6 @@ long fpstream::filelength()
 {
  return ::filelength(rdbuf()->fd());
 }
+#endif
 #endif
 

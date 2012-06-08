@@ -14,14 +14,14 @@ void CLY_YieldProcessor(int micros)
 
 #if defined(TVOSf_QNX4)
    #include <time.h>
-   
-   static void usleep(unsigned long sleeptime)
+#if 0
+   static void usleep(useconds_t sleeptime)
    {
       struct timespec wait;
-      
+
       wait.tv_sec=0;
       wait.tv_nsec=sleeptime;
-      
+
       do {
          if (nanosleep(&wait, &wait)==0)
          {
@@ -29,6 +29,7 @@ void CLY_YieldProcessor(int micros)
          }
       } while(1);
    }
+#endif
 #endif // TVOSf_QNX4
 
 #ifdef TVOS_UNIX

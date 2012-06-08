@@ -29,7 +29,7 @@
 #define Uses_opstream
 #define Uses_TPWrittenObjects
 #include <tv.h>
-
+#if !defined( NO_STREAM )
 inline
 unsigned strlen16(const uint16 *s)
 {
@@ -263,4 +263,4 @@ void opstream::registerObject( const void *adr )
 {
     objs->registerObject( adr );
 }
-
+#endif

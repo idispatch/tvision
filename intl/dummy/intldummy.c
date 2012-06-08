@@ -1,12 +1,12 @@
 /* Copyright (C) 2001-2003 by Salvador E. Tropea (SET),
-   see copyrigh file for details */
+   see copyright file for details */
 /**[txh]********************************************************************
 
   Description:
   This file provides dummies for the libintl.a library so you can create
 programs without international support even if your Turbo Vision library
 was configured to have it.
-  
+
 ***************************************************************************/
 
 char *textdomain(const char *domainname)

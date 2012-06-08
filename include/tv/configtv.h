@@ -1,22 +1,22 @@
 /* Generated automatically by the configure script */
 
 /* ncurses library */
-#define HAVE_NCURSES 1
+#undef HAVE_NCURSES
 
 /* ncurses 4.2 or better have define_key (In Linux) */
-#define HAVE_DEFINE_KEY 1
+#undef HAVE_DEFINE_KEY
 
 /* The X11 keysyms are there */
-#define HAVE_KEYSYMS 1
+#undef HAVE_KEYSYMS
 
 /* X11 library and headers */
-#define HAVE_X11 1
+#undef HAVE_X11
 
 /* International support with gettext */
-#define HAVE_INTL_SUPPORT 1
+#undef HAVE_INTL_SUPPORT
 
 /* GPM mouse support */
-#define HAVE_GPM 1
+#undef HAVE_GPM
 
 /* out/in functions defined by glibc */
 /*#define HAVE_OUTB_IN_SYS 1*/
@@ -32,7 +32,7 @@
 
 /* Memcpy doesn't support overlaps */
 /*#define HAVE_UNSAFE_MEMCPY 1*/
-
+#if 0
 #define TVOS_UNIX
 #define TVOSf_Linux
 #define TVCPU_x86
@@ -52,4 +52,9 @@
 #define TVCONFIG_CFLAGS   "-O2 -Wall -Werror -gstabs+3 -pipe"
 #define TVCONFIG_CXXFLAGS "-O2 -Wall -Werror -gstabs+3 -pipe"
 #define TVCONFIG_REF_DIR  "/usr/src/tvision"
+#else
+#define TVComp_GCC
+#define TVOS_UNIX
+#define TVOSf_QNX4
+#endif
 

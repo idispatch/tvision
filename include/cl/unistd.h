@@ -1,8 +1,6 @@
 #ifndef __UNISTD_H
 #define __UNISTD_H
 
-//#define PATH_MAX MAXPATH
-
 #ifndef F_OK
  #define F_OK 0
 #endif

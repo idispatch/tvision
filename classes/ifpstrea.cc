@@ -20,7 +20,7 @@ Andris Pavenis.
 #include <tv.h>
 
 UsingNamespaceStd
-
+#if !defined( NO_STREAM )
 ifpstream::ifpstream()
 {
 }
@@ -51,5 +51,5 @@ void ifpstream::open( const char *name, CLY_OpenModeT omode, int prot )
 {
     fpbase::open( name, omode | CLY_IOSIn | CLY_IOSBin, prot );
 }
-
+#endif
 

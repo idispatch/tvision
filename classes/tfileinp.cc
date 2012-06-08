@@ -43,7 +43,7 @@ NULL.@p
 ***************************************************************************/
 
 static
-int strCat(char *d, char *s1, char *s2, char *s3, int max)
+int strCat(char *d, char const *s1, char const *s2, char const *s3, int max)
 {
  char *dest=d;
  char *end=dest+max;

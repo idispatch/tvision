@@ -24,6 +24,7 @@ Andris Pavenis and Christoph Bauer.
 #if defined( Uses_ifpstream ) && !defined( __ifpstream )
 #define __ifpstream
 
+#if !defined( NO_STREAM )
 class ifpstream : public fpbase, public ipstream
 {
 public:
@@ -42,6 +43,6 @@ public:
                       int = CLY_FBOpenProtDef
                     );
 };
-
+#endif
 #endif  // Uses_ifpstream
 

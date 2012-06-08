@@ -41,7 +41,7 @@ TMenuItem::TMenuItem(   const char *aName,
                         ushort aCommand,
                         ushort aKeyCode,
                         ushort aHelpCtx,
-                        char *p,
+                        const char *p,
                         TMenuItem *aNext
              )
 {
@@ -90,7 +90,7 @@ TMenuItem::~TMenuItem()
   Description:
   Appends the provided TMenuItem at the end of the chain.@*
   Coded by SET. That's a mix between Dean Wakerley and TVTools ideas.
-  
+
 ***************************************************************************/
 
 void TMenuItem::append( TMenuItem *aNext )
@@ -399,7 +399,7 @@ ushort TMenuView::getHelpCtx()
     TMenuView *c = this;
 
     while( c != 0 &&
-                (c->current == 0 || 
+                (c->current == 0 ||
                  c->current->helpCtx == hcNoContext ||
                  c->current->name == 0 )
          )
@@ -459,9 +459,9 @@ void TMenuView::do_a_select( TEvent& event )
 
   Description:
   This is the code to look-up an item from a key. Used by handleEvent.
-  
+
   Return: True if the item was found.
-  
+
 ***************************************************************************/
 
 Boolean TMenuView::keyToItem(TEvent &event)
@@ -480,9 +480,9 @@ Boolean TMenuView::keyToItem(TEvent &event)
 
   Description:
   This is the code to look-up a short cut from a key. Used by handleEvent.
-  
+
   Return: True if the item was found.
-  
+
 ***************************************************************************/
 
 Boolean TMenuView::keyToHotKey(TEvent &event)

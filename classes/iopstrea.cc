@@ -18,7 +18,7 @@ Andris Pavenis.
 #include <tv.h>
 
 UsingNamespaceStd
-
+#if !defined( NO_STREAM )
 iopstream::iopstream( CLY_streambuf * sb )
 {
     pstream::init( sb );
@@ -31,4 +31,4 @@ iopstream::~iopstream()
 iopstream::iopstream()
 {
 }
-
+#endif

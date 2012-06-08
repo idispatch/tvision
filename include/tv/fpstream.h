@@ -24,7 +24,7 @@ Andris Pavenis and Christoph Bauer.
 
 #if defined( Uses_fpstream ) && !defined( __fpstream )
 #define __fpstream
-
+#if !defined( NO_STREAM )
 class fpstream : public fpbase, public iopstream
 {
 public:
@@ -38,6 +38,6 @@ public:
     CLY_filebuf *rdbuf();
     void open( const char *, CLY_OpenModeT, int = CLY_FBOpenProtDef );
 };
-
+#endif
 #endif  // Uses_fpstream
 

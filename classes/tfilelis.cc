@@ -14,7 +14,7 @@ exlude some particular files by configuration.
  *
  */
 #include <tv/configtv.h>
- 
+
 #define Uses_string
 #define Uses_stdio
 #ifdef TVComp_MSC
@@ -187,7 +187,7 @@ struct DirSearchRec : public TSearchRec
 struct DirSearchRec : public TSearchRec
 {
   /* SS: changed */
-  void readFf_blk(char *filename, struct stat &s)
+  void readFf_blk(char const *filename, struct stat &s)
   {
     attr = FA_ARCH;
     if (S_ISDIR(s.st_mode)) attr |= FA_DIREC;
@@ -232,7 +232,7 @@ void TFileList::readDirectory( const char *aWildCard )
   char *path, pathAux[4];
   // SET: Added code to remove .. in the root directory
   int removeParent=0;
-  
+
   if (slash)
     {
      *slash = 0;
@@ -307,7 +307,7 @@ void TFileList::readDirectory( const char *aWildCard )
   // SET: Added code to remove .. in the root directory
   int removeParent=0;
   char dirpath[PATH_MAX];
-  
+
   if (slash)
     {
      *slash = 0;
@@ -386,6 +386,7 @@ void TFileList::readDirectory( const char *aWildCard )
 #else
 
 #if defined(TVOSf_QNX4)
+#include <fnmatch.h>
 void TFileList::readDirectory( const char *aWildCard )
 {
    DIR *dp;

@@ -8,7 +8,7 @@ driver. Default members are provided.
   This is a complete new file created from concepts that José Angel Sanchez
 Caso provide me and coded from scratch. Original Turbo Vision didn't even
 have such a class.
-  
+
 ***************************************************************************/
 
 #define Uses_TEvent
@@ -28,7 +28,7 @@ char   TGKey::suspended=1;
 ushort TGKey::AltSet=0;    // Default: Left and right key are different ones
 int    TGKey::Mode=0;
 int    TGKey::inputMode=TGKey::codepage;
-char  *TGKey::KeyNames[]=
+const char  *TGKey::KeyNames[]=
 {
 "Unknown",
 "A","B","C","D","E","F","G","H","I","J","K",
@@ -268,7 +268,7 @@ int compare(const void *v1, const void *v2)
 
   Description:
   Fills the KeyMap table using the provided keyboard layout.
-  
+
 ***************************************************************************/
 
 void TGKey::FillKeyMapForCP(int id, stIntCodePairs *keyboard, size_t szKb)
@@ -345,9 +345,9 @@ routine tries to figure out which key was used and changes the event to
 be Alt+ASCII. Example: A greek keyboard can generate Alt+Alfa, in this case
 the routine will convert it into Alt+A (because Alfa is in the key that A
 is located).
-  
+
   Return: !=0 if the event was altered.
-  
+
 ***************************************************************************/
 
 int TGKey::Generic_AltInternat2ASCII(TEvent &e)
@@ -371,7 +371,7 @@ int TGKey::Generic_AltInternat2ASCII(TEvent &e)
 
   Description:
   Used by objects that needs the TEvent.keyDown.charCode filled.
-  
+
 ***************************************************************************/
 
 void TGKey::defaultFillCharCode(TEvent &e)

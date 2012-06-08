@@ -21,7 +21,7 @@ Andris Pavenis and Christoph Bauer.
 #include <tv.h>
 
 UsingNamespaceStd
-
+#if !defined( NO_STREAM )
 ofpstream::ofpstream()
 {
 }
@@ -52,4 +52,4 @@ void ofpstream::open( const char *name, CLY_OpenModeT omode, int prot )
 {
     fpbase::open( name, omode | CLY_IOSOut | CLY_IOSBin, prot );
 }
-
+#endif

@@ -33,6 +33,7 @@ trick will be used.
 #if defined( Uses_fpbase ) && !defined( __fpbase )
 #define __fpbase
 
+#if !defined( NO_STREAM )
 #ifdef CLY_DefineSpecialFileBuf
 class CLY_int_filebuf: public CLY_filebuf
 {
@@ -74,6 +75,6 @@ private:
     CLY_int_filebuf *buf;
 
 };
-
+#endif
 #endif  // Uses_fpbase
 

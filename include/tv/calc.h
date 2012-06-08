@@ -51,7 +51,7 @@ public:
     virtual TPalette& getPalette() const;
     virtual void handleEvent(TEvent& event);
     virtual void draw();
-    
+
 private:
 
     TCalcState status;
@@ -106,8 +106,8 @@ class TCalculator : public TDialog
 public:
 
     TCalculator();
-    static char *keyChar[20];
-    
+    static const char *keyChar[20];
+
 #if !defined( NO_STREAM )
     TCalculator( StreamableInit ) :
         TWindowInit(&TCalculator::initFrame), TDialog(streamableInit) { };

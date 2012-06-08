@@ -28,7 +28,7 @@
 #define Uses_TPReadObjects
 #define Uses_PubStreamBuf
 #include <tv.h>
-
+#if !defined( NO_STREAM )
 ipstream::ipstream( CLY_streambuf *sb )
 {
     objs = new TPReadObjects();
@@ -307,4 +307,4 @@ void ipstream::registerObject( const void *adr )
 {
     objs->registerObject( adr );
 }
-
+#endif

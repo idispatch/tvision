@@ -19,7 +19,7 @@ Andris Pavenis and Christoph Bauer.
 #include <tv.h>
 
 UsingNamespaceStd
-
+#if !defined( NO_STREAM )
 fpbase::fpbase()
 {
  buf=new CLY_int_filebuf();
@@ -106,7 +106,7 @@ CLY_int_filebuf *CLY_int_filebuf::open(FILE *f, ios_base::openmode mode)
       {
        _M_allocate_internal_buffer();
        _M_mode=mode;
-       
+
        // For time being, set both (in/out) sets  of pointers.
        _M_set_indeterminate();
        if ((mode & ios_base::ate) &&
@@ -128,7 +128,7 @@ CLY_int_filebuf *CLY_int_filebuf::open(int h, ios_base::openmode mode)
       {
        _M_allocate_internal_buffer();
        _M_mode=mode;
-       
+
        // For time being, set both (in/out) sets  of pointers.
        _M_set_indeterminate();
        if ((mode & ios_base::ate) &&
@@ -139,5 +139,6 @@ CLY_int_filebuf *CLY_int_filebuf::open(int h, ios_base::openmode mode)
    }
  return ret;
 }
+#endif
 #endif // CLY_DefineSpecialFileBuf
 
