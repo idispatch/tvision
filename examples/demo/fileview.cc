@@ -30,7 +30,7 @@
 #define Uses_TRect
 #define Uses_TProgram
 #define Uses_TDeskTop
-#define Uses_TStreamableClass
+
 #include <tv.h>
 __link(RScroller)
 __link(RScrollBar)

@@ -11,7 +11,6 @@ Modified by Robert H”hne to be used for RHIDE.
  *
  */
 
-#define Uses_TPoint
 #include <tv.h>
 
 TPoint operator - ( const TPoint& one, const TPoint& two )

@@ -11,16 +11,15 @@ Modified by Robert H”hne to be used for RHIDE.
  *
  */
 
-#if defined( Uses_TResourceItem ) && !defined( __TResourceItem )
+#ifndef __TResourceItem
 #define __TResourceItem
 
 struct TResourceItem
 {
-
     long pos;
     long size;
     char *key;
 };
 
-#endif  // Uses_TResourceItem
+#endif
 

@@ -18,16 +18,6 @@
  * Andris Pavenis and Christoph Bauer.
  *
  */
-#define Uses_stdio // fprintf in writeData
-#define Uses_string
-#define Uses_PubStreamBuf
-#define Uses_TStreamable
-#define Uses_TStreamableClass
-#define Uses_TPWrittenObjects
-#define Uses_TStreamableTypes
-#define Uses_pstream
-#define Uses_opstream
-#define Uses_TPWrittenObjects
 #include <tv.h>
 #if !defined( NO_STREAM )
 inline

@@ -20,7 +20,7 @@
 #define Uses_TStatusItem
 #define Uses_TStatusDef
 #define Uses_TDeskTop
-#define Uses_TStreamableClass
+
 #define Uses_TResourceFile
 #define Uses_TResourceCollection
 #define Uses_MsgBox

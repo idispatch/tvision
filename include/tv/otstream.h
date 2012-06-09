@@ -13,14 +13,16 @@ Andris Pavenis.
  *
  */
 
-#if defined( Uses_otstream ) && !defined( __otstream )
+#ifndef __otstream
 #define __otstream
 
+#if !defined( NO_STREAM )
 class otstream : public CLY_std(ostream)
 {
 public:
  otstream( TTerminal * );
 };
+#endif
 
 #endif
 

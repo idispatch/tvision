@@ -13,12 +13,11 @@ Andris Pavenis.
  *
  */
 
-#define Uses_pstream
-#define Uses_iopstream
 #include <tv.h>
 
-UsingNamespaceStd
 #if !defined( NO_STREAM )
+UsingNamespaceStd
+
 iopstream::iopstream( CLY_streambuf * sb )
 {
     pstream::init( sb );

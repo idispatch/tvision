@@ -12,17 +12,12 @@ Andris Pavenis.
  *
  *
  */
+#if !defined( NO_STREAM )
 // SET: Moved the standard headers here because according to DJ
 // they can inconditionally declare symbols like NULL
 #include <tv/configtv.h>
 // The SSC code doesn't support as much as needed for it.
 #ifndef HAVE_SSC
-
-#define Uses_string
-
-#define Uses_TTextDevice
-#define Uses_TTerminal
-#define Uses_otstream
 #include <tv.h>
 
 UsingNamespaceStd
@@ -237,5 +232,5 @@ uint32 TTerminal::prevLines(uint32 posStart, uint32 Lines)
 
  return queBack;
 }
-
+#endif
 #endif

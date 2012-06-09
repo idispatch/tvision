@@ -11,9 +11,6 @@ Modified by Robert H”hne to be used for RHIDE.
  *
  */
 
-#define Uses_TView
-#define Uses_TEvent
-#define Uses_TObject
 #include <tv.h>
 
 void *message( TView *receiver, ushort what, ushort command, void *infoPtr)

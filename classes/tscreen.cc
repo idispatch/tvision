@@ -14,16 +14,6 @@ Caso provide me and coded from scratch. The names of some members are the
 same used in original Turbo Vision for compatibility purposes.
 
 ***************************************************************************/
-
-#define Uses_stdio
-#define Uses_stdlib
-#define Uses_string
-#define Uses_unistd
-#define Uses_AllocLocal
-#define Uses_ctype
-#define Uses_TScreen
-#define Uses_TVConfigFile
-#define Uses_TGKey
 #include <tv.h>
 #include <tv/drivers.h>
 

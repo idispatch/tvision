@@ -15,13 +15,6 @@ Modified by Salvador E. Tropea: added i18n support.
 // SET: Moved the standard headers here because according to DJ
 // they can inconditionally declare symbols like NULL
 #include <ctype.h>
-#define Uses_string
-#define Uses_AllocLocal
-#define Uses_TStaticText
-#define Uses_TDrawBuffer
-#define Uses_opstream
-#define Uses_ipstream
-#define Uses_TPalette
 #include <tv.h>
 
 #define cpStaticText "\x06"
@@ -85,19 +78,19 @@ void TStaticText::draw()
             i = p;
             do {
                j = p;
-               while ((p < l) && (s[p] == ' ')) 
+               while ((p < l) && (s[p] == ' '))
                    ++p;
                while ((p < l) && (s[p] != ' ') && (s[p] != '\n'))
                    ++p;
                } while ((p < l) && (p < i + size.x) && (s[p] != '\n'));
             if (p > i + size.x)
                 if (j > i)
-                    p = j; 
-                else 
+                    p = j;
+                else
                     p = i + size.x;
             if (center == True)
                j = (size.x - p + i) / 2 ;
-            else 
+            else
                j = 0;
             b.moveBuf(j, &s[i], color, (p - i));
             while ((p < l) && (s[p] == ' '))

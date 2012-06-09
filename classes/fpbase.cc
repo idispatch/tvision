@@ -13,9 +13,6 @@ Andris Pavenis and Christoph Bauer.
  *
  */
 
-#define Uses_pstream
-#define Uses_fpbase
-#define Uses_PubStreamBuf
 #include <tv.h>
 
 UsingNamespaceStd

@@ -11,10 +11,10 @@ Modified by Robert H”hne to be used for RHIDE.
  *
  */
 
-#if defined(Uses_TValidator) && !defined(__TValidator)
+#ifndef __TValidator
 #define __TValidator
 
-const ushort	
+const ushort
 // TValidator Status constants
 		vsOk		= 0,
 		vsSyntax	= 1,
@@ -35,7 +35,7 @@ class TInputLineBase;
 // Abstract TValidator object
 class TValidator : public TObject
 #if !defined( NO_STREAM )
-    , protected TStreamable
+                 , protected TStreamable
 #endif // NO_STREAM
 {
 public:

@@ -15,24 +15,6 @@ i18n.
 // SET: Moved the standard headers here because according to DJ
 // they can inconditionally declare symbols like NULL
 #include <stdarg.h>
-#define Uses_string
-#define Uses_stdio
-
-#define Uses_MsgBox
-#define Uses_TObject
-#define Uses_TDialog
-#define Uses_TStaticText
-#define Uses_TRect
-#define Uses_TButton
-#define Uses_TProgram
-#define Uses_TInputLine
-#define Uses_TDeskTop
-#define Uses_TLabel
-#define Uses_TCheckBoxes
-#define Uses_TSItem
-#define Uses_TScreen
-#define Uses_AllocLocal
-#define Uses_snprintf
 #include <tv.h>
 
 static const char *buttonName[] =
@@ -127,7 +109,7 @@ ushort messageBoxRect( const TRect &r, const char *msg, ushort aOptions )
       }
 
     TObject::CLY_destroy( dialog );
-    
+
     return ccode;
 }
 

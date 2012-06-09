@@ -21,14 +21,9 @@ Modified by Robert H”hne to be used for RHIDE.
 /*        4 = Selected shortcut                                           */
 /* ---------------------------------------------------------------------- */
 
-#if defined( Uses_TCluster ) && !defined( __TCluster )
+#ifndef __TCluster
 #define __TCluster
 
-class TRect;
-class TSItem;
-struct TEvent;
-class TPoint;
-class TStringCollection;
 class TStringCollectionCIntl;
 
 class TCluster : public TView
@@ -99,5 +94,5 @@ inline opstream& operator << ( opstream& os, TCluster* cl )
     { return os << (TStreamable *)cl; }
 #endif // NO_STREAM
 
-#endif  // Uses_TCluster
+#endif
 

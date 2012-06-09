@@ -14,11 +14,9 @@ the memory is allocated.
 
 ***************************************************************************/
 
-#define Uses_TVPartitionTree556
 #include <tv.h>
 
-//#define DEBUG
-#ifdef DEBUG
+#ifdef _DEBUG
  #define IncTables (tables++)
  #define IncBlocks (blocks++)
 #else
@@ -30,7 +28,7 @@ TVPartitionTree556::TVPartitionTree556()
 {
  base=new uint16 **[32];
  memset(base,0,sizeof(uint16 **)*32);
- #ifdef DEBUG
+ #ifdef _DEBUG
  tables=blocks=0;
  #endif
 }
@@ -38,7 +36,7 @@ TVPartitionTree556::TVPartitionTree556()
 TVPartitionTree556::~TVPartitionTree556()
 {
  int i,j;
- #ifdef DEBUG
+ #ifdef _DEBUG
  printf("About to release %d tables and %d blocks\n",tables,blocks);
  #endif
  for (i=0; i<32; i++)

@@ -50,7 +50,7 @@
 						</toolChain>
 					</folderInfo>
 					<sourceEntries>
-						<entry excluding="include/tv/unix|include/tv/linux|classes/helpbase.cc|classes/help.cc|dual.cc|include/tv/x11|include/tv/winnt|include/tv/wingr|include/tv/win32|include/tv/qnxrtp|include/tv/qnx4|include/tv/dos|compat/unc_nt.c|compat/unc_95.c|makes|linux|extra|classes/unix|classes/linux|classes/x11|classes/winnt|classes/wingr|classes/win32|classes/qnxrtp|classes/qnx4|classes/dos|rhtv-config.c|redhat|qnxrtp|examples|doc|debian|www-site|winnt|win32|djgpp" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
+						<entry excluding="names|stream|intl|include/tv/unix|include/tv/linux|classes/helpbase.cc|classes/help.cc|dual.cc|include/tv/x11|include/tv/winnt|include/tv/wingr|include/tv/win32|include/tv/qnxrtp|include/tv/qnx4|include/tv/dos|compat/unc_nt.c|compat/unc_95.c|makes|linux|extra|classes/unix|classes/linux|classes/x11|classes/winnt|classes/wingr|classes/win32|classes/qnxrtp|classes/qnx4|classes/dos|rhtv-config.c|redhat|qnxrtp|examples|doc|debian|www-site|winnt|win32|djgpp" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
 					</sourceEntries>
 				</configuration>
 			</storageModule>
@@ -74,7 +74,7 @@
 				<configuration artifactExtension="a" artifactName="${ProjName}" buildArtefactType="org.eclipse.cdt.build.core.buildArtefactType.staticLib" buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.release,org.eclipse.cdt.build.core.buildArtefactType=org.eclipse.cdt.build.core.buildArtefactType.staticLib" description="" id="com.qnx.qcc.configuration.staticLib.release.495053985" name="Release" parent="com.qnx.qcc.configuration.staticLib.release">
 					<folderInfo id="com.qnx.qcc.configuration.staticLib.release.495053985." name="/" resourcePath="">
 						<toolChain id="com.qnx.qcc.toolChain.staticLib.release.433885029" name="QNX QCC" superClass="com.qnx.qcc.toolChain.staticLib.release">
-							<option id="com.qnx.qcc.option.cpu.971822920" superClass="com.qnx.qcc.option.cpu" value="com.qnx.qcc.option.gen.cpu.armle-v7" valueType="enumerated"/>
+							<option id="com.qnx.qcc.option.cpu.971822920" name="Target CPU:" superClass="com.qnx.qcc.option.cpu" value="com.qnx.qcc.option.gen.cpu.armle-v7" valueType="enumerated"/>
 							<targetPlatform archList="all" binaryParser="com.qnx.tools.ide.qde.core.QDEBynaryParser" id="com.qnx.qcc.targetPlatform.343940827" osList="all" superClass="com.qnx.qcc.targetPlatform"/>
 							<builder buildPath="${workspace_loc:/tvision/Release}" id="com.qnx.nto.1238386679" keepEnvironmentInBuildfile="false" managedBuildOn="true" name="CDT Internal Builder" superClass="com.qnx.nto"/>
 							<tool id="com.qnx.qcc.tool.compiler.669224704" name="QCC Compiler" superClass="com.qnx.qcc.tool.compiler">
@@ -99,7 +99,7 @@
 						</toolChain>
 					</folderInfo>
 					<sourceEntries>
-						<entry excluding="include/tv/unix|include/tv/linux|classes/helpbase.cc|classes/help.cc|dual.cc|include/tv/x11|include/tv/winnt|include/tv/wingr|include/tv/win32|include/tv/qnxrtp|include/tv/qnx4|include/tv/dos|compat/unc_nt.c|compat/unc_95.c|makes|linux|extra|classes/unix|classes/linux|classes/x11|classes/winnt|classes/wingr|classes/win32|classes/qnxrtp|classes/qnx4|classes/dos|rhtv-config.c|redhat|qnxrtp|examples|doc|debian|www-site|winnt|win32|djgpp" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
+						<entry excluding="names|stream|intl|include/tv/unix|include/tv/linux|classes/helpbase.cc|classes/help.cc|dual.cc|include/tv/x11|include/tv/winnt|include/tv/wingr|include/tv/win32|include/tv/qnxrtp|include/tv/qnx4|include/tv/dos|compat/unc_nt.c|compat/unc_95.c|makes|linux|extra|classes/unix|classes/linux|classes/x11|classes/winnt|classes/wingr|classes/win32|classes/qnxrtp|classes/qnx4|classes/dos|rhtv-config.c|redhat|qnxrtp|examples|doc|debian|www-site|winnt|win32|djgpp" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
 					</sourceEntries>
 				</configuration>
 			</storageModule>

@@ -12,7 +12,7 @@ Modified by Salvador E. Tropea: added operators and append.
  *
  */
 
-#if defined( Uses_TSItem ) && !defined( __TSItem )
+#ifndef __TSItem
 #define __TSItem
 
 class TSItem
@@ -42,5 +42,5 @@ inline void operator += ( TSItem& i1, TSItem& i2 )
     i1 = i1 + i2;
 }
 
-#endif  // Uses_TSItem
+#endif
 

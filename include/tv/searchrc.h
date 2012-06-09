@@ -11,7 +11,7 @@ Modified by Robert H”hne to be used for RHIDE.
  *
  */
 
-#if defined( Uses_TSearchRec ) && !defined( __TSearchRec )
+#ifndef __TSearchRec
 #define __TSearchRec
 
 struct TSearchRec
@@ -23,5 +23,5 @@ struct TSearchRec
     char name[PATH_MAX];
 };
 
-#endif  // Uses_TSearchRec
+#endif
 

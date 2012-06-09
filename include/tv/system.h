@@ -11,7 +11,7 @@ Modified by Robert H”hne to be used for RHIDE.
  *
  */
 
-#if !defined( __EVENT_CODES )
+#ifndef __EVENT_CODES
 #define __EVENT_CODES
 
 /* If this variable is set to nonzero, TV uses for the screen
@@ -51,26 +51,9 @@ const ushort mbRightButton = 0x04;
 const ushort mbButton4     = 0x08;
 const ushort mbButton5     = 0x10;
 
-#endif  // __EVENT_CODES
-
-
-#if defined( Uses_TEvent )
+#endif
 
 #include <tv/event.h>
-
-#endif
-
-#if defined( Uses_TEventQueue )
-
 #include <tv/eventqu.h>
-
-#endif
-
-#if defined( Uses_TScreen )
-
 #include <tv/screen.h>
-
-#endif
-
-
 

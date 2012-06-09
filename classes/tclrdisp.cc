@@ -12,16 +12,6 @@ Modified by Robert H”hne to be used for RHIDE.
  */
 // SET: Moved the standard headers here because according to DJ
 // they can unconditionally declare symbols like NULL
-#define Uses_string
-
-#define Uses_TKeys
-#define Uses_TColorDisplay
-#define Uses_TEvent
-#define Uses_TDrawBuffer
-#define Uses_TGroup
-#define Uses_TRect
-#define Uses_opstream
-#define Uses_ipstream
 #include <tv.h>
 
 TColorDisplay::TColorDisplay( const TRect& bounds, const char *aText ) :

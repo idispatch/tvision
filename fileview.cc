@@ -14,27 +14,7 @@ Modified by Salvador E. Tropea to compile for 64 bits architectures.
  *
  */
 // SET: Moved the standard headers here because according to DJ
-// they can inconditionally declare symbols like NULL
-#define Uses_stdio
-#define Uses_string
-#define Uses_stdlib
-#define Uses_ctype
-#define Uses_fcntl
-#define Uses_sys_stat
-#define Uses_filelength
-#define Uses_unistd
-#define Uses_AllocLocal
-
-#define Uses_MsgBox
-#define Uses_TKeys
-#define Uses_TScroller
-#define Uses_TDrawBuffer
-#define Uses_TRect
-#define Uses_TProgram
-#define Uses_TDeskTop
-#define Uses_TStreamableClass
-#define Uses_TFileViewer
-#define Uses_TFileDialog
+// they can unconditionally declare symbols like NULL
 #include <tv.h>
 
 #if !defined( NO_STREAM )
@@ -57,7 +37,7 @@ void *TFileViewer::read(ipstream& is)
     fName = is.readString();
     fileName = NULL;
     readFile(fName);
-    delete fName; 
+    delete fName;
     return this;
 }
 

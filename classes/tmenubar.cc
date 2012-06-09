@@ -11,17 +11,6 @@ Modified by Salvador E. Tropea. [Also added i18n support].
  *
  *
  */
-// SET: Moved the standard headers here because according to DJ
-// they can inconditionally declare symbols like NULL
-#define Uses_string
-
-#define Uses_TMenuBar
-#define Uses_TDrawBuffer
-#define Uses_TMenu
-#define Uses_TMenuItem
-#define Uses_TRect
-#define Uses_TSubMenu
-#define Uses_TScreen
 #include <tv.h>
 
 TMenuBar::TMenuBar( const TRect& bounds, TMenu *aMenu ) :

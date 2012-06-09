@@ -12,18 +12,14 @@ Modified by Salvador E. Tropea for Unicode Copyright (c) 2003.
  *
  */
 
-#if defined( Uses_TView ) && !defined( __TView )
+#ifndef __TView
 #define __TView
 
-class TRect;
-struct TEvent;
 class TGroup;
-class TPalette;
-class TCommandSet;
 
 class TView : public TObject
 #if !defined ( NO_STREAM )
-                             , public TStreamable
+            , public TStreamable
 #endif // NO_STREAM
 {
 
@@ -195,6 +191,7 @@ protected:
 #endif // NO_STREAM
 };
 
+#if !defined( NO_STREAM )
 inline ipstream& operator >> ( ipstream& is, TView& cl )
     { return is >> (TStreamable&)cl; }
 inline ipstream& operator >> ( ipstream& is, TView*& cl )
@@ -204,6 +201,7 @@ inline opstream& operator << ( opstream& os, TView& cl )
     { return os << (TStreamable&)cl; }
 inline opstream& operator << ( opstream& os, TView* cl )
     { return os << (TStreamable *)cl; }
+#endif // NO_STREAM
 
-#endif  // Uses_TView
+#endif
 

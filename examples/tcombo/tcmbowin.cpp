@@ -23,7 +23,7 @@
 
 #define Uses_TComboWindow
 #define Uses_TScrollBar
-#define Uses_TStreamableClass
+
 #define Uses_TPalette
 #include "tcombobx.h"
 

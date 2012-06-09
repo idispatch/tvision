@@ -11,9 +11,6 @@ Modified by Robert H”hne to be used for RHIDE.
  *
  */
 
-#define Uses_THistoryWindow
-#define Uses_THistoryViewer
-#define Uses_TPalette
 #include <tv.h>
 
 THistInit::THistInit( TListViewer *(*cListViewer)( TRect, TWindow *, ushort ) ) :

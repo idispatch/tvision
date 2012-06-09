@@ -11,12 +11,8 @@ Modified by Robert H”hne to be used for RHIDE.
  *
  */
 
-#if defined( Uses_TFileList ) && !defined( __TFileList )
+#ifndef __TFileList
 #define __TFileList
-
-class TRect;
-class TScrollBar;
-struct TEvent;
 
 class TFileList : public TSortedListBox
 {
@@ -86,5 +82,5 @@ inline TFileCollection *TFileList::list()
     return (TFileCollection *)TSortedListBox::list();
 }
 
-#endif  // Uses_TFileList
+#endif
 

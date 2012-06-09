@@ -11,11 +11,6 @@ Modified by Salvador E. Tropea (atReplace and other stuff)
  *
  *
  */
-// SET: Moved the standard headers here because according to DJ
-// they can inconditionally declare symbols like NULL
-#define Uses_string
-#define Uses_abort
-#define Uses_TNSCollection
 #include <tv.h>
 
 TNSCollection::TNSCollection( ccIndex aLimit, ccIndex aDelta ) :

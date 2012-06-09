@@ -11,9 +11,7 @@ Modified by Robert H”hne to be used for RHIDE.
  *
  */
 
-#define Uses_TNSSortedCollection
 #include <tv.h>
-
 
 ccIndex TNSSortedCollection::indexOf(void *item)
 {
@@ -89,7 +87,7 @@ new value returned by keyOf.
   It is currently implemented using buble sort algorithm, a better solution
 is welcome.
   Added by SET.
-  
+
 ***************************************************************************/
 
 void TNSSortedCollection::reSort()

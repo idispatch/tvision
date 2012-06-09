@@ -28,12 +28,8 @@ Added i18n support by Salvador Eduardo Tropea.
 /*        8 = Shadow                                                      */
 /* ---------------------------------------------------------------------- */
 
-#if defined( Uses_TButton ) && !defined( __TButton )
+#ifndef __TButton
 #define __TButton
-
-class TRect;
-struct TEvent;
-class TDrawBuffer;
 
 // SET: callback function and return values
 typedef int (*TButtonCallBack)(unsigned command, void *data);
@@ -100,6 +96,7 @@ public:
 #endif // NO_STREAM
 };
 
+#if !defined( NO_STREAM )
 inline ipstream& operator >> ( ipstream& is, TButton& cl )
     { return is >> (TStreamable&)cl; }
 inline ipstream& operator >> ( ipstream& is, TButton*& cl )
@@ -109,6 +106,7 @@ inline opstream& operator << ( opstream& os, TButton& cl )
     { return os << (TStreamable&)cl; }
 inline opstream& operator << ( opstream& os, TButton* cl )
     { return os << (TStreamable *)cl; }
+#endif // NO_STREAM
 
 // Note: you can't stream this class. Wait until I create relative code page
 // TViews for international buttons.
@@ -123,5 +121,5 @@ public:
     ~TButtonRef();
 };
 
-#endif  // Uses_TButton
+#endif
 

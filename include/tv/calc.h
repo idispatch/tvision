@@ -7,8 +7,10 @@
 /*-------------------------------------------------------*/
 /* Ported by SET */
 
-#if defined(Uses_TCalcDisplay) && !defined( TCalcDisplay__ )
+#ifndef TCalcDisplay__
 #define TCalcDisplay__
+
+#include <stdlib.h>
 
 // SET: The following should be enough to hold the output of the %f modifier
 #define DISPLAYLEN  25      // Length (width) of calculator display
@@ -37,10 +39,6 @@ const int cmCalcButton  = 200,
           cmCalcDecimal = cmCalcButton+17,
           cmCalcEqual   = cmCalcButton+18,
           cmCalcPlus    = cmCalcButton+19;
-
-class TRect;
-class TPalette;
-struct TEvent;
 
 class TCalcDisplay : public TView
 {
@@ -98,7 +96,7 @@ inline opstream& operator << ( opstream& os, TCalcDisplay* cl )
 #endif  // Uses_TCalcDisplay
 
 
-#if defined(Uses_TCalculator) && !defined( TCalculator__ )
+#ifndef TCalculator__
 #define TCalculator__
 
 class TCalculator : public TDialog
@@ -116,12 +114,6 @@ private:
 
     virtual const char *streamableName() const
         { return name; }
-
-//protected:
-
-//    virtual void write( opstream& );
-//    virtual void *read( ipstream& );
-
 public:
 
     static const char * const name;
@@ -140,4 +132,4 @@ inline opstream& operator << ( opstream& os, TCalculator& cl )
 inline opstream& operator << ( opstream& os, TCalculator* cl )
     { return os << (TStreamable *) cl; }
 #endif  // NO_STREAM
-#endif  // Uses_TCalculator
+#endif

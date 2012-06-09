@@ -17,25 +17,7 @@ Modified by Salvador E. Tropea:
  *
  *
  */
-// SET: Moved the standard headers here because according to DJ
-// they can inconditionally declare symbols like NULL
 #include <tv/configtv.h>
-#define Uses_string
-#define Uses_sys_stat
-#define Uses_TDirListBox
-#define Uses_TEvent
-#define Uses_TDirCollection
-#define Uses_TChDirDialog
-#define Uses_TDirEntry
-#define Uses_TButton
-#define Uses_TStreamableClass
-#define Uses_TStringCollection
-#define Uses_TKeys
-#define Uses_TVCodePage
-#define Uses_TScrollBar
-#if defined(TVCompf_djgpp) || defined(TVComp_BCPP)
- #define Uses_dir // getdisk()
-#endif
 #include <tv.h>
 
 TDirListBox::TDirListBox( const TRect& bounds, TScrollBar *aVScrollBar,
@@ -50,7 +32,7 @@ TDirListBox::TDirListBox( const TRect& bounds, TScrollBar *aVScrollBar,
 }
 
 TDirListBox::~TDirListBox()
-{ 
+{
     CLY_destroy( list() );
 }
 
@@ -75,7 +57,7 @@ void TDirListBox::getText( char *text, ccIndex item, short maxChars )
   Description:
   This is a new member added to update the cursor position. Originaly this
 class had no cursor. Now is used to show the incremental search state.
-  
+
 ***************************************************************************/
 
 void TDirListBox::updateCursorPos()
@@ -133,7 +115,7 @@ void TDirListBox::handleEvent( TEvent& event )
                          incremental, incPos ) == 0 )
                         {
                         newFocus = i;
-                        break;                        
+                        break;
                         }
                      }
               // From beginning

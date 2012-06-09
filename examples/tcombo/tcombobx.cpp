@@ -31,7 +31,7 @@
 #define Uses_TComboBox
 #define Uses_TComboWindow
 #define Uses_TKeys
-#define Uses_TStreamableClass
+
 #define Uses_TPalette
 #include "tcombobx.h"
 

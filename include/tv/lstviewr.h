@@ -11,12 +11,8 @@ Modified by Robert H”hne to be used for RHIDE.
  *
  */
 
-#if defined( Uses_TListViewer ) && !defined( __TListViewer )
+#ifndef __TListViewer
 #define __TListViewer
-
-class TRect;
-class TScrollBar;
-struct TEvent;
 
 class TListViewer : public TView
 {
@@ -62,7 +58,7 @@ public:
 protected:
     // SET: extra options ored by default to all objects of this class.
     static unsigned extraOptions;
-    // SET: neede to change the scroll bars too.
+    // SET: need to change the scroll bars too.
     void setNumCols(int aNumCols);
     // SET: Used to center the focused item.
     Boolean center;
@@ -98,5 +94,5 @@ inline opstream& operator << ( opstream& os, TListViewer* cl )
    { return os << (TStreamable *)cl; }
 #endif // NO_STREAM
 
-#endif  // Uses_TListViewer
+#endif
 

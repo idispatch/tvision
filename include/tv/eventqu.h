@@ -11,7 +11,7 @@ Modified by Robert H”hne to be used for RHIDE.
  *
  */
 
-#if defined( Uses_TEventQueue ) && !defined( __TEventQueue )
+#ifndef __TEventQueue
 #define __TEventQueue
 
 class TEventQueue
@@ -67,5 +67,5 @@ inline void TEvent::getMouseEvent()
     TEventQueue::getMouseEvent( *this );
 }
 
-#endif  // Uses_TEventQueue
+#endif
 

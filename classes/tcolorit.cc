@@ -11,18 +11,6 @@ Modified by Salvador E. Tropea for i18n support.
  *
  *
  */
-// SET: Moved the standard headers here because according to DJ
-// they can inconditionally declare symbols like NULL
-#define Uses_string
-
-#define Uses_TKeys
-#define Uses_TColorItem
-#define Uses_TColorItemList
-#define Uses_TEvent
-#define Uses_TGroup
-#define Uses_TRect
-#define Uses_opstream
-#define Uses_ipstream
 #include <tv.h>
 
 TColorItem::TColorItem( const char *nm, uchar idx, TColorItem *nxt )

@@ -19,12 +19,8 @@ Modified by Robert H”hne to be used for RHIDE.
 /*      2 = Selected text                                                 */
 /* ---------------------------------------------------------------------- */
 
-#if defined( Uses_TScroller ) && !defined( __TScroller )
+#ifndef __TScroller
 #define __TScroller
-
-class TRect;
-class TScrollBar;
-struct TEvent;
 
 class TScroller : public TView
 {
@@ -91,5 +87,5 @@ inline opstream& operator << ( opstream& os, TScroller* cl )
     { return os << (TStreamable *)cl; }
 #endif // NO_STREAM
 
-#endif  // Uses_TScroller
+#endif
 

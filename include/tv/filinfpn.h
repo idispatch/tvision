@@ -11,11 +11,8 @@ Modified by Robert H”hne to be used for RHIDE.
  *
  */
 
-#if defined( Uses_TFileInfoPane ) && !defined( __TFileInfoPane )
+#ifndef __TFileInfoPane
 #define __TFileInfoPane
-
-class TRect;
-struct TEvent;
 
 class TFileInfoPane : public TView
 {
@@ -62,5 +59,5 @@ inline opstream& operator << ( opstream& os, TFileInfoPane* cl )
     { return os << (TStreamable *)cl; }
 #endif // NO_STREAM
 
-#endif  // Uses_TFileInfoPane
+#endif
 

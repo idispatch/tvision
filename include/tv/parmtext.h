@@ -15,50 +15,45 @@
 /*        1 = Text                                                        */
 /* ---------------------------------------------------------------------- */
 
-#if defined( Uses_TParamText ) && !defined( __TParamText )
+#ifndef __TParamText
 #define __TParamText
 
-class TRect;
-
-const int tparamTextMaxLen=256;
+const int tparamTextMaxLen = 256;
 #define SAFE_CODE 1  // Don't corrupt memory if tparamTextMaxLen is small
-
-class TParamText : public TStaticText
-{
+class TParamText: public TStaticText {
 public:
- TParamText( const TRect& bounds );
- ~TParamText();
+    TParamText(const TRect& bounds);
+    ~TParamText();
 
- virtual void getText( char *str, int maxLen );
- virtual void setText( char *fmt, ... );
- virtual int  getTextLen();
+    virtual void getText(char *str, int maxLen);
+    virtual void setText(char *fmt, ...);
+    virtual int getTextLen();
 
 protected:
- char *str;
+    char *str;
 
 #if !defined( NO_STREAM )
 private:
-  virtual const char *streamableName() const
-        { return name; }
+    virtual const char *streamableName() const
+    {   return name;}
 protected:
-  TParamText( StreamableInit );
+    TParamText( StreamableInit );
 public:
-  static const char * const name;
-  static TStreamable *build();
+    static const char * const name;
+    static TStreamable *build();
 #endif
 };
 
 #if !defined( NO_STREAM )
 inline ipstream& operator >> ( ipstream& is, TParamText& cl )
-    { return is >> (TStreamable&)cl; }
+{   return is >> (TStreamable&)cl;}
 inline ipstream& operator >> ( ipstream& is, TParamText*& cl )
-    { return is >> (void *&)cl; }
+{   return is >> (void *&)cl;}
 
 inline opstream& operator << ( opstream& os, TParamText& cl )
-    { return os << (TStreamable&)cl; }
+{   return os << (TStreamable&)cl;}
 inline opstream& operator << ( opstream& os, TParamText* cl )
-    { return os << (TStreamable *)cl; }
+{   return os << (TStreamable *)cl;}
 #endif // NO_STREAM
-
-#endif  // Uses_TParamText
+#endif
 

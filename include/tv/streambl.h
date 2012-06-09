@@ -15,15 +15,16 @@ Modified by Robert H”hne to be used for RHIDE.
 /*                                                                         */
 /*   class TStreamable                                                     */
 /*                                                                         */
-/*   This is the base class for all storable objects.  It provides         */
+/*   This is the base class for all streamable objects.  It provides       */
 /*   three member functions, streamableName(), read(), and write(), which  */
 /*   must be overridden in every derived class.                            */
 /*                                                                         */
 /* ------------------------------------------------------------------------*/
 
-#if defined( Uses_TStreamable ) && !defined( __TStreamable )
+#ifndef __TStreamable
 #define __TStreamable
 
+#if !defined ( NO_STREAM )
 class TStreamable
 {
 
@@ -40,6 +41,7 @@ protected:
     virtual void write( opstream& ) = 0;
 
 };
+#endif
 
-#endif  // Uses_TStreamable
+#endif
 

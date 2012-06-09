@@ -10,31 +10,8 @@ Modified by Robert H”hne to be used for RHIDE.
  *
  *
  */
-
-#if defined( Uses_TBackground )
-
 #include <tv/backgrnd.h>
-
-#endif
-
-
-#if defined( Uses_TDeskTop )
-
 #include <tv/desktop.h>
-
-#endif
-
-
-#if defined( Uses_TProgram )
-
 #include <tv/program.h>
-
-#endif
-
-#if defined( Uses_TApplication )
-
 #include <tv/applictn.h>
-
-#endif
-
 

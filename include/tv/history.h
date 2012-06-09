@@ -11,13 +11,8 @@ Modified by Robert H”hne to be used for RHIDE.
  *
  */
 
-#if defined( Uses_THistory ) && !defined( __THistory )
+#ifndef __THistory
 #define __THistory
-
-class TRect;
-class TInputLine;
-struct TEvent;
-class THistoryWindow;
 
 class THistory : public TView
 {
@@ -71,5 +66,5 @@ inline opstream& operator << ( opstream& os, THistory* cl )
     { return os << (TStreamable *)cl; }
 #endif // NO_STREAM
 
-#endif  // Uses_THistory
+#endif
 

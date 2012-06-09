@@ -5,27 +5,26 @@
  *      All Rights Reserved.
  *
 
-Modified by Robert H”hne to be used for RHIDE.
-Modified by Salvador E. Tropea to allow dynamic status bars and i18n support.
+ Modified by Robert H”hne to be used for RHIDE.
+ Modified by Salvador E. Tropea to allow dynamic status bars and i18n support.
 
  *
  *
  */
 
-#if defined( Uses_TStatusItem ) && !defined( __TStatusItem )
+#ifndef __TStatusItem
 #define __TStatusItem
 
-class TStatusItem
-{
+class TStatusItem {
 
 public:
 
-    TStatusItem( const char *aText,
-                 ushort key,
-                 ushort cmd,
-                 TStatusItem *aNext = 0
-                );
-    ~TStatusItem() { DeleteArray(text); TVIntl::freeSt(intlText); };
+    TStatusItem(const char *aText, ushort key, ushort cmd, TStatusItem *aNext = 0);
+    ~TStatusItem() {
+        DeleteArray(text);
+        TVIntl::freeSt(intlText);
+    }
+    ;
 
     TStatusItem *next;
     const char *text;
@@ -35,19 +34,14 @@ public:
 
 };
 
-inline TStatusItem::TStatusItem( const char *aText,
-                                 ushort key,
-                                 ushort cmd,
-                                 TStatusItem *aNext
-                                ) :
-    next( aNext ), keyCode( key ), command( cmd )
-{
- // SET: If we don't allocate a copy is imposible to have dynamic status
- // lines loaded from disk files or other similar stuff. Or if we does it
- // we leak.
- text=newStr(aText);
- intlText=NULL;
+inline TStatusItem::TStatusItem(const char *aText, ushort key, ushort cmd, TStatusItem *aNext) :
+        next(aNext), keyCode(key), command(cmd) {
+    // SET: If we don't allocate a copy is impossible to have dynamic status
+    // lines loaded from disk files or other similar stuff. Or if we does it
+    // we leak.
+    text = newStr(aText);
+    intlText = NULL;
 }
 
-#endif  // Uses_TStatusItem
+#endif
 

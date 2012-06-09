@@ -159,7 +159,7 @@ diff -u ./fileview.cc E:\DJ\CONTRIB\tvision\examples\demo\fileview.cc
 @@ -22,7 +22,7 @@
  #define Uses_TProgram
  #define Uses_TDeskTop
- #define Uses_TStreamableClass
+ 
 -#include <tvision/tv.h>
 +#include <tv.h>
  __link(RScroller)

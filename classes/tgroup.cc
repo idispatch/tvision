@@ -15,15 +15,6 @@ Modified for Unicode buffers by Salvador E. Tropea (SET)
  *
  */
 
-#define Uses_TGroup
-#define Uses_TView
-#define Uses_TRect
-#define Uses_TEvent
-#define Uses_opstream
-#define Uses_ipstream
-#define Uses_TCommandSet
-#define Uses_TStreamableClass
-#define Uses_TScreen // To know the current screen encoding (codepage/unicode16)
 #include <tv.h>
 
 TView *TheTopView = 0;

@@ -11,26 +11,10 @@
 /*----------------------------------------------------------*/
 #include <tv/configtv.h>
 
-#define Uses_filelength
-#define Uses_limits
-#define Uses_string
-#define Uses_fcntl
 #ifdef TVComp_MSC
  #include <io.h>
 #else
- #define Uses_unistd
 #endif
-#define Uses_stdio
-#define Uses_sys_stat
-
-#define Uses_TGroup
-#define Uses_TEditor
-#define Uses_TFileEditor
-#define Uses_TEvent
-#define Uses_opstream
-#define Uses_ipstream
-#define Uses_TStreamableClass
-#define Uses_IOS_BIN
 #include <tv.h>
 
 UsingNamespaceStd

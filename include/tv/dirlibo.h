@@ -11,13 +11,8 @@ Modified by Robert H”hne to be used for RHIDE.
  *
  */
 
-#if defined( Uses_TDirListBox ) && !defined( __TDirListBox )
+#ifndef __TDirListBox
 #define __TDirListBox
-
-class TRect;
-class TScrollBar;
-struct TEvent;
-class TDirCollection;
 
 #include <limits.h>
 
@@ -96,5 +91,5 @@ inline TDirCollection *TDirListBox::list()
     return (TDirCollection *)TListBox::list();
 }
 
-#endif  // Uses_TDirListBox
+#endif
 

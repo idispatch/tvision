@@ -8,12 +8,10 @@ driver. Default members are provided.
   This is a complete new file created from concepts that José Angel Sanchez
 Caso provide me and coded from scratch. The names of some members are the
 same used in original Turbo Vision for compatibility purposes.
-  
+
 ***************************************************************************/
 // Definitions are located at the event.h header
 
-#define Uses_TEvent
-#define Uses_TEventQueue
 #include <tv.h>
 
 /*****************************************************************************

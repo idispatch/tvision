@@ -11,7 +11,7 @@ Modified by Robert H”hne to be used for RHIDE.
  *
  */
 
-#if defined( Uses_TStrIndexRec ) && !defined( __TStrIndexRec )
+#ifndef __TStrIndexRec
 #define __TStrIndexRec
 
 class TStrIndexRec
@@ -27,5 +27,5 @@ public:
 
 };
 
-#endif  // Uses_TStrIndexRec
+#endif
 

@@ -17,7 +17,7 @@
 
 
 #define Uses_TStaticInputLine
-#define Uses_TStreamableClass
+
 #include "tsinputl.h"
 __link( RInputLine )
 

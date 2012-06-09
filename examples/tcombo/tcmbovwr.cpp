@@ -28,7 +28,7 @@
 
 #define Uses_TComboViewer
 #define Uses_TKeys
-#define Uses_TStreamableClass
+
 #define Uses_TPalette
 #include "tcombobx.h"
 

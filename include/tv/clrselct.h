@@ -11,11 +11,8 @@ Modified by Robert H”hne to be used for RHIDE.
  *
  */
 
-#if defined( Uses_TColorSelector ) && !defined( __TColorSelector )
+#ifndef __TColorSelector
 #define __TColorSelector
-
-class TRect;
-struct TEvent;
 
 class TColorSelector : public TView
 {
@@ -71,5 +68,5 @@ inline opstream& operator << ( opstream& os, TColorSelector* cl )
     { return os << (TStreamable *)cl; }
 #endif // NO_STREAM
 
-#endif  // Uses_TColorSelector
+#endif
 

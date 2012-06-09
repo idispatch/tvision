@@ -12,7 +12,7 @@ Modified by Salvador E. Tropea for i18n support.
  *
  */
 
-#if defined( Uses_TColorItem ) && !defined( __TColorItem )
+#ifndef __TColorItem
 #define __TColorItem
 
 class TColorGroup;
@@ -36,5 +36,5 @@ protected:
     friend class TColorItemList;
 };
 
-#endif  // Uses_TColorItem
+#endif
 

@@ -13,13 +13,6 @@ Modified by Salvador E. Tropea to add functionality.
  */
 // SET: Moved the standard headers here because according to DJ
 // they can inconditionally declare symbols like NULL
-#define Uses_ctype
-#define Uses_limits
-#define Uses_string
-#define Uses_TKeys
-#define Uses_TEvent
-#define Uses_TSortedListBox
-#define Uses_TSortedCollection
 #include <tv.h>
 
 #if 0

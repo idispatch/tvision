@@ -16,7 +16,6 @@ Robert did a quick hack. We still using some of this code so isn't too bad
 
 *****************************************************************************/
 
-#define Uses_TEditor
 #include <tv.h>
 
 #if defined(TV_BIG_ENDIAN)
@@ -39,7 +38,7 @@ Boolean call10(const TEditor *edit, ushort *drawBuf, ushort color, int cx,
     {
       if (c == 0x09)
       {
-        do 
+        do
         {
          drawBuf[bufptr++] = endianCol(' ', color);
          offset++;

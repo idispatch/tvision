@@ -12,15 +12,11 @@ Modified by Salvador E. Tropea, tile, options, cursor behavior, etc.
  *
  */
 
-#if defined( Uses_TDeskTop )  && !defined( __TDeskTop )
+#ifndef __TDeskTop
 #define __TDeskTop
 
 // SET: To set the tile partition priority
 const unsigned dsktTileVertical=1, dsktTileHorizontal=0;
-
-class TBackground;
-class TRect;
-struct TEvent;
 
 class TDeskInit
 {

@@ -18,7 +18,7 @@
 #define Uses_TStatusDef
 #define Uses_TDeskTop
 #define Uses_MsgBox
-#define Uses_TStreamableClass
+
 #define Uses_TResourceCollection
 #define Uses_TResourceFile
 #define Uses_string

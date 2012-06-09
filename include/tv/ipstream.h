@@ -23,9 +23,10 @@
  *                                                                         *
  * ------------------------------------------------------------------------*/
 
-#if defined( Uses_ipstream ) && !defined( __ipstream )
+#ifndef __ipstream
 #define __ipstream
 
+#if !defined ( NO_STREAM )
 class TStreamableClass;
 class TPReadObjects;
 
@@ -89,6 +90,7 @@ protected:
 private:
     TPReadObjects *objs;
 };
+#endif
 
-#endif  // Uses_ipstream
+#endif
 

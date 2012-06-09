@@ -11,7 +11,7 @@ Modified by Robert H”hne to be used for RHIDE.
  *
  */
 
-#if defined( Uses_TFileCollection ) && !defined( __TFileCollection )
+#ifndef __TFileCollection
 #define __TFileCollection
 
 class TSearchRec;
@@ -100,5 +100,5 @@ inline TSearchRec *TFileCollection::lastThat( ccTestFunc func, void *arg )
     return (TSearchRec *)TSortedCollection::lastThat( ccTestFunc(func), arg );
 }
 
-#endif  // Uses_TFileCollection
+#endif
 

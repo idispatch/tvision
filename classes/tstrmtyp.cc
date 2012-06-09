@@ -10,12 +10,9 @@ Modified by Robert H”hne to be used for RHIDE.
  *
  *
  */
+#if !defined( NO_STREAM )
 // SET: Moved the standard headers here because according to DJ
 // they can inconditionally declare symbols like NULL
-#define Uses_string
-
-#define Uses_TStreamableClass
-#define Uses_TStreamableTypes
 #include <tv.h>
 
 TStreamableTypes::TStreamableTypes() : TNSSortedCollection( 5, 5 )
@@ -59,4 +56,5 @@ int TStreamableTypes::compare( void *d1, void *d2 )
 {
     return strcmp( (char *)d1, (char *)d2 );
 }
+#endif
 

@@ -12,14 +12,12 @@ Modified by Salvador E. Tropea.
  *
  */
 
-#if defined( Uses_MsgBox ) && !defined( __MsgBox )
+#ifndef __MsgBox
 #define __MsgBox
 
 #if !defined( __STDARG_H )
 #include <stdarg.h>
 #endif  // __STDARG_H
-
-class TRect;
 
 ushort messageBox( const char *msg, ushort aOptions );
 ushort messageBox( ushort aOptions, const char *msg, ... )
@@ -60,21 +58,6 @@ const ushort
     mfOKCancel     = mfOKButton | mfCancelButton;
                                     // Standard OK, Cancel dialog
 
-class MsgBoxText
-{
-
-public:
-
-//    static const char * yesText;
-//    static const char * noText;
-//    static const char * okText;
-//    static const char * cancelText;
-//    static const char * warningText;
-//    static const char * errorText;
-//    static const char * informationText;
-//    static const char * confirmText;
-};
-
-#endif  // Uses_MsgBox
+#endif
 
 

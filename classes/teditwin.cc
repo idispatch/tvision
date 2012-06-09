@@ -11,18 +11,6 @@
 
 *****************************************************************************/
 
-#define Uses_TFrame
-#define Uses_TWindow
-#define Uses_TRect
-#define Uses_TIndicator
-#define Uses_TEditor
-#define Uses_TMemo
-#define Uses_TFileEditor
-#define Uses_TEditWindow
-#define Uses_TEvent
-#define Uses_TScrollBar
-#define Uses_opstream
-#define Uses_ipstream
 #include <tv.h>
 
 const TPoint minEditWinSize = {24, 6};

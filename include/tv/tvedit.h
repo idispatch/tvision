@@ -12,7 +12,7 @@
 /*   Turbo Vision TVEDIT header file                        */
 /*----------------------------------------------------------*/
 
-#if defined( Uses_TEditorApp ) && !defined( __TEditorApp )
+#ifndef __TEditorApp
 #define __TEditorApp
 
 class TMenuBar;
@@ -31,8 +31,6 @@ public:
     static TMenuBar *initMenuBar( TRect );
     static TStatusLine *initStatusLine( TRect );
     virtual void outOfMemory();
-
-// private:
 
     virtual TEditWindow *openEditor( const char *fileName, Boolean visible );
 

@@ -25,7 +25,7 @@
 #define Uses_TEvent
 #define Uses_TKeys
 #define Uses_TStaticInputLine
-#define Uses_TStreamableClass
+
 #include "tsinputl.h"
 
 Boolean matchFirstChar(void *, void *);

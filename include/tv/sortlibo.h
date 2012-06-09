@@ -5,35 +5,25 @@
  *      All Rights Reserved.
  *
 
-Modified by Robert H”hne to be used for RHIDE.
+ Modified by Robert H”hne to be used for RHIDE.
 
  *
  *
  */
 
-#if defined( Uses_TSortedListBox ) && !defined( __TSortedListBox )
+#ifndef __TSortedListBox
 #define __TSortedListBox
 
-class TRect;
-class TScrollBar;
-struct TEvent;
-class TSortedCollection;
-
-class TSortedListBox: public TListBox
-{
+class TSortedListBox: public TListBox {
 
 public:
 
-    TSortedListBox( const TRect& bounds,
-		    ushort aNumCols,
-		    TScrollBar *aScrollBar
-		  );
-   TSortedListBox( const TRect& bounds, ushort aNumCols,
-                   TScrollBar *aHScrollBar, TScrollBar *aVScrollBar,
-                   Boolean aCenterOps = False);
+    TSortedListBox(const TRect& bounds, ushort aNumCols, TScrollBar *aScrollBar);
+    TSortedListBox(const TRect& bounds, ushort aNumCols, TScrollBar *aHScrollBar,
+            TScrollBar *aVScrollBar, Boolean aCenterOps = False);
 
-    virtual void handleEvent( TEvent& event );
-    void newList( TSortedCollection *aList );
+    virtual void handleEvent(TEvent& event);
+    void newList(TSortedCollection *aList);
 
     TSortedCollection *list();
 
@@ -41,13 +31,13 @@ protected:
 
     uchar shiftState;
     ushort searchPos; // SET: made protected not private
-    virtual void *getKey( const char *s );
+    virtual void *getKey(const char *s);
 
 private:
 
 #if !defined( NO_STREAM )
     virtual const char *streamableName() const
-	{ return name; }
+    {   return name;}
 
 protected:
 
@@ -61,20 +51,21 @@ public:
 #endif // NO_STREAM
 };
 
+#if !defined( NO_STREAM )
 inline ipstream& operator >> ( ipstream& is, TSortedListBox& cl )
-    { return is >> (TStreamable&)cl; }
+{   return is >> (TStreamable&)cl;}
 inline ipstream& operator >> ( ipstream& is, TSortedListBox*& cl )
-    { return is >> (void *&)cl; }
+{   return is >> (void *&)cl;}
 
 inline opstream& operator << ( opstream& os, TSortedListBox& cl )
-    { return os << (TStreamable&)cl; }
+{   return os << (TStreamable&)cl;}
 inline opstream& operator << ( opstream& os, TSortedListBox* cl )
-    { return os << (TStreamable *)cl; }
+{   return os << (TStreamable *)cl;}
+#endif
 
-inline TSortedCollection *TSortedListBox::list()
-{
-    return (TSortedCollection *)TListBox::list();
+inline TSortedCollection *TSortedListBox::list() {
+    return (TSortedCollection *) TListBox::list();
 }
 
-#endif  // Uses_TSortedListBox
+#endif
 

@@ -14,15 +14,11 @@ Added filelength member by Salvador E. Tropea (SET)
  *
  *
  */
-
-#define Uses_fpbase
-#define Uses_fpstream
-#define Uses_IOS_BIN
-#define Uses_filelength
 #include <tv.h>
 
-UsingNamespaceStd
 #if !defined( NO_STREAM )
+UsingNamespaceStd
+
 fpstream::fpstream()
 {
 }

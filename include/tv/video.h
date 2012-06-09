@@ -66,42 +66,9 @@ typedef struct {
     short	WinSize		  CLY_Packed;	    window size
 */
 #define WinSize _WORD(6)
-/*
-    short	WinASegment	  CLY_Packed;	    Window A start segment
-    short	WinBSegment	  CLY_Packed;	    Window B start segment
-*/
 #define WinASegment _WORD(8)
 #define WinBSegment _WORD(10)
-/*
-    void far  (*WinFuncPtr)()	  CLY_Packed;	    pointer to window function
-    short	BytesPerScanLine  CLY_Packed;	    bytes per scan line
-      ==== extended and optional information ====
-    short	XResolution	  CLY_Packed;	    horizontal resolution
-    short	YResolution	  CLY_Packed;	    vertical resolution
-    char	XCharSize	  CLY_Packed;	    character cell width
-    char	YCharSize	  CLY_Packed;	    character cell height
-    char	NumberOfPlanes	  CLY_Packed;	    number of memory planes
-*/
 #define NumberOfPlanes _BYTE(0x18)
-/*
-    char	BitsPerPixel	  CLY_Packed;	    bits per pixel
-    char	NumberOfBanks	  CLY_Packed;	    number of banks
-    char	MemoryModel	  CLY_Packed;	    memory model type
-    char	BankSize	  CLY_Packed;	    bank size in K
-    char	NumImagePages	  CLY_Packed;	    number of image pages
-    char	reserved[1]	  CLY_Packed;
-       ==== VESA 1.2 and later ====
-    char	RedMaskSize	  CLY_Packed;	    number of bits in red mask
-    char	RedMaskPos	  CLY_Packed;	    starting bit for red mask
-    char	GreenMaskSize	  CLY_Packed;
-    char	GreenMaskPos	  CLY_Packed;
-    char	BlueMaskSize	  CLY_Packed;
-    char	BlueMaskPos	  CLY_Packed;
-    char	ReservedMaskSize  CLY_Packed;	    reserved bits in pixel
-    char	ReservedMaskPos	  CLY_Packed;
-    char	DirectScreenMode  CLY_Packed;
-} VESAmodeInfoBlock;
-*/
 
 /************************** Inline Helpers **********************************/
 __inline__ void
@@ -129,7 +96,4 @@ _farfill_l(unsigned short sel,unsigned long offset,unsigned long count,
 #define RESTORE_VGA_BIOS   2
 #define RESTORE_VGA_COLORS 4
 #define RESTORE_VGA_ALL    7
-
-
-
 

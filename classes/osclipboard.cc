@@ -8,10 +8,9 @@
   Comments:
   OS independent clipboard system class. Uses to access the OS clipboard.@*
   It was created to abstract the X11 and Windows clipboards.
-  
+
 ***************************************************************************/
 
-#define Uses_TVOSClipboard
 #include <tv.h>
 
 const char   *TVOSClipboard::name="None";
@@ -30,5 +29,4 @@ const char *TVOSClipboard::getError()
     return NULL;
  return _(nameErrors[error]);
 }
-
 

@@ -10,7 +10,7 @@
  * Modified by Salvador E. Tropea <set@ieee.org>, <set@users.sourceforge.net>
  */
 
-#if defined(Uses_THelpWindow) && !defined(THelpWindow_Included)
+#ifndef THelpWindow_Included
 #define THelpWindow_Included
 
 // THelpViewer
@@ -53,5 +53,5 @@ extern void notAssigned( opstream& s, int value );
 
 extern TCrossRefHandler crossRefHandler;
 
-#endif // Uses_THelpWindow && !THelpWindow_Included
+#endif
 

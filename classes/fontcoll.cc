@@ -39,15 +39,7 @@ contain fonts with all the supported symbols.@p
 
 ***************************************************************************/
 
-#define Uses_stdlib
-#define Uses_string
-#define Uses_dirent
-#define Uses_limits
-#define Uses_TVCodePage
-#define Uses_TVFontCollection
 #include <tv.h>
-
-//#define TEST
 
 const int SizeInDisk1=3*sizeof(int);
 const int SizeInDisk2=SizeInDisk1+sizeof(int);
@@ -70,7 +62,7 @@ int isWordChar(int i)
 
   Description:
   A specialized free to free the memory used by the font structure.
-  
+
 ***************************************************************************/
 
 void TVFontCollection::freeItem(void *item)
@@ -89,7 +81,7 @@ void TVFontCollection::freeItem(void *item)
   Description:
   Internally used during searchs to look for a font that matchs a specified
 size.
-  
+
 ***************************************************************************/
 
 Boolean TVFontCollection::CheckForLines(void *item, void *arg)
@@ -107,7 +99,7 @@ Boolean TVFontCollection::CheckForLines(void *item, void *arg)
   Creates a font of the specified height from another of the same height
 plus one. The destination buffer should be large enough (num*height bytes).
 Special care is taked for letters.
-  
+
 ***************************************************************************/
 
 void TVFontCollection::ReduceOne(uchar *dest, uchar *ori, int height,
@@ -140,7 +132,7 @@ void TVFontCollection::ReduceOne(uchar *dest, uchar *ori, int height,
   Creates a font of the specified height from another of the same height
 minus one. The destination buffer should be large enough (num*height bytes).
 The last line is filled with 0.
-  
+
 ***************************************************************************/
 
 void TVFontCollection::EnlargeOne(uchar *dest, uchar *ori, int height,
@@ -168,9 +160,9 @@ void TVFontCollection::EnlargeOne(uchar *dest, uchar *ori, int height,
   Description:
   Returns a newly allocated block of memory containing a font of the
 specified height.
-  
+
   Return: NULL if the font isn't available.
-  
+
 ***************************************************************************/
 
 uchar *TVFontCollection::GetFont(int width, int height)
@@ -216,9 +208,9 @@ uchar *TVFontCollection::GetFont(int width, int height)
   Returns a newly allocated block of memory containing a font of the
 specified height. This is a full font and not just one for the current code
 page.
-  
+
   Return: NULL if the font isn't available.
-  
+
 ***************************************************************************/
 
 uchar *TVFontCollection::GetFontFull(int width, int height, int &first,
@@ -265,7 +257,7 @@ uchar *TVFontCollection::GetFontFull(int width, int height, int &first,
 
   Description:
   Internally used to check if we opened a fonts file.
-  
+
 ***************************************************************************/
 
 int TVFontCollection::CheckSignature(FILE *f)
@@ -280,7 +272,7 @@ int TVFontCollection::CheckSignature(FILE *f)
 
   Description:
   Internally used to get the font's name.
-  
+
 ***************************************************************************/
 
 char *TVFontCollection::ReadName(FILE *f)
@@ -315,7 +307,7 @@ void TVFontCollection::Swap(uint16 *value)
 
   Description:
   Internally used to read the version and number of fonts in the file.
-  
+
 ***************************************************************************/
 
 void TVFontCollection::ReadVersionNum(FILE *f, int *version, int *numfonts)
@@ -335,7 +327,7 @@ void TVFontCollection::ReadVersionNum(FILE *f, int *version, int *numfonts)
 file.
 
   Return: Size of the data font.
-  
+
 ***************************************************************************/
 
 unsigned TVFontCollection::ReadFontInfo(FILE *f, int version, TVBitmapFont *p)
@@ -362,7 +354,7 @@ unsigned TVFontCollection::ReadFontInfo(FILE *f, int version, TVBitmapFont *p)
 
   Description:
   Internally used to create a font for a desired code page.
-  
+
 ***************************************************************************/
 
 void TVFontCollection::CreateFont(void *item, void *arg)
@@ -407,7 +399,7 @@ void TVFontCollection::CreateFont(void *item, void *arg)
 
   Description:
   Sets the encoding of the fonts returned by GetFont.
-  
+
 ***************************************************************************/
 
 void TVFontCollection::SetCodePage(int id)
@@ -429,7 +421,7 @@ TVFontCollection::~TVFontCollection()
   Creates a font collection from the specified file and using the specified
 code page. You must check the error status with GetError before using the
 collection.
-  
+
 ***************************************************************************/
 
 TVFontCollection::TVFontCollection(const char *file, int cp) :
@@ -494,9 +486,9 @@ ASCIIZ strings. The first is the fantasy name of the font and the second is
 the name of the file containing it. It is useful to display the name in
 a TSortedListBox and easilly locate which file contains it using strlen.@*
   This is an static member.
-  
+
   Return: The collection of available fonts or NULL if none.
-  
+
 ***************************************************************************/
 
 TVBitmapFontDescCol *TVFontCollection::CreateListOfFonts(const char *dir,

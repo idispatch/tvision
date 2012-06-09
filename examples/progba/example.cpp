@@ -41,7 +41,7 @@
 #define Uses_TEvent
 #define Uses_TKeys
 #define Uses_TDrawBuffer
-#define Uses_TStreamableClass
+
 #define Uses_TStreamable
 #define Uses_TScreen
 #define Uses_TVCodePage

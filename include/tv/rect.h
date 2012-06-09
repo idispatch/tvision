@@ -11,12 +11,11 @@ Modified by Robert H”hne to be used for RHIDE.
  *
  */
 
-#if defined( Uses_TRect ) && !defined( __TRect )
+#ifndef __TRect
 #define __TRect
 
 class TRect
 {
-
 public:
 
     TRect( int ax, int ay, int bx, int by );
@@ -108,6 +107,7 @@ inline Boolean TRect::isEmpty()
     return Boolean( a.x >= b.x || a.y >= b.y );
 }
 
+#if !defined ( NO_STREAM )
 inline ipstream& operator >> ( ipstream& is, TRect& r )
     { return is >> r.a >> r.b; }
 inline ipstream& operator >> ( ipstream& is, TRect*& r )
@@ -117,6 +117,7 @@ inline opstream& operator << ( opstream& os, TRect& r )
     { return os << r.a << r.b; }
 inline opstream& operator << ( opstream& os, TRect* r )
     { return os << r->a << r->b; }
+#endif
 
-#endif  // Uses_TRect
+#endif
 

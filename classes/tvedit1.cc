@@ -9,24 +9,6 @@
 /*                                                          */
 /*   Turbo Vision TVEDIT source file                        */
 /*----------------------------------------------------------*/
-
-#define Uses_stdarg
-#define Uses_stdlib
-#define Uses_string //strcpy()
-
-#define Uses_TApplication
-#define Uses_TEditWindow
-#define Uses_TDeskTop
-#define Uses_TRect
-#define Uses_TEditor
-#define Uses_TFileEditor
-#define Uses_TFileDialog
-#define Uses_TChDirDialog
-#define Uses_TEditorApp
-#define Uses_TVEdMac
-#define Uses_TVEdConstant
-#define Uses_TScreen
-
 #include <tv.h>
 
 UsingNamespaceStd

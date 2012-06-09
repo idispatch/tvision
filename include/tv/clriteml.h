@@ -12,13 +12,8 @@ Modified by Salvador E. Tropea: added horizontal scrollbar.
  *
  */
 
-#if defined( Uses_TColorItemList ) && !defined( __TColorItemList )
+#ifndef __TColorItemList
 #define __TColorItemList
-
-class TRect;
-class TScrollBar;
-class TColorItem;
-struct TEvent;
 
 class TColorItemList : public TListViewer
 {
@@ -66,5 +61,5 @@ inline opstream& operator << ( opstream& os, TColorItemList* cl )
     { return os << (TStreamable *)cl; }
 #endif // NO_STREAM
 
-#endif  // Uses_TColorItemList
+#endif
 

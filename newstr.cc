@@ -11,7 +11,6 @@ Modified by Robert H”hne to be used for RHIDE.
  *
  */
 
-#define Uses_string
 #include <tv.h>
 
 char *newStr( const char *s )

@@ -12,8 +12,6 @@ Added TRadioButtons32 and code page stuff by Salvador Eduardo Tropea.
  *
  */
 
-#define Uses_TRadioButtons
-#define Uses_TStreamableClass
 #include <tv.h>
 
 void TRadioButtons::draw()

@@ -11,15 +11,6 @@
 the size of the memo structure because the old code uses 4Gb ;-)
 
 *****************************************************************************/
-
-#define Uses_string
-
-#define Uses_TKeys
-#define Uses_TEditor
-#define Uses_TMemo
-#define Uses_TEvent
-#define Uses_opstream
-#define Uses_ipstream
 #include <tv.h>
 
 #define cpMemo      "\x1A\x1B"
@@ -55,7 +46,7 @@ void TMemo::setData( void *rec )
     memcpy(&buffer[bufSize - data->length], data->buffer, data->length);
     setBufLen(data->length);
 }
- 
+
 TPalette& TMemo::getPalette() const
 {
     static TPalette palette( cpMemo, sizeof( cpMemo )-1 );
@@ -102,4 +93,4 @@ TMemo::TMemo( StreamableInit ) : TEditor( streamableInit )
 {
 }
 
-#endif // #ifndef NO_STREAM
+#endif

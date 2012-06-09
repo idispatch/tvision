@@ -11,13 +11,8 @@ Modified by Robert H”hne to be used for RHIDE.
  *
  */
 
-#if defined( Uses_THistoryWindow ) && !defined( __THistoryWindow )
+#ifndef __THistoryWindow
 #define __THistoryWindow
-
-class TListViewer;
-class TRect;
-class TWindow;
-class TInputLine;
 
 class THistInit
 {
@@ -61,5 +56,5 @@ protected:
     TListViewer *viewer;
 };
 
-#endif  // Uses_THistoryWindow
+#endif
 

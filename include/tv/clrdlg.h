@@ -11,7 +11,7 @@ Modified by Robert H”hne to be used for RHIDE.
  *
  */
 
-#if defined( Uses_TColorDialog ) && !defined( __TColorDialog )
+#ifndef __TColorDialog
 #define __TColorDialog
 
 class TColorGroup;
@@ -50,7 +50,7 @@ protected:
 #if !defined( NO_STREAM )
 private:
 
-    
+
     virtual const char *streamableName() const
         { return name; }
 
@@ -79,5 +79,5 @@ inline opstream& operator << ( opstream& os, TColorDialog* cl )
     { return os << (TStreamable *)cl; }
 #endif // NO_STREAM
 
-#endif  // TColorDialog
+#endif
 

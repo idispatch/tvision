@@ -11,7 +11,6 @@ Modified by Robert H”hne to be used for RHIDE.
  *
  */
 
-#define Uses_string
 #include <tv.h>
 
 #include <stdlib.h>
@@ -21,7 +20,7 @@ Modified by Robert H”hne to be used for RHIDE.
 
 class HistRec
 {
-    
+
 public:
 
     HistRec( uchar nId, const char *nStr );

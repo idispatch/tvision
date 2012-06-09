@@ -11,19 +11,6 @@ Modified by Salvador E. Tropea: added i18n support.
  *
  *
  */
-
-#define Uses_TLabel
-#define Uses_TEvent
-#define Uses_TDrawBuffer
-#define Uses_TGroup
-#define Uses_TView
-#define Uses_opstream
-#define Uses_ipstream
-#define Uses_TStreamableClass
-#define Uses_TPalette
-#define Uses_TGKey
-#define Uses_ctype
-#define Uses_TScreen
 #include <tv.h>
 
 #define cpLabel "\x07\x08\x09\x09\x0D\x0D"

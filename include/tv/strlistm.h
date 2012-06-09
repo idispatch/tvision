@@ -11,7 +11,7 @@ Modified by Robert H”hne to be used for RHIDE.
  *
  */
 
-#if defined( Uses_TStrListMaker ) && !defined( __TStrListMaker )
+#ifndef __TStrListMaker
 #define __TStrListMaker
 
 class TStrListMaker : public TObject
@@ -51,7 +51,7 @@ public:
 
     static TStreamable *build();
 #endif // NO_STREAM
-};                    
+};
 
 #if !defined( NO_STREAM )
 inline ipstream& operator >> ( ipstream& is, TStrListMaker& cl )
@@ -66,5 +66,5 @@ inline opstream& operator << ( opstream& os, TStrListMaker* cl )
 #endif // NO_STREAM
 
 
-#endif  // Uses_TStrListMaker
+#endif
 

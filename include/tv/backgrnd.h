@@ -11,10 +11,10 @@ Modified by Robert H”hne to be used for RHIDE.
  *
  */
 
-#if defined( Uses_TBackground ) && !defined( __TBackground )
+#ifndef __TBackground
 #define __TBackground
-    
-class TRect;
+
+#include <tv/view.h>
 
 class TBackground : public TView
 {
@@ -61,5 +61,5 @@ inline opstream& operator << ( opstream& os, TBackground* cl )
     { return os << (TStreamable *)cl; }
 #endif // NO_STREAM
 
-#endif  // Uses_TBackground
+#endif
 

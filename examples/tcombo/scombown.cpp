@@ -17,7 +17,7 @@
 
 
 #define Uses_TComboWindow
-#define Uses_TStreamableClass
+
 #include "tcombobx.h"
 __link( RWindow )
 

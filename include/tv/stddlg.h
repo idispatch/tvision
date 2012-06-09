@@ -11,7 +11,7 @@ Modified by Robert H”hne to be used for RHIDE.
  *
  */
 
-#if !defined( __FILE_CMDS )
+#ifndef __FILE_CMDS
 #define __FILE_CMDS
 
 const ushort
@@ -36,70 +36,15 @@ const ushort
 
 #endif  // __FILE_CMDS
 
-#if defined( Uses_TSearchRec )
-
 #include <tv/searchrc.h>
-
-#endif
-
-#if defined( Uses_TFileInputLine )
-
 #include <tv/filinpln.h>
-
-#endif
-
-#if defined( Uses_TFileCollection )
-
 #include <tv/filecoll.h>
-
-#endif
-
-#if defined( Uses_TSortedListBox )
-
 #include <tv/sortlibo.h>
-
-#endif
-
-#if defined( Uses_TFileList )
-
 #include <tv/filelist.h>
-
-#endif
-
-#if defined( Uses_TFileInfoPane )
-
 #include <tv/filinfpn.h>
-
-#endif
-
-#if defined( Uses_TFileDialog )
-
 #include <tv/filedlg.h>
-
-#endif
-
-#if defined( Uses_TDirEntry )
-
 #include <tv/direntr.h>
-
-#endif
-
-#if defined( Uses_TDirCollection )
-
 #include <tv/dircoll.h>
-
-#endif
-
-#if defined( Uses_TDirListBox )
-
 #include <tv/dirlibo.h>
-
-#endif
-
-#if defined( Uses_TChDirDialog )
-
 #include <tv/chdirdlg.h>
-
-#endif
-
 

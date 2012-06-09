@@ -11,7 +11,7 @@ Modified by Robert H”hne to be used for RHIDE.
  *
  */
 
-#if defined( Uses_TGroup ) && !defined( __TGroup )
+#ifndef __TGroup
 #define __TGroup
 
 class TGroup : public TView
@@ -120,5 +120,5 @@ inline opstream& operator << ( opstream& os, TGroup* cl )
     { return os << (TStreamable *)cl; }
 #endif // NO_STREAM
 
-#endif  // Uses_TGroup
+#endif
 

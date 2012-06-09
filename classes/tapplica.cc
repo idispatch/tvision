@@ -10,14 +10,6 @@ Modified by Robert H”hne to be used for RHIDE.
  *
  *
  */
-// SET: Moved the standard headers here because according to DJ
-// they can inconditionally declare symbols like NULL
-#define Uses_stdio
-#define Uses_TEventQueue
-#define Uses_TScreen
-#define Uses_TObject
-#define Uses_TMouse
-#define Uses_TApplication
 #include <tv.h>
 
 static TEventQueue *teq = 0;

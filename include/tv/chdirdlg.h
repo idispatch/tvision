@@ -11,7 +11,7 @@ Modified by Robert H”hne to be used for RHIDE.
  *
  */
 
-#if defined( Uses_TChDirDialog ) && !defined( __TChDirDialog )
+#ifndef __TChDirDialog
 #define __TChDirDialog
 
 const ushort
@@ -53,7 +53,7 @@ private:
 	{ return name; }
 
 protected:
-    TChDirDialog( StreamableInit ) : 
+    TChDirDialog( StreamableInit ) :
 		TWindowInit( &TChDirDialog::initFrame )
 		, TDialog( streamableInit ) {}
     virtual void write( opstream& );
@@ -78,5 +78,5 @@ inline opstream& operator << ( opstream& os, TChDirDialog* cl )
     { return os << (TStreamable *)cl; }
 #endif // NO_STREAM
 
-#endif  // Uses_TChDirDialog
+#endif
 

@@ -17,7 +17,7 @@
 
 
 #define Uses_TComboViewer
-#define Uses_TStreamableClass
+
 #include "tcombobx.h"
 
 __link( RListViewer )

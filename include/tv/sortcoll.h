@@ -11,7 +11,7 @@ Modified by Robert H”hne to be used for RHIDE.
  *
  */
 
-#if defined( Uses_TSortedCollection ) && !defined( __TSortedCollection )
+#ifndef __TSortedCollection
 #define __TSortedCollection
 
 class TSortedCollection : public TNSSortedCollection, public TCollection
@@ -55,5 +55,5 @@ inline opstream& operator << ( opstream& os, TSortedCollection* cl )
     { return os << (TStreamable *)cl; }
 #endif // NO_STREAM
 
-#endif  // Uses_TSortedCollection
+#endif
 

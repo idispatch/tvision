@@ -13,17 +13,11 @@ Andris Pavenis.
  *
  */
 
-#define Uses_TResourceFile
-#define Uses_TResourceItem
-#define Uses_fpstream
-#define Uses_filelength
-#define Uses_TCollection
-#define Uses_TStringCollection
-#define Uses_TResourceCollection
 #include <tv.h>
 
-UsingNamespaceStd
 #if !defined( NO_STREAM )
+UsingNamespaceStd
+
 const long rStreamMagic = 0x52504246uL; // 'FBPR'
 
 #pragma pack(1)

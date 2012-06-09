@@ -17,7 +17,7 @@
 
 
 #define Uses_TComboBox
-#define Uses_TStreamableClass
+
 #include "tcombobx.h"
 __link( RView )
 

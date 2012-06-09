@@ -10,12 +10,6 @@ Modified by Robert H”hne to be used for RHIDE.
  *
  *
  */
-#define Uses_string
-
-#define Uses_TFileInputLine
-#define Uses_TEvent
-#define Uses_TSearchRec
-#define Uses_TFileDialog
 #include <tv.h>
 
 #if defined(TVCompf_djgpp)

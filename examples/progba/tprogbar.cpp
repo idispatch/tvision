@@ -18,7 +18,7 @@ CIS: 70662,1523
 #define Uses_TRect
 #define Uses_TGroup
 #define Uses_TDrawBuffer
-#define Uses_TStreamableClass
+
 #define Uses_opstream
 #define Uses_ipstream
 #define Uses_TPalette

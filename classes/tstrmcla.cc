@@ -10,9 +10,7 @@ Modified by Robert H”hne to be used for RHIDE.
  *
  *
  */
-
-#define Uses_TStreamableClass
-#define Uses_pstream
+#if !defined( NO_STREAM )
 #include <tv.h>
 
 TStreamableClass::TStreamableClass( const char *n, BUILDER b, int d ) :
@@ -23,4 +21,5 @@ TStreamableClass::TStreamableClass( const char *n, BUILDER b, int d ) :
     pstream::initTypes();
     pstream::registerType( this );
 }
+#endif
 

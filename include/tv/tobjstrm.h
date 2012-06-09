@@ -58,82 +58,17 @@ struct fLink
     { (fLink *)&force ## s, (TStreamableClass *)&s };
 #endif
 
-#if defined( Uses_TStreamable )
-
 #include <tv/streambl.h>
-
-#endif
-
-#if defined( Uses_TStreamableClass )
-
 #include <tv/strmblcl.h>
-
-#endif
-
-#if defined( Uses_TStreamableTypes )
-
 #include <tv/strmblty.h>
-
-#endif
-
-#if defined( Uses_TPWrittenObjects )
-
 #include <tv/pwritobj.h>
-
-#endif
-
-#if defined( Uses_TPReadObjects )
-
 #include <tv/preadobj.h>
-
-#endif
-
-#if defined( Uses_pstream )
-
 #include <tv/pstream.h>
-
-#endif
-
-#if defined( Uses_ipstream )
-
 #include <tv/ipstream.h>
-
-#endif
-
-#if defined( Uses_opstream )
-
 #include <tv/opstream.h>
-
-#endif
-
-#if defined( Uses_iopstream )
-
 #include <tv/iopstrm.h>
-
-#endif
-
-#if defined( Uses_fpbase )
-
 #include <tv/fpbase.h>
-
-#endif
-
-#if defined( Uses_ifpstream )
-
 #include <tv/ifpstrm.h>
-
-#endif
-
-#if defined( Uses_ofpstream )
-
 #include <tv/ofpstrm.h>
-
-#endif
-
-#if defined( Uses_fpstream )
-
 #include <tv/fpstream.h>
-
-#endif
-
 

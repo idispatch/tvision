@@ -19,25 +19,6 @@ A lot of internal details changed.
  *
  *
  */
-// SET: Moved the standard headers here because according to DJ
-// they can inconditionally declare symbols like NULL
-// Added insertChar member.
-//#define Uses_stdio // debug
-
-#define Uses_ctype
-#define Uses_string
-#define Uses_TKeys
-#define Uses_TInputLine
-#define Uses_TDrawBuffer
-#define Uses_TEvent
-#define Uses_opstream
-#define Uses_ipstream
-#define Uses_TStreamableClass
-#define Uses_TValidator
-#define Uses_TPalette
-#define Uses_TVOSClipboard
-#define Uses_TGKey
-#define Uses_TGroup
 #include <tv.h>
 
 unsigned TInputLineBase::defaultModeOptions=0;
@@ -135,12 +116,12 @@ void TInputLineBaseT<T,D>::draw()
 {
  int l, r;
  D b;
- 
+
  uchar color=(state & sfFocused) ? getColor(2) : getColor(1);
- 
+
  b.moveChar(0,' ',color,size.x);
  b.moveStr(1,((T *)data)+firstPos,color,size.x-2);
- 
+
  if (canScroll(1))
     b.moveChar(size.x-1,sizeof(T)==1 ? rightArrow : 0x25b6,(uchar)getColor(4),1);
  if (canScroll(-1))
@@ -172,7 +153,7 @@ TPalette& TInputLineBase::getPalette() const
 int TInputLineBase::mouseDelta( TEvent& event )
 {
  TPoint mouse=makeLocal( event.mouse.where );
- 
+
  if (mouse.x<=0)
     return -1;
  else
@@ -219,9 +200,9 @@ there is not enough space, but the virtual resizeData() is called giving
 a chance to create variable size input lines.@*
   I (SET) moved it to allow insertions from sources other than the keyboard
 emulating it's behavior.
-  
+
   Return: False if the validator canceled the character, otherwise True.
-  
+
 ***************************************************************************/
 // TODO: The validator can't be 8 bits for an Unicode class.
 //       I think IsValidInput should support one char.
@@ -297,7 +278,7 @@ Boolean TInputLineU16::insertCharEv(TEvent &event)
   Description:
   Used internally to ensure the cursor is at a visible position, unselect
 the text and force a draw.
-  
+
 ***************************************************************************/
 
 void TInputLineBase::makeVisible()

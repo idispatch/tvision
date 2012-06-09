@@ -11,18 +11,6 @@ Modified by Salvador E. Tropea for i18n support.
  *
  *
  */
-// SET: Moved the standard headers here because according to DJ
-// they can inconditionally declare symbols like NULL
-#define Uses_string
-
-#define Uses_TKeys
-#define Uses_TColorItem
-#define Uses_TColorGroup
-#define Uses_TColorGroupList
-#define Uses_TGroup
-#define Uses_TRect
-#define Uses_opstream
-#define Uses_ipstream
 #include <tv.h>
 
 TColorGroup::TColorGroup( const char *nm, TColorItem *itm, TColorGroup *nxt )
@@ -34,7 +22,7 @@ TColorGroup::TColorGroup( const char *nm, TColorItem *itm, TColorGroup *nxt )
 }
 
 TColorGroup::~TColorGroup()
-{ 
+{
     DeleteArray(name);
     TVIntl::freeSt(cacheName);
 }

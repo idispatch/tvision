@@ -10,19 +10,6 @@ Modified by Robert H”hne to be used for RHIDE.
  *
  *
  */
-// SET: Moved the standard headers here because according to DJ
-// they can inconditionally declare symbols like NULL
-#define Uses_string
-
-#define Uses_TKeys
-#define Uses_TColorSelector
-#define Uses_TEvent
-#define Uses_TDrawBuffer
-#define Uses_TRect
-#define Uses_TView
-#define Uses_TGroup
-#define Uses_opstream
-#define Uses_ipstream
 #include <tv.h>
 
 TColorSelector::TColorSelector( const TRect& bounds, ColorSel aSelType ) :
@@ -67,7 +54,7 @@ void TColorSelector::colorChanged()
         msg = cmColorBackgroundChanged;
     message( owner, evBroadcast, msg, (void *)(long)color );
 }
- 
+
 void TColorSelector::handleEvent( TEvent& event )
 {
     const int width = 4;

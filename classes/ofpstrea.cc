@@ -14,14 +14,11 @@ Andris Pavenis and Christoph Bauer.
  *
  */
 
-#define Uses_string
-#define Uses_fpbase
-#define Uses_ofpstream
-#define Uses_IOS_BIN
 #include <tv.h>
 
-UsingNamespaceStd
 #if !defined( NO_STREAM )
+UsingNamespaceStd
+
 ofpstream::ofpstream()
 {
 }

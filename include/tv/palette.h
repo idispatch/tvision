@@ -11,7 +11,7 @@ Modified by Robert H”hne to be used for RHIDE.
  *
  */
 
-#if defined( Uses_TPalette ) && !defined( __TPalette )
+#ifndef __TPalette
 #define __TPalette
 
 class TPalette
@@ -34,5 +34,5 @@ public:
 
 };
 
-#endif  // Uses_TPalette
+#endif
 

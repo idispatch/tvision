@@ -12,14 +12,8 @@ Modified by Robert H”hne to be used for RHIDE.
  */
 // SET: Moved the standard headers here because according to DJ
 // they can inconditionally declare symbols like NULL
-#define Uses_string
 #include <limits.h>
 #include <stdio.h>
-
-#define Uses_ipstream
-#define Uses_opstream
-#define Uses_TFilterValidator
-#define Uses_MsgBox
 #include <tv.h>
 
 TFilterValidator::TFilterValidator() :

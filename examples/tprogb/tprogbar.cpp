@@ -19,7 +19,7 @@
 #define Uses_TEvent
 #define Uses_TKeys
 #define Uses_TDrawBuffer
-#define Uses_TStreamableClass
+
 
 #include <tv.h>
 __link( RView )

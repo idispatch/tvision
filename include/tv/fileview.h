@@ -11,7 +11,7 @@ Modified by Robert H”hne to be used for RHIDE.
  *
  */
 
-#if defined( Uses_TFileViewer ) && !defined( __TFileViewer )
+#ifndef __TFileViewer
 #define __TFileViewer
 
 #include <tv.h>

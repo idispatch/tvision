@@ -11,7 +11,7 @@ Modified by Robert H”hne to be used for RHIDE.
  *
  */
 
-#if defined( Uses_TCommandSet ) && !defined( __TCommandSet )
+#ifndef __TCommandSet
 #define __TCommandSet
 
 class TCommandSet
@@ -81,5 +81,5 @@ inline int operator != ( const TCommandSet& tc1, const TCommandSet& tc2 )
     return !operator == ( tc1, tc2 );
 }
 
-#endif  // Uses_TCommandSet
+#endif
 

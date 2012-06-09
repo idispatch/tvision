@@ -12,30 +12,7 @@ Modified by Salvador E. Tropea: added i18n support. Horizontal scroll bar.
  *
  *
  */
-// SET: Moved the standard headers here because according to DJ
-// they can inconditionally declare symbols like NULL
-#define Uses_ctype
-#define Uses_stdio
-#define Uses_string
-#define Uses_unistd
-#define Uses_chdir
 
-#define Uses_MsgBox
-#define Uses_TChDirDialog
-#define Uses_TRect
-#define Uses_TInputLine
-#define Uses_T1Label
-#define Uses_THistory
-#define Uses_TScrollBar
-#define Uses_TDirListBox
-#define Uses_TButton
-#define Uses_TEvent
-#define Uses_TDirEntry
-#define Uses_TDirCollection
-#define Uses_TChDirDialog
-#define Uses_opstream
-#define Uses_ipstream
-#define Uses_TStreamableClass
 #include <tv.h>
 
 TChDirDialog::TChDirDialog( ushort opts, ushort histId ) :
@@ -134,7 +111,7 @@ void TChDirDialog::handleEvent( TEvent& event )
                     }
                 case cmDirSelection:
                     chDirButton->makeDefault((Boolean)(event.message.infoPtr!=NULL));
-                    return; // Do not use break here ! 
+                    return; // Do not use break here !
                 default:
                     return;
                 }

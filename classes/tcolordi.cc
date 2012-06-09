@@ -12,33 +12,7 @@ horizontal scroll bar in items, etc.
  *
  *
  */
-// SET: Moved the standard headers here because according to DJ
-// they can inconditionally declare symbols like NULL
-#define Uses_string
 
-#define Uses_TKeys
-#define Uses_TColorSelector
-#define Uses_TMonoSelector
-#define Uses_TColorDisplay
-#define Uses_TColorItem
-#define Uses_TColorItemList
-#define Uses_TColorGroup
-#define Uses_TColorGroupList
-#define Uses_TColorDialog
-#define Uses_TEvent
-#define Uses_TDrawBuffer
-#define Uses_TGroup
-#define Uses_TScrollBar
-#define Uses_T1Label
-#define Uses_TButton
-#define Uses_TRect
-#define Uses_opstream
-#define Uses_ipstream
-#define Uses_TPalette
-#define Uses_TScreen
-// For the "Try" button:
-#define Uses_TProgram
-#define Uses_TDeskTop
 #include <tv.h>
 
 TColorDialog::TColorDialog( TPalette *aPalette, TColorGroup *aGroups ):
@@ -105,8 +79,8 @@ TColorDialog::TColorDialog( TPalette *aPalette, TColorGroup *aGroups ):
 }
 
 TColorDialog::~TColorDialog()
-{ 
-}  
+{
+}
 
 void TColorDialog::handleEvent( TEvent& event )
 {

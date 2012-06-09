@@ -10,24 +10,6 @@ Modified by Robert H”hne to be used for RHIDE.
  *
  *
  */
-// SET: Moved the standard headers here because according to DJ
-// they can inconditionally declare symbols like NULL
-#if 0
- #define Uses_strstream
-#else
- #define Uses_stdio
-#endif
-#define Uses_string
-
-#define Uses_TIndicator
-#define Uses_TDrawBuffer
-#define Uses_TEvent
-#define Uses_TView
-#define Uses_opstream
-#define Uses_ipstream
-#define Uses_TIndicator
-#define Uses_TStreamableClass
-#define Uses_TPalette
 #include <tv.h>
 
 #define cpIndicator "\x02\x03"

@@ -11,11 +11,8 @@ Modified by Robert H”hne to be used for RHIDE.
  *
  */
 
-#if defined( Uses_TColorDisplay ) && !defined( __TColorDisplay )
+#ifndef __TColorDisplay
 #define __TColorDisplay
-
-class TRect;
-struct TEvent;
 
 class TColorDisplay : public TView
 {
@@ -33,6 +30,7 @@ protected:
     uchar *color;
     const char *text;
 
+#if !defined( NO_STREAM )
 private:
 
     virtual const char *streamableName() const
@@ -48,9 +46,10 @@ public:
 
     static const char * const name;
     static TStreamable *build();
-
+#endif
 };
 
+#if !defined( NO_STREAM )
 inline ipstream& operator >> ( ipstream& is, TColorDisplay& cl )
     { return is >> (TStreamable&)cl; }
 inline ipstream& operator >> ( ipstream& is, TColorDisplay*& cl )
@@ -60,6 +59,6 @@ inline opstream& operator << ( opstream& os, TColorDisplay& cl )
     { return os << (TStreamable&)cl; }
 inline opstream& operator << ( opstream& os, TColorDisplay* cl )
     { return os << (TStreamable *)cl; }
-
-#endif  // Uses_TColorDisplay
+#endif
+#endif
 

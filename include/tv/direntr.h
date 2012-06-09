@@ -11,7 +11,7 @@ Modified by Robert H”hne to be used for RHIDE.
  *
  */
 
-#if defined( Uses_TDirEntry ) && !defined( __TDirEntry )
+#ifndef __TDirEntry
 #define __TDirEntry
 
 class TDirEntry
@@ -47,5 +47,5 @@ inline TDirEntry::~TDirEntry()
     delete[] directory;
 }
 
-#endif  // Uses_TDirEntry
+#endif
 

@@ -13,17 +13,6 @@ Modified by Robert H”hne to be used for RHIDE.
 // SET: Moved the standard headers here because according to DJ
 // they can inconditionally declare symbols like NULL
 #include <ctype.h>
-#define Uses_string
-
-#define Uses_THistory
-#define Uses_TKeys
-#define Uses_TRect
-#define Uses_TEvent
-#define Uses_TInputLine
-#define Uses_THistoryWindow
-#define Uses_opstream
-#define Uses_ipstream
-#define Uses_TPalette
 #include <tv.h>
 
 #define cpHistory "\x16\x17"

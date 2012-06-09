@@ -20,15 +20,15 @@ Modified by Salvador E. Tropea to compile for 64 bits architectures.
 /*                                                                         */
 /* ------------------------------------------------------------------------*/
 
-#if defined( Uses_TStreamableClass ) && !defined( __TStreamableClass )
+#ifndef __TStreamableClass
 #define __TStreamableClass
 
+#if !defined ( NO_STREAM )
 #include <limits.h>
 
 const P_id_type P_id_notFound = UINT_MAX;
 
 typedef TStreamable *(*BUILDER)();
-//#define __DELTA( d ) (FP_OFF((TStreamable *)(d *)1)-1)
 #define __DELTA( d ) ((long)((TStreamable *)(d *)1)-1)
 
 class TStreamableClass
@@ -49,6 +49,6 @@ private:
     int delta;
 
 };
-
-#endif  // Uses_TStreamableClass
+#endif
+#endif
 

@@ -11,19 +11,6 @@ Modified by Salvador E. Tropea to compile for 64 bits architectures.
  *
  *
  */
-// SET: Moved the standard headers here because according to DJ
-// they can inconditionally declare symbols like NULL
-#define Uses_string
-
-#define Uses_TKeys
-#define Uses_TMonoSelector
-#define Uses_TSItem
-#define Uses_TEvent
-#define Uses_TDrawBuffer
-#define Uses_TGroup
-#define Uses_TRect
-#define Uses_opstream
-#define Uses_ipstream
 #include <tv.h>
 
 const uchar monoColors[] = { 0x07, 0x0F, 0x01, 0x70, 0x09 };

@@ -16,22 +16,6 @@ code and adapted it to compile with the new port (01/1999).
 
 *****************************************************************************/
 
-#define Uses_ctype
-#define Uses_TKeys
-// SET: Needed for the new keyboard symbols
-#define Uses_TKeys_Extended
-// SET: Needed to manipulate the keycodes safetly
-#define Uses_TGKey
-#define Uses_TEditor
-#define Uses_TIndicator
-#define Uses_TEvent
-#define Uses_TScrollBar
-#define Uses_TFindDialogRec
-#define Uses_TReplaceDialogRec
-#define Uses_opstream
-#define Uses_ipstream
-#define Uses_TStreamableClass
-#define Uses_TMacroCollection
 #include <tv.h>
 
 inline int isWordChar( int ch )
@@ -744,7 +728,7 @@ Boolean TEditor::insertBuffer( char *p,
         if( allowUndo == True )
             {
             if( delLen > 0 )
-                memmove( 
+                memmove(
                          &buffer[curPtr + gapLen - delCount - delLen],
                          &buffer[selStart],
                          delLen

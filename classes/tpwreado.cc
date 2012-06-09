@@ -10,8 +10,7 @@ Modified by Robert H”hne to be used for RHIDE.
  *
  *
  */
-
-#define Uses_TPReadObjects
+#if !defined( NO_STREAM )
 #include <tv.h>
 
 #include <assert.h>
@@ -38,4 +37,4 @@ const void *TPReadObjects::find( P_id_type id )
 {
     return at( id );
 }
-
+#endif

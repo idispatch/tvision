@@ -5,30 +5,29 @@
  *      All Rights Reserved.
  *
 
-Modified by Robert H”hne to be used for RHIDE.
+ Modified by Robert H”hne to be used for RHIDE.
 
  *
  *
  */
 
-#if defined( Uses_TResourceCollection ) && !defined( __TResourceCollection )
+#ifndef __TResourceCollection
 #define __TResourceCollection
 
-class TResourceCollection: public TStringCollection
-{
+class TResourceCollection: public TStringCollection {
 
 public:
 
-    TResourceCollection( ccIndex aLimit, ccIndex aDelta );
+    TResourceCollection(ccIndex aLimit, ccIndex aDelta);
 
-    virtual void *keyOf( void *item );
+    virtual void *keyOf(void *item);
 
 private:
 
-    virtual void freeItem( void *item );
+    virtual void freeItem(void *item);
 #if !defined( NO_STREAM )
     virtual const char *streamableName() const
-	{ return name; }
+    {   return name;}
     virtual void *readItem( ipstream& );
     virtual void writeItem( void *, opstream& );
 
@@ -42,15 +41,14 @@ public:
 
 #if !defined( NO_STREAM )
 inline ipstream& operator >> ( ipstream& is, TResourceCollection& cl )
-    { return is >> (TStreamable&)cl; }
+{   return is >> (TStreamable&)cl;}
 inline ipstream& operator >> ( ipstream& is, TResourceCollection*& cl )
-    { return is >> (void *&)cl; }
+{   return is >> (void *&)cl;}
 
 inline opstream& operator << ( opstream& os, TResourceCollection& cl )
-    { return os << (TStreamable&)cl; }
+{   return os << (TStreamable&)cl;}
 inline opstream& operator << ( opstream& os, TResourceCollection* cl )
-    { return os << (TStreamable *)cl; }
+{   return os << (TStreamable *)cl;}
 #endif // NO_STREAM
-
-#endif  // Uses_TResourceCollection
+#endif
 

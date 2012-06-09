@@ -11,8 +11,6 @@ Modified by Vadim Beloborodov to be used on WIN32 console
  *
  */
 
-#define Uses_string //memcpy()
-#define Uses_TPalette
 #include <tv.h>
 
 TPalette::TPalette( const char* d, ushort len ) :

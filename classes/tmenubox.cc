@@ -12,14 +12,7 @@ Modified by Salvador E. Tropea. [also added i18n support]
  *
  */
 // SET: Moved the standard headers here because according to DJ
-// they can inconditionally declare symbols like NULL
-#define Uses_string
-
-#define Uses_TRect
-#define Uses_TMenu
-#define Uses_TMenuItem
-#define Uses_TMenuBox
-#define Uses_TScreen // getShowCursorEver()
+// they can unconditionally declare symbols like NULL
 #include <tv.h>
 
 static TRect getRect( const TRect& bounds, TMenu *aMenu )

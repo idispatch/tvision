@@ -12,16 +12,7 @@ Modified by Robert H”hne to be used for RHIDE.
  */
 #include <stdlib.h>
 #include <time.h>
-#define Uses_string
 #include <stdio.h>
-
-#define Uses_TFileInputLine
-#define Uses_TEvent
-#define Uses_TSearchRec
-#define Uses_TFileInfoPane
-#define Uses_TDrawBuffer
-#define Uses_TFileDialog
-#define Uses_TPalette
 #include <tv.h>
 
 #define cpInfoPane "\x1E"
@@ -80,14 +71,14 @@ void TFileInfoPane::draw()
          b.moveStr( 25, _(months[time->tm_mon+1]), color );
          sprintf(buf,"%02d",time->tm_mday);
          b.moveStr( 29, buf, color );
-   
+
          b.putChar( 31, ',' );
          sprintf(buf,"%d",time->tm_year+1900);
          b.moveStr( 32, buf, color );
-   
+
          PM = Boolean(time->tm_hour >= 12 );
          time->tm_hour %= 12;
-   
+
          if ( time->tm_hour == 0 )
            time->tm_hour = 12;
          sprintf(buf,"%02d",time->tm_hour);
@@ -95,7 +86,7 @@ void TFileInfoPane::draw()
          b.putChar( 40, ':' );
          sprintf(buf,"%02d",time->tm_min);
          b.moveStr( 41, buf, color );
-   
+
          if ( PM )
            b.moveStr( 43, pmText, color );
          else

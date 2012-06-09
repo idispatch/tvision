@@ -11,7 +11,7 @@ Modified by Robert H”hne to be used for RHIDE.
  *
  */
 
-#if defined( Uses_TNSSortedCollection ) && !defined( __TNSSortedCollection )
+#ifndef __TNSSortedCollection
 #define __TNSSortedCollection
 
 class TNSSortedCollection: public virtual TNSCollection
@@ -43,5 +43,5 @@ private:
 
 };
 
-#endif  // Uses_TNSSortedCollection
+#endif
 

@@ -10,9 +10,7 @@ Modified by Robert H”hne to be used for RHIDE.
  *
  *
  */
-
-#define Uses_TPWrittenObjects
-#define Uses_TStreamableClass
+#if !defined( NO_STREAM )
 #include <tv.h>
 
 TPWrittenObjects::TPWrittenObjects() : TNSSortedCollection( 5, 5 ), curId( 0 )
@@ -59,4 +57,4 @@ int TPWrittenObjects::compare( void *o1, void *o2 )
     else
         return 1;
 }
-
+#endif

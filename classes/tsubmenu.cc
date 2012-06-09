@@ -11,12 +11,9 @@ Modified by Robert H”hne to be used for RHIDE.
  *
  */
 
-#define Uses_TSubMenu
-#define Uses_TMenuItem
-#define Uses_TMenu
 #include <tv.h>
 
-TSubMenu::TSubMenu( const char *nm, ushort key, ushort helpCtx ) : 
+TSubMenu::TSubMenu( const char *nm, ushort key, ushort helpCtx ) :
     TMenuItem( nm, 0, key, helpCtx )
 {
 }

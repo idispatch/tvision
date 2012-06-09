@@ -7,10 +7,9 @@
 #include <tv/configtv.h>
 #ifndef HAVE_SSC
 
-#define Uses_filelength
-#define Uses_fstream
 #include <compatlayer.h>
-
+#ifdef __QNXNTO__
+#else
 #include <cl/needs.h>
 
 UsingNamespaceStd
@@ -42,5 +41,5 @@ int CLY_IfStreamGetLine(ifstream &is, char *buffer, unsigned len)
  return 0;
 }
 #endif // NEEDS_IFSTREAMGETLINE
-
+#endif
 #endif

@@ -11,8 +11,6 @@ Modified by Robert H”hne to be used for RHIDE.
  *
  */
 
-#define Uses_TStatusDef
-#define Uses_TStatusItem
 #include <tv.h>
 
 TStatusDef& operator + ( TStatusDef& s1, TStatusItem& s2 )

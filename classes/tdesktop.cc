@@ -11,19 +11,7 @@ Modified cursor behavior while desktop locked by Salvador E. Tropea (SET)
  *
  *
  */
-// SET: Moved the standard headers here because according to DJ
-// they can inconditionally declare symbols like NULL
 #include <stdlib.h>
-
-#define Uses_TDeskTop
-#define Uses_TRect
-#define Uses_TPoint
-#define Uses_TEvent
-#define Uses_TBackground
-#define Uses_opstream
-#define Uses_ipstream
-#define Uses_TScreen
-#define Uses_TVCodePage
 #include <tv.h>
 
 TDeskInit::TDeskInit( TBackground *(*cBackground)( TRect ) ) :
@@ -38,7 +26,7 @@ TDeskTop::TDeskTop( const TRect& bounds ) :
     growMode = gfGrowHiX | gfGrowHiY;
 
     TScreen::setCursorPos( bounds.a.x , bounds.b.y );
-        
+
     if( createBackground != 0 &&
         (background = createBackground( getExtent() )) != 0 )
         insert( background );
@@ -57,7 +45,7 @@ inline Boolean Tileable( TView *p )
 
 static short cascadeNum;
 static TView *lastView;
-             
+
 void doCount( TView* p, void * )
 {
     if( Tileable( p ) )
@@ -87,7 +75,7 @@ void TDeskTop::cascade( const TRect &r )
     if( cascadeNum > 0 )
         {
         lastView->sizeLimits( min, max );
-        if( (min.x > r.b.x - r.a.x - cascadeNum) || 
+        if( (min.x > r.b.x - r.a.x - cascadeNum) ||
             (min.y > r.b.y - r.a.y - cascadeNum) )
             tileError();
         else
@@ -233,7 +221,7 @@ void TDeskTop::tile( const TRect& r )
             mostEqualDivisors( numTileable, numRows, numCols );
         else
             mostEqualDivisors( numTileable, numCols, numRows );
-        if( ( (r.b.x - r.a.x)/numCols ==  0 ) || 
+        if( ( (r.b.x - r.a.x)/numCols ==  0 ) ||
             ( (r.b.y - r.a.y)/numRows ==  0) )
             tileError();
         else

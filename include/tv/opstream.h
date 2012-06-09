@@ -21,9 +21,10 @@ Andris Pavenis and Christoph Bauer.
 /*                                                                         */
 /* ------------------------------------------------------------------------*/
 
-#if defined( Uses_opstream ) && !defined( __opstream )
+#ifndef __opstream
 #define __opstream
 
+#if !defined ( NO_STREAM )
 class TStreamableClass;
 class TPWrittenObjects;
 
@@ -85,6 +86,7 @@ protected:
 private:
     TPWrittenObjects *objs;
 };
+#endif
 
 #endif  // Uses_opstream
 

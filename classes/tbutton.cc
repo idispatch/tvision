@@ -13,29 +13,7 @@ Added i18n support by Salvador Eduardo Tropea.
  *
  *
  */
-// SET: Moved the standard headers here because according to DJ
-// they can inconditionally declare symbols like NULL
-#define Uses_ctype
-#define Uses_string
-#define Uses_TButton
-#define Uses_TDrawBuffer
-#define Uses_TEvent
-#define Uses_TRect
-#define Uses_TGroup
-#define Uses_opstream
-#define Uses_ipstream
-#define Uses_TPalette
-#define Uses_TGKey
-#define Uses_TScreen
 #include <tv.h>
-
-/* SET: F*#$%! why these values are defined here!!!
-const ushort
-    cmGrabDefault    = 61,
-    cmReleaseDefault = 62;
-
-  Moved to views.h
-*/
 
 #define cpButton "\x0A\x0B\x0C\x0D\x0E\x0E\x0E\x0F"
 
@@ -356,7 +334,7 @@ TStreamable *TButton::build()
 and not a copy of the one passed by the user. It allows changes from the
 application side to be reflected in the button with a simple redraw. That's
 *very* useful for remappings.
-  
+
 ***************************************************************************/
 
 TButtonRef::TButtonRef(const TRect& bounds, const char *aTitle,

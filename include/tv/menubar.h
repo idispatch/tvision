@@ -23,11 +23,8 @@ Modified by Robert H”hne to be used for RHIDE.
 /*        6 = Shortcut selection                                          */
 /* ---------------------------------------------------------------------- */
 
-#if defined( Uses_TMenuBar ) && !defined( __TMenuBar )
+#ifndef __TMenuBar
 #define __TMenuBar
-
-class TRect;
-class TMenu;
 
 class TMenuBar : public TMenuView
 {
@@ -42,7 +39,7 @@ public:
     virtual void draw();
     virtual TRect getItemRect( TMenuItem *item );
     virtual void changeBounds(const TRect& bounds);
-    
+
 #if !defined( NO_STREAM )
 private:
 
@@ -72,5 +69,5 @@ inline opstream& operator << ( opstream& os, TMenuBar* cl )
     { return os << (TStreamable *)cl; }
 #endif // NO_STREAM
 
-#endif  // Uses_TMenuBar
+#endif
 

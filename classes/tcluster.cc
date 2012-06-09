@@ -12,23 +12,6 @@ Added TSItem::append by Salvador E. Tropea
  *
  *
  */
-// SET: Moved the standard headers here because according to DJ
-// they can inconditionally declare symbols like NULL
-//#define Uses_stdio
-#define Uses_ctype
-#define Uses_string
-#define Uses_TKeys
-#define Uses_TCluster
-#define Uses_TDrawBuffer
-#define Uses_TEvent
-#define Uses_TPoint
-#define Uses_TSItem
-#define Uses_TStringCollection
-#define Uses_TGroup
-#define Uses_opstream
-#define Uses_ipstream
-#define Uses_TPalette
-#define Uses_TGKey
 #include <tv.h>
 
 class TStringCollectionCIntl : public TStringCollection
@@ -366,7 +349,7 @@ int TCluster::row( int item )
   Description:
   Appends the provided TMenuItem at the end of the chain.@*
   Coded by SET. That's a mix between Dean Wakerley and TVTools ideas.
-  
+
 ***************************************************************************/
 
 void TSItem::append( TSItem *aNext )

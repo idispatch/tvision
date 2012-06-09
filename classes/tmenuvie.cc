@@ -13,26 +13,6 @@ Modified the behavior of short-cuts when Alt is not/pressed by SET.
  *
  *
  */
-// SET: Moved the standard headers here because according to DJ
-// they can inconditionally declare symbols like NULL
-#include <assert.h>
-#define Uses_string
-
-#define Uses_stdio // just for debug
-
-#define Uses_TMenuItem
-#define Uses_TMenu
-#define Uses_TMenuView
-#define Uses_TKeys
-#define Uses_TRect
-#define Uses_TEvent
-#define Uses_TGroup
-#define Uses_TMenuBox
-#define Uses_opstream
-#define Uses_ipstream
-#define Uses_TPalette
-#define Uses_TGKey
-#define Uses_TVCodePage
 #include <tv.h>
 
 #define cpMenuView "\x02\x03\x04\x05\x06\x07"

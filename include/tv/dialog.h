@@ -49,11 +49,8 @@ Modified by Robert H”hne to be used for RHIDE.
 /*       32 = Reserved                                                    */
 /* ---------------------------------------------------------------------- */
 
-#if defined( Uses_TDialog ) && !defined( __TDialog )
+#ifndef __TDialog
 #define __TDialog
-
-class TRect;
-struct TEvent;
 
 class TDialog : public TWindow
 {
@@ -94,5 +91,5 @@ inline opstream& operator << ( opstream& os, TDialog* cl )
     { return os << (TStreamable *)cl; }
 #endif // NO_STREAM
 
-#endif  // Uses_TDialog
+#endif
 

@@ -10,11 +10,10 @@ Modified by Robert H”hne to be used for RHIDE.
  *
  *
  */
-
-#define Uses_TPWrittenObjects
+#if !defined( NO_STREAM )
 #include <tv.h>
 
 TPWObj::TPWObj( const void *adr, P_id_type id ) : address( adr ), ident( id )
 {
 }
-
+#endif

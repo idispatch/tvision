@@ -11,7 +11,6 @@ Modified by Robert H”hne to be used for RHIDE.
  *
  */
 
-#define Uses_TStrIndexRec
 #include <tv.h>
 
 TStrIndexRec::TStrIndexRec() :

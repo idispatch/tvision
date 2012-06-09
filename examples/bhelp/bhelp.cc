@@ -22,7 +22,7 @@
 #define Uses_sys_stat
 #define Uses_filelength
 #define Uses_TCollection
-#define Uses_TStreamableClass
+
 #define Uses_THelpFile
 #define Uses_fpstream
 #include <tv.h>

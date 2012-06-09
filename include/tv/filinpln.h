@@ -11,11 +11,8 @@ Modified by Robert H”hne to be used for RHIDE.
  *
  */
 
-#if defined( Uses_TFileInputLine ) && !defined( __TFileInputLine )
+#ifndef __TFileInputLine
 #define __TFileInputLine
-
-class TRect;
-struct TEvent;
 
 class TFileInputLine : public TInputLine
 {
@@ -54,5 +51,5 @@ inline opstream& operator << ( opstream& os, TFileInputLine* cl )
     { return os << (TStreamable *)cl; }
 #endif // NO_STREAM
 
-#endif  // Uses_TFileInputLine
+#endif
 

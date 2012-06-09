@@ -13,18 +13,6 @@ Modified by Robert H”hne to be used for RHIDE.
 // SET: Moved the standard headers here because according to DJ
 // they can inconditionally declare symbols like NULL
 #include <ctype.h>
-#define Uses_string
-
-#define Uses_TKeys
-#define Uses_TScrollBar
-#define Uses_TRect
-#define Uses_TDrawBuffer
-#define Uses_TEvent
-#define Uses_TGroup
-#define Uses_opstream
-#define Uses_ipstream
-#define Uses_TPalette
-#define Uses_TScreen
 #include <tv.h>
 
 #define cpScrollBar  "\x04\x05\x05"

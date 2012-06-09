@@ -23,9 +23,10 @@ Modified by Robert H”hne to be used for RHIDE.
 /*                                                                         */
 /* ------------------------------------------------------------------------*/
 
-#if defined( Uses_TPWrittenObjects ) && !defined( __TPWrittenObjects )
+#ifndef __TPWrittenObjects
 #define __TPWrittenObjects
 
+#if !defined ( NO_STREAM )
 class TPWrittenObjects : public TNSSortedCollection
 {
 
@@ -72,6 +73,7 @@ private:
     P_id_type ident;
 
 };
+#endif
 
-#endif  // Uses_TPWrittenObjects
+#endif
 

@@ -12,7 +12,7 @@ Modified by Salvador E. Tropea (setScreenMode and other things)
  *
  */
 
-#if defined( Uses_TProgram ) && !defined( __TProgram )
+#ifndef __TProgram
 #define __TProgram
 
 #define cpColor \

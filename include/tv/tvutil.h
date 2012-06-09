@@ -10,7 +10,7 @@ Modified by Salvador E. Tropea to avoid macros collisions and make easier to use
 
  */
 
-#if !defined( __UTIL_H )
+#ifndef __UTIL_H
 #define __UTIL_H
 
 // SET: Used by names, they only include this file.
@@ -78,7 +78,7 @@ Boolean lowMemory();
 
 char *newStr( const char * );
 
-/* SET: Added a conditional for it because n is too common. I remmember I had
+/* SET: Added a conditional for it because n is too common. I remember I had
    problems with it and Jerzy Witkowski <jwi@pl.ibm.com> complained about
    conflicts between a class member in your code and this macro */
 #ifdef Uses_n
@@ -95,4 +95,4 @@ public:                                   \
 const char * const CLASS::name = #CLASS;
 #endif
 
-#endif  // __UTIL_H
+#endif

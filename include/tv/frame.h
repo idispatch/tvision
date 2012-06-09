@@ -22,12 +22,8 @@ Modified by Robert H”hne to be used for RHIDE.
 /*        5 = Icons                                                       */
 /* ---------------------------------------------------------------------- */
 
-#if defined( Uses_TFrame ) && !defined( __TFrame )
+#ifndef __TFrame
 #define __TFrame
-
-class TRect;
-struct TEvent;
-class TDrawBuffer;
 
 class TFrame : public TView
 {
@@ -86,5 +82,5 @@ inline opstream& operator << ( opstream& os, TFrame* cl )
     { return os << (TStreamable *)cl; }
 #endif // NO_STREAM
 
-#endif  // Uses_TFrame
+#endif
 

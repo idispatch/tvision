@@ -14,9 +14,6 @@ Andris Pavenis.
  *
  */
 
-#define Uses_fpbase
-#define Uses_ifpstream
-#define Uses_IOS_BIN
 #include <tv.h>
 
 UsingNamespaceStd

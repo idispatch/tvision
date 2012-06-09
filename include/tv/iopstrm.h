@@ -19,9 +19,10 @@ Modified by Robert H”hne to be used for RHIDE.
 /*                                                                         */
 /* ------------------------------------------------------------------------*/
 
-#if defined( Uses_iopstream ) && !defined( __iopstream )
+#ifndef __iopstream
 #define __iopstream
 
+#if !defined( NO_STREAM )
 class iopstream : public ipstream, public opstream
 {
 public:
@@ -31,6 +32,7 @@ public:
 protected:
  iopstream();
 };
+#endif
 
-#endif  // Uses_iopstream
+#endif
 

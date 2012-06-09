@@ -11,12 +11,6 @@ Modified by Robert H”hne to be used for RHIDE.
  *
  */
 
-#define Uses_TProgram
-#define Uses_TStatusLine
-#define Uses_TDeskTop
-#define Uses_TMenuBar
-#define Uses_TScreen
-#define Uses_TVConfigFile
 #include <tv.h>
 
 TScreen          *TProgInit::tsc=NULL;

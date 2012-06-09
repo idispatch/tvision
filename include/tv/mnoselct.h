@@ -11,11 +11,8 @@ Modified by Robert H”hne to be used for RHIDE.
  *
  */
 
-#if defined( Uses_TMonoSelector ) && !defined( __TMonoSelector )
+#ifndef __TMonoSelector
 #define __TMonoSelector
-
-class TRect;
-struct TEvent;
 
 class TMonoSelector : public TCluster
 {
@@ -62,5 +59,5 @@ inline opstream& operator << ( opstream& os, TMonoSelector* cl )
     { return os << (TStreamable *)cl; }
 #endif // NO_STREAM
 
-#endif  // Uses_TMonoSelector
+#endif
 

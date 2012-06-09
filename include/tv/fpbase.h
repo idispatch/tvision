@@ -30,7 +30,7 @@ trick will be used.
 /*                                                                         */
 /* ------------------------------------------------------------------------*/
 
-#if defined( Uses_fpbase ) && !defined( __fpbase )
+#ifndef __fpbase
 #define __fpbase
 
 #if !defined( NO_STREAM )
@@ -76,5 +76,5 @@ private:
 
 };
 #endif
-#endif  // Uses_fpbase
+#endif
 

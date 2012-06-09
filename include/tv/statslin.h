@@ -23,12 +23,8 @@ Modified by Robert H”hne to be used for RHIDE.
 /*        6 = Shortcut selection                                          */
 /* ---------------------------------------------------------------------- */
 
-#if defined( Uses_TStatusLine ) && !defined( __TStatusLine )
+#ifndef __TStatusLine
 #define __TStatusLine
-
-class TRect;
-struct TEvent;
-class TPoint;
 
 class TStatusLine : public TView
 {
@@ -79,7 +75,7 @@ protected:
     TStatusLine( StreamableInit );
     virtual void write( opstream& );
     virtual void *read( ipstream& );
- 
+
 public:
 
     static const char * const name;
@@ -99,5 +95,5 @@ inline opstream& operator << ( opstream& os, TStatusLine* cl )
     { return os << (TStreamable *)cl; }
 #endif // NO_STREAM
 
-#endif  // Uses_TStatusLine
+#endif
 

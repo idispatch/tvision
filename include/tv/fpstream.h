@@ -22,8 +22,8 @@ Andris Pavenis and Christoph Bauer.
 /*                                                                         */
 /* ------------------------------------------------------------------------*/
 
-#if defined( Uses_fpstream ) && !defined( __fpstream )
-#define __fpstream
+#ifndef __fpstream
+#define __fpstream 1
 #if !defined( NO_STREAM )
 class fpstream : public fpbase, public iopstream
 {
@@ -39,5 +39,5 @@ public:
     void open( const char *, CLY_OpenModeT, int = CLY_FBOpenProtDef );
 };
 #endif
-#endif  // Uses_fpstream
+#endif
 

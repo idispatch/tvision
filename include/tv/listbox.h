@@ -12,12 +12,8 @@ Modified by Salvador E. Tropea to add functionality.
  *
  */
 
-#if defined( Uses_TListBox ) && !defined( __TListBox )
+#ifndef __TListBox
 #define __TListBox
-
-class TRect;
-class TScrollBar;
-class TCollection;
 
 struct TListBoxRec
 {

@@ -12,19 +12,7 @@ Modified for i18n support by Salvador Eduardo Tropea.
  *
  */
 // SET: Moved the standard headers here because according to DJ
-// they can inconditionally declare symbols like NULL
-#define Uses_string
-
-#define Uses_TKeys
-#define Uses_TWindow
-#define Uses_TEvent
-#define Uses_TRect
-#define Uses_TFrame
-#define Uses_TScrollBar
-#define Uses_opstream
-#define Uses_ipstream
-#define Uses_TPalette
-#define Uses_TProgram // SET: TProgram::application broadcast
+// they can unconditionally declare symbols like NULL
 #include <tv.h>
 
 const TPoint minWinSize = {16, 6};
@@ -163,9 +151,9 @@ void TWindow::handleEvent( TEvent& event )
                     clearEvent(event);
                     break;
                 }
-    else if( event.what == evBroadcast && 
+    else if( event.what == evBroadcast &&
              event.message.command == cmSelectWindowNum &&
-             event.message.infoInt == number && 
+             event.message.infoInt == number &&
              (options & ofSelectable) != 0
            )
             {

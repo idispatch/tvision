@@ -11,7 +11,7 @@ Modified by Robert H”hne to be used for RHIDE.
  *
  */
 
-#if defined( Uses_TStringList ) && !defined( __TStringList )
+#ifndef __TStringList
 #define __TStringList
 
 class TStrIndexRec;
@@ -20,23 +20,24 @@ const int MAXKEYS = 16;
 
 class TStringList : public TObject
 #if !defined( NO_STREAM )
-                                   , public TStreamable
+                  , public TStreamable
 #endif // NO_STREAM
 {
 
 public:
 
     ~TStringList();
-
+#if !defined( NO_STREAM )
     void get( char *dest, ushort key );
-
+#endif
 private:
 
-    ipstream *ip;
     long basePos;
     short indexSize;
     TStrIndexRec *index;
 #if !defined( NO_STREAM )
+    ipstream *ip;
+
     virtual const char *streamableName() const
 	{ return name; }
 
@@ -65,5 +66,5 @@ inline opstream& operator << ( opstream& os, TStringList* cl )
     { return os << (TStreamable *)cl; }
 #endif // NO_STREAM
 
-#endif  // Uses_TStringList
+#endif
 

@@ -11,21 +11,6 @@ Modified by Salvador E. Tropea to add functionality.
  *
  *
  */
-// SET: Moved the standard headers here because according to DJ
-// they can inconditionally declare symbols like NULL
-#define Uses_string
-#define Uses_AllocLocal
-#define Uses_TKeys
-#define Uses_TListViewer
-#define Uses_TScrollBar
-#define Uses_TDrawBuffer
-#define Uses_TPoint
-#define Uses_TEvent
-#define Uses_TGroup
-#define Uses_opstream
-#define Uses_ipstream
-#define Uses_TStreamableClass
-#define Uses_TPalette
 #include <tv.h>
 
 #define cpListViewer "\x1A\x1A\x1B\x1C\x1D"
@@ -119,7 +104,7 @@ void TListViewer::draw()
             int width;;
             item =  j * size.y + i + topItem;
             curCol = j * colWidth;
-            if (j == numCols-1) width = size.x - curCol + 1; 
+            if (j == numCols-1) width = size.x - curCol + 1;
             else width = colWidth;
             if( (state & (sfSelected | sfActive)) == (sfSelected | sfActive) &&
                 focused == item &&
@@ -211,7 +196,7 @@ void TListViewer::focusItem( ccIndex item )
   Description:
   That's a variant of focusItem that tries to center the focused item when
 the list have only one column.
-  
+
 ***************************************************************************/
 
 void TListViewer::focusItemCentered( ccIndex item )
@@ -429,7 +414,7 @@ void TListViewer::handleEvent( TEvent& event )
         if( (options & ofSelectable) != 0 )
             {
             if( event.message.command == cmScrollBarClicked &&
-                  ( event.message.infoPtr == hScrollBar || 
+                  ( event.message.infoPtr == hScrollBar ||
                     event.message.infoPtr == vScrollBar ) )
                 select();
             else if( event.message.command == cmScrollBarChanged )
@@ -464,7 +449,7 @@ void TListViewer::setRange( ccIndex aRange )
                                vScrollBar->pgStep,
                                vScrollBar->arStep
                              );
-        } 
+        }
     else
         drawView();
 }

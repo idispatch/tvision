@@ -11,13 +11,8 @@ Modified by Robert H”hne to be used for RHIDE.
  *
  */
 
-#if defined( Uses_TColorGroupList ) && !defined( __TColorGroupList )
+#ifndef __TColorGroupList
 #define __TColorGroupList
-
-class TRect;
-class TScrollBar;
-class TColorGroup;
-class TColorItem;
 
 class TColorGroupList : public TListViewer
 {
@@ -70,5 +65,5 @@ inline opstream& operator << ( opstream& os, TColorGroupList* cl )
     { return os << (TStreamable *)cl; }
 #endif
 
-#endif  // Uses_TColorGroupList
+#endif
 

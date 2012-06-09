@@ -20,11 +20,8 @@ Modified by Robert H”hne to be used for RHIDE.
 /*        3 = Indicator                                                   */
 /* ---------------------------------------------------------------------- */
 
-#if defined( Uses_TScrollBar ) && !defined( __TScrollBar )
+#ifndef __TScrollBar
 #define __TScrollBar
-
-class TRect;
-struct TEvent;
 
 typedef char TScrollChars[5];
 
@@ -95,5 +92,5 @@ inline opstream& operator << ( opstream& os, TScrollBar& cl )
 inline opstream& operator << ( opstream& os, TScrollBar* cl )
     { return os << (TStreamable *)cl; }
 #endif // NO_STREAM
-#endif  // Uses_TScrollBar
+#endif
 

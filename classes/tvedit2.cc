@@ -10,25 +10,6 @@
 /*   Turbo Vision TVEDIT source file                        */
 /*----------------------------------------------------------*/
 
-#define Uses_stdlib
-#define Uses_stdarg
-
-#define Uses_TDialog
-#define Uses_TDeskTop
-#define Uses_TProgram
-#define Uses_TApplication
-#define Uses_TObject
-#define Uses_TInputLine
-#define Uses_T1Label
-#define Uses_THistory
-#define Uses_TRect
-#define Uses_TCheckBoxes
-#define Uses_TButton
-#define Uses_MsgBox
-#define Uses_TSItem
-#define Uses_TEditor
-#define Uses_TEditorApp
-
 #include <tv.h>
 
 ushort execDialog( TDialog *d, void *data )

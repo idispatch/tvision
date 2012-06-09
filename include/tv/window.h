@@ -12,15 +12,8 @@ Modified for i18n support by Salvador Eduardo Tropea.
  *
  */
 
-#if defined( Uses_TWindow ) && !defined( __TWindow )
+#ifndef __TWindow
 #define __TWindow
-
-class TFrame;
-class TRect;
-class TPoint;
-struct TEvent;
-class TFrame;
-class TScrollBar;
 
 class TWindowInit
 {
@@ -109,5 +102,5 @@ inline opstream& operator << ( opstream& os, TWindow* cl )
     { return os << (TStreamable *)cl; }
 #endif // NO_STREAM
 
-#endif  // Uses_TWindow
+#endif
 

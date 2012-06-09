@@ -21,9 +21,10 @@ Modified by Robert H”hne to be used for RHIDE.
 /*                                                                         */
 /* ------------------------------------------------------------------------*/
 
-#if defined( Uses_TStreamableTypes ) && !defined( __TStreamableTypes )
+#ifndef __TStreamableTypes
 #define __TStreamableTypes
 
+#if !defined ( NO_STREAM )
 // Avoid replacing new by MSS's macro
 #include <tv/no_mss.h>
 
@@ -49,6 +50,7 @@ private:
 };
 
 #include <tv/yes_mss.h>
+#endif
 
-#endif  // Uses_TStreamableTypes
+#endif
 

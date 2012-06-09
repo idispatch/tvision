@@ -11,10 +11,6 @@ Modified by Robert H”hne to be used for RHIDE.
  *
  */
 
-#define Uses_TDirCollection
-#define Uses_TDirEntry
-#define Uses_opstream
-#define Uses_ipstream
 #include <tv.h>
 
 #if !defined( NO_STREAM )

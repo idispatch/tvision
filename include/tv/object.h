@@ -11,7 +11,7 @@ Modified by Robert H”hne to be used for RHIDE.
  *
  */
 
-#if defined( Uses_TObject ) && !defined( __TObject )
+#ifndef __TObject
 #define __TObject
 
 #include <stddef.h>
@@ -39,7 +39,7 @@ inline void TObject::CLY_destroy( TObject *o )
 
 inline void CLY_destroy( TObject *o )
 {
-  if (o) 
+  if (o)
   {
     o->shutDown();
     delete o;
@@ -53,5 +53,5 @@ inline void CLY_destroy( TObject *o )
  o=0;\
 }
 
-#endif  // Uses_TObject
+#endif
 

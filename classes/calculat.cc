@@ -13,16 +13,6 @@
   I ported it from TV 1.03.
  */
 
-#define Uses_TKeys
-#define Uses_TKeys_Extended
-#define Uses_TRect
-#define Uses_TEvent
-#define Uses_TButton
-#define Uses_TStreamableClass
-#define Uses_TStreamable
-#define Uses_TView
-#define Uses_TDialog
-#define Uses_TCalculator
 #include <tv.h>
 
 // SET: Moved to the class, made ASCII

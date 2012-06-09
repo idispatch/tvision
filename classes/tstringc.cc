@@ -10,13 +10,7 @@ Modified by Robert H”hne to be used for RHIDE.
  *
  *
  */
-// SET: Moved the standard headers here because according to DJ
-// they can unconditionally declare symbols like NULL
-#define Uses_string
 
-#define Uses_TStringCollection
-#define Uses_opstream
-#define Uses_ipstream
 #include <tv.h>
 
 TStringCollection::TStringCollection( ccIndex aLimit, ccIndex aDelta ) :

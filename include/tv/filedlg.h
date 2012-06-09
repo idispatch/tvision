@@ -12,7 +12,7 @@ Modified by Salvador Eduardo Tropea to add more functionality.
  *
  */
 
-#if defined( Uses_TFileDialog ) && !defined( __TFileDialog )
+#ifndef __TFileDialog
 #define __TFileDialog
 
 const ushort
@@ -70,7 +70,7 @@ protected:
 
 protected:
 
-    TFileDialog( StreamableInit ) :  TWindowInit( &TFileDialog::initFrame ), 
+    TFileDialog( StreamableInit ) :  TWindowInit( &TFileDialog::initFrame ),
             TDialog ( streamableInit ) {}
     virtual void write( opstream& );
     virtual void *read( ipstream& );
@@ -94,5 +94,5 @@ inline opstream& operator << ( opstream& os, TFileDialog* cl )
     { return os << (TStreamable *)cl; }
 #endif // NO_STREAM
 
-#endif  // Uses_TFileDialog
+#endif
 

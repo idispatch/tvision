@@ -11,17 +11,6 @@ and octal numbers. Thanks to Andris Pavenis for suggestions.
  *
  *
  */
-// SET: Moved the standard headers here because according to DJ
-// they can inconditionally declare symbols like NULL
-#define Uses_stdlib
-#define Uses_string
-#define Uses_limits
-#define Uses_stdio
-
-#define Uses_ipstream
-#define Uses_opstream
-#define Uses_TRangeValidator
-#define Uses_MsgBox
 #include <tv.h>
 
 // SET: Added hexadecimal letters

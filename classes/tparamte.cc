@@ -26,12 +26,6 @@
  * to write in a string without knowing the length is a very bad idea.
  *
  */
-#define Uses_stdio
-#define Uses_stdarg
-#define Uses_string
-#define Uses_snprintf
-
-#define Uses_TParamText
 #include <tv.h>
 
 TParamText::TParamText( const TRect& bounds ) :

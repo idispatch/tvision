@@ -1,6 +1,7 @@
 #ifndef Included_SSC_Streams
-#define Included_SSC_Streams 1
+#define Included_SSC_Streams
 
+#if !defined( NO_STREAM )
 #define SSC_IOSSeekDir SSC_ios::seekdir
 #define SSC_StreamOffT SSC_ios::seekoff
 #define SSC_OpenModeT  SSC_ios::openmode
@@ -72,5 +73,7 @@ protected:
  int opened;
  SSC_OpenModeT mode;
 };
+#endif
+
 #endif // Included_SSC_Streams
 

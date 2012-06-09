@@ -23,9 +23,10 @@ Modified by Robert H”hne to be used for RHIDE.
 /*                                                                         */
 /* ------------------------------------------------------------------------*/
 
-#if defined( Uses_TPReadObjects ) && !defined( __TPReadObjects )
+#ifndef __TPReadObjects
 #define __TPReadObjects
 
+#if !defined ( NO_STREAM )
 class TPReadObjects : public TNSCollection
 {
 
@@ -46,6 +47,7 @@ private:
     P_id_type curId;
 
 };
+#endif
 
-#endif  // Uses_TPReadObjects
+#endif
 

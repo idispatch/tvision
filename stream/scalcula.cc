@@ -1,7 +1,7 @@
 #ifndef NO_STREAM
 
 #define Uses_TCalculator
-#define Uses_TStreamableClass
+
 #include <tv.h>
 __link( RView )
 __link( RDialog )

@@ -12,14 +12,10 @@ Andris Pavenis and Christoph Bauer.
  *
  *
  */
+#if !defined( NO_STREAM )
 // SET: Moved the standard headers here because according to DJ
 // they can inconditionally declare symbols like NULL
 #include <stdlib.h>
-
-#define Uses_TStreamableTypes
-#define Uses_TStreamableClass
-#define Uses_TStreamable
-#define Uses_pstream
 #include <tv.h>
 
 UsingNamespaceStd
@@ -85,8 +81,8 @@ void pstream::clear( int i )
 }
 
 void pstream::registerType( TStreamableClass *ts )
-{ 
-    types->registerType( ts ); 
+{
+    types->registerType( ts );
 }
 
 pstream::operator void *() const
@@ -130,3 +126,4 @@ void pstream::setstate( int b )
 }
 
 TStreamableTypes * pstream::types;
+#endif

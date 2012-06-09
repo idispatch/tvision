@@ -21,9 +21,10 @@ Andris Pavenis.
 /*                                                                         */
 /* ------------------------------------------------------------------------*/
 
-#if defined( Uses_pstream ) && !defined( __pstream )
+#ifndef __pstream
 #define __pstream
 
+#if !defined ( NO_STREAM )
 class TStreamableTypes;
 
 class pstream
@@ -67,6 +68,7 @@ protected:
 
     static TStreamableTypes * types;
 };
+#endif
 
-#endif  // Uses_pstream
+#endif
 

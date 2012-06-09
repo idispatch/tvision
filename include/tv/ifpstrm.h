@@ -21,7 +21,7 @@ Andris Pavenis and Christoph Bauer.
 /*                                                                         */
 /* ------------------------------------------------------------------------*/
 
-#if defined( Uses_ifpstream ) && !defined( __ifpstream )
+#ifndef __ifpstream
 #define __ifpstream
 
 #if !defined( NO_STREAM )
@@ -44,5 +44,5 @@ public:
                     );
 };
 #endif
-#endif  // Uses_ifpstream
+#endif
 

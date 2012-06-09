@@ -11,7 +11,7 @@ Modified by Robert H”hne to be used for RHIDE.
  *
  */
 
-#if defined( Uses_TMenu ) && !defined( __TMenu )
+#ifndef __TMenu
 #define __TMenu
 
 class TMenuItem;
@@ -32,5 +32,5 @@ public:
 
 };
 
-#endif  // Uses_TMenu
+#endif
 

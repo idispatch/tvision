@@ -11,7 +11,7 @@ Modified by Robert H”hne to be used for RHIDE.
  *
  */
 
-#if defined( Uses_TNSCollection ) && !defined( __TNSCollection )
+#ifndef __TNSCollection
 #define __TNSCollection
 // Avoid replacing free by MSS's macro
 #include <tv/no_mss.h>
@@ -84,5 +84,5 @@ private:
 
 #include <tv/yes_mss.h>
 
-#endif  // Uses_TNSCollection
+#endif
 

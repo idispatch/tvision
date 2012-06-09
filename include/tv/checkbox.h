@@ -22,11 +22,8 @@ Added TCheckBoxes32 and code page stuff by Salvador Eduardo Tropea.
 /*        4 = Selected shortcut                                           */
 /* ---------------------------------------------------------------------- */
 
-#if defined( Uses_TCheckBoxes ) && !defined( __TCheckBoxes )
+#ifndef __TCheckBoxes
 #define __TCheckBoxes
-
-class TRect;
-class TSItem;
 
 class TCheckBoxes : public TCluster
 {
@@ -37,7 +34,7 @@ public:
       TCluster( bounds, aStrings ) {};
 
     virtual void draw();
-    
+
     virtual Boolean mark( int item );
     virtual void press( int item );
 
@@ -103,5 +100,5 @@ inline opstream& operator << ( opstream& os, TCheckBoxes32* cl )
     { return os << (TStreamable *)cl; }
 #endif // NO_STREAM
 
-#endif  // Uses_TCheckBoxes
+#endif
 

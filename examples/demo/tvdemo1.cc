@@ -40,7 +40,7 @@
 #define Uses_THelpWindow
 // Needed to remap the "system" menu character
 #define Uses_TVCodePage
-#define Uses_TStreamableClass
+
 
 #include <tv.h>
 

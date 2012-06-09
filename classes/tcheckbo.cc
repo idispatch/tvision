@@ -12,7 +12,6 @@ Added TCheckBoxes32 and code page stuff by Salvador Eduardo Tropea.
  *
  */
 
-#define Uses_TCheckBoxes
 #include <tv.h>
 
 void TCheckBoxes::draw()

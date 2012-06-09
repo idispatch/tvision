@@ -11,7 +11,7 @@ Modified by Robert H”hne to be used for RHIDE.
  *
  */
 
-#if defined( Uses_TApplication ) && !defined( __TApplication )
+#ifndef __TApplication
 #define __TApplication
 
 class TApplication : public TProgram
@@ -28,4 +28,3 @@ protected:
 };
 
 #endif
-

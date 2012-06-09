@@ -10,18 +10,6 @@ Modified by Robert H”hne to be used for RHIDE.
  *
  *
  */
-// SET: Moved the standard headers here because according to DJ
-// they can inconditionally declare symbols like NULL
-#define Uses_string
-
-#define Uses_TStatusLine
-#define Uses_TStatusItem
-#define Uses_TStatusDef
-#define Uses_TDrawBuffer
-#define Uses_TEvent
-#define Uses_opstream
-#define Uses_ipstream
-#define Uses_TPalette
 #include <tv.h>
 
 #define cpStatusLine "\x02\x03\x04\x05\x06\x07"
@@ -241,7 +229,7 @@ void TStatusLine::handleEvent( TEvent& event )
             {
             for( TStatusItem *T = items; T != 0; T = T->next )
                 {
-                if( event.keyDown.keyCode ==  T->keyCode && 
+                if( event.keyDown.keyCode ==  T->keyCode &&
                     commandEnabled(T->command))
                     {
                     event.what = evCommand;
@@ -349,7 +337,7 @@ TStatusDef *TStatusLine::readDefs( ipstream& is )
 }
 
 void *TStatusLine::read( ipstream& is )
-{   
+{
     TView::read( is );
     defs = readDefs( is );
     findItems();

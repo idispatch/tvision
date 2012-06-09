@@ -23,13 +23,8 @@ Modified by Robert H”hne to be used for RHIDE.
 /*        6 = Shortcut selection                                          */
 /* ---------------------------------------------------------------------- */
 
-#if defined( Uses_TMenuBox ) && !defined( __TMenuBox )
+#ifndef __TMenuBox
 #define __TMenuBox
-
-class TRect;
-class TMenu;
-class TMenuView;
-class TDrawBuffer;
 
 class TMenuBox : public TMenuView
 {
@@ -78,5 +73,5 @@ inline opstream& operator << ( opstream& os, TMenuBox* cl )
     { return os << (TStreamable *)cl; }
 #endif // NO_STREAM
 
-#endif  // Uses_TMenuBox
+#endif
 

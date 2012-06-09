@@ -11,7 +11,7 @@ Modified by Robert H”hne to be used for RHIDE.
  *
  */
 
-#if defined( Uses_TStringCollection ) && !defined( __TStringCollection )
+#ifndef __TStringCollection
 #define __TStringCollection
 
 class TStringCollection : public TSortedCollection
@@ -56,5 +56,5 @@ inline opstream& operator << ( opstream& os, TStringCollection* cl )
     { return os << (TStreamable *)cl; }
 #endif // NO_STREAM
 
-#endif  // Uses_TStringCollection
+#endif
 

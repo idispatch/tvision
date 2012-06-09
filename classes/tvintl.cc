@@ -2,17 +2,9 @@
    Copyright by Salvador E. Tropea (SET) (2003)
    Covered by the GPL license. */
 
-#define Uses_string
-#define Uses_ctype
-#define Uses_stdlib
-#define Uses_stdarg
-#define Uses_stdio
-#define Uses_snprintf
-#define Uses_limits
 #include <compatlayer.h>
 #include <locale.h>
 #include <tv/ttypes.h>
-#define Uses_intl_fprintf
 #include <tv/intl.h>
 #include <tv.h>
 
@@ -270,7 +262,7 @@ int TVIntl::snprintf(char *dest, size_t sz, const char *fmt, ...)
  va_end(argptr);
  return l;
 }
-
+#ifdef Uses_intl_fprintf
 int TVIntl::fprintf(FILE *f, const char *fmt, ...)
 {
  va_list argptr;
@@ -279,5 +271,6 @@ int TVIntl::fprintf(FILE *f, const char *fmt, ...)
  va_end(argptr);
  return l;
 }
+#endif
 #endif /* HAVE_INTL_SUPPORT */
 

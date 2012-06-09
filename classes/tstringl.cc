@@ -10,25 +10,16 @@ Modified by Robert H”hne to be used for RHIDE.
  *
  *
  */
-// SET: Moved the standard headers here because according to DJ
-// they can inconditionally declare symbols like NULL
-#define Uses_string
-
-#define Uses_TStringList
-#define Uses_TStrIndexRec
-#define Uses_ipstream
 #include <tv.h>
 
 TStringList::~TStringList()
 {
     int i;
-    for (i=indexSize;i>0;i--) delete (index+(i-1));
-/*
-    delete [indexSize] index;
-*/
+    for (i=indexSize;i>0;i--)
+        delete (index+(i-1));
 }
 
-
+#if !defined( NO_STREAM )
 void TStringList::get( char *dest, ushort key )
 {
     if( indexSize == 0 )
@@ -55,7 +46,6 @@ void TStringList::get( char *dest, ushort key )
         } while( count-- > 0 );
 }
 
-#if !defined( NO_STREAM )
 void *TStringList::read( ipstream& is )
 {
     ip = &is;

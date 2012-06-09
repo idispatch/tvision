@@ -11,16 +11,7 @@ Modified by Salvador E. Tropea to add functionality.
  *
  *
  */
-// SET: Moved the standard headers here because according to DJ
-// they can inconditionally declare symbols like NULL
-#define Uses_string
 
-#define Uses_TListBox
-#define Uses_TEvent
-#define Uses_TCollection
-#define Uses_opstream
-#define Uses_ipstream
-#define Uses_TStreamableClass
 #include <tv.h>
 
 TListBox::TListBox( const TRect& bounds,

@@ -11,12 +11,10 @@ Modified by Robert H”hne to be used for RHIDE.
  *
  */
 
-#if defined( Uses_TResourceFile ) && !defined( __TResourceFile )
+#ifndef __TResourceFile
 #define __TResourceFile
 
-class TResourceCollection;
-class fpstream;
-
+#if !defined( NO_STREAM )
 class TResourceFile: public TObject
 {
 
@@ -40,6 +38,6 @@ protected:
     CLY_StreamPosT indexPos;
     TResourceCollection *index;
 };
-
-#endif  // Uses_TResourceFile
+#endif
+#endif
 

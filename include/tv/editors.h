@@ -16,7 +16,7 @@
 /*                                                                         */
 /* ------------------------------------------------------------------------*/
 
-#if !defined( __EDIT_COMMAND_CODES )
+#ifndef __EDIT_COMMAND_CODES
 #define __EDIT_COMMAND_CODES
 
 const int
@@ -101,10 +101,8 @@ const unsigned
 
 #endif  // __EDIT_COMMAND_CODES
 
-#if defined( Uses_TIndicator ) && !defined( __TIndicator )
+#ifndef __TIndicator
 #define __TIndicator
-
-class far TRect;
 
 class TIndicator : public TView
 {
@@ -159,19 +157,14 @@ inline opstream& operator << ( opstream& os, TIndicator* cl )
 
 #endif // NO_STREAM
 
-#endif  // Uses_TIndicator
+#endif
 
 
-#if defined( Uses_TEditor ) && !defined( __TEditor )
+#ifndef __TEditor
 #define __TEditor
 
 typedef ushort (*TEditorDialog)( int, ... );
 ushort defEditorDialog( int dialog, ... );
-
-class TRect;
-class TScrollBar;
-class TIndicator;
-class TEvent;
 
 class TEditor : public TView
 {
@@ -310,9 +303,9 @@ inline opstream& operator << ( opstream& os, TEditor* cl )
     { return os << (TStreamable *)cl; }
 #endif // NO_STREAM
 
-#endif  // Uses_TEditor
+#endif
 
-#if defined( Uses_TMemo ) && !defined( __TMemo )
+#ifndef __TMemo
 #define __TMemo
 
 class TEvent;
@@ -368,18 +361,11 @@ inline opstream& operator << ( opstream& os, TMemo* cl )
     { return os << (TStreamable *)cl; }
 #endif  // NO_STREAM
 
-#endif  // Uses_TMemo
+#endif
 
 
-#if defined( Uses_TFileEditor ) && !defined( __TFileEditor )
+#ifndef __TFileEditor
 #define __TFileEditor
-
-//#include <dir.h>
-
-class TRect;
-class TScrollBar;
-class TIndicator;
-class TEvent;
 
 class TFileEditor : public TEditor
 {
@@ -438,10 +424,10 @@ inline opstream& operator << ( opstream& os, TFileEditor* cl )
     { return os << (TStreamable *)cl; }
 #endif // NO_STREAM
 
-#endif  // Uses_TFileEditor
+#endif
 
 
-#if defined( Uses_TEditWindow ) && !defined( __TEditWindow )
+#ifndef __TEditWindow
 #define __TEditWindow
 
 class TFileEditor;
@@ -493,10 +479,10 @@ inline opstream& operator << ( opstream& os, TEditWindow* cl )
     { return os << (TStreamable *)cl; }
 #endif // NO_STREAM
 
-#endif  // Uses_TEditWindow
+#endif
 
 
-#if defined( Uses_TFindDialogRec ) && !defined( __TFindDialogRec )
+#ifndef __TFindDialogRec
 #define __TFindDialogRec
 
 struct TFindDialogRec
@@ -510,9 +496,9 @@ struct TFindDialogRec
     ushort options;
 };
 
-#endif  // Uses_TFindDialogRec
+#endif
 
-#if defined( Uses_TReplaceDialogRec ) && !defined( __TReplaceDialogRec )
+#ifndef __TReplaceDialogRec
 #define __TReplaceDialogRec
 
 struct TReplaceDialogRec
@@ -528,5 +514,5 @@ struct TReplaceDialogRec
     ushort options;
 };
 
-#endif  // Uses_TReplaceDialogRec
+#endif
 

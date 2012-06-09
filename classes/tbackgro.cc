@@ -11,14 +11,6 @@ Modified by Robert H”hne to be used for RHIDE.
  *
  */
 
-#define Uses_TBackground
-#define Uses_TDrawBuffer
-#define Uses_opstream
-#define Uses_ipstream
-#define Uses_TStreamableClass
-#define Uses_TPalette
-#define Uses_TScreen
-#define Uses_TDeskTop
 #include <tv.h>
 
 #define cpBackground "\x01"      // background palette

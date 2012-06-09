@@ -11,11 +11,8 @@ Modified by Robert H”hne to be used for RHIDE.
  *
  */
 
-#if defined( Uses_TIndicator ) && !defined( __TIndicator )
+#ifndef __TIndicator
 #define __TIndicator
-
-class TRect;
-class TPoint;
 
 class TIndicator : public TView
 {
@@ -70,6 +67,6 @@ inline opstream& operator << ( opstream& os, TIndicator* cl )
     { return os << (TStreamable *)cl; }
 #endif // NO_STREAM
 
-#endif  // Uses_TIndicator
+#endif
 
 

@@ -19,14 +19,6 @@
  *
  */
 #include <assert.h>
-#define Uses_string
-#define Uses_TStreamable
-#define Uses_TStreamableClass
-#define Uses_TStreamableTypes
-#define Uses_pstream
-#define Uses_ipstream
-#define Uses_TPReadObjects
-#define Uses_PubStreamBuf
 #include <tv.h>
 #if !defined( NO_STREAM )
 ipstream::ipstream( CLY_streambuf *sb )

@@ -11,7 +11,7 @@ Modified by Robert H”hne to be used for RHIDE.
  *
  */
 
-#if defined( Uses_TDirCollection ) && !defined( __TDirCollection )
+#ifndef __TDirCollection
 #define __TDirCollection
 // Avoid replacing free by MSS's macro
 #include <tv/no_mss.h>
@@ -84,5 +84,5 @@ inline TDirEntry *TDirCollection::lastThat( ccTestFunc func, void *arg )
     return (TDirEntry *)TCollection::lastThat( ccTestFunc(func), arg );
 }
 
-#endif  // Uses_TDirCollection
+#endif
 

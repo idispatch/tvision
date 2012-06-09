@@ -11,7 +11,7 @@ Modified by Robert H”hne to be used for RHIDE.
  *
  */
 
-#if !defined( __COMMAND_CODES )
+#ifndef __COMMAND_CODES
 #define __COMMAND_CODES
 
 const ushort
@@ -37,7 +37,7 @@ const ushort
     cmNo            = 13,
     cmDefault       = 14,
 
-//  TView State masks 
+//  TView State masks
 
     sfVisible       = 0x001,
     sfCursorVis     = 0x002,
@@ -52,7 +52,7 @@ const ushort
     sfDefault       = 0x400,
     sfExposed       = 0x800,
 
-// TView Option masks 
+// TView Option masks
 
     ofSelectable    = 0x001,
     ofTopSelect     = 0x002,
@@ -70,7 +70,7 @@ const ushort
     // classes and enable it by default, see TCluster as example.
     ofBeVerbose     = 0x400,
 
-// TView GrowMode masks 
+// TView GrowMode masks
 
     gfGrowLoX       = 0x01,
     gfGrowLoY       = 0x02,
@@ -79,7 +79,7 @@ const ushort
     gfGrowAll       = 0x0f,
     gfGrowRel       = 0x10,
 
-// TView DragMode masks 
+// TView DragMode masks
 
     dmDragMove      = 0x01,
     dmDragGrow      = 0x02,
@@ -94,7 +94,7 @@ const ushort
     hcNoContext     = 0,
     hcDragging      = 1,
 
-// TScrollBar part codes 
+// TScrollBar part codes
 
     sbLeftArrow     = 0,
     sbRightArrow    = 1,
@@ -106,7 +106,7 @@ const ushort
     sbPageDown      = 7,
     sbIndicator     = 8,
 
-// TScrollBar options for TWindow.StandardScrollBar 
+// TScrollBar options for TWindow.StandardScrollBar
 
     sbHorizontal    = 0x000,
     sbVertical      = 0x001,
@@ -133,7 +133,7 @@ const ushort
 
     wnNoNumber      = 0,
 
-// TWindow palette entries 
+// TWindow palette entries
 
     wpBlueWindow    = 0,
     wpCyanWindow    = 1,
@@ -149,18 +149,18 @@ const ushort
     cmTile          = 25,
     cmCascade       = 26,
 
-// Standard messages 
+// Standard messages
 
     cmReceivedFocus     = 50,
     cmReleasedFocus     = 51,
     cmCommandSetChanged = 52,
 
-// TScrollBar messages 
+// TScrollBar messages
 
     cmScrollBarChanged  = 53,
     cmScrollBarClicked  = 54,
 
-// TWindow select messages 
+// TWindow select messages
 
     cmSelectWindowNum   = 55,
 
@@ -204,7 +204,7 @@ const ushort
 //      this case.
 
     cmCallShell         = 65,
-    
+
 //  Event masks
 
     positionalEvents    = evMouse,
@@ -212,58 +212,13 @@ const ushort
 
 #endif  // __COMMAND_CODES
 
-#if defined( Uses_TCommandSet )
-
 #include <tv/cmdset.h>
-
-#endif
-
-#if defined( Uses_TPalette )
-
 #include <tv/palette.h>
-
-#endif
-
-#if defined( Uses_TView )
-
 #include <tv/view.h>
-
-#endif
-
-#if defined( Uses_TFrame )
-
 #include <tv/frame.h>
-
-#endif
-
-#if defined( Uses_TScrollBar )
-
 #include <tv/scrlbar.h>
-
-#endif
-
-#if defined( Uses_TScroller )
-
 #include <tv/scroller.h>
-
-#endif
-
-#if defined( Uses_TListViewer )
-
 #include <tv/lstviewr.h>
-
-#endif
-
-#if defined( Uses_TGroup )
-
 #include <tv/group.h>
-
-#endif
-
-#if defined( Uses_TWindow )
-
 #include <tv/window.h>
-
-#endif
-
 

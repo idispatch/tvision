@@ -29,7 +29,7 @@
 #define Uses_TEvent
 #define Uses_TKeys
 #define Uses_TDrawBuffer
-#define Uses_TStreamableClass
+
 #define Uses_TStreamable
 #define Uses_TView
 #define Uses_TWindow

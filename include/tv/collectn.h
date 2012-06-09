@@ -11,12 +11,12 @@ Modified by Robert H”hne to be used for RHIDE.
  *
  */
 
-#if defined( Uses_TCollection ) && !defined( __TCollection )
+#ifndef __TCollection
 #define __TCollection
 
 class TCollection : public virtual TNSCollection
 #if !defined( NO_STREAM )
-                                                 , public TStreamable
+                  , public TStreamable
 #endif // NO_STREAM
 {
 
@@ -46,6 +46,7 @@ public:
 #endif // NO_STREAM
 };
 
+#if !defined( NO_STREAM )
 inline ipstream& operator >> ( ipstream& is, TCollection& cl )
     { return is >> (TStreamable&)cl; }
 inline ipstream& operator >> ( ipstream& is, TCollection*& cl )
@@ -55,6 +56,7 @@ inline opstream& operator << ( opstream& os, TCollection& cl )
     { return os << (TStreamable&)cl; }
 inline opstream& operator << ( opstream& os, TCollection* cl )
     { return os << (TStreamable *)cl; }
+#endif // NO_STREAM
 
-#endif  // Uses_TCollection
+#endif
 

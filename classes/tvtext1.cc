@@ -10,26 +10,6 @@ Modified by Robert H”hne to be used for RHIDE.
  *
  *
  */
-
-#define Uses_TScreen
-#define Uses_TRadioButtons
-#define Uses_TMenuBox
-#define Uses_TFrame
-#define Uses_TIndicator
-#define Uses_THistory
-#define Uses_TColorSelector
-#define Uses_TMonoSelector
-#define Uses_TColorDialog
-#define Uses_TInputLine
-#define Uses_TStatusLine
-#define Uses_TCheckBoxes
-#define Uses_TScrollBar
-#define Uses_TButton
-#define Uses_TDirListBox
-#define Uses_TFileEditor
-#define Uses_TFileInfoPane
-#define Uses_TDeskTop
-#define Uses_TListViewer
 #include <tv.h>
 
 // All the strings are arrays ASCIIZ

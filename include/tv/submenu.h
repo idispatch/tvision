@@ -11,7 +11,7 @@ Modified by Robert H”hne to be used for RHIDE.
  *
  */
 
-#if defined( Uses_TSubMenu ) && !defined( __TSubMenu )
+#ifndef __TSubMenu
 #define __TSubMenu
 
 class TSubMenu : public TMenuItem
@@ -23,5 +23,5 @@ public:
 
 };
 
-#endif  // Uses_TSubMenu
+#endif
 

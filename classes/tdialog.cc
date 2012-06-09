@@ -10,12 +10,7 @@ Modified by Robert H”hne to be used for RHIDE.
  *
  *
  */
- 
-#define Uses_TKeys
-#define Uses_TDialog
-#define Uses_TEvent
-#define Uses_TPalette
-#define Uses_TApplication
+
 #include <tv.h>
 
 #define cpDialog "\x20\x21\x22\x23\x24\x25\x26\x27\x28\x29\x2A\x2B\x2C\x2D\x2E\x2F"\
@@ -37,7 +32,7 @@ TPalette& TDialog::getPalette() const
     // Avoid returning the palette if the dialog isn't inserted on the
     // desktop or the application. Example: a dialog inside another.
     if ( (owner == (TGroup*)TApplication::deskTop) ||
-         (owner == (TGroup*)TApplication::application) 
+         (owner == (TGroup*)TApplication::application)
        ) return palette1;
     return palette2;
 }

@@ -11,26 +11,8 @@ Modified by Vadim Beloborodov to be used on WIN32 console
  *
  *
  */
-#define Uses_string
-#define Uses_ctype
 #include <stdio.h>
-#define Uses_HaveLFNs
-#define Uses_TFileDialog
-#define Uses_MsgBox
-#define Uses_TRect
-#define Uses_TFileInputLine
-#define Uses_TButton
-#define Uses_T1Label
-#define Uses_TFileList
-#define Uses_THistory
-#define Uses_TScrollBar
-#define Uses_TEvent
-#define Uses_TFileInfoPane
-#define Uses_opstream
-#define Uses_ipstream
-#define Uses_TStreamableClass
 #include <tv.h>
-
 #include <errno.h>
 
 // File dialog flags
@@ -69,7 +51,7 @@ TFileDialog::TFileDialog( const char *aWildCard,
     // SET: This and more settings to make it grow nicely
     his->growMode=gfGrowLoX | gfGrowHiX;
     insert(his);
-    
+
     int longNames=CLY_HaveLFNs(); // SET
     TScrollBar *sb = longNames ?
                      new TScrollBar( TRect( 34, 5, 35, 16 ) ) :
@@ -82,7 +64,7 @@ TFileDialog::TFileDialog( const char *aWildCard,
 
     ushort opt = bfDefault;
     TRect r( 35, 2, 46, 4 );
-    
+
     TButton *bt;
     #define AddButton(flag,name,command)\
     if (aOptions & flag) {\

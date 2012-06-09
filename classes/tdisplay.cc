@@ -2,7 +2,7 @@
 
   Copyright 2001-2003 by Salvador E. Tropea
   This file is covered by the GPL license.
-  
+
   Module: Display
   Include: TDisplay
   Comments:
@@ -12,14 +12,9 @@ driver. Default members are provided.
   This is a complete new file created from concepts that José Angel Sanchez
 Caso provide me and coded from scratch. The names of some members are the
 same used in original Turbo Vision for compatibility purposes.
-  
+
 ***************************************************************************/
 
-//#define DEBUG_CURSOR
-#define Uses_stdio
-#define Uses_stdlib
-#define Uses_TScreen
-#define Uses_TVCodePage
 #include <tv.h>
 
 // Remove me please!
@@ -132,7 +127,7 @@ int           TDisplay::dosModes[TDisplayDOSModesNum]=
 /*****************************************************************************
 
  Default actions for TDisplay.
-    
+
 *****************************************************************************/
 
 /**[txh]********************************************************************

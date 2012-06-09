@@ -11,7 +11,7 @@ Modified by Robert H”hne to be used for RHIDE.
  *
  */
 
-#if defined( Uses_TStatusDef ) && !defined( __TStatusDef )
+#ifndef __TStatusDef
 #define __TStatusDef
 
 class TStatusDef
@@ -40,5 +40,5 @@ inline TStatusDef::TStatusDef( ushort aMin,
 {
 }
 
-#endif  // Uses_TStatusDef
+#endif
 

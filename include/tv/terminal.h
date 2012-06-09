@@ -11,12 +11,10 @@ Modified by Robert H”hne to be used for RHIDE.
  *
  */
 
-#if defined( Uses_TTerminal ) && !defined( __TTerminal )
+#ifndef __TTerminal
 #define __TTerminal
 
-class TRect;
-class TScrollBar;
-
+#if !defined( NO_STREAM )
 class TTerminal: public TTextDevice
 {
 
@@ -46,6 +44,7 @@ protected:
     uint32 queFront, queBack;
     void bufDec(uint32& val) { if (val==0) val=bufSize - 1; else val--; }
 };
+#endif
 
-#endif  // Uses_TTerminal
+#endif
 

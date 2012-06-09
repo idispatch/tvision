@@ -22,11 +22,8 @@ Modified by Robert H”hne to be used for RHIDE.
 /*        5 = Divider                                                     */
 /* ---------------------------------------------------------------------- */
 
-#if defined( Uses_THistoryViewer ) && !defined( __THistoryViewer )
+#ifndef __THistoryViewer
 #define __THistoryViewer
-
-class TRect;
-class TScrollBar;
 
 class THistoryViewer : public TListViewer
 {
@@ -50,5 +47,5 @@ protected:
 
 };
 
-#endif  // Uses_THistoryViewer
+#endif
 

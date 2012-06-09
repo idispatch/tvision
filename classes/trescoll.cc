@@ -11,8 +11,6 @@ Modified by Robert H”hne to be used for RHIDE.
  *
  */
 
-#define Uses_TResourceCollection
-#define Uses_TResourceItem
 #include <tv.h>
 
 TResourceCollection::TResourceCollection( ccIndex aLimit, ccIndex aDelta) :
@@ -22,14 +20,14 @@ TResourceCollection::TResourceCollection( ccIndex aLimit, ccIndex aDelta) :
 
 void TResourceCollection::freeItem( void* item )
 {
-    delete ((TResourceItem*)item)->key; 
+    delete ((TResourceItem*)item)->key;
     delete((TResourceItem*)item);
 }
 
-void* TResourceCollection::keyOf( void* item ) 
+void* TResourceCollection::keyOf( void* item )
 {
     return ((TResourceItem *)item)->key;
-} 
+}
 
 #if !defined( NO_STREAM )
 TStreamable *TResourceCollection::build()
@@ -39,7 +37,7 @@ TStreamable *TResourceCollection::build()
 
 void TResourceCollection::writeItem( void *obj, opstream& os )
 {
-   
+
    os << ((TResourceItem *)obj)->pos;
    os << ((TResourceItem *)obj)->size;
    os.writeString(((TResourceItem *)obj)->key);

@@ -11,12 +11,6 @@ Modified by Robert H”hne to be used for RHIDE.
  *
  */
 
-//#define Uses_stdio
-#define Uses_string
-#define Uses_TEventQueue
-#define Uses_TEvent
-#define Uses_TScreen
-#define Uses_TVCodePage
 #include <tv.h>
 #include <tv/gkey.h>
 
@@ -66,7 +60,7 @@ void TEventQueue::resume()
         return;
     mouse->getEvent( curMouse );
     lastMouse = curMouse;
-    
+
     mouseEvents = True;
     mouse->setRange( TScreen::getCols()-1,   TScreen::getRows()-1 );
 }

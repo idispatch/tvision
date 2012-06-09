@@ -59,5 +59,6 @@
 #define TVComp_GCC
 #define TVOS_UNIX
 #define TVOSf_BBOS10
+#define OS_HaveLFNs
 #endif
 
