@@ -5,8 +5,8 @@
  *      All Rights Reserved.
  *
 
-Modified by Robert H”hne to be used for RHIDE.
-Modified for i18n support by Salvador Eduardo Tropea.
+ Modified by Robert H”hne to be used for RHIDE.
+ Modified for i18n support by Salvador Eduardo Tropea.
 
  *
  *
@@ -15,218 +15,170 @@ Modified for i18n support by Salvador Eduardo Tropea.
 // they can unconditionally declare symbols like NULL
 #include <tv.h>
 
-const TPoint minWinSize = {16, 6};
+const TPoint minWinSize = { 16, 6 };
 
-TWindowInit::TWindowInit( TFrame *(*cFrame)( TRect ) ) :
-    createFrame( cFrame )
-{
+TWindowInit::TWindowInit(TFrame *(*cFrame)(TRect)) :
+        createFrame(cFrame) {
 }
 
 #define cpBlueWindow "\x08\x09\x0A\x0B\x0C\x0D\x0E\x0F"
 #define cpCyanWindow "\x10\x11\x12\x13\x14\x15\x16\x17"
 #define cpGrayWindow "\x18\x19\x1A\x1B\x1C\x1D\x1E\x1F"
 
-TWindow::TWindow( const TRect& bounds,
-                  const char *aTitle,
-                  short aNumber
-                ) :
-    TWindowInit( &TWindow::initFrame ),
-    TGroup( bounds ),
-    flags( wfMove | wfGrow | wfClose | wfZoom ),
-    zoomRect( getBounds() ),
-    number( aNumber ),
-    palette( wpBlueWindow ),
-    title( newStr( aTitle ) ),
-    intlTitle( NULL )
-{
+TWindow::TWindow(const TRect& bounds, const char *aTitle, short aNumber) :
+        TWindowInit(&TWindow::initFrame), TGroup(bounds), flags(wfMove | wfGrow | wfClose | wfZoom), zoomRect(
+                getBounds()), number(aNumber), palette(wpBlueWindow), title(newStr(aTitle)), intlTitle(
+                NULL) {
     state |= sfShadow;
     options |= ofSelectable | ofTopSelect;
     growMode = gfGrowAll | gfGrowRel;
     eventMask |= evMouseUp; //for TFrame
-    if( createFrame != 0 &&
-        (frame = createFrame( getExtent() )) != 0
-      )
-        insert( frame );
+    if (createFrame != 0 && (frame = createFrame(getExtent())) != 0)
+        insert(frame);
 }
 
-TWindow::~TWindow()
-{
+TWindow::~TWindow() {
     DeleteArray((char *)title);
     TVIntl::freeSt(intlTitle);
 }
 
-void TWindow::close()
-{
-    if( valid( cmClose ) )
-        { // SET: tell the application we are closing
-        message( TProgram::application, evBroadcast, cmClosingWindow, this );
-        frame = 0;  // so we don't try to use the frame after it's been deleted
-        CLY_destroy( this );
-        }
+void TWindow::close() {
+    if (valid(cmClose)) { // SET: tell the application we are closing
+        message(TProgram::application, evBroadcast, cmClosingWindow, this);
+        frame = 0; // so we don't try to use the frame after it's been deleted
+        CLY_destroy(this);
+    }
 }
 
-void TWindow::shutDown()
-{
+void TWindow::shutDown() {
     frame = 0;
     TGroup::shutDown();
 }
 
-TPalette& TWindow::getPalette() const
-{
-    static TPalette blue( cpBlueWindow, sizeof( cpBlueWindow )-1 );
-    static TPalette cyan( cpCyanWindow, sizeof( cpCyanWindow )-1 );
-    static TPalette gray( cpGrayWindow, sizeof( cpGrayWindow )-1 );
-    static TPalette *palettes[] =
-        {
-        &blue,
-        &cyan,
-        &gray
-        };
+TPalette& TWindow::getPalette() const {
+    static TPalette blue(cpBlueWindow, sizeof(cpBlueWindow) - 1);
+    static TPalette cyan(cpCyanWindow, sizeof(cpCyanWindow) - 1);
+    static TPalette gray(cpGrayWindow, sizeof(cpGrayWindow) - 1);
+    static TPalette *palettes[] = { &blue, &cyan, &gray };
     return *(palettes[palette]);
 }
 
-const char *TWindow::getTitle( short )
-{
-    return TVIntl::getText(title,intlTitle);
+const char *TWindow::getTitle(short) {
+    return TVIntl::getText(title, intlTitle);
 }
 
-void TWindow::handleEvent( TEvent& event )
-{
- TRect  limits;
- TPoint min, max;
+void TWindow::handleEvent(TEvent& event) {
+    TRect limits;
+    TPoint min, max;
 
     TGroup::handleEvent(event);
-    if( event.what== evCommand )
-        switch (event.message.command)
-            {
-            case  cmResize:
-                if( (flags & (wfMove | wfGrow)) != 0 )
-                    {
-                    limits = owner->getExtent();
-                    sizeLimits(min, max);
-                    dragView( event, dragMode | (flags & (wfMove | wfGrow)),
-                              limits, min, max);
-                    clearEvent(event);
-                    }
-                break;
-            case  cmClose:
-                if( (flags & wfClose) != 0 &&
-                    ( event.message.infoPtr == 0 || event.message.infoPtr == this )
-                  )
-                    {
-                    if( (state & sfModal) == 0 )
-                        close();
-                    else
-                        {
-                        event.what = evCommand;
-                        event.message.command = cmCancel;
-                        putEvent( event );
-                        }
-                    clearEvent( event );
-                    }
-                break;
-            case  cmZoom:
-                if( (flags & wfZoom) != 0 &&
-                    (event.message.infoPtr == 0 || event.message.infoPtr == this)
-                  )
-                    {
-                    zoom();
-                    clearEvent(event);
-                    }
-                break;
+    if (event.what == evCommand)
+        switch (event.message.command) {
+        case cmResize:
+            if ((flags & (wfMove | wfGrow)) != 0) {
+                limits = owner->getExtent();
+                sizeLimits(min, max);
+                dragView(event, dragMode | (flags & (wfMove | wfGrow)), limits, min, max);
+                clearEvent(event);
             }
-    else if( event.what == evKeyDown )
-            switch (event.keyDown.keyCode)
-                {
-                case  kbTab:
-                case  kbDown:
-                case  kbRight:
-                    selectNext(False);
-                    clearEvent(event);
-                    break;
-                case  kbShiftTab:
-                case  kbUp:
-                case  kbLeft:
-                    selectNext(True);
-                    clearEvent(event);
-                    break;
+            break;
+        case cmClose:
+            if ((flags & wfClose) != 0
+                    && (event.message.infoPtr == 0 || event.message.infoPtr == this)) {
+                if ((state & sfModal) == 0)
+                    close();
+                else {
+                    event.what = evCommand;
+                    event.message.command = cmCancel;
+                    putEvent(event);
                 }
-    else if( event.what == evBroadcast &&
-             event.message.command == cmSelectWindowNum &&
-             event.message.infoInt == number &&
-             (options & ofSelectable) != 0
-           )
-            {
-            select();
-            clearEvent(event);
+                clearEvent(event);
             }
+            break;
+        case cmZoom:
+            if ((flags & wfZoom) != 0
+                    && (event.message.infoPtr == 0 || event.message.infoPtr == this)) {
+                zoom();
+                clearEvent(event);
+            }
+            break;
+        }
+    else if (event.what == evKeyDown)
+        switch (event.keyDown.keyCode) {
+        case kbTab:
+        case kbDown:
+        case kbRight:
+            selectNext(False);
+            clearEvent(event);
+            break;
+        case kbShiftTab:
+        case kbUp:
+        case kbLeft:
+            selectNext(True);
+            clearEvent(event);
+            break;
+        }
+    else if (event.what == evBroadcast && event.message.command == cmSelectWindowNum
+            && event.message.infoInt == number && (options & ofSelectable) != 0) {
+        select();
+        clearEvent(event);
+    }
 }
 
-TFrame *TWindow::initFrame( TRect r )
-{
+TFrame *TWindow::initFrame(TRect r) {
     return new TFrame(r);
 }
 
-void TWindow::setState( ushort aState, Boolean enable )
-{
+void TWindow::setState(ushort aState, Boolean enable) {
 #define C(x) if (enable == True) enableCommand(x); else disableCommand(x)
     TGroup::setState(aState, enable);
-    if( (aState & sfSelected) != 0 )
-        {
+    if ((aState & sfSelected) != 0) {
         setState(sfActive, enable);
-        if( frame != 0 )
-            frame->setState(sfActive,enable);
+        if (frame != 0)
+            frame->setState(sfActive, enable);
         C(cmNext);
         C(cmPrev);
-        if( (flags & (wfGrow | wfMove)) != 0 )
-          {
+        if ((flags & (wfGrow | wfMove)) != 0) {
             C(cmResize);
-          }
-        if( (flags & wfClose) != 0 )
-          {
-            C(cmClose);
-          }
-        if( (flags & wfZoom) != 0 )
-          {
-            C(cmZoom);
-          }
         }
+        if ((flags & wfClose) != 0) {
+            C(cmClose);
+        }
+        if ((flags & wfZoom) != 0) {
+            C(cmZoom);
+        }
+    }
 #undef C
 }
 
-TScrollBar *TWindow::standardScrollBar( ushort aOptions )
-{
+TScrollBar *TWindow::standardScrollBar(ushort aOptions) {
     TRect r = getExtent();
-    if( (aOptions & sbVertical) != 0 )
-        r = TRect( r.b.x-1, r.a.y+1, r.b.x, r.b.y-1 );
+    if ((aOptions & sbVertical) != 0)
+        r = TRect(r.b.x - 1, r.a.y + 1, r.b.x, r.b.y - 1);
     else
-        r = TRect( r.a.x+2, r.b.y-1, r.b.x-2, r.b.y );
+        r = TRect(r.a.x + 2, r.b.y - 1, r.b.x - 2, r.b.y);
 
     TScrollBar *s;
-    insert( s = new TScrollBar(r) );
-    if( (aOptions & sbHandleKeyboard) != 0 )
+    insert(s = new TScrollBar(r));
+    if ((aOptions & sbHandleKeyboard) != 0)
         s->options |= ofPostProcess;
     return s;
 }
 
-void TWindow::sizeLimits( TPoint& min, TPoint& max )
-{
+void TWindow::sizeLimits(TPoint& min, TPoint& max) {
     TView::sizeLimits(min, max);
     min = minWinSize;
 }
 
-void TWindow::zoom()
-{
+void TWindow::zoom() {
     TPoint minSize, maxSize;
-    sizeLimits( minSize, maxSize );
-    if( size != maxSize )
-        {
+    sizeLimits(minSize, maxSize);
+    if (size != maxSize) {
         zoomRect = getBounds();
-        TRect r( 0, 0, maxSize.x, maxSize.y );
+        TRect r(0, 0, maxSize.x, maxSize.y);
         locate(r);
-        }
-    else
-        locate( zoomRect );
+    } else
+        locate(zoomRect);
 }
 
 #if !defined( NO_STREAM )
@@ -254,10 +206,9 @@ TStreamable *TWindow::build()
 }
 
 TWindow::TWindow( StreamableInit ) :
-    TWindowInit( NULL ),
-    TGroup( streamableInit )
+TWindowInit( NULL ),
+TGroup( streamableInit )
 {
 }
 #endif // NO_STREAM
-
 

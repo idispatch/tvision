@@ -5,8 +5,8 @@
  *      All Rights Reserved.
  *
 
-Modified by Robert H”hne to be used for RHIDE.
-Modified by Salvador E. Tropea to support mouse wheels and other things.
+ Modified by Robert H”hne to be used for RHIDE.
+ Modified by Salvador E. Tropea to support mouse wheels and other things.
 
  *
  *
@@ -18,35 +18,27 @@ Modified by Salvador E. Tropea to support mouse wheels and other things.
 
 #define cpScroller "\x06\x07"
 
-int TScroller::defaultWheelStep=5;
+int TScroller::defaultWheelStep = 5;
 
-TScroller::TScroller( const TRect& bounds,
-                      TScrollBar *aHScrollBar,
-                      TScrollBar *aVScrollBar) :
-    TView( bounds ),
-    drawLock( 0 ),
-    drawFlag( False ),
-    hScrollBar( aHScrollBar ),
-    vScrollBar( aVScrollBar )
-{
+TScroller::TScroller(const TRect& bounds, TScrollBar *aHScrollBar, TScrollBar *aVScrollBar) :
+        TView(bounds), drawLock(0), drawFlag(False), hScrollBar(aHScrollBar), vScrollBar(
+                aVScrollBar) {
     delta.x = delta.y = limit.x = limit.y = 0;
     options |= ofSelectable;
     eventMask |= evBroadcast;
     wheelStep = defaultWheelStep;
     // This class can be "Braille friendly"
     if (TScreen::getShowCursorEver())
-       state |= sfCursorVis;
+        state |= sfCursorVis;
 }
 
-void TScroller::shutDown()
-{
+void TScroller::shutDown() {
     hScrollBar = 0;
     vScrollBar = 0;
     TView::shutDown();
 }
 
-void TScroller::changeBounds( const TRect& bounds )
-{
+void TScroller::changeBounds(const TRect& bounds) {
     setBounds(bounds);
     drawLock++;
     setLimit(limit.x, limit.y);
@@ -55,123 +47,94 @@ void TScroller::changeBounds( const TRect& bounds )
     drawView();
 }
 
-void TScroller::checkDraw()
-{
-    if( drawLock == 0 && drawFlag != False )
-        {
+void TScroller::checkDraw() {
+    if (drawLock == 0 && drawFlag != False) {
         drawFlag = False;
         drawView();
-        }
+    }
 }
 
-TPalette& TScroller::getPalette() const
-{
-    static TPalette palette( cpScroller, sizeof( cpScroller )-1 );
+TPalette& TScroller::getPalette() const {
+    static TPalette palette(cpScroller, sizeof(cpScroller) - 1);
     return palette;
 }
 
-void TScroller::handleEvent(TEvent& event)
-{
+void TScroller::handleEvent(TEvent& event) {
     TView::handleEvent(event);
 
-    if( event.what == evBroadcast &&
-        event.message.command == cmScrollBarChanged &&
-          ( event.message.infoPtr == hScrollBar ||
-            event.message.infoPtr == vScrollBar )
-      )
+    if (event.what == evBroadcast && event.message.command == cmScrollBarChanged
+            && (event.message.infoPtr == hScrollBar || event.message.infoPtr == vScrollBar))
         scrollDraw();
-    else
-    if( vScrollBar && event.what == evMouseDown)
-        {
-         if( event.mouse.buttons==mbButton4 )
-             {
-              vScrollBar->setValue( vScrollBar->value - wheelStep );
-              clearEvent( event );
-             }
-         else if( event.mouse.buttons==mbButton5 )
-             {
-              vScrollBar->setValue( vScrollBar->value + wheelStep );
-              clearEvent( event );
-             }
+    else if (vScrollBar && event.what == evMouseDown) {
+        if (event.mouse.buttons == mbButton4) {
+            vScrollBar->setValue(vScrollBar->value - wheelStep);
+            clearEvent(event);
+        } else if (event.mouse.buttons == mbButton5) {
+            vScrollBar->setValue(vScrollBar->value + wheelStep);
+            clearEvent(event);
         }
+    }
 }
 
-void TScroller::scrollDraw()
-{
-    TPoint  d;
+void TScroller::scrollDraw() {
+    TPoint d;
 
-    if( hScrollBar != 0 )
+    if (hScrollBar != 0)
         d.x = hScrollBar->value;
     else
         d.x = 0;
 
-    if( vScrollBar != 0 )
+    if (vScrollBar != 0)
         d.y = vScrollBar->value;
     else
         d.y = 0;
 
-    if( d.x != delta.x || d.y != delta.y )
-        {
-        setCursor( cursor.x + delta.x - d.x, cursor.y + delta.y - d.y );
+    if (d.x != delta.x || d.y != delta.y) {
+        setCursor(cursor.x + delta.x - d.x, cursor.y + delta.y - d.y);
         delta = d;
-        if( drawLock != 0 )
+        if (drawLock != 0)
             drawFlag = True;
         else
             drawView();
-        }
+    }
 }
 
-void TScroller::scrollTo( int32 x, int32 y )
-{
+void TScroller::scrollTo(int32 x, int32 y) {
     drawLock++;
-    if( hScrollBar != 0 )
+    if (hScrollBar != 0)
         hScrollBar->setValue(x);
-    if( vScrollBar != 0 )
+    if (vScrollBar != 0)
         vScrollBar->setValue(y);
     drawLock--;
     checkDraw();
 }
 
-void TScroller::setLimit( int32 x, int32 y )
-{
+void TScroller::setLimit(int32 x, int32 y) {
     limit.x = x;
     limit.y = y;
     drawLock++;
-    if( hScrollBar != 0 )
-        hScrollBar->setParams( hScrollBar->value,
-                               0,
-                               x - size.x,
-                               size.x,
-                               1
-                             );
-    if( vScrollBar != 0 )
-        vScrollBar->setParams( vScrollBar->value,
-                               0,
-                               y - size.y,
-                               size.y,
-                               1
-                             );
+    if (hScrollBar != 0)
+        hScrollBar->setParams(hScrollBar->value, 0, x - size.x, size.x, 1);
+    if (vScrollBar != 0)
+        vScrollBar->setParams(vScrollBar->value, 0, y - size.y, size.y, 1);
     drawLock--;
     checkDraw();
 }
 
-void TScroller::showSBar( TScrollBar *sBar )
-{
-    if( sBar != 0 )
-        if( getState(sfActive | sfSelected) != 0 )
+void TScroller::showSBar(TScrollBar *sBar) {
+    if (sBar != 0)
+        if (getState(sfActive | sfSelected) != 0)
             sBar->show();
         else
             sBar->hide();
 }
 
-void TScroller::setState( ushort aState, Boolean enable )
-{
+void TScroller::setState(ushort aState, Boolean enable) {
     TView::setState(aState, enable);
-    if( (aState & (sfActive | sfSelected)) != 0 )
-        {
+    if ((aState & (sfActive | sfSelected)) != 0) {
         showSBar(hScrollBar);
         showSBar(vScrollBar);
-        }
+    }
 }
 
 #if !defined( NO_STREAM )
@@ -200,4 +163,3 @@ TScroller::TScroller( StreamableInit ) : TView( streamableInit )
 {
 }
 #endif // NO_STREAM
-

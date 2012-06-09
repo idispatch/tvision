@@ -5,11 +5,11 @@
  *      All Rights Reserved.
  *
 
-Modified by Robert H”hne to be used for RHIDE.
-Modified by Vadim Beloborodov to be used on WIN32 console
-Modified to compile with gcc v3.x by Salvador E. Tropea, with the help of
-Andris Pavenis and Christoph Bauer.
-Added filelength member by Salvador E. Tropea (SET)
+ Modified by Robert H”hne to be used for RHIDE.
+ Modified by Vadim Beloborodov to be used on WIN32 console
+ Modified to compile with gcc v3.x by Salvador E. Tropea, with the help of
+ Andris Pavenis and Christoph Bauer.
+ Added filelength member by Salvador E. Tropea (SET)
 
  *
  *
@@ -24,7 +24,7 @@ fpstream::fpstream()
 }
 
 fpstream::fpstream( const char* name, CLY_OpenModeT omode, int prot ) :
-        fpbase( name, omode | CLY_IOSOut | CLY_IOSBin, prot )
+fpbase( name, omode | CLY_IOSOut | CLY_IOSBin, prot )
 {
 }
 
@@ -57,15 +57,15 @@ void fpstream::open( const char *name, CLY_OpenModeT omode, int prot )
 #ifdef CLY_ISOCpp98
 long fpstream::filelength()
 {
- long basePos=tellp();
- long ret=seekg(0, CLY_IOSEnd).tellg();
- seekg(basePos, CLY_IOSBeg);
- return ret;
+    long basePos=tellp();
+    long ret=seekg(0, CLY_IOSEnd).tellg();
+    seekg(basePos, CLY_IOSBeg);
+    return ret;
 }
 #else
 long fpstream::filelength()
 {
- return ::filelength(rdbuf()->fd());
+    return ::filelength(rdbuf()->fd());
 }
 #endif
 #endif

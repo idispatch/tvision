@@ -5,7 +5,7 @@
  *      All Rights Reserved.
  *
 
-Modified by Robert H”hne to be used for RHIDE.
+ Modified by Robert H”hne to be used for RHIDE.
 
  *
  *
@@ -13,11 +13,10 @@ Modified by Robert H”hne to be used for RHIDE.
 
 #include <tv.h>
 
-char *newStr( const char *s )
-{
-    if( s == 0 )
+char *newStr(const char *s) {
+    if (s == 0)
         return 0;
-    char *temp = new char[ strlen(s)+1 ];
-    strcpy( temp, s );
+    char *temp = new char[strlen(s) + 1];
+    strcpy(temp, s);
     return temp;
 }

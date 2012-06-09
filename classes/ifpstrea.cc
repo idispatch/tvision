@@ -5,10 +5,10 @@
  *      All Rights Reserved.
  *
 
-Modified by Robert H”hne to be used for RHIDE.
-Modified by Vadim Beloborodov to be used on WIN32 console
-Modified to compile with gcc v3.x by Salvador E. Tropea, with the help of
-Andris Pavenis.
+ Modified by Robert H”hne to be used for RHIDE.
+ Modified by Vadim Beloborodov to be used on WIN32 console
+ Modified to compile with gcc v3.x by Salvador E. Tropea, with the help of
+ Andris Pavenis.
 
  *
  *
@@ -23,7 +23,7 @@ ifpstream::ifpstream()
 }
 
 ifpstream::ifpstream( const char* name, CLY_OpenModeT omode, int prot ) :
-        fpbase( name, omode | CLY_IOSIn | CLY_IOSBin, prot )
+fpbase( name, omode | CLY_IOSIn | CLY_IOSBin, prot )
 {
 }
 

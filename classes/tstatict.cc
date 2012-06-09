@@ -5,127 +5,105 @@
  *      All Rights Reserved.
  *
 
-Modified by Robert H”hne to be used for RHIDE.
-Modified by Vadim Beloborodov to be used on WIN32 console
-Modified by Salvador E. Tropea: added i18n support.
+ Modified by Robert H”hne to be used for RHIDE.
+ Modified by Vadim Beloborodov to be used on WIN32 console
+ Modified by Salvador E. Tropea: added i18n support.
 
  *
  *
  */
-// SET: Moved the standard headers here because according to DJ
-// they can inconditionally declare symbols like NULL
 #include <ctype.h>
 #include <tv.h>
 
 #define cpStaticText "\x06"
 
-TStaticText::TStaticText( const TRect& bounds, const char *aText ) :
-    TView( bounds ),
-    text( newStr( aText ) ),
-    intlText( NULL ),
-    noIntl( 0 )
-{
+TStaticText::TStaticText(const TRect& bounds, const char *aText) :
+        TView(bounds), text(newStr(aText)), intlText(NULL), noIntl(0) {
 }
 
-TStaticText::TStaticText( const TRect& bounds, const char *aText,
-                          stTVIntl *aIntlText ) :
-    TView( bounds ),
-    text( newStr( aText ) ),
-    intlText( aIntlText ),
-    noIntl( 0 )
-{
+TStaticText::TStaticText(const TRect& bounds, const char *aText, stTVIntl *aIntlText) :
+        TView(bounds), text(newStr(aText)), intlText(aIntlText), noIntl(0) {
 }
 
-TStaticText::~TStaticText()
-{
+TStaticText::~TStaticText() {
     DeleteArray((char *)text);
-    TVIntl::freeSt( intlText );
+    TVIntl::freeSt(intlText);
 }
 
-void TStaticText::draw()
-{
+void TStaticText::draw() {
     uchar color;
     Boolean center;
     int i, j, l, p, y;
     TDrawBuffer b;
-    int maxLen = size.x*size.y;
+    int maxLen = size.x * size.y;
     // +2 to hold the \x3 center char (SET)
-    AllocLocalStr(s,maxLen+2);
+    AllocLocalStr(s, maxLen+2);
 
     color = getColor(1);
-    getText(s, maxLen+1);
+    getText(s, maxLen + 1);
     l = strlen(s);
     // Check if the size if bigger than allowed and the extra char isn't the
     // center char (SET)
-    if ((l > maxLen) && s[0]!=3)
-        {
+    if ((l > maxLen) && s[0] != 3) {
         l--;
-        s[maxLen+1] = 0;
-        }
+        s[maxLen + 1] = 0;
+    }
     p = 0;
     y = 0;
     center = False;
-    while (y < size.y)
-        {
+    while (y < size.y) {
         b.moveChar(0, ' ', color, size.x);
-        if (p < l)
-            {
-            if (s[p] == 3)
-                {
+        if (p < l) {
+            if (s[p] == 3) {
                 center = True;
                 ++p;
-                }
+            }
             i = p;
             do {
-               j = p;
-               while ((p < l) && (s[p] == ' '))
-                   ++p;
-               while ((p < l) && (s[p] != ' ') && (s[p] != '\n'))
-                   ++p;
-               } while ((p < l) && (p < i + size.x) && (s[p] != '\n'));
+                j = p;
+                while ((p < l) && (s[p] == ' '))
+                    ++p;
+                while ((p < l) && (s[p] != ' ') && (s[p] != '\n'))
+                    ++p;
+            } while ((p < l) && (p < i + size.x) && (s[p] != '\n'));
             if (p > i + size.x)
                 if (j > i)
                     p = j;
                 else
                     p = i + size.x;
             if (center == True)
-               j = (size.x - p + i) / 2 ;
+                j = (size.x - p + i) / 2;
             else
-               j = 0;
+                j = 0;
             b.moveBuf(j, &s[i], color, (p - i));
             while ((p < l) && (s[p] == ' '))
                 p++;
-            if ((p < l) && (s[p] == '\n'))
-                {
+            if ((p < l) && (s[p] == '\n')) {
                 center = False;
                 p++;
                 if ((p < l) && (s[p] == 10))
                     p++;
-                }
             }
-        writeLine(0, y++, size.x, 1, b);
         }
+        writeLine(0, y++, size.x, 1, b);
+    }
 }
 
-TPalette& TStaticText::getPalette() const
-{
-    static TPalette palette( cpStaticText, sizeof( cpStaticText )-1 );
+TPalette& TStaticText::getPalette() const {
+    static TPalette palette(cpStaticText, sizeof(cpStaticText) - 1);
     return palette;
 }
 
-const char *TStaticText::getText()
-{
-     return noIntl ? text : TVIntl::getText( text, intlText );
+const char *TStaticText::getText() {
+    return noIntl ? text : TVIntl::getText(text, intlText);
 }
 
-void TStaticText::getText( char *s, int maxLen )
-{
-    if( text == 0 )
+void TStaticText::getText(char *s, int maxLen) {
+    if (text == 0)
         *s = EOS;
-    else
-    {
+    else {
         const char *iText = getText();
-        strncpy( s, iText, maxLen );
+        strncpy(s, iText, maxLen);
         s[maxLen] = 0;
     }
 }
@@ -154,5 +132,4 @@ TStaticText::TStaticText( StreamableInit ) : TView( streamableInit )
 {
 }
 #endif // NO_STREAM
-
 

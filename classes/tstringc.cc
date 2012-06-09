@@ -5,7 +5,7 @@
  *      All Rights Reserved.
  *
 
-Modified by Robert H”hne to be used for RHIDE.
+ Modified by Robert H”hne to be used for RHIDE.
 
  *
  *
@@ -13,19 +13,16 @@ Modified by Robert H”hne to be used for RHIDE.
 
 #include <tv.h>
 
-TStringCollection::TStringCollection( ccIndex aLimit, ccIndex aDelta ) :
-    TSortedCollection(aLimit, aDelta)
-{
+TStringCollection::TStringCollection(ccIndex aLimit, ccIndex aDelta) :
+        TSortedCollection(aLimit, aDelta) {
 }
 
-int TStringCollection::compare( void *key1, void *key2 )
-{
-    return strcmp( (char *)key1, (char *)key2 );
+int TStringCollection::compare(void *key1, void *key2) {
+    return strcmp((char *) key1, (char *) key2);
 }
 
-void TStringCollection::freeItem( void* item )
-{
-    delete[] (char *)item;
+void TStringCollection::freeItem(void* item) {
+    delete[] (char *) item;
 }
 
 #if !defined( NO_STREAM )
@@ -46,14 +43,13 @@ void *TStringCollection::readItem( ipstream& is )
 
 TStringCollection & TStringCollection::operator = (const TStringCollection & pl)
 {
-  int i;
-  duplicates = pl.duplicates;
-  freeAll();
-  for (i=0;i<pl.count;i++)
-  {
-    insert(strdup((char *)pl.items[i]));
-  }
-  return *this;
+    int i;
+    duplicates = pl.duplicates;
+    freeAll();
+    for (i=0;i<pl.count;i++)
+    {
+        insert(strdup((char *)pl.items[i]));
+    }
+    return *this;
 }
 #endif // NO_STREAM
-

@@ -5,7 +5,7 @@
  *      All Rights Reserved.
  *
 
-Modified by Robert H”hne to be used for RHIDE.
+ Modified by Robert H”hne to be used for RHIDE.
 
  *
  *
@@ -14,7 +14,6 @@ Modified by Robert H”hne to be used for RHIDE.
 #include <tv.h>
 
 TStrIndexRec::TStrIndexRec() :
-    count(0)
-{
+        count(0) {
 }
 

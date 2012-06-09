@@ -5,14 +5,14 @@
  *      All Rights Reserved.
  *
 
-Modified by Robert H”hne to be used for RHIDE.
+ Modified by Robert H”hne to be used for RHIDE.
 
  *
  *
  */
 #include <tv.h>
 
-static TEventQueue *teq = 0;
+static TEventQueue * g_eventQueue = 0;
 
 #if 0 /************** Disabled ************/
 #ifdef TVCompf_djgpp
@@ -37,45 +37,44 @@ static int mouse_buffer_allocated = 0;
 static void restore_mouse_state()
 {
 #ifdef TVCompf_djgpp
-  REGS r;
-  if (mouse_buffer_allocated)
-  {
-    AX = 0x0017;
-    BX = mouse_buffer_size;
-    ES = mouse_buffer_segment;
-    DX = 0;
-    INTR(0x33,r);
-  }
+    REGS r;
+    if (mouse_buffer_allocated)
+    {
+        AX = 0x0017;
+        BX = mouse_buffer_size;
+        ES = mouse_buffer_segment;
+        DX = 0;
+        INTR(0x33,r);
+    }
 #endif
 }
 
 static void save_mouse_state()
 {
 #ifdef TVCompf_djgpp
-  REGS r;
-  if (!mouse_buffer_allocated)
-  {
-    AX = 0x0015;
-    INTR(0x33,r);
-    mouse_buffer_size = BX;
-    mouse_buffer_segment = __dpmi_allocate_dos_memory(
-                             (mouse_buffer_size+15)>>4,
-                             &mouse_buffer_selector);
-    if (mouse_buffer_segment != -1)
-      mouse_buffer_allocated = 1;
-  }
-  if (mouse_buffer_allocated)
-  {
-    AX = 0x0016;
-    BX = mouse_buffer_size;
-    ES = mouse_buffer_segment;
-    DX = 0;
-    INTR(0x33,r);
-  }
+    REGS r;
+    if (!mouse_buffer_allocated)
+    {
+        AX = 0x0015;
+        INTR(0x33,r);
+        mouse_buffer_size = BX;
+        mouse_buffer_segment = __dpmi_allocate_dos_memory(
+                (mouse_buffer_size+15)>>4,
+                &mouse_buffer_selector);
+        if (mouse_buffer_segment != -1)
+        mouse_buffer_allocated = 1;
+    }
+    if (mouse_buffer_allocated)
+    {
+        AX = 0x0016;
+        BX = mouse_buffer_size;
+        ES = mouse_buffer_segment;
+        DX = 0;
+        INTR(0x33,r);
+    }
 #endif
 }
 #endif /************** Disabled ************/
-
 
 /************** Disabled ************/
 #if 0
@@ -86,85 +85,79 @@ static int my_mouse_buffer_allocated = 0;
 
 static void restore_my_mouse_state()
 {
-  REGS r;
-  if (my_mouse_buffer_allocated)
-  {
-    AX = 0x0017;
-    BX = my_mouse_buffer_size;
-    ES = my_mouse_buffer_segment;
-    DX = 0;
-    INTR(0x33,r);
-  }
+    REGS r;
+    if (my_mouse_buffer_allocated)
+    {
+        AX = 0x0017;
+        BX = my_mouse_buffer_size;
+        ES = my_mouse_buffer_segment;
+        DX = 0;
+        INTR(0x33,r);
+    }
 }
 
 static void save_my_mouse_state()
 {
-  REGS r;
-  if (!my_mouse_buffer_allocated)
-  {
-    AX = 0x0015;
-    INTR(0x33,r);
-    my_mouse_buffer_size = BX;
-    my_mouse_buffer_segment = __dpmi_allocate_dos_memory(
-                             (my_mouse_buffer_size+15)>>4,
-                             &my_mouse_buffer_selector);
-    if (my_mouse_buffer_segment != -1)
-      my_mouse_buffer_allocated = 1;
-  }
-  if (my_mouse_buffer_allocated)
-  {
-    AX = 0x0016;
-    BX = my_mouse_buffer_size;
-    ES = my_mouse_buffer_segment;
-    DX = 0;
-    INTR(0x33,r);
-  }
+    REGS r;
+    if (!my_mouse_buffer_allocated)
+    {
+        AX = 0x0015;
+        INTR(0x33,r);
+        my_mouse_buffer_size = BX;
+        my_mouse_buffer_segment = __dpmi_allocate_dos_memory(
+                (my_mouse_buffer_size+15)>>4,
+                &my_mouse_buffer_selector);
+        if (my_mouse_buffer_segment != -1)
+        my_mouse_buffer_allocated = 1;
+    }
+    if (my_mouse_buffer_allocated)
+    {
+        AX = 0x0016;
+        BX = my_mouse_buffer_size;
+        ES = my_mouse_buffer_segment;
+        DX = 0;
+        INTR(0x33,r);
+    }
 }
 #endif /************** Disabled ************/
 
-void TApplication::resume()
-{
-  #if 0
-  save_mouse_state();
-  #endif
-  TScreen::resume();
-  TEventQueue::resume();
-  #if 0
-  restore_my_mouse_state();
-  #endif
-  resetIdleTime(); // Don't count this time
+void TApplication::resume() {
+#if 0
+    save_mouse_state();
+#endif
+    TScreen::resume();
+    TEventQueue::resume();
+#if 0
+    restore_my_mouse_state();
+#endif
+    resetIdleTime(); // Don't count this time
 }
 
-void TApplication::suspend()
-{
-  #if 0
-  save_my_mouse_state();
-  #endif
-  TEventQueue::suspend();
-  TScreen::suspend();
-  #if 0
-  restore_mouse_state();
-  #endif
+void TApplication::suspend() {
+#if 0
+    save_my_mouse_state();
+#endif
+    TEventQueue::suspend();
+    TScreen::suspend();
+#if 0
+    restore_mouse_state();
+#endif
 }
 
 void initHistory();
 void doneHistory();
 
 TApplication::TApplication() :
-    TProgInit( &TApplication::initStatusLine,
-                  &TApplication::initMenuBar,
-                  &TApplication::initDeskTop
-                )
-{
-    if (!teq)
-      teq = new TEventQueue();
+        TProgInit(&TApplication::initStatusLine, &TApplication::initMenuBar,
+                &TApplication::initDeskTop) {
+    if (! g_eventQueue)
+         g_eventQueue = new TEventQueue();
     initHistory();
 }
 
-TApplication::~TApplication()
-{
+TApplication::~TApplication() {
     doneHistory();
-    delete teq;
-    teq = 0;
+    delete  g_eventQueue;
+     g_eventQueue = 0;
 }
 

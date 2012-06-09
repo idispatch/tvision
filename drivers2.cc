@@ -5,7 +5,7 @@
  *      All Rights Reserved.
  *
 
-Modified by Robert H”hne to be used for RHIDE.
+ Modified by Robert H”hne to be used for RHIDE.
 
  *
  *
@@ -27,27 +27,20 @@ Modified by Robert H”hne to be used for RHIDE.
 /*      or original key code if no correspondence exists                  */
 /*                                                                        */
 /*------------------------------------------------------------------------*/
-ushort ctrlToArrow(ushort keyCode)
-{
+ushort ctrlToArrow(ushort keyCode) {
 
-static const ushort ctrlCodes[] =
-    {
-    kbCtrlS, kbCtrlD, kbCtrlE, kbCtrlX, kbCtrlA,
-    kbCtrlF, kbCtrlG, kbCtrlV, kbCtrlR, kbCtrlC, kbCtrlH
-    };
+    static const ushort ctrlCodes[] = { kbCtrlS, kbCtrlD, kbCtrlE, kbCtrlX, kbCtrlA, kbCtrlF,
+            kbCtrlG, kbCtrlV, kbCtrlR, kbCtrlC, kbCtrlH };
 
-static const ushort arrowCodes[] =
-    {
-    kbLeft, kbRight, kbUp, kbDown, kbHome,
-    kbEnd,  kbDel,   kbIns,kbPgUp, kbPgDn, kbBack
-    };
+    static const ushort arrowCodes[] = { kbLeft, kbRight, kbUp, kbDown, kbHome, kbEnd, kbDel, kbIns,
+            kbPgUp, kbPgDn, kbBack };
 
     /* The keycode contains now also the shift flags, which the
-       caller don't want to see */
+     caller don't want to see */
     ushort _keyCode = keyCode & 0x7F;
 
-    for( unsigned i = 0; i<(sizeof(ctrlCodes)/sizeof(ushort)) ; i++ )
-        if( _keyCode==ctrlCodes[i] )
+    for (unsigned i = 0; i < (sizeof(ctrlCodes) / sizeof(ushort)); i++)
+        if (_keyCode == ctrlCodes[i])
             return arrowCodes[i];
     /* If it was not found, return the original code */
     return keyCode;
@@ -72,14 +65,12 @@ static const ushort arrowCodes[] =
 /*                                                                        */
 /*------------------------------------------------------------------------*/
 
-int cstrlen( const char *s )
-{
+int cstrlen(const char *s) {
     int len = 0;
-    while( *s != EOS )
-        {
-        if( *s++ != '~' )
+    while (*s != EOS) {
+        if (*s++ != '~')
             len++;
-        }
+    }
     return len;
 }
 

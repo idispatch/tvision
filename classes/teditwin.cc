@@ -7,76 +7,62 @@
 /*----------------------------------------------------------*/
 /*****************************************************************************
 
-  That's a window containing an editor.
+ That's a window containing an editor.
 
-*****************************************************************************/
+ *****************************************************************************/
 
 #include <tv.h>
 
-const TPoint minEditWinSize = {24, 6};
+const TPoint minEditWinSize = { 24, 6 };
 
-TEditWindow::TEditWindow( const TRect& bounds,
-                          const char *fileName,
-                          int aNumber
-                        ) :
-    TWindowInit( &TEditWindow::initFrame )
-    , TWindow( bounds, 0, aNumber )
-{
+TEditWindow::TEditWindow(const TRect& bounds, const char *fileName, int aNumber) :
+        TWindowInit(&TEditWindow::initFrame), TWindow(bounds, 0, aNumber) {
     options |= ofTileable;
 
-    TScrollBar *hScrollBar =
-        new TScrollBar( TRect( 18, size.y - 1, size.x - 2, size.y ) );
+    TScrollBar *hScrollBar = new TScrollBar(TRect(18, size.y - 1, size.x - 2, size.y));
     hScrollBar->hide();
     insert(hScrollBar);
 
-    TScrollBar *vScrollBar =
-        new TScrollBar( TRect( size.x - 1, 1, size.x, size.y - 1 ) );
+    TScrollBar *vScrollBar = new TScrollBar(TRect(size.x - 1, 1, size.x, size.y - 1));
     vScrollBar->hide();
     insert(vScrollBar);
 
-    TIndicator *indicator =
-        new TIndicator( TRect( 2, size.y - 1, 16, size.y ) );
+    TIndicator *indicator = new TIndicator(TRect(2, size.y - 1, 16, size.y));
     indicator->hide();
     insert(indicator);
 
-
-    TRect r( getExtent() );
+    TRect r(getExtent());
     r.grow(-1, -1);
-    editor = new TFileEditor( r, hScrollBar, vScrollBar, indicator, fileName );
+    editor = new TFileEditor(r, hScrollBar, vScrollBar, indicator, fileName);
     insert(editor);
 }
 
-void TEditWindow::close()
-{
-    if( editor->isClipboard() == True )
+void TEditWindow::close() {
+    if (editor->isClipboard() == True)
         hide();
     else
         TWindow::close();
 }
 
-const char *TEditWindow::getTitle( short )
-{
-    if( editor->isClipboard() == True )
+const char *TEditWindow::getTitle(short) {
+    if (editor->isClipboard() == True)
         return _(clipboardTitle);
-    else if( *(editor->fileName) == EOS )
+    else if (*(editor->fileName) == EOS)
         return _(untitled);
     else
         return editor->fileName;
 }
 
-void TEditWindow::handleEvent( TEvent& event )
-{
+void TEditWindow::handleEvent(TEvent& event) {
     TWindow::handleEvent(event);
-    if( event.what == evBroadcast && event.message.command == cmUpdateTitle )
-        {
-        if( frame != 0 )
+    if (event.what == evBroadcast && event.message.command == cmUpdateTitle) {
+        if (frame != 0)
             frame->drawView();
         clearEvent(event);
-        }
+    }
 }
 
-void TEditWindow::sizeLimits( TPoint& min, TPoint& max )
-{
+void TEditWindow::sizeLimits(TPoint& min, TPoint& max) {
     TWindow::sizeLimits(min, max);
     min = minEditWinSize;
 }
@@ -102,8 +88,8 @@ TStreamable *TEditWindow::build()
 }
 
 TEditWindow::TEditWindow( StreamableInit ) :
-    TWindowInit( NULL )
-    , TWindow( streamableInit )
+TWindowInit( NULL )
+, TWindow( streamableInit )
 {
 }
 

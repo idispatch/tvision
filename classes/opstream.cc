@@ -23,11 +23,10 @@
 inline
 unsigned strlen16(const uint16 *s)
 {
- unsigned l;
- for (l=0; s[l]; l++);
- return l;
+    unsigned l;
+    for (l=0; s[l]; l++);
+    return l;
 }
-
 
 opstream::opstream()
 {
@@ -110,26 +109,26 @@ DefineWriteDep(Long,ulong);
 static inline
 void Swap16(char *v)
 {
- char t;
- Swap(0,1);
+    char t;
+    Swap(0,1);
 }
 
 static inline
 void Swap32(char *v)
 {
- char t;
- Swap(0,3);
- Swap(1,2);
+    char t;
+    Swap(0,3);
+    Swap(1,2);
 }
 
 static inline
 void Swap64(char *v)
 {
- char t;
- Swap(0,7);
- Swap(1,6);
- Swap(2,5);
- Swap(3,4);
+    char t;
+    Swap(0,7);
+    Swap(1,6);
+    Swap(2,5);
+    Swap(3,4);
 }
 #else
 static inline
@@ -153,19 +152,19 @@ DefineWrite(64,uint64);
 void opstream::writeString( const char *str )
 {
     if( str == 0 )
-        {
+    {
         writeByte( 0xFF );
         return;
-        }
+    }
     int len = strlen( str );
     if (len > 0xfd)
     {
-      writeByte( 0xfe );
-      write32(len);
+        writeByte( 0xfe );
+        write32(len);
     }
     else
     {
-      writeByte( (uchar)len );
+        writeByte( (uchar)len );
     }
     writeBytes( str, len );
 }
@@ -173,19 +172,19 @@ void opstream::writeString( const char *str )
 void opstream::writeString16( const uint16 *str )
 {
     if( str == 0 )
-        {
+    {
         writeByte( 0xFF );
         return;
-        }
+    }
     int len = strlen16( str );
     if (len > 0xfd)
     {
-      writeByte( 0xfe );
-      write32(len);
+        writeByte( 0xfe );
+        write32(len);
     }
     else
     {
-      writeByte( (uchar)len );
+        writeByte( (uchar)len );
     }
     writeBytes( str, len*2 );
 }
@@ -204,17 +203,17 @@ opstream& operator << ( opstream& ps, TStreamable *t )
 {
     P_id_type index;
     if( t == 0 )
-        ps.writeByte( pstream::ptNull );
+    ps.writeByte( pstream::ptNull );
     else if( (index = ps.find( t )) != P_id_notFound )
-        {
+    {
         ps.writeByte( pstream::ptIndexed );
         ps.writeWord( index );
-        }
+    }
     else
-        {
+    {
         ps.writeByte( pstream::ptObject );
         ps << *t;
-        }
+    }
     return ps;
 }
 
@@ -224,19 +223,18 @@ void opstream::writePrefix( const TStreamable& t )
     writeString( t.streamableName() );
 }
 
-
 void opstream::writeData( TStreamable& t )
 {
     if( types->lookup( t.streamableName() ) == 0 )
-        {
+    {
         fprintf(stderr,_("type not registered: %s\n"),t.streamableName());
         error( peNotRegistered, t );
-        }
+    }
     else
-        {
+    {
         registerObject( &t );
         t.write( *this );
-        }
+    }
 }
 
 void opstream::writeSuffix( const TStreamable& )

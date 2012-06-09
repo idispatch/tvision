@@ -5,9 +5,9 @@
  *      All Rights Reserved.
  *
 
-Modified by Robert H”hne to be used for RHIDE.
-Modified to compile with gcc v3.x by Salvador E. Tropea, with the help of
-Andris Pavenis.
+ Modified by Robert H”hne to be used for RHIDE.
+ Modified to compile with gcc v3.x by Salvador E. Tropea, with the help of
+ Andris Pavenis.
 
  *
  *
@@ -24,24 +24,24 @@ const long rStreamMagic = 0x52504246uL; // 'FBPR'
 
 struct Count_type
 {
- ushort lastCount CLY_Packed;
- ushort pageCount CLY_Packed;
+    ushort lastCount CLY_Packed;
+    ushort pageCount CLY_Packed;
 };
 
 struct Info_type
 {
- ushort infoType CLY_Packed;
- long   infoSize CLY_Packed;
+    ushort infoType CLY_Packed;
+    long infoSize CLY_Packed;
 };
 
 struct THeader
 {
- ushort signature  CLY_Packed;
- union
- {
-  Count_type count CLY_Packed;
-  Info_type  info  CLY_Packed;
- };
+    ushort signature CLY_Packed;
+    union
+    {
+        Count_type count CLY_Packed;
+        Info_type info CLY_Packed;
+    };
 };
 
 #pragma pack()
@@ -59,30 +59,30 @@ TResourceFile::TResourceFile( fpstream *aStream ) : TObject()
     header = new THeader;
     found = 0;
     do {
-       repeat = 0;
-       if ((unsigned long)basePos <= (streamSize - sizeof(THeader)))
-           {
-           stream->seekg(basePos, CLY_IOSBeg);
-           stream->readBytes(header, sizeof(THeader));
-           if (header->signature == 0x5a4d)
-               {
-               basePos += ((header->count.pageCount * 512L) -
-                          (-header->count.lastCount & 511));
-               repeat = 1;
-               }
-           else if (header->signature == 0x4246)
-               {
-               if (header->info.infoType == 0x5250)
-                   found = 1;
-               else
-                   {
-                   basePos +=
-                      header->info.infoSize + 16 - (header->info.infoSize)%16;
-                   repeat = 1;
-                   }
-               }
-           }
-        } while (repeat);
+        repeat = 0;
+        if ((unsigned long)basePos <= (streamSize - sizeof(THeader)))
+        {
+            stream->seekg(basePos, CLY_IOSBeg);
+            stream->readBytes(header, sizeof(THeader));
+            if (header->signature == 0x5a4d)
+            {
+                basePos += ((header->count.pageCount * 512L) -
+                        (-header->count.lastCount & 511));
+                repeat = 1;
+            }
+            else if (header->signature == 0x4246)
+            {
+                if (header->info.infoType == 0x5250)
+                found = 1;
+                else
+                {
+                    basePos +=
+                    header->info.infoSize + 16 - (header->info.infoSize)%16;
+                    repeat = 1;
+                }
+            }
+        }
+    }while (repeat);
 
     if (found)
     {
@@ -95,7 +95,7 @@ TResourceFile::TResourceFile( fpstream *aStream ) : TObject()
     }
     else
     {
-        indexPos =  sizeof(long) * 3;
+        indexPos = sizeof(long) * 3;
         index = new TResourceCollection(0, 8);
     }
     delete header;
@@ -121,10 +121,10 @@ void TResourceFile::remove( const char *key )
     int i;
 
     if (index->search( (char *)key, i))
-        {
+    {
         index->free(index->at(i));
         modified = True;
-        }
+    }
 }
 
 #include <tv/yes_mss.h>
@@ -137,7 +137,7 @@ void TResourceFile::flush()
     {
         stream->seekg(basePos + indexPos, CLY_IOSBeg);
         *stream << index;
-        lenRez =  stream->tellp() - basePos -  CLY_StreamPosT(sizeof(long) * 2);
+        lenRez = stream->tellp() - basePos - CLY_StreamPosT(sizeof(long) * 2);
         stream->seekg(basePos, CLY_IOSBeg);
         *stream << rStreamMagic;
         *stream << lenRez;
@@ -153,9 +153,9 @@ void *TResourceFile::get( const char *key)
     void *p;
 
     if (! index->search((char *)key, i))
-        return  0;
+    return 0;
     stream->seekg(basePos + CLY_StreamPosT(((TResourceItem*)(index->at(i)))->pos),
-                  CLY_IOSBeg);
+            CLY_IOSBeg);
     *stream >> p;
     return p;
 }
@@ -168,21 +168,21 @@ const char *TResourceFile::keyAt(short i)
 void TResourceFile::put(TStreamable *item, const char *key)
 {
     int i;
-    TResourceItem  *p;
+    TResourceItem *p;
 
     if (index->search( (char *)key, i))
-        p = (TResourceItem*)(index->at(i));
+    p = (TResourceItem*)(index->at(i));
     else
     {
         p = new TResourceItem;
         p->key = newStr(key);
         index->atInsert(i, p);
     }
-    p->pos =  indexPos;
+    p->pos = indexPos;
     stream->seekp(basePos + indexPos, CLY_IOSBeg);
     *stream << item;
     indexPos = stream->tellp() - basePos;
-    p->size  = indexPos - CLY_StreamPosT(p->pos);
+    p->size = indexPos - CLY_StreamPosT(p->pos);
     modified = True;
 }
 #endif

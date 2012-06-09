@@ -93,7 +93,7 @@ protected:
     static Boolean handlerInstalled;
     static Boolean noMouse;
     // The following counter is incremented when the mouse pointer is updated
-    // by the driver. Only useful when done asynchronically.
+    // by the driver. Only useful when done asynchronously.
     static volatile unsigned drawCounter;
 };
 
@@ -105,7 +105,7 @@ inline void THWMouse::inhibit() {
     noMouse = True;
 }
 
-// This class exposses the mouse interface.
+// This class exposes the mouse interface.
 class TMouse: public THWMouse {
 public:
     TMouse();

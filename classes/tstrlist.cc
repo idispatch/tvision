@@ -5,53 +5,45 @@
  *      All Rights Reserved.
  *
 
-Modified by Robert H”hne to be used for RHIDE.
+ Modified by Robert H”hne to be used for RHIDE.
 
  *
  *
  */
 #include <tv.h>
 
-TStrListMaker::TStrListMaker( ushort aStrSize, ushort aIndexSize )
-{
-    strPos=0;
-    strSize=0;
-    strings=new char[aStrSize];
-    indexPos=0;
-    indexSize=aIndexSize;
-    index=new TStrIndexRec[aIndexSize];
+TStrListMaker::TStrListMaker(ushort aStrSize, ushort aIndexSize) {
+    strPos = 0;
+    strSize = 0;
+    strings = new char[aStrSize];
+    indexPos = 0;
+    indexSize = aIndexSize;
+    index = new TStrIndexRec[aIndexSize];
 }
 
-
-TStrListMaker::~TStrListMaker()
-{
+TStrListMaker::~TStrListMaker() {
     delete strings;
     delete[] index;
 }
 
-
-void TStrListMaker::closeCurrent()
-{
-    if( cur.count != 0 )
-        {
+void TStrListMaker::closeCurrent() {
+    if (cur.count != 0) {
         index[indexPos++] = cur;
         cur.count = 0;
-        }
+    }
 }
 
-void TStrListMaker::put( ushort key, char *str )
-{
-    if( cur.count == MAXKEYS || key != cur.key + cur.count )
+void TStrListMaker::put(ushort key, char *str) {
+    if (cur.count == MAXKEYS || key != cur.key + cur.count)
         closeCurrent();
-    if( cur.count == 0 )
-        {
+    if (cur.count == 0) {
         cur.key = key;
         cur.offset = strPos;
-        }
-    int len = strlen( str );
+    }
+    int len = strlen(str);
     strings[strPos] = len;
-    memmove( strings+strPos+1, str, len );
-    strPos += len+1;
+    memmove(strings + strPos + 1, str, len);
+    strPos += len + 1;
     cur.count++;
 }
 
@@ -65,4 +57,3 @@ void TStrListMaker::write( opstream& os )
     os.writeBytes( index, indexPos * sizeof( TStrIndexRec ) );
 }
 #endif // NO_STREAM
-

@@ -28,50 +28,43 @@
  */
 #include <tv.h>
 
-TParamText::TParamText( const TRect& bounds ) :
-    TStaticText(bounds, 0 ),
-    str( new char [tparamTextMaxLen] )
-{
+TParamText::TParamText(const TRect& bounds) :
+        TStaticText(bounds, 0), str(new char[tparamTextMaxLen]) {
     str[0] = EOS;
 }
 
-TParamText::~TParamText()
-{
+TParamText::~TParamText() {
     delete str;
 }
 
 // , int maxLen ) isn't part of TV 2.0
-void TParamText::getText( char *s, int maxLen )
-{
-    if( str == 0 )
+void TParamText::getText(char *s, int maxLen) {
+    if (str == 0)
         *s = EOS;
-    else
-    {
-        strncpy( s, str, maxLen );
+    else {
+        strncpy(s, str, maxLen);
         s[maxLen] = 0;
     }
 }
 
-int TParamText::getTextLen()
-{
-    return (str != 0) ? strlen( str ) : 0;
+int TParamText::getTextLen() {
+    return (str != 0) ? strlen(str) : 0;
 }
 
-void TParamText::setText( char *fmt, ... )
-{
+void TParamText::setText(char *fmt, ...) {
     va_list ap;
 
-    #ifdef SAFE_CODE
+#ifdef SAFE_CODE
     // Slow but we can check the overflow
-    va_start( ap, fmt );
-    CLY_vsnprintf(str, (size_t)tparamTextMaxLen, fmt, ap);
-    va_end( ap );
-    str[tparamTextMaxLen-1]=0;
-    #else
+    va_start( ap, fmt);
+    CLY_vsnprintf(str, (size_t) tparamTextMaxLen, fmt, ap);
+    va_end( ap);
+    str[tparamTextMaxLen - 1] = 0;
+#else
     va_start( ap, fmt );
     vsprintf( str, fmt, ap );
     va_end( ap );
-    #endif
+#endif
 
     drawView();
 }

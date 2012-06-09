@@ -11,8 +11,6 @@ Modified by Robert H”hne to be used for RHIDE.
  *
  */
 #if !defined( NO_STREAM )
-// SET: Moved the standard headers here because according to DJ
-// they can inconditionally declare symbols like NULL
 #include <tv.h>
 
 TStreamableTypes::TStreamableTypes() : TNSSortedCollection( 5, 5 )

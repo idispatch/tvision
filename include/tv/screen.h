@@ -231,7 +231,7 @@ protected:
     // Code page initializer
     static TVCodePage *codePage;
     // Initialization call back
-    static TVScreenDriverDetectCallBack dCB;
+    static TVScreenDriverDetectCallBack screen_driver_detect_callback;
     // Are we showing signs of busy state?
     static Boolean busyState;
     // Format used for the drawing calls (codepage, unicode16, etc.)

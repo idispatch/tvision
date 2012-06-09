@@ -5,9 +5,9 @@
  *      All Rights Reserved.
  *
 
-Modified by Robert H”hne to be used for RHIDE.
-Modified to compile with gcc v3.x by Salvador E. Tropea, with the help of
-Andris Pavenis and Christoph Bauer.
+ Modified by Robert H”hne to be used for RHIDE.
+ Modified to compile with gcc v3.x by Salvador E. Tropea, with the help of
+ Andris Pavenis and Christoph Bauer.
 
  *
  *
@@ -31,7 +31,7 @@ pstream::~pstream()
 
 void pstream::deInitTypes(void)
 {
- if (types)
+    if (types)
     delete types;
 }
 
@@ -41,11 +41,11 @@ void pstream::deInitTypes(void)
 
 void pstream::initTypes()
 {
- if (!types)
-   {
-    types=new TStreamableTypes;
-    atexit(pstream::deInitTypes);
-   }
+    if (!types)
+    {
+        types=new TStreamableTypes;
+        atexit(pstream::deInitTypes);
+    }
 }
 
 #include <tv/yes_mss.h>
