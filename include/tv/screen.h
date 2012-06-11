@@ -67,7 +67,11 @@ public:
 
     // Members defined by original TV library v2.0
     enum videoModes {
-        smBW80 = 0x0002, smCO80 = 0x0003, smCO80x25 = 0x0003, smMono = 0x0007, smFont8x8 = 0x0100,
+        smBW80 = 0x0002,
+        smCO80 = 0x0003,
+        smCO80x25 = 0x0003,
+        smMono = 0x0007,
+        smFont8x8 = 0x0100,
         // Modes defined by Robert
         // Extended
         smCO80x28 = 0x0103,
@@ -106,11 +110,11 @@ public:
     // Not found in original TV 2.0
     // Robert added it to know the cursor position and restore it.
     static void (*getCursorPos)(unsigned &x, unsigned &y); // old GetCursor
-    static void (*setCursorPos)(unsigned x, unsigned y); // ols SetCursor
+    static void (*setCursorPos)(unsigned x, unsigned y); // old SetCursor
     // SET: I moved it to the class
     // Returns 0 if the MSB of the background selects more colors.
     static int (*getBlinkState)();
-    // SET: A new and more rasonable way to choose a video mode
+    // SET: A new and more reasonable way to choose a video mode
     static int (*setCrtModeRes_p)(unsigned w, unsigned h, int fW, int fH);
     static int setCrtModeRes(unsigned w, unsigned h, int fW = -1, int fH = -1) {
         return setCrtModeRes_p(w, h, fW, fH);
@@ -129,7 +133,7 @@ public:
     static
     const char *(*getWindowTitle)(void);
     static int (*setWindowTitle)(const char *name);
-    // SET: Roman Valyushenko propposed some mechanism no indicate the
+    // SET: Roman Valyushenko proposed some mechanism no indicate the
     // application is busy
     static Boolean (*showBusyState)(Boolean state);
     // SET: The bell/beep is something really tied to the terminal
@@ -161,7 +165,7 @@ public:
     }
     // Uses to be called when driver is detected but not yet initialized
     static TVScreenDriverDetectCallBack setDetectCallBack(TVScreenDriverDetectCallBack aCB);
-    // Searchs information about a known DOS video mode
+    // Searches information about a known DOS video mode
     static Boolean searchDOSModeInfo(ushort mode, unsigned &w, unsigned &h, int &fW, int &fH);
     // Used to know the format needed for buffers passed to setCharacters
     static int getDrawingMode() {

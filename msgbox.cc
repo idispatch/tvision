@@ -4,16 +4,12 @@
  *      Copyright (c) 1994 by Borland International
  *      All Rights Reserved.
  *
-
- Modified by Robert H”hne to be used for RHIDE.
- Modified by Salvador E. Tropea to add mfDontShowAgain, vsnprintf usage and
- i18n.
-
+ * Modified by Robert H”hne to be used for RHIDE.
+ * Modified by Salvador E. Tropea to add mfDontShowAgain, vsnprintf usage and
+ * i18n.
  *
  *
  */
-// SET: Moved the standard headers here because according to DJ
-// they can inconditionally declare symbols like NULL
 #include <stdarg.h>
 #include <tv.h>
 

@@ -3,7 +3,7 @@
  Copyright (C) 2000      Anatoli Soltan
  Copyright (C) 2000      Salvador E. Tropea
  Covered by the GPL license.
-*/
+ */
 
 #define Uses_string
 #define Uses_limits
@@ -40,23 +40,22 @@
 #define CheckUNC(path)
 #endif
 
-int CLY_PathValid(const char *path)
-{
- char dir[PATH_MAX];
- char name[PATH_MAX];
- DeclareUNCVar;
+int CLY_PathValid(const char *path) {
+    char dir[PATH_MAX];
+    char name[PATH_MAX];
+    DeclareUNCVar;
 
- // Set UNC variable and return if that's an UNC path
- CheckUNC(path);
- CLY_ExpandPath(path, dir, name);
- // return True if that's just a valid drive letter
- CheckOnlyDrive(dir);
- // Force it to look like a directory
- if (*dir && dir[strlen(dir)-1]==DIRSEPARATOR)
-    strcat(dir,".");
- else
-    strcat(dir,DIRSEPARATOR_".");
- // return False if the drive letter is invalid
- CheckDriveValid(dir[0]);
- return CLY_IsDir(dir);
+    // Set UNC variable and return if that's an UNC path
+    CheckUNC(path);
+    CLY_ExpandPath(path, dir, name);
+    // return True if that's just a valid drive letter
+    CheckOnlyDrive(dir);
+    // Force it to look like a directory
+    if (*dir && dir[strlen(dir) - 1] == DIRSEPARATOR)
+        strcat(dir, ".");
+    else
+        strcat(dir, DIRSEPARATOR_".");
+    // return False if the drive letter is invalid
+    CheckDriveValid(dir[0]);
+    return CLY_IsDir(dir);
 }

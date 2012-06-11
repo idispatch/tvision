@@ -4,12 +4,10 @@
  *      Copyright (c) 1994 by Borland International
  *      All Rights Reserved.
  *
-
-Modified by Robert H”hne to be used for RHIDE.
-Modified by Vadim Beloborodov to be used on WIN32 console.
-Modified to compile with gcc v3.x by Salvador E. Tropea, with the help of
-Andris Pavenis and Christoph Bauer.
-
+ * Modified by Robert H”hne to be used for RHIDE.
+ * Modified by Vadim Beloborodov to be used on WIN32 console.
+ * Modified to compile with gcc v3.x by Salvador E. Tropea, with the help of
+ * Andris Pavenis and Christoph Bauer.
  *
  *
  */

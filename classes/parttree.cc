@@ -8,7 +8,7 @@
  Comments:
  This module provides something I call "partition tree" (I guess it have
  another name but I don't know). This tree is used to implement searches done
- entering with a 16 bits value and obtaining a 16 bits value. The seach is
+ entering with a 16 bits value and obtaining a 16 bits value. The search is
  really fast (3 indirections) and saves memory because only a fraction of
  the memory is allocated.
 

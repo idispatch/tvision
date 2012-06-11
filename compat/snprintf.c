@@ -35,8 +35,7 @@
      Jacek Slabocewiz
      Mike Parker(mouse)
  ------------------------------------
-
- Modified by Salvador E. Tropea (c) 2003.
+ * Modified by Salvador E. Tropea (c) 2003.
  Don't blame Caolán for the bugs introduced by me ;-)
  I removed all the pre-ANSI previsions because they make the code unreadable
 and I don't plan to support such an old compilers.

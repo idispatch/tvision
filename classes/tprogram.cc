@@ -4,12 +4,10 @@
  *      Copyright (c) 1994 by Borland International
  *      All Rights Reserved.
  *
-
- Modified by Robert H”hne to be used for RHIDE.
- Modified by Salvador E. Tropea (release CPU and other stuff)
- Modified by Salvador E. Tropea to compile for 64 bits architectures.
- Modified by Salvador E. Tropea to disable Alt+N stuff.
-
+ * Modified by Robert H”hne to be used for RHIDE.
+ * Modified by Salvador E. Tropea (release CPU and other stuff)
+ * Modified by Salvador E. Tropea to compile for 64 bits architectures.
+ * Modified by Salvador E. Tropea to disable Alt+N stuff.
  *
  *
  */
@@ -82,8 +80,8 @@ clock_t Clock(void)
 }
 #else
 /*
- In Linux clock returns time consumed by our program, so if ourprogram
- sleeps it doesn't count so the screen saver and clock aren'tupdated.
+ In Linux clock returns time consumed by our program, so if our program
+ sleeps it doesn't count so the screen saver and clock aren't updated.
  Instead we must use gettimeofday.
  */
 
@@ -102,7 +100,7 @@ clock_t Clock(void) {
     }
     // Current time
     gettimeofday(&cur, 0);
-    // Substract the reference
+    // Subtract the reference
     cur.tv_sec -= ref.tv_sec;
     if (cur.tv_usec < ref.tv_usec) {
         cur.tv_sec--;
@@ -225,7 +223,6 @@ void TProgram::initScreen() {
         else
             appPalette = apColor;
     } else {
-
         shadowSize.x = 0;
         shadowSize.y = 0;
         showMarkers = True;

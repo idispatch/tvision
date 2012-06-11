@@ -18,7 +18,7 @@
  * 1) The limit is now a constant defined in tparamTextMaxLen, so you can
  * adjust it.
  * 2) If SAFE_CODE is defined (default) the setText() member checks the
- * lenght of the string. I use snprintf to limit the size.
+ * length of the string. I use snprintf to limit the size.
  *
  * Portability note:
  * getText( char *s, int maxLen ) and BTV uses: getText( char *s )

@@ -4,15 +4,11 @@
  *      Copyright (c) 1994 by Borland International
  *      All Rights Reserved.
  *
-
- Modified by Robert H”hne to be used for RHIDE.
- Modified by Salvador E. Tropea. [also added i18n support]
-
+ * Modified by Robert H”hne to be used for RHIDE.
+ * Modified by Salvador E. Tropea. [also added i18n support]
  *
  *
  */
-// SET: Moved the standard headers here because according to DJ
-// they can unconditionally declare symbols like NULL
 #include <tv.h>
 
 static TRect getRect(const TRect& bounds, TMenu *aMenu) {

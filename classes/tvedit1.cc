@@ -1,7 +1,7 @@
 /* Modified by Robert Hoehne and Salvador Eduardo Tropea for the gcc port */
 /* Modified by Vadim Beloborodov to be used on WIN32 console */
 /* Modified to compile with gcc v3.x by Salvador E. Tropea, with the help of
- Andris Pavenis. */
+ * Andris Pavenis. */
 /*----------------------------------------------------------*/
 /*                                                          */
 /*   Turbo Vision 1.0                                       */

@@ -4,10 +4,9 @@
  *      Copyright (c) 1994 by Borland International
  *      All Rights Reserved.
  *
-
- Modified by Robert H”hne to be used for RHIDE.
- Modified by Salvador Eduardo Tropea to add more functionality + i18n support.
- Modified by Vadim Beloborodov to be used on WIN32 console
+ * Modified by Robert H”hne to be used for RHIDE.
+ * Modified by Salvador Eduardo Tropea to add more functionality + i18n support.
+ * Modified by Vadim Beloborodov to be used on WIN32 console
  *
  *
  */

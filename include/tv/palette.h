@@ -4,9 +4,7 @@
  *      Copyright (c) 1994 by Borland International
  *      All Rights Reserved.
  *
-
-Modified by Robert H”hne to be used for RHIDE.
-
+ * Modified by Robert H”hne to be used for RHIDE.
  *
  *
  */
@@ -14,19 +12,15 @@ Modified by Robert H”hne to be used for RHIDE.
 #ifndef __TPalette
 #define __TPalette
 
-class TPalette
-{
+class TPalette {
 
 public:
 
-    TPalette( const char *, ushort );
-    TPalette( const TPalette& );
+    TPalette(const char *, ushort);
+    TPalette(const TPalette&);
     ~TPalette();
-
-    TPalette& operator = ( const TPalette& );
-
-    uchar& operator[]( int index) const
-    {
+    TPalette& operator =(const TPalette&);
+    uchar& operator[](int index) const {
         return data[index];
     }
 

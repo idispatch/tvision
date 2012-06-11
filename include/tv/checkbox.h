@@ -4,8 +4,7 @@
  *      Copyright (c) 1994 by Borland International
  *      All Rights Reserved.
  *
-
-Modified by Robert H”hne to be used for RHIDE.
+ * Modified by Robert H”hne to be used for RHIDE.
 Added TCheckBoxes32 and code page stuff by Salvador Eduardo Tropea.
 
  *

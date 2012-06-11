@@ -4,11 +4,9 @@
  *      Copyright (c) 1994 by Borland International
  *      All Rights Reserved.
  *
-
- Modified by Robert H”hne to be used for RHIDE.
- Added palette color and draw code for disabled clusters by Salvador E. Tropea
- Added TSItem::append by Salvador E. Tropea
-
+ * Modified by Robert H”hne to be used for RHIDE.
+ * Added palette color and draw code for disabled clusters by Salvador E. Tropea
+ * Added TSItem::append by Salvador E. Tropea
  *
  *
  */

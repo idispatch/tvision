@@ -4,16 +4,14 @@
  *      Copyright (c) 1994 by Borland International
  *      All Rights Reserved.
  *
-
- Modified by Robert H”hne to be used for RHIDE.
- Modified by Vadim Beloborodov to be used on WIN32 console
- Modified by Salvador E. Tropea:
+ * Modified by Robert H”hne to be used for RHIDE.
+ * Modified by Vadim Beloborodov to be used on WIN32 console
+ * Modified by Salvador E. Tropea:
  * Changed to sort directory names.
  * Added incremental directory search.
  * Added horizontal scroll bar.
  * Made cursor visible.
  * Abstracted platform dependent detail, more things must be done.
-
  *
  *
  */

@@ -4,12 +4,10 @@
  *      Copyright (c) 1994 by Borland International
  *      All Rights Reserved.
  *
-
- Modified by Robert H”hne to be used for RHIDE.
- Modified by Salvador E. Tropea to support i18n.
- Added TMenuItem::append by Salvador E. Tropea.
- Modified the behavior of short-cuts when Alt is not/pressed by SET.
-
+ * Modified by Robert H”hne to be used for RHIDE.
+ * Modified by Salvador E. Tropea to support i18n.
+ * Added TMenuItem::append by Salvador E. Tropea.
+ * Modified the behavior of short-cuts when Alt is not/pressed by SET.
  *
  *
  */

@@ -150,7 +150,6 @@ void TDrawBufferU16::moveChar(unsigned indent, unsigned c, unsigned attr, unsign
 
 void TDrawBuffer::moveCStr(unsigned indent, const char *str, unsigned attrs) {
 #if !defined(TVCPU_x86) || !defined(TVComp_GCC)
-//$todo: implement it in asm for Win32
     uchar bh = attrs >> 8, ah = attrs & 0xff;
     uchar al;
     ushort *dest = data + indent;
@@ -174,14 +173,14 @@ void TDrawBuffer::moveCStr(unsigned indent, const char *str, unsigned attrs) {
    // EAX = attrs                                 \n\
                                                   \n\
 // SET: It isn't supposed to be needed if I put   \n\
-// the register in the clobered list, but ...     \n\
+// the register in the clobbered list, but ...    \n\
 // gcc 2.7.x have a bug when handling it and      \n\
 // fails to save/restore bug when handling it and \n\
 // fails to save/restore it.                      \n\
 //   It didn't show until I compiled with -fPIC   \n\
 // to create a dynamic ELF library. In this case  \n\
 // EBX is used as a base for the dynamic jmp      \n\
-// table and the code misserably crash.           \n\
+// table and the code miserably crash.            \n\
 // I found it thanks to the disassemble window.   \n\
      pushl %%ebx                                  \n\
                                                   \n\
@@ -263,7 +262,6 @@ void TDrawBufferU16::moveCStr(unsigned indent, const uint16 *str, uint32 attrs) 
 
 void TDrawBuffer::moveStr(unsigned indent, const char *str, unsigned attr, int maxLen) {
 #if !defined(TVCPU_x86) || !defined(TVComp_GCC)
-//$todo: implement it in asm
     ushort *dest = data + indent;
     ushort *end;
     if (maxLen >= 0 && maxLen < maxViewWidth)

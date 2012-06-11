@@ -4,9 +4,8 @@
  *      Copyright (c) 1994 by Borland International
  *      All Rights Reserved.
  *
-
- Modified by Robert H”hne to be used for RHIDE.
- Modified by Vadim Beloborodov to be used on WIN32 console
+ * Modified by Robert H”hne to be used for RHIDE.
+ * Modified by Vadim Beloborodov to be used on WIN32 console
  *
  *
  */

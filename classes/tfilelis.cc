@@ -4,12 +4,10 @@
  *      Copyright (c) 1994 by Borland International
  *      All Rights Reserved.
  *
-
- Modified by Robert H”hne to be used for RHIDE.
- Modified by Vadim Beloborodov to be used on WIN32 console
- Modified by Salvador E. Tropea to exclude .. in parent dir and
- exlude some particular files by configuration.
-
+ * Modified by Robert H”hne to be used for RHIDE.
+ * Modified by Vadim Beloborodov to be used on WIN32 console
+ * Modified by Salvador E. Tropea to exclude .. in parent dir and
+ * exclude some particular files by configuration.
  *
  *
  */

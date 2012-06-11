@@ -5,8 +5,7 @@
     May, 2000
     Copyright (C) 2000 by Warlei Alves
     walves@usa.net
-    
-    Modified by Salvador E. Tropea to compile without warnings.
+ * Modified by Salvador E. Tropea to compile without warnings.
     This header allocated a couple of structures in each file that used it.
     
  ***************************************************************************/

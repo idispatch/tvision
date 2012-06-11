@@ -4,11 +4,9 @@
  *      Copyright (c) 1994 by Borland International
  *      All Rights Reserved.
  *
-
- Modified by Robert H”hne to be used for RHIDE.
- Modified to compile with gcc v3.x by Salvador E. Tropea, with the help of
- Andris Pavenis.
-
+ * Modified by Robert H”hne to be used for RHIDE.
+ * Modified to compile with gcc v3.x by Salvador E. Tropea, with the help of
+ * Andris Pavenis.
  *
  *
  */
@@ -185,7 +183,7 @@ uint32 TTerminal::prevLines(uint32 posStart, uint32 Lines)
 {
     uint32 pos=posStart;
 
-    // If that's the start just return, we can't go back. Remmember that's a
+    // If that's the start just return, we can't go back. Remember that's a
     // circular buffer.
     if (!Lines || pos==queBack)
     return pos;

@@ -4,8 +4,8 @@
 
   Based on code:
   Copyright (c) 1994 by Borland International
-  Modified by Sergio Sigala <ssigala@globalnet.it>
-  Modified by Salvador E. Tropea <set@ieee.org>, <set@users.sourceforge.net>
+ * Modified by Sergio Sigala <ssigala@globalnet.it>
+ * Modified by Salvador E. Tropea <set@ieee.org>, <set@users.sourceforge.net>
   Copyright (c) 1999 by Andreas F. Gorup von Besanez <besanez@compuserve.de>
 
   Covered by the GPL license.

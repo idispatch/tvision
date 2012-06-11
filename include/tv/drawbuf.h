@@ -4,11 +4,9 @@
  *      Copyright (c) 1994 by Borland International
  *      All Rights Reserved.
  *
-
- Modified by Robert H”hne to be used for RHIDE.
- Changed classes hierarchy and added new draw buffers by Salvador E. Tropea
- (Changes under GPL as usual).
-
+ * Modified by Robert H”hne to be used for RHIDE.
+ * Changed classes hierarchy and added new draw buffers by Salvador E. Tropea
+ * (Changes under GPL as usual).
  *
  *
  */

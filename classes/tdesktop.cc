@@ -4,10 +4,8 @@
  *      Copyright (c) 1994 by Borland International
  *      All Rights Reserved.
  *
-
- Modified by Robert H”hne to be used for RHIDE.
- Modified cursor behavior while desktop locked by Salvador E. Tropea (SET)
-
+ * Modified by Robert H”hne to be used for RHIDE.
+ * Modified cursor behavior while desktop locked by Salvador E. Tropea (SET)
  *
  *
  */

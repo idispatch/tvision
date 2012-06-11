@@ -4,8 +4,7 @@
  *      Copyright (c) 1994 by Borland International
  *      All Rights Reserved.
  *
-
-Modified by Robert H”hne to be used for RHIDE.
+ * Modified by Robert H”hne to be used for RHIDE.
 Modified by Salvador E. Tropea.
 
  *

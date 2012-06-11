@@ -4,22 +4,18 @@
  *      Copyright (c) 1994 by Borland International
  *      All Rights Reserved.
  *
-
-Modified by Robert H”hne to be used for RHIDE.
-
+ * Modified by Robert H”hne to be used for RHIDE.
  *
  *
  */
 
 #include <tv.h>
 
-TMouse::TMouse()
-{
+TMouse::TMouse() {
     show();
 }
 
-TMouse::~TMouse()
-{
+TMouse::~TMouse() {
     hide();
 }
 

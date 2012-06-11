@@ -4,11 +4,9 @@
  *      Copyright (c) 1994 by Borland International
  *      All Rights Reserved.
  *
-
- Modified by Robert H”hne to be used for RHIDE.
- Modified by Vadim Beloborodov to be used on WIN32 console
- Modified by Salvador E. Tropea: added i18n support. Horizontal scroll bar.
-
+ * Modified by Robert H”hne to be used for RHIDE.
+ * Modified by Vadim Beloborodov to be used on WIN32 console
+ * Modified by Salvador E. Tropea: added i18n support. Horizontal scroll bar.
  *
  *
  */

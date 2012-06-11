@@ -1,6 +1,6 @@
 /* Modified by Robert Hoehne and Salvador Eduardo Tropea for the gcc port */
 /* Modified to compile with gcc v3.x by Salvador E. Tropea, with the help of
- Andris Pavenis. */
+ * Andris Pavenis. */
 /* Modified for i18n support by Salvador Eduardo Tropea. */
 /*----------------------------------------------------------*/
 /*                                                          */

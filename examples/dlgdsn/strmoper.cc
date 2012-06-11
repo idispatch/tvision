@@ -5,8 +5,7 @@
     May, 2000
     Copyright (C) 2000 by Warlei Alves
     walves@usa.net
-    
-    Modified by Salvador E. Tropea to compile without warnings.
+ * Modified by Salvador E. Tropea to compile without warnings.
     For gcc 2.95.x and then 3.0.1.
     
  ***************************************************************************/

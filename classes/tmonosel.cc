@@ -4,10 +4,8 @@
  *      Copyright (c) 1994 by Borland International
  *      All Rights Reserved.
  *
-
-Modified by Robert H”hne to be used for RHIDE.
-Modified by Salvador E. Tropea to compile for 64 bits architectures.
-
+ * Modified by Robert H”hne to be used for RHIDE.
+ * Modified by Salvador E. Tropea to compile for 64 bits architectures.
  *
  *
  */

@@ -4,17 +4,16 @@
  *      Copyright (c) 1994 by Borland International
  *      All Rights Reserved.
  *
-
- Modified by Robert H”hne to be used for RHIDE.
- Modified by Vadim Beloborodov to be used on WIN32 console
- Modified cursor behavior while desktop locked by Salvador E. Tropea (SET)
- Rewrote call50() to support on the fly remapping and avoid using
- setCharacter.
- Modified reworked the core drawing stuff (resetCursor(), exposed() and
- writeView()) to make the code easy to understand and maintain
- by Salvador E. Tropea (SET).
- Added support for Unicode buffers Copyright (c) 2003 by by Salvador E.
- Tropea (SET).
+ * Modified by Robert H”hne to be used for RHIDE.
+ * Modified by Vadim Beloborodov to be used on WIN32 console
+ * Modified cursor behavior while desktop locked by Salvador E. Tropea (SET)
+ * Rewrote call50() to support on the fly remapping and avoid using
+ * setCharacter.
+ * Modified reworked the core drawing stuff (resetCursor(), exposed() and
+ * writeView()) to make the code easy to understand and maintain
+ * by Salvador E. Tropea (SET).
+ * Added support for Unicode buffers Copyright (c) 2003 by by Salvador E.
+ * Tropea (SET).
  *
  *
  */
@@ -844,6 +843,7 @@ Boolean lineExposed(TView *view, int line, int x1, int x2, TView *target) {
             x1 = Xtest;
         }
     }
+    return False;
 }
 
 Boolean TView::exposed() {

@@ -4,10 +4,8 @@
  *      Copyright (c) 1994 by Borland International
  *      All Rights Reserved.
  *
-
- Modified by Robert H”hne to be used for RHIDE.
- Modified for i18n support by Salvador Eduardo Tropea.
-
+ * Modified by Robert H”hne to be used for RHIDE.
+ * Modified for i18n support by Salvador Eduardo Tropea.
  *
  *
  */

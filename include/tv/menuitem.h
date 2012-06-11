@@ -4,9 +4,8 @@
  *      Copyright (c) 1994 by Borland International
  *      All Rights Reserved.
  *
-
- Modified by Robert H”hne to be used for RHIDE.
- Modified by Salvador E. Tropea. More operators and append. Also i18n support.
+ * Modified by Robert H”hne to be used for RHIDE.
+ * Modified by Salvador E. Tropea. More operators and append. Also i18n support.
 
  *
  *

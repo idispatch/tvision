@@ -12,27 +12,27 @@
 
 int mkstemp (char *_template)
 {
-  char tmp_name[FILENAME_MAX];
-  int  fd = -1;
+    char tmp_name[FILENAME_MAX];
+    int fd = -1;
 
-  /* Make sure we create a non-exisiting file, even
+    /* Make sure we create a non-existing file, even
      if race conditions exist with other processes.  */
-  do {
-    strcpy(tmp_name, _template);
-    errno = 0;
-  } while (mktemp (tmp_name) != NULL
-       /* SAA: changed file mode from 0 to 0666 because on WinNT it creted files
-        * with read-only attribute set. Fix me if it causes problems on other
-        * platforms.
-        */
-	   && (fd = open(tmp_name, O_RDWR | O_CREAT | O_EXCL | O_BINARY, 0666)) == -1
-	   && errno == EEXIST);
+    do {
+        strcpy(tmp_name, _template);
+        errno = 0;
+    }while (mktemp (tmp_name) != NULL
+            /* SAA: changed file mode from 0 to 0666 because on WinNT it created files
+             * with read-only attribute set. Fix me if it causes problems on other
+             * platforms.
+             */
+            && (fd = open(tmp_name, O_RDWR | O_CREAT | O_EXCL | O_BINARY, 0666)) == -1
+            && errno == EEXIST);
 
-  if (fd == -1)
+    if (fd == -1)
     errno = ENOENT;
-  else
+    else
     strcpy(_template, tmp_name);
 
-  return fd;
+    return fd;
 }
 #endif

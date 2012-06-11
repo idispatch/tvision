@@ -4,10 +4,8 @@
  *      Copyright (c) 1994 by Borland International
  *      All Rights Reserved.
  *
-
- Modified by Robert H”hne to be used for RHIDE.
- Added options to customize the file sorting by Salvador E. Tropea.
-
+ * Modified by Robert H”hne to be used for RHIDE.
+ * Added options to customize the file sorting by Salvador E. Tropea.
  *
  *
  */

@@ -4,10 +4,9 @@
  *      Copyright (c) 1994 by Borland International
  *      All Rights Reserved.
  *
-
- Modified by Robert H”hne to be used for RHIDE.
- Heavily modified by Salvador E. Tropea (SET) to properly accept Hexadecimal
- and octal numbers. Thanks to Andris Pavenis for suggestions.
+ * Modified by Robert H”hne to be used for RHIDE.
+ * Heavily modified by Salvador E. Tropea (SET) to properly accept Hexadecimal
+ * and octal numbers. Thanks to Andris Pavenis for suggestions.
  *
  *
  */

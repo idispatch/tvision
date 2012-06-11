@@ -10,7 +10,6 @@
  same used in original Turbo Vision for compatibility purposes.
 
  ***************************************************************************/
-// Definitions are located at the event.h header
 #include <tv.h>
 
 /*****************************************************************************
