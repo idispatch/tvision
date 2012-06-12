@@ -55,7 +55,7 @@ protected:
     TStatusLine *(*createStatusLine)( TRect );
     TMenuBar *(*createMenuBar)( TRect );
     TDeskTop *(*createDeskTop)( TRect );
-    static TScreen *tsc;
+    static TScreen *tscreen;
 };
 
 /* ---------------------------------------------------------------------- */
@@ -140,7 +140,7 @@ public:
 
 protected:
 
-    static TEvent pending;
+    static TEvent pendingEvent;
 
 private:
 };

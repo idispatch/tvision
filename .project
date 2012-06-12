@@ -3,6 +3,8 @@
 	<name>tvision</name>
 	<comment></comment>
 	<projects>
+		<project>SDL_console</project>
+		<project>console</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>

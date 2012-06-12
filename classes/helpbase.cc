@@ -9,16 +9,6 @@
  * Modified by Sergio Sigala <ssigala@globalnet.it>
  * Modified by Salvador E. Tropea <set@ieee.org>, <set@users.sourceforge.net>
  */
- 
-// SET: moved the standard headers before tv.h. Adapted to compat layer.
-#define Uses_ctype
-#define Uses_limits
-#define Uses_string
-#define Uses_sys_stat
-#define Uses_filelength
-
-
-#define Uses_THelpFile
 #include <tv.h>
 
 TCrossRefHandler crossRefHandler = notAssigned;

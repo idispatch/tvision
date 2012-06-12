@@ -23,7 +23,7 @@ TMenuBar * TProgram::menuBar = 0;
 TDeskTop * TProgram::deskTop = 0;
 TProgram * TProgram::application = 0;
 int TProgram::appPalette = apColor;
-TEvent TProgram::pending;
+TEvent TProgram::pendingEvent;
 clock_t TProgram::lastIdleClock = 0;
 clock_t TProgram::inIdleTime = 0;
 Boolean TProgram::inIdle = False;
@@ -33,8 +33,10 @@ char TProgram::doNotHandleAltNumber = 0;
 extern TPoint shadowSize;
 
 TProgram::TProgram() :
-        TProgInit(&TProgram::initStatusLine, &TProgram::initMenuBar, &TProgram::initDeskTop), TGroup(
-                TRect(0, 0, TScreen::screenWidth, TScreen::screenHeight)) {
+        TProgInit(&TProgram::initStatusLine,
+                  &TProgram::initMenuBar,
+                  &TProgram::initDeskTop),
+        TGroup(TRect(0, 0, TScreen::screenWidth, TScreen::screenHeight)) {
     application = this;
     initScreen();
     state = sfVisible | sfSelected | sfFocused | sfModal | sfExposed;
@@ -52,7 +54,6 @@ TProgram::TProgram() :
 
     if (createDeskTop != 0 && (deskTop = createDeskTop(getExtent())) != 0)
         insert(deskTop);
-
 }
 
 TProgram::~TProgram() {
@@ -116,9 +117,9 @@ clock_t Clock(void) {
 #endif
 
 void TProgram::getEvent(TEvent& event) {
-    if (pending.what != evNothing) {
-        event = pending;
-        pending.what = evNothing;
+    if (pendingEvent.what != evNothing) {
+        event = pendingEvent;
+        pendingEvent.what = evNothing;
         inIdle = False;
     } else {
         event.getMouseEvent();
@@ -242,7 +243,7 @@ void TProgram::outOfMemory() {
 }
 
 void TProgram::putEvent(TEvent & event) {
-    pending = event;
+    pendingEvent = event;
 }
 
 void TProgram::run() {

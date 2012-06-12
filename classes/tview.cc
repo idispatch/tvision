@@ -17,8 +17,6 @@
  *
  *
  */
-// SET: Moved the standard headers here because according to DJ
-// they can unconditionally declare symbols like NULL
 #include <tv.h>
 
 #include <limits.h>

@@ -11,12 +11,14 @@
 
 #include <tv.h>
 
-TScreen *TProgInit::tsc = NULL;
+TScreen *TProgInit::tscreen = NULL;
 TVMainConfigFile *TProgInit::config = NULL;
 
 TProgInit::TProgInit(TStatusLine *(*cStatusLine)(TRect), TMenuBar *(*cMenuBar)(TRect),
         TDeskTop *(*cDeskTop)(TRect)) :
-        createStatusLine(cStatusLine), createMenuBar(cMenuBar), createDeskTop(cDeskTop) {
+        createStatusLine(cStatusLine),
+        createMenuBar(cMenuBar),
+        createDeskTop(cDeskTop) {
     // Load the configuration file
     if (!config)
         config = new TVMainConfigFile();
@@ -28,12 +30,12 @@ TProgInit::TProgInit(TStatusLine *(*cStatusLine)(TRect), TMenuBar *(*cMenuBar)(T
     if (config->Search("DontMoveHiddenCursor", aux))
         TScreen::setDontMoveHiddenCursor(aux ? True : False);
 
-    tsc = new TScreen();
+    tscreen = new TScreen();
 }
 
 TProgInit::~TProgInit() {
-    delete tsc;
+    delete tscreen;
     delete config;
-    tsc = NULL;
+    tscreen = NULL;
     config = NULL;
 }

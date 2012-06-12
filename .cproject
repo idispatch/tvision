@@ -28,8 +28,12 @@
 								<option id="com.qnx.qcc.option.compiler.optlevel.1024821593" name="Optimization Level" superClass="com.qnx.qcc.option.compiler.optlevel" value="com.qnx.qcc.option.compiler.optlevel.0" valueType="enumerated"/>
 								<option id="com.qnx.qcc.option.compile.debug.1766796363" name="Debug (-g)" superClass="com.qnx.qcc.option.compile.debug" value="true" valueType="boolean"/>
 								<option id="com.qnx.qcc.option.compiler.includePath.2146316256" name="Include Directories (-I)" superClass="com.qnx.qcc.option.compiler.includePath" valueType="includePath">
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/console}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/SDL_console}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/tvision/include/tv}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/tvision/include}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/console/src}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/SDL_console/src}&quot;"/>
 								</option>
 								<option id="com.qnx.qcc.option.compiler.defines.612944306" name="Defines (-D)" superClass="com.qnx.qcc.option.compiler.defines" valueType="definedSymbols">
 									<listOptionValue builtIn="false" value="__PLAYBOOK__"/>
@@ -40,6 +44,10 @@
 							</tool>
 							<tool id="com.qnx.qcc.tool.assembler.804827921" name="QCC Assembler" superClass="com.qnx.qcc.tool.assembler">
 								<option id="com.qnx.qcc.option.assembler.debug.492787811" name="Debug (-g)" superClass="com.qnx.qcc.option.assembler.debug" value="true" valueType="boolean"/>
+								<option id="com.qnx.qcc.option.assembler.includePath.1819843874" name="Include Directories (-I)" superClass="com.qnx.qcc.option.assembler.includePath" valueType="includePath">
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/console}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/SDL_console}&quot;"/>
+								</option>
 								<inputType id="com.qnx.qcc.inputType.assembler.804186746" superClass="com.qnx.qcc.inputType.assembler"/>
 							</tool>
 							<tool id="com.qnx.qcc.tool.linker.1221085198" name="QCC Linker" superClass="com.qnx.qcc.tool.linker">
@@ -50,11 +58,26 @@
 						</toolChain>
 					</folderInfo>
 					<sourceEntries>
-						<entry excluding="names|stream|intl|include/tv/unix|include/tv/linux|classes/helpbase.cc|classes/help.cc|dual.cc|include/tv/x11|include/tv/winnt|include/tv/wingr|include/tv/win32|include/tv/qnxrtp|include/tv/qnx4|include/tv/dos|compat/unc_nt.c|compat/unc_95.c|makes|linux|extra|classes/unix|classes/linux|classes/x11|classes/winnt|classes/wingr|classes/win32|classes/qnxrtp|classes/qnx4|classes/dos|rhtv-config.c|redhat|qnxrtp|examples|doc|debian|www-site|winnt|win32|djgpp" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
+						<entry excluding="include/tv/skeleton|names|stream|intl|include/tv/unix|include/tv/linux|classes/helpbase.cc|classes/help.cc|dual.cc|include/tv/x11|include/tv/winnt|include/tv/wingr|include/tv/win32|include/tv/qnxrtp|include/tv/qnx4|include/tv/dos|compat/unc_nt.c|compat/unc_95.c|makes|linux|extra|classes/unix|classes/linux|classes/x11|classes/winnt|classes/wingr|classes/win32|classes/qnxrtp|classes/qnx4|classes/dos|rhtv-config.c|redhat|qnxrtp|examples|doc|debian|www-site|winnt|win32|djgpp" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
 					</sourceEntries>
 				</configuration>
 			</storageModule>
-			<storageModule moduleId="org.eclipse.cdt.core.externalSettings"/>
+			<storageModule moduleId="org.eclipse.cdt.core.externalSettings">
+				<externalSettings containerId="SDL_console;" factoryId="org.eclipse.cdt.core.cfg.export.settings.sipplier">
+					<externalSetting>
+						<entry flags="VALUE_WORKSPACE_PATH" kind="includePath" name="/SDL_console"/>
+						<entry flags="VALUE_WORKSPACE_PATH" kind="libraryPath" name="/SDL_console/Debug"/>
+						<entry flags="RESOLVED" kind="libraryFile" name="SDL_console"/>
+					</externalSetting>
+				</externalSettings>
+				<externalSettings containerId="console;" factoryId="org.eclipse.cdt.core.cfg.export.settings.sipplier">
+					<externalSetting>
+						<entry flags="VALUE_WORKSPACE_PATH" kind="includePath" name="/console"/>
+						<entry flags="VALUE_WORKSPACE_PATH" kind="libraryPath" name="/console/Device-Debug"/>
+						<entry flags="RESOLVED" kind="libraryFile" name="console"/>
+					</externalSetting>
+				</externalSettings>
+			</storageModule>
 		</cconfiguration>
 		<cconfiguration id="com.qnx.qcc.configuration.staticLib.release.495053985">
 			<storageModule buildSystemId="org.eclipse.cdt.managedbuilder.core.configurationDataProvider" id="com.qnx.qcc.configuration.staticLib.release.495053985" moduleId="org.eclipse.cdt.core.settings" name="Release">
@@ -82,6 +105,8 @@
 								<option id="com.qnx.qcc.option.compiler.includePath.1700289353" name="Include Directories (-I)" superClass="com.qnx.qcc.option.compiler.includePath" valueType="includePath">
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/tvision/include/tv}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/tvision/include}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/console/src}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/SDL_console/src}&quot;"/>
 								</option>
 								<option id="com.qnx.qcc.option.compiler.defines.1907585498" name="Defines (-D)" superClass="com.qnx.qcc.option.compiler.defines" valueType="definedSymbols">
 									<listOptionValue builtIn="false" value="__PLAYBOOK__"/>
@@ -99,7 +124,7 @@
 						</toolChain>
 					</folderInfo>
 					<sourceEntries>
-						<entry excluding="names|stream|intl|include/tv/unix|include/tv/linux|classes/helpbase.cc|classes/help.cc|dual.cc|include/tv/x11|include/tv/winnt|include/tv/wingr|include/tv/win32|include/tv/qnxrtp|include/tv/qnx4|include/tv/dos|compat/unc_nt.c|compat/unc_95.c|makes|linux|extra|classes/unix|classes/linux|classes/x11|classes/winnt|classes/wingr|classes/win32|classes/qnxrtp|classes/qnx4|classes/dos|rhtv-config.c|redhat|qnxrtp|examples|doc|debian|www-site|winnt|win32|djgpp" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
+						<entry excluding="include/tv/skeleton|names|stream|intl|include/tv/unix|include/tv/linux|classes/helpbase.cc|classes/help.cc|dual.cc|include/tv/x11|include/tv/winnt|include/tv/wingr|include/tv/win32|include/tv/qnxrtp|include/tv/qnx4|include/tv/dos|compat/unc_nt.c|compat/unc_95.c|makes|linux|extra|classes/unix|classes/linux|classes/x11|classes/winnt|classes/wingr|classes/win32|classes/qnxrtp|classes/qnx4|classes/dos|rhtv-config.c|redhat|qnxrtp|examples|doc|debian|www-site|winnt|win32|djgpp" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
 					</sourceEntries>
 				</configuration>
 			</storageModule>

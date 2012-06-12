@@ -17,7 +17,7 @@
  * Modified to compile with gcc v3.x by Salvador E. Tropea, with the help of
  * Andris Pavenis.
  */
- 
+
 // SET: moved the standard headers before tv.h
 #define Uses_string
 #define Uses_stdlib
@@ -40,47 +40,36 @@
 
 #include "mousedlg.h"
 
-
 #define cpMousePalette "\x07\x08"
-
 
 //
 // TClickTester functions
 //
 
 TClickTester::TClickTester(TRect& r, char *aText) :
-    TStaticText(r, aText)
-{
+        TStaticText(r, aText) {
     clicked = 0;
 }
 
-
-TPalette& TClickTester::getPalette() const
-{
-    static TPalette palette( cpMousePalette, sizeof(cpMousePalette)-1 );
+TPalette& TClickTester::getPalette() const {
+    static TPalette palette(cpMousePalette, sizeof(cpMousePalette) - 1);
     return palette;
 }
 
-
-void TClickTester::handleEvent(TEvent& event)
-{
+void TClickTester::handleEvent(TEvent& event) {
     TStaticText::handleEvent(event);
 
-    if (event.what == evMouseDown)
-        {
+    if (event.what == evMouseDown) {
         //if (event.mouse.eventFlags & meDoubleClick) SET:
-        if (event.mouse.doubleClick)
-            {
-            clicked = (short)((clicked) ? 0 : 1);
+        if (event.mouse.doubleClick) {
+            clicked = (short) ((clicked) ? 0 : 1);
             drawView();
-            }
-        clearEvent(event);
         }
+        clearEvent(event);
+    }
 }
 
-
-void TClickTester::draw()
-{
+void TClickTester::draw() {
     TDrawBuffer buf;
     char c;
 
@@ -89,20 +78,17 @@ void TClickTester::draw()
     else
         c = getColor(1);
 
-    buf.moveChar(0, ' ', c, (short)size.x);
+    buf.moveChar(0, ' ', c, (short) size.x);
     buf.moveStr(0, text, c);
-    writeLine(0, 0, (short)size.x, 1, buf);
+    writeLine(0, 0, (short) size.x, 1, buf);
 }
-
 
 //
 // TMouseDialog functions
 //
 
 TMouseDialog::TMouseDialog() :
-    TWindowInit( &TMouseDialog::initFrame )
-    , TDialog( TRect(0, 0, 34, 12), "Mouse options" )
-{
+        TWindowInit(&TMouseDialog::initFrame), TDialog(TRect(0, 0, 34, 12), "Mouse options") {
     TRect r(3, 4, 30, 5);
 
     options |= ofCentered;
@@ -129,27 +115,23 @@ TMouseDialog::TMouseDialog() :
     r = TRect(21, 9, 31, 11);
     insert(new TButton(r, "Cancel", cmCancel, bfNormal));
 
-    selectNext( (Boolean) 0);
+    selectNext((Boolean) 0);
 }
 
-
-void TMouseDialog::handleEvent(TEvent& event)
-{
+void TMouseDialog::handleEvent(TEvent& event) {
     TDialog::handleEvent(event);
-    switch(event.what)
-        {
-        case evCommand:
-            if(event.message.command == cmCancel)
-                TEventQueue::doubleDelay = oldDelay;
-            break;
+    switch (event.what) {
+    case evCommand:
+        if (event.message.command == cmCancel)
+            TEventQueue::doubleDelay = oldDelay;
+        break;
 
-        case evBroadcast:
-            if(event.message.command == cmScrollBarChanged)
-                {
-                TEventQueue::doubleDelay = (short)mouseScrollBar->value;
-                clearEvent(event);
-                }
-            break;
+    case evBroadcast:
+        if (event.message.command == cmScrollBarChanged) {
+            TEventQueue::doubleDelay = (short) mouseScrollBar->value;
+            clearEvent(event);
         }
+        break;
+    }
 }
 

@@ -310,6 +310,7 @@ void TGroup::handleEvent(TEvent& event) {
         } else
             forEach(doHandleEvent, &hs);
     }
+
 }
 
 void TGroup::insert(TView* p) {

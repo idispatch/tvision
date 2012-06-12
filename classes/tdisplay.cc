@@ -19,34 +19,34 @@
 
 int TDisplay::dual_display = 0;
 
-void (*TDisplay::clearScreen)(uchar, uchar)=TDisplay::defaultClearScreen;
-ushort (*TDisplay::getRows)() =TDisplay::defaultGetRows;
-ushort (*TDisplay::getCols)() =TDisplay::defaultGetCols;
-void (*TDisplay::setCrtMode)(ushort mode) =TDisplay::defaultSetCrtMode;
-ushort (*TDisplay::getCrtMode)() =TDisplay::defaultGetCrtMode;
+void (*TDisplay::clearScreen)(uchar, uchar)   = TDisplay::defaultClearScreen;
+ushort (*TDisplay::getRows)()                 = TDisplay::defaultGetRows;
+ushort (*TDisplay::getCols)()                 = TDisplay::defaultGetCols;
+void (*TDisplay::setCrtMode)(ushort mode)     = TDisplay::defaultSetCrtMode;
+ushort (*TDisplay::getCrtMode)()              = TDisplay::defaultGetCrtMode;
 void (*TDisplay::getCursorPos)(unsigned &x, unsigned &y)
-=TDisplay::defaultGetCursorShape;
+                                              = TDisplay::defaultGetCursorShape;
 void (*TDisplay::setCursorPos)(unsigned x, unsigned y)
-=TDisplay::defaultSetCursorShape;
+                                              = TDisplay::defaultSetCursorShape;
 void (*TDisplay::setCursorShape)(unsigned start, unsigned end)
-=TDisplay::defaultSetCursorShape;
+                                              = TDisplay::defaultSetCursorShape;
 void (*TDisplay::getCursorShape)(unsigned &start, unsigned &end)
-=TDisplay::defaultGetCursorShape;
-void (*TDisplay::setCrtModeExt)(char *mode)=TDisplay::defaultSetCrtModeExt;
-int (*TDisplay::checkForWindowSize)(void) =TDisplay::defaultCheckForWindowSize;
-const char *(*TDisplay::getWindowTitle)(void) =TDisplay::defaultGetWindowTitle;
+                                              = TDisplay::defaultGetCursorShape;
+void (*TDisplay::setCrtModeExt)(char *mode)   = TDisplay::defaultSetCrtModeExt;
+int (*TDisplay::checkForWindowSize)(void)     = TDisplay::defaultCheckForWindowSize;
+const char *(*TDisplay::getWindowTitle)(void) = TDisplay::defaultGetWindowTitle;
 int (*TDisplay::setWindowTitle)(const char *name)
-=TDisplay::defaultSetWindowTitle;
-int (*TDisplay::getBlinkState)() =TDisplay::defaultGetBlinkState;
+                                              = TDisplay::defaultSetWindowTitle;
+int (*TDisplay::getBlinkState)()              = TDisplay::defaultGetBlinkState;
 void (*TDisplay::getDisPaletteColors)(int from, int number, TScreenColor *colors)
-=TDisplay::defaultGetDisPaletteColors;
+                                              = TDisplay::defaultGetDisPaletteColors;
 int (*TDisplay::setDisPaletteColors)(int from, int number, TScreenColor *colors)
-=TDisplay::defaultSetDisPaletteColors;
+                                              = TDisplay::defaultSetDisPaletteColors;
 int (*TDisplay::setCrtModeRes_p)(unsigned w, unsigned h, int fW, int fH)
-=TDisplay::defaultSetCrtModeRes;
+                                              = TDisplay::defaultSetCrtModeRes;
 Boolean (*TDisplay::showBusyState)(Boolean state)
-=TDisplay::defaultShowBusyState;
-void (*TDisplay::beep)() =TDisplay::defaultBeep;
+                                              = TDisplay::defaultShowBusyState;
+void (*TDisplay::beep)()                      = TDisplay::defaultBeep;
 int TDisplay::argc = 0;
 char **TDisplay::argv = NULL;
 char **TDisplay::environment = NULL;
@@ -79,7 +79,8 @@ TScreenResolution TDisplay::dosModesRes[TDisplayDOSModesNum] = {
         { 132, 25 },
         { 132, 43 },
         { 132, 50 },
-        { 132, 60 }
+        { 132, 60 },
+        { 128, 37 }
 };
 
 TScreenResolution TDisplay::dosModesCell[TDisplayDOSModesNum] = {
@@ -100,7 +101,8 @@ TScreenResolution TDisplay::dosModesCell[TDisplayDOSModesNum] = {
         { 9, 14 },
         { 9, 11 },
         { 9, 10 },
-        { 9, 8 }
+        { 9, 8 },
+        { 8, 8 },
 };
 
 int TDisplay::dosModes[TDisplayDOSModesNum] = {
@@ -121,7 +123,8 @@ int TDisplay::dosModes[TDisplayDOSModesNum] = {
         smCO132x25,
         smCO132x43,
         smCO132x50,
-        smCO132x60
+        smCO132x60,
+        smCO128x37
 };
 
 /*****************************************************************************
@@ -309,17 +312,11 @@ TDisplay::~TDisplay() {
 
 void TDisplay::setCursorType(ushort val) {
     setCursorShape(val & 0xFF, val >> 8);
-#ifdef DEBUG_CURSOR
-    fprintf(stderr,"Seteando 0x%0X => %X %X\n",val,val & 0xFF,val>>8);
-#endif
 }
 
 ushort TDisplay::getCursorType() {
     unsigned start, end;
     getCursorShape(start, end);
-#ifdef DEBUG_CURSOR
-    fprintf(stderr,"Obteniendo: start %X end %X => 0x%0X\n",start,end,(start | (end<<8)));
-#endif
     return (ushort) (start | (end << 8));
 }
 
@@ -397,7 +394,8 @@ TScreenColor TDisplay::PC_BIOSPalette[16] =
   { 0xFC, 0x54, 0x54 },
   { 0xFC, 0x54, 0xFC },
   { 0xFC, 0xFC, 0x54 },
-  { 0xFC, 0xFC, 0xFC } };
+  { 0xFC, 0xFC, 0xFC }
+};
 
 // This is the palette parsed from the tvrc file or the application
 TScreenColor TDisplay::UserStartPalette[16];

@@ -40,39 +40,57 @@ char TScreen::useSecondaryFont = 0;
 uint32 TScreen::flags0 = 0;
 TScreen *TScreen::driver = NULL;
 const char *TScreen::currentDriverShortName = NULL;
-TVScreenFontRequestCallBack TScreen::frCB = NULL;
-long TScreen::forcedAppCP = -1, TScreen::forcedScrCP = -1, TScreen::forcedInpCP = -1;
+TVScreenFontRequestCallBack TScreen::fontRequestCallback = NULL;
+long TScreen::forcedAppCP = -1;
+long TScreen::forcedScrCP = -1;
+long TScreen::forcedInpCP = -1;
 
 /*****************************************************************************
  Function pointer members initialization
  *****************************************************************************/
 
-void (*TScreen::setVideoMode)(ushort mode) =TScreen::defaultSetVideoMode;
-void (*TScreen::setVideoModeExt)(char *mode) =TScreen::defaultSetVideoModeExt;
-void (*TScreen::clearScreen)() =TScreen::defaultClearScreen;
-void (*TScreen::setCrtData)() =TScreen::defaultSetCrtData;
-ushort (*TScreen::fixCrtMode)(ushort mode) =TScreen::defaultFixCrtMode;
-void (*TScreen::Suspend)() =dummy;
-void (*TScreen::Resume)() =dummy;
-ushort (*TScreen::getCharacter)(unsigned offset)=TScreen::defaultGetCharacter;
-void (*TScreen::getCharacters)(unsigned offset, ushort *buf, unsigned count)
-=TScreen::defaultGetCharacters;
+void (*TScreen::setVideoMode)(ushort mode)   = TScreen::defaultSetVideoMode;
+void (*TScreen::setVideoModeExt)(char *mode) = TScreen::defaultSetVideoModeExt;
+void (*TScreen::clearScreen)()               = TScreen::defaultClearScreen;
+void (*TScreen::setCrtData)()                = TScreen::defaultSetCrtData;
+ushort (*TScreen::fixCrtMode)(ushort mode)   = TScreen::defaultFixCrtMode;
+void (*TScreen::Suspend)()                   = dummy;
+void (*TScreen::Resume)()                    = dummy;
+ushort (*TScreen::getCharacter)(unsigned offset) = TScreen::defaultGetCharacter;
+void (*TScreen::getCharacters)(unsigned offset,
+                               ushort *buf,
+                               unsigned count)
+                                             = TScreen::defaultGetCharacters;
 void (*TScreen::setCharacter)(unsigned offset, uint32 value)
-=TScreen::defaultSetCharacter;
-void (*TScreen::setCharacters)(unsigned offset, ushort *values, unsigned count)
-=TScreen::defaultSetCharacters;
-int (*TScreen::System_p)(const char *command, pid_t *pidChild, int in, int out, int err)
-=TScreen::defaultSystem;
+                                             = TScreen::defaultSetCharacter;
+void (*TScreen::setCharacters)(unsigned offset,
+                               ushort *values,
+                               unsigned count)
+                                             = TScreen::defaultSetCharacters;
+int (*TScreen::System_p)(const char *command,
+                         pid_t *pidChild,
+                         int in,
+                         int out,
+                         int err)
+                                             = TScreen::defaultSystem;
 int (*TScreen::getFontGeometry)(unsigned &w, unsigned &h)
-=TScreen::defaultGetFontGeometry;
-int (*TScreen::getFontGeometryRange)(unsigned &wmin, unsigned &hmin, unsigned &umax, unsigned &hmax)
-=TScreen::defaultGetFontGeometryRange;
-int (*TScreen::setFont_p)(int changeP, TScreenFont256 *fontP, int changeS, TScreenFont256 *fontS,
-        int fontCP, int appCP)
-        =TScreen::defaultSetFont;
-void (*TScreen::restoreFonts)() =TScreen::defaultRestoreFonts;
-int (*TScreen::setVideoModeRes_p)(unsigned w, unsigned h, int fW, int fH)
-=TScreen::defaultSetVideoModeRes;
+                                             = TScreen::defaultGetFontGeometry;
+int (*TScreen::getFontGeometryRange)(unsigned &wmin,
+                                     unsigned &hmin,
+                                     unsigned &umax,
+                                     unsigned &hmax)
+                                             = TScreen::defaultGetFontGeometryRange;
+int (*TScreen::setFont_p)(int changeP,
+                          TScreenFont256 *fontP,
+                          int changeS,
+                          TScreenFont256 *fontS,
+                          int fontCP,
+                          int appCP)        = TScreen::defaultSetFont;
+void (*TScreen::restoreFonts)()              = TScreen::defaultRestoreFonts;
+int (*TScreen::setVideoModeRes_p)(unsigned w,
+                                  unsigned h,
+                                  int fW,
+                                  int fH)    = TScreen::defaultSetVideoModeRes;
 
 /*****************************************************************************
  Default behaviors for the members
@@ -92,9 +110,10 @@ void TScreen::defaultSetVideoModeExt(char *mode) { // Set the screen mode
 
 int TScreen::defaultSetVideoModeRes(unsigned w, unsigned h, int fW, int fH) { // Set the screen mode
     int ret = setCrtModeRes(w, h, fW, fH);
-    if (ret)
+    if (ret) {
         // Cache the data about it and initialize related stuff
         setCrtData();
+    }
     return ret;
 }
 
@@ -141,7 +160,10 @@ void TScreen::defaultSetCharacters(unsigned offset, ushort *values, unsigned cou
 }
 
 int TScreen::defaultSystem(const char *command, pid_t *pidChild, int in, int out, int err) {
-    // fork mechanism not available
+#ifdef __QNXNTO__
+    return 1;
+#else
+    // fork mechanism is not available
     if (pidChild)
         *pidChild = 0;
     // If the caller asks for redirection replace the requested handles
@@ -152,6 +174,7 @@ int TScreen::defaultSystem(const char *command, pid_t *pidChild, int in, int out
     if (err != -1)
         dup2(err, STDERR_FILENO);
     return system(command);
+#endif
 }
 
 int TScreen::defaultGetFontGeometry(unsigned &, unsigned &) {
@@ -179,10 +202,12 @@ struct stDriver {
     const char *name;
 };
 
+#ifdef TVOS_Win32
 #ifdef TV_Disable_WinGr_Driver
 #define TV_WinGr_Driver_Entry
 #else
 #define TV_WinGr_Driver_Entry { TV_WinGrDriverCheck,  80, "WinGr" },
+#endif
 #endif
 
 static stDriver Drivers[] = {
@@ -204,6 +229,7 @@ static stDriver Drivers[] = {
         {   TV_QNX4DriverCheck, 90, "QNX4"},
 #endif // TVOSf_QNX4
 #ifdef TVOSf_BBOS10
+        {   TV_QNXDriverCheck, 100, "QNX"},
 #else
         {   TV_XTermDriverCheck, 60, "XTerm"},
 #endif
@@ -251,8 +277,7 @@ int cmpDrivers(const void *v1, const void *v2) {
 
  ***************************************************************************/
 
-TScreen::TScreen() :
-        TDisplay() {
+TScreen::TScreen() : TDisplay() {
     // When the real drivers creates a derived class they will call this
     // constructor so we must avoid getting in an infinite loop.
     // I know that's tricky but it helps to maintain compatibility with the
@@ -340,7 +365,6 @@ const char *sep = ",;";
 
 Boolean TScreen::parseUserPalette() {
     char *sPal = optSearch("ScreenPalette");
-    //printf("parseUserPalette():  %s\n",sPal ? sPal : "None");
     if (!sPal || !*sPal)
         return False;
     memcpy(UserStartPalette, PC_BIOSPalette, sizeof(UserStartPalette));
@@ -397,8 +421,8 @@ char *TScreen::optSearch(const char *variable) {
 }
 
 TVScreenFontRequestCallBack TScreen::setFontRequestCallBack(TVScreenFontRequestCallBack cb) {
-    TVScreenFontRequestCallBack old = frCB;
-    frCB = cb;
+    TVScreenFontRequestCallBack old = fontRequestCallback;
+    fontRequestCallback = cb;
     return old;
 }
 

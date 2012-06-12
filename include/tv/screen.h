@@ -37,7 +37,7 @@ typedef TScreenFont256 *(*TVScreenFontRequestCallBack)(int which, unsigned w, un
 // initialized yet.
 typedef void (*TVScreenDriverDetectCallBack)();
 
-const int TDisplayDOSModesNum = 18;
+const int TDisplayDOSModesNum = 19;
 
 /**[txh]********************************************************************
 
@@ -92,7 +92,9 @@ public:
         smCO132x25 = 0x0109,
         smCO132x43 = 0x010A,
         smCO132x50 = 0x010B,
-        smCO132x60 = 0x010C
+        smCO132x60 = 0x010C,
+        // PlayBook
+        smCO128x37 = 0x0400
     };
 
     static void (*clearScreen)(uchar w, uchar h);
@@ -119,7 +121,6 @@ public:
     static int setCrtModeRes(unsigned w, unsigned h, int fW = -1, int fH = -1) {
         return setCrtModeRes_p(w, h, fW, fH);
     }
-    ;
     // SET: These are the real functions for *CursorType
     static void (*setCursorShape)(unsigned start, unsigned end);
     static void (*getCursorShape)(unsigned &start, unsigned &end);
@@ -141,7 +142,6 @@ public:
     static void bell() {
         beep();
     }
-    ;
     // This should be called before initialization.
     // Isn't mandatory but helps some drivers.
     static void setArgv(int aArgc, char **aArgv, char **aEnvir);
@@ -150,12 +150,10 @@ public:
     static Boolean getShowCursorEver() {
         return opts1 & ShowCursorEver ? True : False;
     }
-    ;
     static Boolean setDontMoveHiddenCursor(Boolean value);
     static Boolean getDontMoveHiddenCursor() {
         return opts1 & DontMoveHiddenCursor ? True : False;
     }
-    ;
     // Helper to look for the closest resolution from a list
     static Boolean searchClosestRes(TScreenResolution *res, unsigned x, unsigned y, unsigned cant,
             unsigned &pos);
@@ -261,18 +259,6 @@ protected:
     static int defaultSetCrtModeRes(unsigned w, unsigned h, int fW = -1, int fH = -1);
     static Boolean defaultShowBusyState(Boolean state);
     static void defaultBeep();
-
-private:
-    // From original TV 2.0.
-    // As they are private I just ignore them.
-    //static void videoInt();
-    //static void updateIntlChars();
-
-    // From where they came from? TV 1.03?
-    //static ushort * equipment;
-    //static uchar * crtInfo;
-    //static uchar * crtRows;
-    //static uchar Page;
 };
 
 // virtual to avoid problems with multiple inheritance
@@ -330,20 +316,18 @@ public:
     static int setVideoModeRes(unsigned w, unsigned h, int fW = -1, int fH = -1) {
         return setVideoModeRes_p(w, h, fW, fH);
     }
-    ;
     // SET: executes the indicated command
     static int (*System_p)(const char *command, pid_t *pidChild, int in, int out, int err);
     static int System(const char *command, pid_t *pidChild = 0, int in = -1, int out = -1, int err =
             -1) {
         return System_p(command, pidChild, in, out, err);
     }
-    ;
     // Palette handling, they call the TDisplay members
     static void getPaletteColors(int from, int number, TScreenColor *colors);
     static void setPaletteColors(int from, int number, TScreenColor *colors);
     static void resetPalette(); // Sets the original palette
     // Font handling
-    // These funtions can fail and only drivers with CanSetFontSize should
+    // These functions can fail and only drivers with CanSetFontSize should
     // implement theme. The rest uses defaults that ever fails.
     static int (*getFontGeometry)(unsigned &w, unsigned &h);
     static int (*getFontGeometryRange)(unsigned &wmin, unsigned &hmin, unsigned &umax,
@@ -353,11 +337,9 @@ public:
     static int setPrimaryFont(TScreenFont256 *font, int fontCP = -1, int appCP = -1) {
         return setFont(1, font, 0, NULL, fontCP, appCP);
     }
-    ;
     static int setSecondaryFont(TScreenFont256 *font) {
         return setFont(0, NULL, 1, font);
     }
-    ;
     // That's the real function to set the fonts
     static int (*setFont_p)(int changeP, TScreenFont256 *fontP, int changeS, TScreenFont256 *fontS,
             int fontCP, int appCP);
@@ -365,7 +347,6 @@ public:
             int fontCP = -1, int appCP = -1) {
         return setFont_p(changeP, fontP, changeS, fontS, fontCP, appCP);
     }
-    ;
     static void (*restoreFonts)();
     static TVScreenFontRequestCallBack
     setFontRequestCallBack(TVScreenFontRequestCallBack cb);
@@ -373,15 +354,12 @@ public:
     static int disableSecondaryFont() {
         return setSecondaryFont(NULL);
     }
-    ;
     static int disablePrimaryFont() {
         return setPrimaryFont(NULL);
     }
-    ;
     static Boolean isSecondaryFontEnabled() {
         return useSecondaryFont ? True : False;
     }
-    ;
     // It looks for a configuration variable that belongs to the current driver
     static Boolean optSearch(const char *variable, long &val);
     static char *optSearch(const char *variable);
@@ -391,12 +369,9 @@ public:
     static void beep() {
         TDisplay::beep();
     }
-    ;
     static void bell() {
         TDisplay::beep();
     }
-    ;
-
     // SET: flags capabilities flags
     enum Capabilities1 {
         CodePageVar = 1, CanSetPalette = 2, // We can change colors
@@ -424,47 +399,36 @@ public:
     static Boolean codePageVariable() {
         return flags0 & CodePageVar ? True : False;
     }
-    ;
     static Boolean canSetPalette() {
         return flags0 & CanSetPalette ? True : False;
     }
-    ;
     static Boolean canReadPalette() {
         return flags0 & CanReadPalette ? True : False;
     }
-    ;
     static Boolean palNeedsRedraw() {
         return flags0 & PalNeedsRedraw ? True : False;
     }
-    ;
     static Boolean cursorShapes() {
         return flags0 & CursorShapes ? True : False;
     }
-    ;
     static Boolean useScreenSaver() {
         return flags0 & UseScreenSaver ? True : False;
     }
-    ;
     static Boolean canSetBFont() {
         return flags0 & CanSetBFont ? True : False;
     }
-    ;
     static Boolean canSetSBFont() {
         return flags0 & CanSetSBFont ? True : False;
     }
-    ;
     static Boolean canSetFontSize() {
         return flags0 & CanSetFontSize ? True : False;
     }
-    ;
     static Boolean canSetVideoSize() {
         return flags0 & CanSetVideoSize ? True : False;
     }
-    ;
     static Boolean noUserScreen() {
         return flags0 & NoUserScreen ? True : False;
     }
-    ;
 
 protected:
     // SET: Capabilities flags
@@ -474,7 +438,7 @@ protected:
     // colors.
     static char useSecondaryFont;
     // Font Request Call Back
-    static TVScreenFontRequestCallBack frCB;
+    static TVScreenFontRequestCallBack fontRequestCallback;
     // Values from the user configuration
     static long forcedAppCP, forcedScrCP, forcedInpCP;
 
