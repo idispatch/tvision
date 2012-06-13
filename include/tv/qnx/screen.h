@@ -18,15 +18,9 @@ protected:
     static void Beep();
 };
 
-// With this order the destructor will be called:
-// TScreenQNX
-// TScreen
-// TDisplayQNX
-// TDisplay
 class TScreenQNX : public TDisplayQNX, public TScreen {
 public:
     TScreenQNX();
-    virtual ~TScreenQNX();
 
     // Usually our guts are needed by the key, mouse and/or display.
     // Here you can allow access to those classes.

@@ -76,9 +76,10 @@ void TEventQueue::suspend() {
 
 TEventQueue::~TEventQueue() {
     suspend();
-    // SET: Destroy the mouse object
-    if (mouse)
+    if (mouse) {
         delete mouse;
+        mouse = NULL;
+    }
 }
 
 #ifdef TVComp_BCPP
@@ -95,9 +96,7 @@ void TEventQueue::getMouseEvent(TEvent& ev) {
 
         if (ev.mouse.buttons == 0 && lastMouse.buttons != 0) {
             ev.what = evMouseUp;
-//            int buttons = lastMouse.buttons;
             lastMouse = ev.mouse;
-//            ev.mouse.buttons = buttons;
             return;
         }
 
@@ -140,12 +139,14 @@ void TEventQueue::getMouseState(TEvent & ev) {
         ev.what = CLY_Ticks();
     } else {
         ev = *eventQHead;
-        if (++eventQHead >= eventQueue + eventQSize)
+        if (++eventQHead >= eventQueue + eventQSize) {
             eventQHead = eventQueue;
+        }
         eventCount--;
     }
-    if (mouseReverse != False && ev.mouse.buttons != 0 && ev.mouse.buttons != 3)
+    if (mouseReverse != False && ev.mouse.buttons != 0 && ev.mouse.buttons != 3) {
         ev.mouse.buttons ^= 3;
+    }
 }
 
 #ifdef TVCompf_djgpp

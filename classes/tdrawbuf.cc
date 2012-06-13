@@ -142,7 +142,7 @@ void TDrawBufferU16::moveChar(unsigned indent, unsigned c, unsigned attr, unsign
  the lower 8 bits are the normal value and the upper 8 bits define the
  attribute to be used for text enclosed by ASCII 126. @x{::moveStr}.@p
  The routine was modified to avoid writes passing the end of the buffer.
- Additionally was re-writed in assembler (I guess the Borland's original code
+ Additionally was re-written in assembler (I guess the Borland's original code
  was assembler, but I didn't take a look to it) because the check slow downs
  the routine so I wanted to avoid a lose in performance. SET.
 
@@ -150,19 +150,20 @@ void TDrawBufferU16::moveChar(unsigned indent, unsigned c, unsigned attr, unsign
 
 void TDrawBuffer::moveCStr(unsigned indent, const char *str, unsigned attrs) {
 #if !defined(TVCPU_x86) || !defined(TVComp_GCC)
-    uchar bh = attrs >> 8, ah = attrs & 0xff;
-    uchar al;
+    uchar highlight_attr = (attrs >> 8);
+    uchar normal_attr = (attrs & 0xff);
+    uchar current_char;
     ushort *dest = data + indent;
     ushort *end = data + maxViewWidth;
     while (*str && dest < end) {
-        al = *str++;
-        if (al == '~') {
-            al = ah;
-            ah = bh;
-            bh = al;
+        current_char = *str++;
+        if (current_char == '~') {
+            uchar t = normal_attr;
+            normal_attr = highlight_attr;
+            highlight_attr = t;
         } else {
-            ((uchar*) dest)[0] = al;
-            ((uchar*) dest++)[1] = ah;
+            ((uchar*) dest)[0] = current_char;
+            ((uchar*) dest++)[1] = normal_attr;
         }
     }
 #else

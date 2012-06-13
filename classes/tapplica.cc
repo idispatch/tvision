@@ -128,7 +128,6 @@ void TApplication::resume() {
 #if 0
     restore_my_mouse_state();
 #endif
-    resetIdleTime(); // Don't count this time
 }
 
 void TApplication::suspend() {

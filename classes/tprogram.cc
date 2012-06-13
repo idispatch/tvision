@@ -15,6 +15,9 @@
 #include <tv.h>
 
 #include <compatlayer.h>
+#ifdef TVOSf_BBOS10
+#include <SDL_console.h>
+#endif
 
 // Public variables
 
@@ -24,11 +27,6 @@ TDeskTop * TProgram::deskTop = 0;
 TProgram * TProgram::application = 0;
 int TProgram::appPalette = apColor;
 TEvent TProgram::pendingEvent;
-clock_t TProgram::lastIdleClock = 0;
-clock_t TProgram::inIdleTime = 0;
-Boolean TProgram::inIdle = False;
-char TProgram::doNotReleaseCPU = 0;
-char TProgram::doNotHandleAltNumber = 0;
 
 extern TPoint shadowSize;
 
@@ -85,7 +83,8 @@ clock_t Clock(void)
  sleeps it doesn't count so the screen saver and clock aren't updated.
  Instead we must use gettimeofday.
  */
-
+#ifdef TVOSf_BBOS10
+#else
 #include <sys/time.h>
 
 clock_t Clock(void) {
@@ -114,36 +113,31 @@ clock_t Clock(void) {
 
     return ret;
 }
-#endif
+#endif /* TVOSf_BBOS10 */
+#endif /* TVOS_UNIX */
 
 void TProgram::getEvent(TEvent& event) {
+#ifdef TVOSf_BBOS10
+    if(SDL_console_run_frames(1) < 0) {
+        pendingEvent.what = evCommand;
+        pendingEvent.message.command = cmQuit;
+    }
+#endif
     if (pendingEvent.what != evNothing) {
         event = pendingEvent;
         pendingEvent.what = evNothing;
-        inIdle = False;
     } else {
         event.getMouseEvent();
         if (event.what == evNothing) {
             event.getKeyEvent();
             if (event.what == evNothing) {
-                if (inIdle) {
-                    clock_t t = Clock();
-                    inIdleTime += t - lastIdleClock;
-                    lastIdleClock = t;
-                } else {
-                    inIdleTime = 0;
-                    lastIdleClock = Clock();
-                    inIdle = True;
-                }
                 if (TScreen::checkForWindowSize()) {
                     setScreenMode(0xFFFF);
                     CLY_Redraw();
                 }
                 idle();
-            } else
-                inIdle = False;
-        } else
-            inIdle = False;
+            }
+        }
     }
 
     if (statusLine != 0) {
@@ -162,7 +156,7 @@ TPalette& TProgram::getPalette() const {
 }
 
 void TProgram::handleEvent(TEvent& event) {
-    if (!doNotHandleAltNumber && event.what == evKeyDown) {
+    if (event.what == evKeyDown) {
         char c = TGKey::GetAltChar(event.keyDown.keyCode, event.keyDown.charScan.charCode);
         if (c >= '1' && c <= '9') {
             if (current->valid(cmReleasedFocus)) {
@@ -187,10 +181,6 @@ void TProgram::idle() {
     if (commandSetChanged == True) {
         message(this, evBroadcast, cmCommandSetChanged, 0);
         commandSetChanged = False;
-    }
-    // SET: Release the CPU unless the user doesn't want it.
-    if (!doNotReleaseCPU) {
-        CLY_ReleaseCPU(); // defined in ticks.cc
     }
 }
 

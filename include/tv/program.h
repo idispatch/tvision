@@ -119,25 +119,6 @@ public:
     static TDeskTop * deskTop;
     static int appPalette;
 
-    // Added by SET
-    static clock_t lastIdleClock; // That's the value of clock in the moment
-                                  // when idle is called. Used to accumulate
-                                  // in the inIdleTime var
-    static clock_t inIdleTime;  // That keeps track of the number of clocks
-                                // elapsed since we entered in idle
-    static Boolean inIdle;      // Indicates that we are in idle, a mouse or
-                                // keyboard event resets it
-    // I think that sometimes we can have a long elapsed time without events
-    // so I provide a way to reset it
-    static void resetIdleTime() { inIdle=False; };
-    // SET: By default that's 0 and the idle member releases the CPU to the
-    // OS. If for some reason you really need to avoid it and want to use
-    // 100% of the CPU just assign 1 to this variable.
-    static char doNotReleaseCPU;
-    // SET: Disable Alt+number window selection. Useful if you have to do it
-    // configurable like in SETEdit.
-    static char doNotHandleAltNumber;
-
 protected:
 
     static TEvent pendingEvent;

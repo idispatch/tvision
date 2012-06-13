@@ -16,8 +16,6 @@ int TScreenQNX::InitOnce() {
         TDisplayQNX::Init();
 
         TScreen::System_p = TScreenQNX::System;
-        TScreen::Resume = TScreenQNX::Resume;
-        TScreen::Suspend = TScreenQNX::Suspend;
         TScreen::getCharacters = TScreenQNX::GetCharacters;
         TScreen::getCharacter = TScreenQNX::GetCharacter;
         TScreen::setCharacters = TScreenQNX::SetCharacters;
@@ -26,14 +24,9 @@ int TScreenQNX::InitOnce() {
         TGKeyQNX::Init();
         THWMouseQNX::Init();
 
-        if(screenBuffer!=NULL) {
-            delete [] screenBuffer;
-            screenBuffer = NULL;
-        }
         unsigned width = console_get_width(g_console);
         unsigned height = console_get_height(g_console);
-        screenBuffer = new ushort[width * height];
-        memset(screenBuffer, 0, width * height * sizeof(ushort));
+        screenBuffer = console_get_raw_buffer(g_console);
 
         initialized = true;
     }
@@ -43,18 +36,9 @@ int TScreenQNX::InitOnce() {
 TScreenQNX::TScreenQNX() {
     if (!InitOnce())
         return;
-    Resume();
     screenMode = getCrtMode();
     setCrtData();
     suspended = 0;
-}
-
-TScreenQNX::~TScreenQNX() {
-    suspend(); // High level suspend to avoid a double call
-    if(screenBuffer!=NULL) {
-        delete [] screenBuffer;
-        screenBuffer = NULL;
-    }
 }
 
 int TScreenQNX::System(const char *command,
@@ -66,38 +50,51 @@ int TScreenQNX::System(const char *command,
 }
 
 void TScreenQNX::GetCharacters(unsigned offset, ushort * buf, unsigned count) {
-    memcpy(buf, screenBuffer + offset, count*sizeof(ushort));
-    /*for(;count > 0; --count) {
-        *buf++ = GetCharacter(offset++);
-    }*/
+#ifdef _DEBUG
+    unsigned max_offset = console_get_width(g_console) * console_get_height(g_console);
+    if(offset + count >= max_offset) {
+        fprintf(stderr,
+                "Reading beyond end of console buffer (offset: %u, max: %u)\n",
+                offset, max_offset);
+        fflush(stderr);
+    }
+#endif
+    memcpy(buf, screenBuffer + offset, count * sizeof(ushort));
 }
 
 ushort TScreenQNX::GetCharacter(unsigned offset) {
-    /*ushort c = (ushort)console_get_character_at_offset(g_console, offset);
-    ushort a = console_get_attribute_at_offset(g_console, offset);
-    return (c << 8) + a;*/
+#ifdef _DEBUG
+    unsigned max_offset = console_get_width(g_console) * console_get_height(g_console);
+    if(offset >= max_offset) {
+        fprintf(stderr,
+                "Reading beyond end of console buffer (offset: %u, max: %u)\n",
+                offset, max_offset);
+        fflush(stderr);
+    }
+#endif
     return screenBuffer[offset];
 }
 
 void TScreenQNX::SetCharacters(unsigned offset, ushort * buf, unsigned count) {
-    memcpy(screenBuffer + offset, buf, count * sizeof(ushort));
     for(;count > 0; --count) {
         SetCharacter(offset++, *buf++);
     }
 }
 
 void TScreenQNX::SetCharacter(unsigned offset, uint32 c) {
-    screenBuffer[offset] = (ushort)c;
+#ifdef _DEBUG
+    unsigned max_offset = console_get_width(g_console) * console_get_height(g_console);
+    if(offset >= max_offset) {
+        fprintf(stderr,
+                "Writing beyond end of console buffer (offset: %u, max: %u)\n",
+                offset, max_offset);
+        fflush(stderr);
+    }
+#endif
     console_set_character_and_attribute_at_offset(g_console,
                                                   offset,
                                                   (unsigned char)(c & 0xff),
                                                   (unsigned char)((c & 0xff00) >> 8));
-}
-
-void TScreenQNX::Resume() {
-}
-
-void TScreenQNX::Suspend() {
 }
 
 TScreen *TV_QNXDriverCheck() {

@@ -160,9 +160,6 @@ void TScreen::defaultSetCharacters(unsigned offset, ushort *values, unsigned cou
 }
 
 int TScreen::defaultSystem(const char *command, pid_t *pidChild, int in, int out, int err) {
-#ifdef __QNXNTO__
-    return 1;
-#else
     // fork mechanism is not available
     if (pidChild)
         *pidChild = 0;
@@ -174,7 +171,6 @@ int TScreen::defaultSystem(const char *command, pid_t *pidChild, int in, int out
     if (err != -1)
         dup2(err, STDERR_FILENO);
     return system(command);
-#endif
 }
 
 int TScreen::defaultGetFontGeometry(unsigned &, unsigned &) {
@@ -320,13 +316,14 @@ TScreen::~TScreen() {
         initCalled = 0; // Avoid actions in farther calls
         delete driver;
         driver = 0;
-    } else
+    } else {
         //  When we destroy the "driver" member it will call the specific destructor
         // and it will call this destructor again (is a child class). This time we
         // will have initCalled=0 and this suspend will be executed.
         //  The specific destructor should set suspended=1 if this suspend should be
         // disabled.
         suspend();
+    }
 }
 
 void TScreen::suspend() {

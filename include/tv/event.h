@@ -5,7 +5,7 @@
  *      All Rights Reserved.
  *
  * Modified by Robert H”hne to be used for RHIDE.
- * SET: Hardware abstaction with ideas from JASC.
+ * SET: Hardware abstraction with ideas from JASC.
  *
  */
 

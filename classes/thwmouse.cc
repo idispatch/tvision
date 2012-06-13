@@ -31,14 +31,14 @@ MouseEventType THWMouse::forcedME;
  Function pointer members initialization
  *****************************************************************************/
 
-void (*THWMouse::Show)() =defaultShow;
-void (*THWMouse::Hide)() =defaultHide;
-void (*THWMouse::setRange)(ushort, ushort) =defaultSetRange;
-void (*THWMouse::GetEvent)(MouseEventType&) =defaultGetEvent;
-void (*THWMouse::registerHandler)(unsigned, void (*)())=defaultRegisterHandler;
-void (*THWMouse::Suspend)() =defaultSuspend;
-void (*THWMouse::Resume)() =defaultResume;
-int (*THWMouse::drawMouse)(int x, int y) =defaultDrawMouse;
+void (*THWMouse::Show)()                                  = defaultShow;
+void (*THWMouse::Hide)()                                  = defaultHide;
+void (*THWMouse::setRange)(ushort, ushort)                = defaultSetRange;
+void (*THWMouse::GetEvent)(MouseEventType&)               = defaultGetEvent;
+void (*THWMouse::registerHandler)(unsigned, void (*)())   = defaultRegisterHandler;
+void (*THWMouse::Suspend)()                               = defaultSuspend;
+void (*THWMouse::Resume)()                                = defaultResume;
+int (*THWMouse::drawMouse)(int x, int y)                  = defaultDrawMouse;
 
 /*****************************************************************************
  Default behaviors for the members

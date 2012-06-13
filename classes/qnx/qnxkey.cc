@@ -14,7 +14,6 @@ void TGKeyQNX::Clear(void) {
 }
 
 int TGKeyQNX::KbHit(void) {
-    SDL_console_run_frames(1);
     return 0;
 }
 
