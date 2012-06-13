@@ -8,6 +8,9 @@
 
 console_t g_console = NULL;
 
+unsigned TDisplayQNX::cursor_shape_start = 0;
+unsigned TDisplayQNX::cursor_shape_end = 0;
+
 void TDisplayQNX::SetCursorPos(unsigned x, unsigned y) {
     console_cursor_goto_xy(g_console, x, y);
 }
@@ -15,6 +18,21 @@ void TDisplayQNX::SetCursorPos(unsigned x, unsigned y) {
 void TDisplayQNX::GetCursorPos(unsigned &x, unsigned &y) {
     x = console_get_cursor_x(g_console);
     y = console_get_cursor_y(g_console);
+}
+
+void TDisplayQNX::SetCursorShape(unsigned start, unsigned end) {
+    cursor_shape_start = start;
+    cursor_shape_end = end;
+    if(cursor_shape_start == 0 && cursor_shape_end == 0) {
+        console_hide_cursor(g_console);
+    } else {
+        console_show_cursor(g_console);
+    }
+}
+
+void TDisplayQNX::GetCursorShape(unsigned &start, unsigned &end) {
+    start = cursor_shape_start;
+    end = cursor_shape_end;
 }
 
 void TDisplayQNX::ClearScreen(uchar screenWidth, uchar screenHeight) {
@@ -57,6 +75,8 @@ void TDisplayQNX::Init() {
     }
     setCursorPos = SetCursorPos;
     getCursorPos = GetCursorPos;
+    setCursorShape = SetCursorShape;
+    getCursorShape = GetCursorShape;
     getRows = GetRows;
     getCols = GetCols;
     clearScreen = ClearScreen;

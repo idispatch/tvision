@@ -10,12 +10,17 @@ protected:
 
     static void SetCursorPos(unsigned x, unsigned y);
     static void GetCursorPos(unsigned &x, unsigned &y);
+    static void SetCursorShape(unsigned start, unsigned end);
+    static void GetCursorShape(unsigned &start, unsigned &end);
     static ushort GetRows();
     static ushort GetCols();
     static void SetCrtMode(ushort mode);
     static ushort GetCrtMode();
     static void ClearScreen(uchar screenWidth, uchar screenHeight);
     static void Beep();
+private:
+    static unsigned cursor_shape_start;
+    static unsigned cursor_shape_end;
 };
 
 class TScreenQNX : public TDisplayQNX, public TScreen {
