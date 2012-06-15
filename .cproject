@@ -41,8 +41,8 @@
 									<listOptionValue builtIn="false" value="_DEBUG"/>
 									<listOptionValue builtIn="false" value="_FORTIFY_SOURCE=2"/>
 								</option>
-								<option id="com.qnx.qcc.option.compiler.warningLevel.561444978" superClass="com.qnx.qcc.option.compiler.warningLevel" value="com.qnx.qcc.option.warningLevel.5" valueType="enumerated"/>
-								<option id="com.qnx.qcc.option.compiler.security.1371992601" superClass="com.qnx.qcc.option.compiler.security" value="true" valueType="boolean"/>
+								<option id="com.qnx.qcc.option.compiler.warningLevel.561444978" name="Warning Level (-w)" superClass="com.qnx.qcc.option.compiler.warningLevel" value="com.qnx.qcc.option.warningLevel.5" valueType="enumerated"/>
+								<option id="com.qnx.qcc.option.compiler.security.1371992601" name="Enhanced Security (-fstack-protector-all)" superClass="com.qnx.qcc.option.compiler.security" value="true" valueType="boolean"/>
 								<inputType id="com.qnx.qcc.inputType.compiler.457311117" superClass="com.qnx.qcc.inputType.compiler"/>
 							</tool>
 							<tool id="com.qnx.qcc.tool.assembler.804827921" name="QCC Assembler" superClass="com.qnx.qcc.tool.assembler">
@@ -69,7 +69,7 @@
 				<externalSettings containerId="SDL_console;" factoryId="org.eclipse.cdt.core.cfg.export.settings.sipplier">
 					<externalSetting>
 						<entry flags="VALUE_WORKSPACE_PATH" kind="includePath" name="/SDL_console"/>
-						<entry flags="VALUE_WORKSPACE_PATH" kind="libraryPath" name="/SDL_console/Debug"/>
+						<entry flags="VALUE_WORKSPACE_PATH" kind="libraryPath" name="/SDL_console/Simulator-Debug"/>
 						<entry flags="RESOLVED" kind="libraryFile" name="SDL_console"/>
 					</externalSetting>
 				</externalSettings>
@@ -200,7 +200,7 @@
 				<externalSettings containerId="SDL_console;" factoryId="org.eclipse.cdt.core.cfg.export.settings.sipplier">
 					<externalSetting>
 						<entry flags="VALUE_WORKSPACE_PATH" kind="includePath" name="/SDL_console"/>
-						<entry flags="VALUE_WORKSPACE_PATH" kind="libraryPath" name="/SDL_console/Debug"/>
+						<entry flags="VALUE_WORKSPACE_PATH" kind="libraryPath" name="/SDL_console/Simulator-Debug"/>
 						<entry flags="RESOLVED" kind="libraryFile" name="SDL_console"/>
 					</externalSetting>
 				</externalSettings>
