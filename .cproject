@@ -69,14 +69,14 @@
 				<externalSettings containerId="SDL_console;" factoryId="org.eclipse.cdt.core.cfg.export.settings.sipplier">
 					<externalSetting>
 						<entry flags="VALUE_WORKSPACE_PATH" kind="includePath" name="/SDL_console"/>
-						<entry flags="VALUE_WORKSPACE_PATH" kind="libraryPath" name="/SDL_console/Simulator-Debug"/>
+						<entry flags="VALUE_WORKSPACE_PATH" kind="libraryPath" name="/SDL_console/Debug"/>
 						<entry flags="RESOLVED" kind="libraryFile" name="SDL_console"/>
 					</externalSetting>
 				</externalSettings>
 				<externalSettings containerId="console;" factoryId="org.eclipse.cdt.core.cfg.export.settings.sipplier">
 					<externalSetting>
 						<entry flags="VALUE_WORKSPACE_PATH" kind="includePath" name="/console"/>
-						<entry flags="VALUE_WORKSPACE_PATH" kind="libraryPath" name="/console/Simulator-Debug"/>
+						<entry flags="VALUE_WORKSPACE_PATH" kind="libraryPath" name="/console/Device-Debug"/>
 						<entry flags="RESOLVED" kind="libraryFile" name="console"/>
 					</externalSetting>
 				</externalSettings>
@@ -200,14 +200,14 @@
 				<externalSettings containerId="SDL_console;" factoryId="org.eclipse.cdt.core.cfg.export.settings.sipplier">
 					<externalSetting>
 						<entry flags="VALUE_WORKSPACE_PATH" kind="includePath" name="/SDL_console"/>
-						<entry flags="VALUE_WORKSPACE_PATH" kind="libraryPath" name="/SDL_console/Simulator-Debug"/>
+						<entry flags="VALUE_WORKSPACE_PATH" kind="libraryPath" name="/SDL_console/Debug"/>
 						<entry flags="RESOLVED" kind="libraryFile" name="SDL_console"/>
 					</externalSetting>
 				</externalSettings>
 				<externalSettings containerId="console;" factoryId="org.eclipse.cdt.core.cfg.export.settings.sipplier">
 					<externalSetting>
 						<entry flags="VALUE_WORKSPACE_PATH" kind="includePath" name="/console"/>
-						<entry flags="VALUE_WORKSPACE_PATH" kind="libraryPath" name="/console/Simulator-Debug"/>
+						<entry flags="VALUE_WORKSPACE_PATH" kind="libraryPath" name="/console/Device-Debug"/>
 						<entry flags="RESOLVED" kind="libraryFile" name="console"/>
 					</externalSetting>
 				</externalSettings>

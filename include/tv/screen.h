@@ -37,7 +37,7 @@ typedef TScreenFont256 *(*TVScreenFontRequestCallBack)(int which, unsigned w, un
 // initialized yet.
 typedef void (*TVScreenDriverDetectCallBack)();
 
-const int TDisplayDOSModesNum = 19;
+const int TDisplayDOSModesNum = 32;
 
 /**[txh]********************************************************************
 
@@ -93,8 +93,22 @@ public:
         smCO132x43 = 0x010A,
         smCO132x50 = 0x010B,
         smCO132x60 = 0x010C,
-        // PlayBook
-        smCO128x37 = 0x0400
+
+        /* PlayBook */
+        smCO128x75 = 0x0400,  // font 8x8
+        smCO128x60 = 0x0401,  // font 8x10
+        smCO128x37 = 0x0402,  // font 8x16
+        smCO113x75 = 0x0403,  // font 9x8
+        smCO113x37 = 0x0404,  // font 9x16
+        smCO102x30 = 0x0405, // font 10x20
+        smCO85x37 = 0x0406,  // font 12x16
+        smCO85x26 = 0x0407,  // font 12x23
+        smCO85x25 = 0x0408,  // font 12x24
+        smCO85x22 = 0x0409,  // font 12x27
+        smCO73x20 = 0x040A,  // font 14x30
+        smCO64x18 = 0x040B,  // font 16x32
+        smCO64x16 = 0x040C,  // font 16x37
+        smCO40x22 = 0x040D,  // font 25x57
     };
 
     static void (*clearScreen)(uchar w, uchar h);

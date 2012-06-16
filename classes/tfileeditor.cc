@@ -219,13 +219,13 @@ Boolean TFileEditor::setBufSize(uint32 newSize) {
     if (newSize != bufSize) {
         char *temp = buffer;
         if ((buffer = new char[newSize]) == 0) {
-            delete temp;
+            delete [] temp;
             return False;
         }
         uint32 n = bufLen - curPtr + delCount;
         memcpy(buffer, temp, min(newSize, bufSize));
         memmove(&buffer[newSize - n], &temp[bufSize - n], n);
-        delete temp;
+        delete [] temp;
         bufSize = newSize;
         gapLen = bufSize - bufLen;
     }

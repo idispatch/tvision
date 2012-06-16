@@ -30,7 +30,7 @@ TPalette::~TPalette() {
 TPalette& TPalette::operator =(const TPalette& tp) {
     if (data != tp.data) {
         if (data[0] != tp.data[0]) {
-            delete data;
+            delete [] data;
             data = new uchar[tp.data[0] + 1];
             data[0] = tp.data[0];
         }

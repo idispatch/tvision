@@ -80,7 +80,21 @@ TScreenResolution TDisplay::dosModesRes[TDisplayDOSModesNum] = {
         { 132, 43 },
         { 132, 50 },
         { 132, 60 },
-        { 128, 37 }
+        /* PlayBook */
+        { 128, 75 },
+        { 128, 60 },
+        { 128, 37 },
+        { 113, 75 },
+        { 113, 37 },
+        { 102, 30 },
+        { 85, 37 },
+        { 85, 26 },
+        { 85, 25 },
+        { 85, 22 },
+        { 73, 20 },
+        { 64, 18 },
+        { 64, 16 },
+        { 40, 22 }
 };
 
 TScreenResolution TDisplay::dosModesCell[TDisplayDOSModesNum] = {
@@ -102,7 +116,21 @@ TScreenResolution TDisplay::dosModesCell[TDisplayDOSModesNum] = {
         { 9, 11 },
         { 9, 10 },
         { 9, 8 },
+        /* PlayBook */
         { 8, 8 },
+        { 8, 10 },
+        { 8, 16 },
+        { 9, 8 },
+        { 9, 16 },
+        { 10, 20 },
+        { 12, 16 },
+        { 12, 23 },
+        { 12, 24 },
+        { 12, 27 },
+        { 14, 30 },
+        { 16, 32 },
+        { 16, 37 },
+        { 25, 57 },
 };
 
 int TDisplay::dosModes[TDisplayDOSModesNum] = {
@@ -124,7 +152,21 @@ int TDisplay::dosModes[TDisplayDOSModesNum] = {
         smCO132x43,
         smCO132x50,
         smCO132x60,
-        smCO128x37
+        /* PlayBook */
+        smCO128x75,
+        smCO128x60,
+        smCO128x37,
+        smCO113x75,
+        smCO113x37,
+        smCO102x30,
+        smCO85x37,
+        smCO85x26,
+        smCO85x25,
+        smCO85x22,
+        smCO73x20,
+        smCO64x18,
+        smCO64x16,
+        smCO40x22,
 };
 
 /*****************************************************************************

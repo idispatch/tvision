@@ -113,7 +113,7 @@ void TCalcDisplay::checkFirst() {
 void TCalcDisplay::calcKey(unsigned char key, unsigned code) {
     char stub[2] = " ";
     double r;
-    char *decPoint = ".";//nl_langinfo(RADIXCHAR);
+    const char *decPoint = ".";//nl_langinfo(RADIXCHAR);
 
     switch (code) {
     case kbBackSpace:
