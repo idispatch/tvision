@@ -123,7 +123,7 @@ void TComboBox::handleEvent(TEvent& event)
 	    link->selectAll(True);                   // Select all in the linked view
 	    link->drawView();                        // Redraw the linked view
 	 }
-	 CLY_destroy(ComboWindow);
+	 destroy(ComboWindow);
       }
       clearEvent(event);
    }
@@ -138,7 +138,7 @@ void TComboBox::handleEvent(TEvent& event)
 void TComboBox::newList(TCollection *aList)
 {
    if (list)
-      CLY_destroy(list);
+      destroy(list);
 
    list = aList;
 }

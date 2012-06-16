@@ -85,19 +85,19 @@ dialogModeRec TDisplayWinGr::mode= { -1, 0 };     // To hold modes
 
   if ( zPos  )                   // Cursor not visible now
   { dir= false; }
-  
+
   if ((unsigned) x >= (unsigned)getCols() ) // JASC, this tests both bounds
   { return; }
-  
-  if ((unsigned) y >= (unsigned)getRows() ) // JASC, this tests both bounds 
+
+  if ((unsigned) y >= (unsigned)getRows() ) // JASC, this tests both bounds
   { return; }
 
   dst = TScreen::screenBuffer    // Calc new cursor position
       + x
-      + y*TScreen::screenWidth;   
+      + y*TScreen::screenWidth;
 
   if ( dir )
-  { fg= attrColor(*dst) >>  4;   // Normal  
+  { fg= attrColor(*dst) >>  4;   // Normal
     bg= attrColor(*dst) & 0xF; }
   else
   { bg= attrColor(*dst) >>  4;   // Swap colors (reverse)
@@ -105,7 +105,7 @@ dialogModeRec TDisplayWinGr::mode= { -1, 0 };     // To hold modes
 
 
   letra= attrChar( *dst );
-       
+
   SetBkColor  ( hdc, colorMap[(int)bg] );  // Background color
   SetTextColor( hdc, colorMap[(int)fg] );  // Foreground color
 
@@ -122,7 +122,7 @@ dialogModeRec TDisplayWinGr::mode= { -1, 0 };     // To hold modes
 	  , DT_NOPREFIX
 	  | DT_SINGLELINE
 	  | DT_BOTTOM ); }
-  
+
 
 /* -------------------------------------------------------------------------- */
    void TDisplayWinGr::winRecalc( int w
@@ -131,7 +131,7 @@ dialogModeRec TDisplayWinGr::mode= { -1, 0 };     // To hold modes
 { RECT  wSize;
 
   GetWindowRect( hwnd        /* acquire window size */
-	       , &wSize );   
+	       , &wSize );
 
   if ( w )
   { TScreen::screenWidth = ( w + tm.tmMaxCharWidth / 2 )/ tm.tmMaxCharWidth; } /* quantize width  */
@@ -140,7 +140,7 @@ dialogModeRec TDisplayWinGr::mode= { -1, 0 };     // To hold modes
 
   wSize.right=  getCols() * tm.tmMaxCharWidth; /* quantize width  */
   wSize.bottom= getRows() * tm.tmHeight;       /* quantize height */
- 
+
   MoveWindow( hwnd
             , wSize.left
 	    , wSize.top
@@ -161,10 +161,10 @@ dialogModeRec TDisplayWinGr::mode= { -1, 0 };     // To hold modes
 
   if ( lplf->lfCharSet != OEM_CHARSET )  // Only pc 437 charset
   { return( 1 ); }
-  
+
   if ( lplf->lfItalic )                  // No italics (bad box drawings)
   { return( 2 ); }
-  
+
   if ( lplf->lfUnderline )               // No underlines (evident)
   { return( 3 ); }
 
@@ -175,14 +175,14 @@ dialogModeRec TDisplayWinGr::mode= { -1, 0 };     // To hold modes
 
   if ( TDisplayWinGr::fonts )            // Previously allocated
   { for ( LOGFONT * ptr=                 // Estimate array size
-          TDisplayWinGr::fonts   
+          TDisplayWinGr::fonts
         ; ptr->lfWeight
         ; ptr ++ )
     { arraySize++; }                     // Enlarge array size
 
     TDisplayWinGr::fonts=              // Get more room
       (LOGFONT *) realloc( TDisplayWinGr::fonts
-                         , arraySize 
+                         , arraySize
                          * sizeof( LOGFONT )); }
   else
   { TDisplayWinGr::fonts=              // Get more room
@@ -220,7 +220,7 @@ dialogModeRec TDisplayWinGr::mode= { -1, 0 };     // To hold modes
   lpcs= (CREATESTRUCT *)lParam;
   hdc= GetDC( hw );
 
-  EnumFontFamilies( hdc            /* Get a list of possible fonts */          
+  EnumFontFamilies( hdc            /* Get a list of possible fonts */
                   , NULL
                   , EnumFamilies
                   , 0 );
@@ -264,7 +264,7 @@ dialogModeRec TDisplayWinGr::mode= { -1, 0 };     // To hold modes
       { case SIZE_MINIMIZED:
 	return(0);
 
-	case SIZE_MAXIMIZED: 
+	case SIZE_MAXIMIZED:
 	  TScreen::screenWidth = ( LOWORD(lParam) + tm.tmMaxCharWidth / 2 )/ tm.tmMaxCharWidth; /* quantize width  */
 	  TScreen::screenHeight= ( HIWORD(lParam) + tm.tmHeight       - 1 )/ tm.tmHeight;       /* quantize height */
         break;
@@ -305,7 +305,7 @@ dialogModeRec TDisplayWinGr::mode= { -1, 0 };     // To hold modes
 
       EndPaint( hwnd, &ps );
     return( 5 ); }
-    
+
     return( 0 ); }    /* for messages that we don't deal with */
 
 
@@ -356,8 +356,8 @@ dialogModeRec TDisplayWinGr::mode= { -1, 0 };     // To hold modes
     { case WM_KEYUP:
       case WM_KEYDOWN:
 	TGKeyWinGr::testEvents( message.message    /* Try for key envens */
-		              , message.wParam 
-			      , message.lParam ); } 
+		              , message.wParam
+			      , message.lParam ); }
 
     TranslateMessage( &message );   /* Arrange key events              */
     DispatchMessage ( &message );   /* Send message to WindowProcedure */
@@ -435,7 +435,7 @@ dialogModeRec TDisplayWinGr::mode= { -1, 0 };     // To hold modes
 { return( TScreen::screenHeight ); }
 
 /* ------------------------------------------------------------------------- */
-   ushort TDisplayWinGr::GetCols() 
+   ushort TDisplayWinGr::GetCols()
 /* ------------------------------------------------------------------------- */
 { return( TScreen::screenWidth ); }
 
@@ -468,7 +468,7 @@ dialogModeRec TDisplayWinGr::mode= { -1, 0 };     // To hold modes
   else
   { lastFont= fontIdx; }
 
-  ptr= TDisplayWinGr::fonts + fontIdx; // Point to font definition 
+  ptr= TDisplayWinGr::fonts + fontIdx; // Point to font definition
 
   hFont= CreateFont( ptr->lfHeight         /* Font height        */
                    , ptr->lfWidth          /* Font width         */
@@ -486,10 +486,10 @@ dialogModeRec TDisplayWinGr::mode= { -1, 0 };     // To hold modes
 	           , ptr->lfFaceName );    /* typeface name      */
 
   SelectObject  (  hdc, hFont  );
-  GetTextMetrics(  hdc, &tm    ); 
+  GetTextMetrics(  hdc, &tm    );
 
   cShapeTo= tm.tmHeight;
-  cShapeFr= tm.tmHeight-2; 
+  cShapeFr= tm.tmHeight-2;
   mode.font= fontIdx; }                        // Store font mode
 
 /* ------------------------------------------------------------------------- */
@@ -525,8 +525,8 @@ dialogModeRec TDisplayWinGr::mode= { -1, 0 };     // To hold modes
 
       index ++; }}
 
-                                     
-  SetFontMode( pick ); } // Take new mode 
+
+  SetFontMode( pick ); } // Take new mode
 
 
 /* ------------------------------------------------------------------------- */
@@ -552,7 +552,7 @@ dialogModeRec TDisplayWinGr::mode= { -1, 0 };     // To hold modes
       ; ptr ++ )
   { nFonts ++; }
 
-  while( --ptr >= TDisplayWinGr::fonts )  // Load fonts backwards 
+  while( --ptr >= TDisplayWinGr::fonts )  // Load fonts backwards
   { char buff[64];
     sprintf( buff
            , "%s %2ld x %2ld"
@@ -590,7 +590,7 @@ dialogModeRec TDisplayWinGr::mode= { -1, 0 };     // To hold modes
 
   pd->setData( &mode );
 
-  ushort control;                 // Default 
+  ushort control;                 // Default
   dialogModeRec  savedMode= mode; // Temp mode
 
   do
@@ -604,13 +604,13 @@ dialogModeRec TDisplayWinGr::mode= { -1, 0 };     // To hold modes
 
   switch ( control )
   { case cmOK: pd->getData( &mode ); break;   // Restore previous
-    case cmCancel: mode= savedMode;  break; } // Get new 
+    case cmCancel: mode= savedMode;  break; } // Get new
 
-  pd->setData( &mode     );  // Store ratio list 
+  pd->setData( &mode     );  // Store ratio list
   SetFontMode( mode.font );  // Change hard font
   winRecalc  ( 0, 0      );  // Modify window size
 
-  CLY_destroy( pd );  // No longer needed
+  destroy( pd );  // No longer needed
 
   SetCursorShape( 0x58
                 , 0x64 ); }
@@ -647,7 +647,7 @@ dialogModeRec TDisplayWinGr::mode= { -1, 0 };     // To hold modes
   return(smCO80); }
 
 /* ------------------------------------------------------------------------- */
-   TDisplayWinGr::~TDisplayWinGr() 
+   TDisplayWinGr::~TDisplayWinGr()
 /* ------------------------------------------------------------------------- */
 { free( TDisplayWinGr::fonts );
   TDisplayWinGr::fonts= NULL; }

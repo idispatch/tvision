@@ -90,7 +90,7 @@ void TMyApp::Test()
 {
  TestDialog *d=new TestDialog;
  deskTop->execView(d);
- CLY_destroy(d);
+ destroy(d);
 }
 
 int main()

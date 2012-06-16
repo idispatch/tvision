@@ -156,7 +156,7 @@ ushort executeDialog(TDialog* pD, void* data = 0) {
         c = TProgram::deskTop->execView(pD);
         if ((c != cmCancel) && (data))
             pD->getData(data);
-        CLY_destroy(pD);
+        destroy(pD);
     }
 
     return c;
@@ -239,7 +239,7 @@ void TVDemo::changeDir() {
     if (d != 0) {
         d->helpCtx = hcFCChDirDBox;
         deskTop->execView(d);
-        CLY_destroy(d);
+        destroy(d);
     }
 }
 
@@ -311,7 +311,7 @@ void TVDemo::colors() {
             getPalette() = *(c->pal);
             setScreenMode(TScreen::screenMode);
         }
-        CLY_destroy(c);
+        destroy(c);
     }
     delete temp_pal;
 }

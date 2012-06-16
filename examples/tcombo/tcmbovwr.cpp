@@ -104,7 +104,7 @@ void TComboViewer::handleEvent(TEvent& event)
 void TComboViewer::newList( TCollection *aList )
 {
    if (list)
-      CLY_destroy(list);
+      destroy(list);
    list = aList;
    if(aList != 0)
       setRange(aList->getCount());

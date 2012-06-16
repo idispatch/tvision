@@ -224,7 +224,7 @@ void TlnInfoWindow::handleEvent(TEvent& event)
         lock();
         if (items[i] != NULL) {
           remove(items[i]);
-          CLY_destroy(items[i]);
+          destroy(items[i]);
         }
 
 
@@ -273,7 +273,7 @@ void postInfo(int line, const char * text)
      message(TProgram::deskTop, evBroadcast, cmFindInfoBox, 0);
 
    if ((line < 0) && (wPtr != 0)){
-     TProgram::deskTop -> CLY_destroy(wPtr);
+     TProgram::deskTop -> destroy(wPtr);
      return;
    }
 

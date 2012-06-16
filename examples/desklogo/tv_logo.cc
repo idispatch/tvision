@@ -206,7 +206,7 @@ void TvApp::AboutDialog()
 				cmOK, bfDefault ) );
 	deskTop->execView( pd );
 	 }
-	 CLY_destroy( pd );
+	 destroy( pd );
 }
 
 

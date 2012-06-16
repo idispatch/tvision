@@ -102,7 +102,7 @@ TResourceFile::TResourceFile( fpstream *aStream ) : TObject()
 TResourceFile::~TResourceFile()
 {
     flush();
-    CLY_destroy( (TCollection *)index );
+    destroy( (TCollection *)index );
     delete(stream);
 }
 

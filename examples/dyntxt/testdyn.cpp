@@ -170,7 +170,7 @@ void Shell::Test()
 {
 	TestDialog *d = new TestDialog;   // create dialog
 	deskTop->execView( d );           // execute it
-	CLY_destroy( d );                 // destroy it
+	destroy( d );                 // destroy it
 
 	// Note: This doesn't illustrate the getData() and setData()
 	// functions, which work as usual for TVision objects.  If you

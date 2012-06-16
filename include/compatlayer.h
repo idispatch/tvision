@@ -191,7 +191,6 @@ typedef unsigned long ulong;
 #undef CLY_HiddenDifferent
 #undef CLY_DummyTStreamRW
 #undef CLY_Have_snprintf
-#undef CLY_destroy
 #undef CLY_DONT_DEFINE_MIN_MAX
 #undef CLY_Redraw
 #undef CLY_SAFE_MEMCPY
@@ -211,14 +210,6 @@ typedef unsigned long ulong;
  */
 #define CLY_SAFE_MEMCPY 1
 #endif
-
-/* Most targets doesn't define destroy, but BC++ 5.6 defines
- _stl::destroy and looks like it collides with any destroy not defined
- inside another namespace. For this reason portable code should use
- CLY_destroy and not destroy. To allow compiling old applications using
- "clean" targets CLY_destroy is defined as destroy (then undefined for
- BC++ 5.6) */
-#define CLY_destroy destroy
 
 /* Assume it as default */
 #define CLY_Have_snprintf 1
@@ -1111,7 +1102,6 @@ CLY_CFunc int mkstemp(char *_template);
 #define CLY_DONT_DEFINE_MIN_MAX 1
 // BC++ 5.6 supports the "open(int fd)" UNIX extension.
 #define CLY_NewFBFromFD(buf,f) buf=new filebuf(); buf->open(f)
-#undef  CLY_destroy
 // Note: that 0777 fails to create the file and 0666 creates a hidden file.
 #define CLY_FBOpenProtDef  0
 #else

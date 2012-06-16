@@ -24,7 +24,7 @@ ushort execDialog(TDialog *d, void *data) {
         ushort result = TProgram::deskTop->execView(p);
         if (result != cmCancel && data != 0)
             p->getData(data);
-        TObject::CLY_destroy(p);
+        TObject::destroy(p);
         return result;
     }
 }

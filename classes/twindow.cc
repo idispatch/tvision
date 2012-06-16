@@ -44,7 +44,7 @@ void TWindow::close() {
     if (valid(cmClose)) { // SET: tell the application we are closing
         message(TProgram::application, evBroadcast, cmClosingWindow, this);
         frame = 0; // so we don't try to use the frame after it's been deleted
-        CLY_destroy(this);
+        destroy(this);
     }
 }
 

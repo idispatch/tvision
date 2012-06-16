@@ -15,41 +15,24 @@
 
 #include <stddef.h>
 
-class TObject
-{
-
+class TObject {
 public:
-
     virtual ~TObject();
-
-    static void CLY_destroy( TObject * );
+    static void destroy(TObject *);
     virtual void shutDown();
-
-private:
-
 };
 
-inline void TObject::CLY_destroy( TObject *o )
-{
-    if( o != 0 )
+inline void TObject::destroy(TObject *o) {
+    if (o != 0)
         o->shutDown();
     delete o;
 }
 
-inline void CLY_destroy( TObject *o )
-{
-  if (o)
-  {
-    o->shutDown();
-    delete o;
-  }
-}
-
-// SET: It also sets the pointer to 0
-#define destroy0(o) \
-{ \
- CLY_destroy(o);\
- o=0;\
+inline void destroy(TObject *o) {
+    if (o) {
+        o->shutDown();
+        delete o;
+    }
 }
 
 #endif

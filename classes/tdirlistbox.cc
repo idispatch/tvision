@@ -27,7 +27,7 @@ TDirListBox::TDirListBox(const TRect& bounds, TScrollBar *aVScrollBar, TScrollBa
 }
 
 TDirListBox::~TDirListBox() {
-    CLY_destroy(list());
+    destroy(list());
 }
 
 void TDirListBox::draw() {
@@ -415,7 +415,7 @@ void TDirListBox::showDirs(TDirCollection *dirs) {
     // SET: Reset incremental search
     incPos = 0;
 
-    CLY_destroy(col);
+    destroy(col);
 
     char *p = dirs->at(dirs->getCount() - 1)->text();
     char *i = strchr(p, graphics[0]);

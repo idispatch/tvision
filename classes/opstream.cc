@@ -41,7 +41,7 @@ opstream::opstream( CLY_streambuf * sb )
 
 opstream::~opstream()
 {
-    CLY_destroy(objs);
+    destroy(objs);
 }
 
 opstream& opstream::seekp( CLY_StreamPosT pos )

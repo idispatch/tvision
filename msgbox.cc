@@ -77,7 +77,7 @@ ushort messageBoxRect(const TRect &r, const char *msg, ushort aOptions) {
             ccode |= 0x8000; // Not so clean but cmOK,Yes,etc are low values
     }
 
-    TObject::CLY_destroy(dialog);
+    TObject::destroy(dialog);
 
     return ccode;
 }
@@ -171,7 +171,7 @@ ushort inputBoxRect(const TRect &bounds, const char *Title, const char *aLabel, 
     c = TProgram::deskTop->execView(dialog);
     if (c != cmCancel)
         dialog->getData(s);
-    TObject::CLY_destroy(dialog);
+    TObject::destroy(dialog);
     return c;
 }
 

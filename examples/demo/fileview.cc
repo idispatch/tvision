@@ -58,7 +58,7 @@ TFileViewer::TFileViewer( const TRect& bounds,
 TFileViewer::~TFileViewer()
 {
      delete [] fileName;
-     CLY_destroy(fileLines);
+     destroy(fileLines);
 }
 
 void TFileViewer::draw()

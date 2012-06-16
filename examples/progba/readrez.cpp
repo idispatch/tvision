@@ -118,7 +118,7 @@ void TMyApplication::aboutDlg()
 	{
 				deskTop->execView(pd);
 
-	    CLY_destroy(pd);
+	    destroy(pd);
 	}
 	 }
 }
@@ -182,7 +182,7 @@ void TMyApplication::statusDlg()
 	    }
 	 delay(50);
 	 }
-      CLY_destroy(theMessage);
+      destroy(theMessage);
 
       if(keepOnGoing) {
 	 // The second 3rd
@@ -198,7 +198,7 @@ void TMyApplication::statusDlg()
 	       }
 	    delay(50);
 	    }
-	 CLY_destroy(theMessage);
+	 destroy(theMessage);
 	 }
 
       if(keepOnGoing) {
@@ -215,10 +215,10 @@ void TMyApplication::statusDlg()
 	       }
 	    delay(50);
 	    }
-	 CLY_destroy(theMessage); // not necessary since we destroy
+	 destroy(theMessage); // not necessary since we destroy
 			      // the TDialog also
 	 }
-      CLY_destroy(pd);
+      destroy(pd);
       }
 
 }

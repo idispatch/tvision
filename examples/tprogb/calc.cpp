@@ -140,7 +140,7 @@ void TMyApplication::aboutDlg()
         {
 				deskTop->execView(pd);
  
-            CLY_destroy(pd);
+            destroy(pd);
         }
 	 }
 }
@@ -172,7 +172,7 @@ void TMyApplication::statusDlg()
 
 	 if( TProgram::application->validView( pd ) != 0 ) {    // If it's valid...
 		 TProgram::deskTop->execView( pd ) ;
-		 TObject::CLY_destroy( pd ) ;
+		 TObject::destroy( pd ) ;
 	 }
 	 }
 	 return ;

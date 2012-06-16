@@ -42,7 +42,7 @@ TFileList::TFileList(const TRect& bounds, TScrollBar *aScrollBar) :
 
 TFileList::~TFileList() {
     if (list())
-        CLY_destroy(list());
+        destroy(list());
 }
 
 void TFileList::focusItem(ccIndex item) {

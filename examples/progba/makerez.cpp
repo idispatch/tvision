@@ -93,9 +93,9 @@ void makerez()
    // Here is the stream for the dialog box.
    myRez->put( pd, "theDialogBox");
 
-   TObject::CLY_destroy( pd );
-   TObject::CLY_destroy( pbar );
-   TObject::CLY_destroy( myRez);
+   TObject::destroy( pd );
+   TObject::destroy( pbar );
+   TObject::destroy( myRez);
 }
 
 int main()

@@ -73,7 +73,7 @@ TFileViewer::~TFileViewer() {
         free(buffer);
     delete[] fileName;
     fileLines->removeAll();
-    CLY_destroy(fileLines);
+    destroy(fileLines);
 }
 
 void TFileViewer::draw() {
@@ -174,7 +174,7 @@ void TFileViewer::handleEvent(TEvent &event) {
                 dialog->getData(fname);
                 saveFile(fname);
             }
-            CLY_destroy(dialog);
+            destroy(dialog);
             break;
         }
         default:

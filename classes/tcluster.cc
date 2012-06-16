@@ -59,8 +59,8 @@ TCluster::TCluster(const TRect& bounds, TSItem *aStrings) :
 }
 
 TCluster::~TCluster() {
-    CLY_destroy((TCollection *) strings);
-    CLY_destroy((TCollection *) intlStrings);
+    destroy((TCollection *) strings);
+    destroy((TCollection *) intlStrings);
 }
 
 const char *TCluster::getItemText(ccIndex item) {

@@ -30,7 +30,7 @@ ipstream::ipstream( CLY_streambuf *sb )
 ipstream::~ipstream()
 {
     objs->shouldDelete = False;
-    CLY_destroy((TObject *)objs);
+    destroy((TObject *)objs);
 }
 
 CLY_StreamPosT ipstream::tellg()

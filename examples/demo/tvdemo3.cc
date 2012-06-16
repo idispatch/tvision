@@ -60,7 +60,7 @@ void TVDemo::mouse() {
         if (deskTop->execView(mouseCage) != cmCancel)
             mouseCage->getData(&(TEventQueue::mouseReverse));
     }
-    CLY_destroy(mouseCage);
+    destroy(mouseCage);
 
 }
 
@@ -80,7 +80,7 @@ void TVDemo::openFile(char *fileSpec) {
         if (w != 0)
             deskTop->insert(w);
     }
-    CLY_destroy(d);
+    destroy(d);
 }
 
 //

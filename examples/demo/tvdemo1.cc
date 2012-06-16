@@ -95,7 +95,7 @@ int main(int argc, char **argv, char **envir) {
     TScreen::setWindowTitle("Turbo Vision Demo Program");
     demoProgram->run();
 
-    TObject::CLY_destroy(demoProgram);
+    TObject::destroy(demoProgram);
     if (title) {
         TScreen::setWindowTitle(title);
         delete[] title;
@@ -173,7 +173,7 @@ void TVDemo::getEvent(TEvent &event) {
                 w = new THelpWindow(hFile, getHelpCtx());
                 if (validView(w) != 0) {
                     execView(w);
-                    CLY_destroy(w);
+                    destroy(w);
                 }
                 clearEvent(event);
             }

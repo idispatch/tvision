@@ -37,7 +37,7 @@ void TGroup::shutDown() {
     if (p != 0)
         do {
             TView* T = p->prev();
-            CLY_destroy(p);
+            destroy(p);
             p = T;
         } while (last != 0);
     freeBuffer();
