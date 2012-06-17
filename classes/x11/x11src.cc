@@ -972,7 +972,7 @@ void TScreenX11::LoadFontAsUnicode()
  if (!fontName)
     return;
  uF=new TVFontCollection(fontName,TVCodePage::ISOLatin1Linux);
- DeleteArray(fontName);
+ delete [] fontName;
 
  if (!uF->GetError())
    {// Get the information for all the available glyphs
@@ -1346,7 +1346,7 @@ TScreenX11::TScreenX11()
              printf("as: %d de: %d\n",fontInfo->max_bounds.ascent,fontInfo->max_bounds.descent);
              printf("2: as: %d de: %d\n",fontInfo->ascent,fontInfo->descent);
             }
-          DeleteArray(x11FontName);
+          delete [] x11FontName;
          }
       }
     if (drawingMode!=unicode16)
@@ -1454,13 +1454,13 @@ TScreenX11::TScreenX11()
     CreateXImageFont(0,fontData,fontW,fontH);
     if (freeFontData)
       {/* Provided by the call back */
-       DeleteArray(useFont->data);
+       delete [] useFont->data;
        delete useFont;
       }
     if (secFont)
       {
        CreateXImageFont(1,secFont->data,fontW,fontH);
-       DeleteArray(secFont->data);
+       delete [] secFont->data;
        delete secFont;
       }
    }
@@ -2513,7 +2513,7 @@ int TScreenX11::SetCrtModeRes(unsigned w, unsigned h, int fW, int fH)
        primaryFontChanged=0;
     if (releaseFont)
       {
-       DeleteArray(nFont->data);
+       delete [] nFont->data;
        delete nFont;
       }
    }

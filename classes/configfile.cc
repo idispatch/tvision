@@ -477,7 +477,7 @@ int TVConfigFile::AddInt(const char *key, const char *name, long value, int prio
     node->name = newStr(name);
     node->next = NULL;
     if (!Add(key, node)) {
-        DeleteArray(node->name);
+        delete [] node->name;
         delete node;
         return 0;
     }
@@ -507,8 +507,8 @@ int TVConfigFile::AddString(const char *key, const char *name, const char *value
     node->name = newStr(name);
     node->next = NULL;
     if (!Add(key, node)) {
-        DeleteArray(node->name);
-        DeleteArray(node->string);
+        delete [] node->name;
+        delete [] node->string;
         delete node;
         return 0;
     }

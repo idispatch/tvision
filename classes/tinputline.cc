@@ -263,7 +263,7 @@ Boolean TInputLineBaseT<T, D>::pasteFromOSClipboard() {
             insertChar(p[i]);
             selStart = selEnd = 0; // Reset the selection or we will delete the last insertion
         }
-        DeleteArray(p);
+        delete [] p;
         makeVisible();
         return True;
     }

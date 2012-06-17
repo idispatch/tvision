@@ -322,7 +322,7 @@ int TDisplayXTerm::SetCrtModeXT(unsigned w, unsigned h, int fW, int fH)
    }
 
  if (TScreen::screenBuffer)
-    DeleteArray(TScreen::screenBuffer);
+    delete [] TScreen::screenBuffer;
  TScreen::screenBuffer=new ushort[w*h];
  fprintf(stdout,"\E[8;%d;%dt",h,w);
 

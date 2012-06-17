@@ -43,12 +43,12 @@ TMenuItem::TMenuItem(const char *aName, ushort aKeyCode, TMenu *aSubMenu, ushort
 }
 
 TMenuItem::~TMenuItem() {
-    DeleteArray((char *)name);
+    delete [] name;
     TVIntl::freeSt(intlName);
     if (command == 0)
         delete (subMenu);
     else
-        DeleteArray((char *)param);
+        delete [] param;
 }
 
 /**[txh]********************************************************************

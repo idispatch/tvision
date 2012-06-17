@@ -66,8 +66,8 @@ int isWordChar(int i) {
 void TVFontCollection::freeItem(void *item) {
     TVBitmapFont *p = (TVBitmapFont *) item;
     if (p) {
-        DeleteArray(p->font);
-        DeleteArray(p->fontFull);
+        delete [] p->font;
+        delete [] p->fontFull;
         delete p;
     }
 }
@@ -332,7 +332,7 @@ unsigned TVFontCollection::ReadFontInfo(FILE *f, int version, TVBitmapFont *p) {
 void TVFontCollection::CreateFont(void *item, void *arg) {
     TVBitmapFont *f = (TVBitmapFont *) item;
     ushort *map = (ushort *) arg;
-    DeleteArray(f->font);
+    delete [] f->font;
     unsigned size1 = f->lines * f->wBytes;
     unsigned size = 256 * size1;
     f->font = new uchar[size];
@@ -378,8 +378,8 @@ void TVFontCollection::SetCodePage(int id) {
 }
 
 TVFontCollection::~TVFontCollection() {
-    DeleteArray(fontName);
-    DeleteArray(fileName);
+    delete [] fontName;
+    delete [] fileName;
 }
 
 /**[txh]********************************************************************
@@ -507,7 +507,7 @@ TVBitmapFontDescCol *TVFontCollection::CreateListOfFonts(const char *dir, unsign
                         if (d)
                             col->insert(d);
                         else
-                            DeleteArray(name);
+                            delete [] name;
                     }
                     fclose(f);
                 }
@@ -525,8 +525,8 @@ TVBitmapFontDescCol *TVFontCollection::CreateListOfFonts(const char *dir, unsign
 
 void TVBitmapFontDescCol::freeItem(void *item) {
     TVBitmapFontDesc *p = (TVBitmapFontDesc *) item;
-    DeleteArray(p->name);
-    DeleteArray(p->file);
+    delete [] p->name;
+    delete [] p->file;
     destroy(p->sizes);
     delete p;
 }

@@ -28,7 +28,7 @@ TCalcDisplay::TCalcDisplay(TRect& r) :
 }
 
 TCalcDisplay::~TCalcDisplay() {
-    DeleteArray(number);
+    delete [] number;
 }
 
 TPalette& TCalcDisplay::getPalette() const {

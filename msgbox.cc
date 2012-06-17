@@ -96,7 +96,7 @@ ushort messageBoxRect(const TRect &r, ushort aOptions, const char *fmt, ...) {
     CLY_vsnprintf(msg, (size_t) l + 1, intlFmt, argptr);
     va_end( argptr);
 
-    DeleteArray(intlFmt);
+    delete [] intlFmt;
     return messageBoxRect(r, msg, aOptions | mfDontTranslate);
 }
 
@@ -124,7 +124,7 @@ ushort messageBox(ushort aOptions, const char *fmt, ...) {
     CLY_vsnprintf(msg, (size_t) l + 1, intlFmt, argptr);
     va_end( argptr);
 
-    DeleteArray(intlFmt);
+    delete [] intlFmt;
     return messageBoxRect(makeRect(), msg, aOptions | mfDontTranslate);
 }
 

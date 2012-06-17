@@ -147,7 +147,6 @@ typedef unsigned long ulong;
 #undef CLY_Packed
 #undef NEVER_RETURNS
 #undef RETURN_WHEN_NEVER_RETURNS
-#undef DeleteArray
 #undef IfStreamGetLine
 #undef CLY_UseCrLf
 #undef CLY_Have_UGID
@@ -286,9 +285,6 @@ typedef unsigned long ulong;
 #define NEVER_RETURNS __attribute__((noreturn))
 #define RETURN_WHEN_NEVER_RETURNS
 #define CLY_Packed __attribute__((packed))
-/* SET: Anything allocated with new[] should be deleted with [].
- Pointed out by Laurynas Biveinis. */
-#define DeleteArray(a) delete[] a
 #ifdef Uses_getcurdir
 #undef  getcurdir
 #define getcurdir CLY_getcurdir
@@ -991,7 +987,6 @@ enum Boolean {False, True};
 #define __attribute__( value )
 #undef  __inline__
 #define __inline__ inline
-#define DeleteArray(a) delete[] a
 #define PATHSEPARATOR ';'
 #define PATHSEPARATOR_ ";"
 #define DIRSEPARATOR '/'
@@ -1322,10 +1317,6 @@ enum Boolean {False, True};
 #undef  __inline__
 #define __inline__ inline
 #pragma warning( disable : 4250 )
-/* SET: MSVC have a non-standard delete[] support. It doesn't follow last
- standard. And which is worst doesn't understand it.
- Vadim Beloborodov pointed out this missfeature. */
-#define DeleteArray(a) delete (void *)a
 #undef  FA_ARCH
 #define FA_ARCH   0x01
 #undef  FA_DIREC

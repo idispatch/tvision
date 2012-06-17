@@ -24,7 +24,7 @@ TStaticText::TStaticText(const TRect& bounds, const char *aText, stTVIntl *aIntl
 }
 
 TStaticText::~TStaticText() {
-    DeleteArray((char *)text);
+    delete [] text;
     TVIntl::freeSt(intlText);
 }
 

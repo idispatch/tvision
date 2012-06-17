@@ -25,7 +25,7 @@
   SaveVGAState      0 don't try to save/restore VGA chip state,
                     1 try to save it using the strategy indicated by
                     VGABIOSState (default)
-  
+
 ***************************************************************************/
 
 #include <tv/configtv.h>
@@ -833,13 +833,13 @@ void TScreenDOS::SetRomFonts(int sizeFont, int which, int modeRecalculate)
 
 /**[txh]********************************************************************
 
-  Description: 
+  Description:
   Stretch a 8x8 font to the 8x10 character box.  This is required to
 use 80x40 mode on a VGA or 80x35 mode on an EGA, because the character
 box is 10 lines high, and the ROM BIOS doesn't have an appropriate font.
 So we create one from the 8x8 font by adding an extra blank line
 from each side.
-  
+
 ***************************************************************************/
 
 void TScreenDOS::MaybeCreate8x10Font(void)
@@ -850,7 +850,7 @@ void TScreenDOS::MaybeCreate8x10Font(void)
  if (fontSeg!=-1)
     return;
  int buf_pm_sel;
- 
+
  /* Allocate buffer in conventional memory. */
  fontSeg=__dpmi_allocate_dos_memory(160,&buf_pm_sel);
 
@@ -919,7 +919,7 @@ was already loaded.@p
 font doesn't match the size used by the video mode calls a call back
 requesting a new font. If the routine fails to get a propper font the BIOS
 font is restored.
-  
+
 ***************************************************************************/
 
 void TScreenDOS::SelectFont(unsigned height, Boolean Force)
@@ -942,7 +942,7 @@ void TScreenDOS::SelectFont(unsigned height, Boolean Force)
              SetFontBIOS(0,height,font->data,0);
              MemorizeFont(0,font);
              fontOk=1;
-             DeleteArray(font->data);
+             delete [] font->data;
              delete font;
             }
          }
@@ -976,7 +976,7 @@ void TScreenDOS::SelectFont(unsigned height, Boolean Force)
              SetFontBIOS(1,height,font->data,0);
              MemorizeFont(1,font);
              fontOk=1;
-             DeleteArray(font->data);
+             delete [] font->data;
              delete font;
             }
          }

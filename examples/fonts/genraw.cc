@@ -14,7 +14,7 @@ different.
 Current sft files can be used to generate more than 200 fonts (different
 sizes and encodings).
   For more sft files look in other directories or in the setedit project.
-  
+
 ***************************************************************************/
 
 #define Uses_stdlib
@@ -106,7 +106,7 @@ int main(int argc, char *argv[])
          // Optional version to generated a C++ header
          WriteHeader(data,w,h,b);
          #endif
-         DeleteArray(data);
+         delete [] data;
         }
     }
  return 0;

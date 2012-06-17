@@ -21,7 +21,7 @@ public:
 
     TSItem( const char *aValue, TSItem *aNext )
         { value = newStr(aValue); next = aNext; }
-    ~TSItem() { DeleteArray((char *)value); }
+    ~TSItem() { delete [] value; }
     void append( TSItem *aNext ); // SET: I put it in the same source as TCluster
 
     const char *value;

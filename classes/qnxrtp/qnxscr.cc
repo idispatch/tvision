@@ -161,7 +161,7 @@ TScreenQNXRtP::~TScreenQNXRtP()
 
    if (screenBuffer)
    {
-     DeleteArray(screenBuffer);
+     delete [] screenBuffer;
      screenBuffer=NULL;
    }
 
@@ -218,7 +218,7 @@ void TScreenQNXRtP::setVideoMode(ushort mode)
    {
       if (screenBuffer)
       {
-         DeleteArray(screenBuffer);
+         delete [] screenBuffer;
          screenBuffer=NULL;
       }
       screenBuffer = new ushort[screenWidth*screenHeight];
@@ -238,7 +238,7 @@ void TScreenQNXRtP::setVideoModeExt(char* mode)
    {
       if (screenBuffer)
       {
-         DeleteArray(screenBuffer);
+         delete [] screenBuffer;
          screenBuffer=NULL;
       }
       screenBuffer = new ushort[screenWidth*screenHeight];

@@ -296,7 +296,7 @@ void TScreenXTerm::DeallocateResources()
  LOG("TScreenXTerm DeallocateResources");
  if (oldFontName)
    {
-    DeleteArray(oldFontName);
+    delete [] oldFontName;
     oldFontName=NULL;
    }
 }
@@ -325,7 +325,7 @@ void TScreenXTerm::Resume()
  // Restore our font
  if (fontChanged)
    {
-    DeleteArray(oldFontName);
+    delete [] oldFontName;
     oldFontName=GetCurrentFontName();
     fprintf(stdout,"\E]50;%dx%d\x7",fontW,fontH);
    }
@@ -374,7 +374,7 @@ void TScreenXTerm::CheckSizeBuffer(int oldWidth, int oldHeight)
     // Realloc screen buffer only if actually needed (it doesn't exist
     // or screen size is changed)
     if (screenBuffer)
-       DeleteArray(screenBuffer);
+       delete [] screenBuffer;
     screenBuffer=new ushort[screenWidth*screenHeight];
    }
  memset(screenBuffer,0,screenWidth*screenHeight*sizeof(ushort));

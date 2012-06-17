@@ -21,7 +21,7 @@ TColorGroup::TColorGroup( const char *nm, TColorItem *itm, TColorGroup *nxt )
 
 TColorGroup::~TColorGroup()
 {
-    DeleteArray(name);
+    delete [] name;
     TVIntl::freeSt(cacheName);
 }
 

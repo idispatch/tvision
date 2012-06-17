@@ -101,7 +101,7 @@ void TFileDialog::sizeLimits(TPoint& min, TPoint& max) {
 }
 
 TFileDialog::~TFileDialog() {
-    DeleteArray((char *)directory);
+    delete [] directory;
 }
 
 void TFileDialog::shutDown() {
@@ -173,7 +173,7 @@ void TFileDialog::readDirectory() {
 }
 
 void TFileDialog::setUpCurDir() {
-    DeleteArray((char *)directory);
+    delete [] directory;
     char curDir[PATH_MAX];
     CLY_GetCurDirSlash(curDir);
     directory = newStr(curDir);
@@ -217,7 +217,7 @@ Boolean TFileDialog::valid(ushort command) {
         if (CLY_IsWild(fName)) {
             CLY_ExpandPath(fName, dir, name);
             if (checkDirectory(dir)) {
-                DeleteArray((char *)directory);
+                delete [] directory;
                 directory = newStr(dir);
                 strcpy(wildCard, name);
                 if (command != cmFileInit)
@@ -226,7 +226,7 @@ Boolean TFileDialog::valid(ushort command) {
             }
         } else if (CLY_IsDir(fName)) {
             if (checkDirectory(fName)) {
-                delete (char *) directory;
+                delete directory;
                 strcat(fName, DIRSEPARATOR_);
                 directory = newStr(fName);
                 if (command != cmFileInit)

@@ -495,7 +495,7 @@ int TScreenWin32::SetVideoModeRes(unsigned w, unsigned h, int fW, int fH)
     GetConsoleScreenBufferInfo(hOut,&ConsoleInfo);
     screenWidth =ConsoleInfo.dwSize.X;
     screenHeight=ConsoleInfo.dwSize.Y;
-    DeleteArray(screenBuffer);
+    delete [] screenBuffer;
     screenBuffer=new ushort[screenHeight*screenWidth];
     ZeroMemory(screenBuffer,screenHeight*screenWidth*sizeof(ushort));
     // This is something silly TV code spects: after a video mode change the

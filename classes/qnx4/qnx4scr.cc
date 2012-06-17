@@ -163,7 +163,7 @@ TScreenQNX4::~TScreenQNX4()
 
    if (screenBuffer)
    {
-      DeleteArray(screenBuffer);
+      delete [] screenBuffer;
       screenBuffer=NULL;
    }
 
@@ -184,7 +184,7 @@ TScreenQNX4::~TScreenQNX4()
             term_cur(i, 0);
             term_restore_image(i, 0, (char*)(UserScreenData+i*TScreen::screenWidth), TScreen::screenWidth);
          }
-         DeleteArray(UserScreenData);
+         delete [] UserScreenData;
          UserScreenData=NULL;
       }
    }
@@ -279,7 +279,7 @@ void TScreenQNX4::SetVideoMode(ushort mode)
    {
       if (screenBuffer)
       {
-         DeleteArray(screenBuffer);
+         delete [] screenBuffer;
          screenBuffer=NULL;
       }
       screenBuffer = new ushort[screenWidth*screenHeight];
@@ -314,7 +314,7 @@ int TScreenQNX4::SetVideoModeRes(unsigned w, unsigned h, int fW, int fH)
    {
       if (screenBuffer)
       {
-         DeleteArray(screenBuffer);
+         delete [] screenBuffer;
          screenBuffer=NULL;
       }
       screenBuffer = new ushort[screenWidth*screenHeight];
@@ -344,7 +344,7 @@ void TScreenQNX4::SetVideoModeExt(char* mode)
    {
       if (screenBuffer)
       {
-         DeleteArray(screenBuffer);
+         delete [] screenBuffer;
          screenBuffer=NULL;
       }
       screenBuffer = new ushort[screenWidth*screenHeight];

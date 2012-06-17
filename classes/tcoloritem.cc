@@ -19,7 +19,7 @@ TColorItem::TColorItem(const char *nm, uchar idx, TColorItem *nxt) {
 }
 
 TColorItem::~TColorItem() {
-    DeleteArray(name);
+    delete [] name;
     TVIntl::freeSt(cacheName);
 }
 

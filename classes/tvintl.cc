@@ -165,7 +165,7 @@ const char *TVIntl::getText(const char *msgid, stTVIntl *&cache)
        return msgid;
     if (curCP==cache->cp)
        return cache->translation ? cache->translation : msgid;
-    DeleteArray(cache->translation);
+    delete [] cache->translation;
    }
  cache->translation=getTextNew(msgid,True);
  cache->cp=curCP;
@@ -175,7 +175,7 @@ const char *TVIntl::getText(const char *msgid, stTVIntl *&cache)
 void TVIntl::freeSt(stTVIntl *&cache)
 {
  if (!cache) return;
- DeleteArray(cache->translation);
+ delete [] cache->translation;
  delete cache;
  cache=NULL;
 }
@@ -203,7 +203,7 @@ int TVIntl::snprintf(char *dest, size_t sz, const char *fmt, ...)
  va_start(argptr,fmt);
  int l=CLY_vsnprintf(dest,sz,intlFmt,argptr);
  va_end(argptr);
- DeleteArray(intlFmt);
+ delete [] intlFmt;
  return l;
 }
 
@@ -214,7 +214,7 @@ int TVIntl::fprintf(FILE *f, const char *fmt, ...)
  va_start(argptr,fmt);
  int l=vfprintf(f,intlFmt,argptr);
  va_end(argptr);
- DeleteArray(intlFmt);
+ delete [] intlFmt;
  return l;
 }
 

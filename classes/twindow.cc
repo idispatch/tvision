@@ -24,9 +24,14 @@ TWindowInit::TWindowInit(TFrame *(*cFrame)(TRect)) :
 #define cpGrayWindow "\x18\x19\x1A\x1B\x1C\x1D\x1E\x1F"
 
 TWindow::TWindow(const TRect& bounds, const char *aTitle, short aNumber) :
-        TWindowInit(&TWindow::initFrame), TGroup(bounds), flags(wfMove | wfGrow | wfClose | wfZoom), zoomRect(
-                getBounds()), number(aNumber), palette(wpBlueWindow), title(newStr(aTitle)), intlTitle(
-                NULL) {
+        TWindowInit(&TWindow::initFrame),
+        TGroup(bounds),
+        flags(wfMove | wfGrow | wfClose | wfZoom),
+        zoomRect(getBounds()),
+        number(aNumber),
+        palette(wpBlueWindow),
+        title(newStr(aTitle)),
+        intlTitle(NULL) {
     state |= sfShadow;
     options |= ofSelectable | ofTopSelect;
     growMode = gfGrowAll | gfGrowRel;
@@ -36,7 +41,7 @@ TWindow::TWindow(const TRect& bounds, const char *aTitle, short aNumber) :
 }
 
 TWindow::~TWindow() {
-    DeleteArray((char *)title);
+    delete [] title;
     TVIntl::freeSt(intlTitle);
 }
 
@@ -128,25 +133,38 @@ TFrame *TWindow::initFrame(TRect r) {
 }
 
 void TWindow::setState(ushort aState, Boolean enable) {
-#define C(x) if (enable == True) enableCommand(x); else disableCommand(x)
     TGroup::setState(aState, enable);
     if ((aState & sfSelected) != 0) {
         setState(sfActive, enable);
         if (frame != 0)
             frame->setState(sfActive, enable);
-        C(cmNext);
-        C(cmPrev);
+        if (enable == True)
+            enableCommand(cmNext);
+        else
+            disableCommand(cmNext);
+        if (enable == True)
+            enableCommand(cmPrev);
+        else
+            disableCommand(cmPrev);
         if ((flags & (wfGrow | wfMove)) != 0) {
-            C(cmResize);
+            if (enable == True)
+                enableCommand(cmResize);
+            else
+                disableCommand(cmResize);
         }
         if ((flags & wfClose) != 0) {
-            C(cmClose);
+            if (enable == True)
+                enableCommand(cmClose);
+            else
+                disableCommand(cmClose);
         }
         if ((flags & wfZoom) != 0) {
-            C(cmZoom);
+            if (enable == True)
+                enableCommand(cmZoom);
+            else
+                disableCommand(cmZoom);
         }
     }
-#undef C
 }
 
 TScrollBar *TWindow::standardScrollBar(ushort aOptions) {

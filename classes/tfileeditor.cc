@@ -36,7 +36,7 @@ TFileEditor::TFileEditor(const TRect& bounds, TScrollBar *aHScrollBar, TScrollBa
 }
 
 void TFileEditor::doneBuffer() {
-    DeleteArray(buffer);
+    delete [] buffer;
 }
 
 void TFileEditor::handleEvent(TEvent& event) {

@@ -20,13 +20,6 @@
 #include <tv.h>
 
 #include <limits.h>
-#if 0 // def TVCompf_djgpp
-#include <dos.h>
-#include <go32.h>
-#include <dpmi.h>
-#include <sys/movedata.h>
-#include <sys/farptr.h>
-#endif
 
 TPoint shadowSize = { 2, 1 };
 uchar shadowAttr = 0x08;
@@ -151,9 +144,6 @@ void TView::moveGrow(TPoint p, TPoint s, TRect& limits, TPoint minSize, TPoint m
     r = TRect(p.x, p.y, p.x + s.x, p.y + s.y);
     locate(r);
 }
-
-// No longer needed, now passed as parameter "grow"
-//extern unsigned short getshiftstate(void);
 
 void TView::change(uchar mode, TPoint delta, TPoint& p, TPoint& s, int grow) {
     if ((mode & dmDragMove) != 0 && !grow)

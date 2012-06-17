@@ -782,7 +782,7 @@ TScreenUNIX::~TScreenUNIX()
 
   if (screenBuffer)
     {
-     DeleteArray(screenBuffer);
+     delete [] screenBuffer;
      screenBuffer=0;
     }
  SpecialKeysRestore(fileno(stdin));
@@ -838,7 +838,7 @@ void TScreenUNIX::setVideoMode(ushort mode)
      // Realloc screen buffer only if actually needed (it doesn't exist
      // or screen size is changed)
      if (screenBuffer)
-        DeleteArray(screenBuffer);
+        delete [] screenBuffer;
      screenBuffer = new ushort[screenWidth*screenHeight];
     }
   memset(screenBuffer,0,screenWidth*screenHeight*sizeof(ushort));
@@ -857,7 +857,7 @@ void TScreenUNIX::setVideoModeExt( char *mode )
      // Realloc screen buffer only if actually needed (it doesn't exist
      // or screen size is changed)
      if (screenBuffer)
-        DeleteArray(screenBuffer);
+        delete [] screenBuffer;
      screenBuffer = new ushort[screenWidth*screenHeight];
     }
   memset(screenBuffer,0,screenWidth*screenHeight*sizeof(ushort));

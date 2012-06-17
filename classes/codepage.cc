@@ -1179,7 +1179,7 @@ void TVCodePage::CreateRemap(int idSource, int idDest, uchar *table) {
     for (i = 0; i < 256; i++)
         table[i] = fromCode[toCode[i]];
 
-    DeleteArray(fromCode);
+    delete [] fromCode;
 }
 
 /**[txh]********************************************************************

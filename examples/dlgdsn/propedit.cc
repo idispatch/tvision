@@ -5,11 +5,11 @@
     May, 2000
     Copyright (C) 2000 by Warlei Alves
     walves@usa.net
-    
+
     Heavily modified by Salvador E. Tropea to compile without warnings.
     Some warnings were in fact bugs.
     For gcc 2.95.x and then 3.0.1.
-    
+
  ***************************************************************************/
 
 /***************************************************************************
@@ -20,7 +20,7 @@
  *   (at your option) any later version.                                   *
  *                                                                         *
  ***************************************************************************/
- 
+
 #include <stdio.h>
 #include <string.h>
 
@@ -94,7 +94,7 @@ static char * blank = "";
 int execDialog_NoFree(TDialog * dialog, void *data)
 {
    int rst;
-   
+
    TView * d = TProgram::application->validView(dialog);
    if (d)
    {
@@ -110,7 +110,7 @@ int execDialog_NoFree(TDialog * dialog, void *data)
 int execDialog(TDialog * dialog, void *data)
 {
    int rst;
-   
+
    TView * d = TProgram::application->validView(dialog);
    if (d)
    {
@@ -130,14 +130,14 @@ static int byTabOrder(const void * key1, const void * key2)
 {
    TDsgObj * d1  = (TDsgObj *)((TDsgLink *)key1)->d;
    TDsgObj * d2  = (TDsgObj *)((TDsgLink *)key2)->d;
-   
+
    bool d1CanTab = d1->tabStop();
    bool d2CanTab = d2->tabStop();
-   
+
    if (!d1CanTab && d2CanTab) return -1;
    if (!d1CanTab && !d2CanTab) return 0;
    if (d1CanTab && !d2CanTab) return 1;
-   
+
    short t1 = ((TDsgObjData *)d1->attributes)->tabOrder;
    short t2 = ((TDsgObjData *)d2->attributes)->tabOrder;
 
@@ -244,9 +244,9 @@ void TLinkList::removeMe(TDsgObj * aDsgObj)
 void TLinkList::add(TView * aView, TDsgObj * aDsgObj)
 {
    if (!aView || !aDsgObj) return;
-   
+
    if (viewFind(aView) != 0) return;
-   
+
    TDsgLink * link = new TDsgLink;
    link->v = aView;
    link->d = aDsgObj;
@@ -286,11 +286,11 @@ void TLinkList::doReOrder()
    int i;
    TDsgLink * dsg;
    TDsgObjData * dsgData;
-   
+
    if (count == 0) return;
 
    sort(byTabOrder);
-   
+
    for (i = 0; i < count; i++)
    {
       dsg = (TDsgLink *)at(i);
@@ -322,9 +322,9 @@ void TLinkList::sortForBuild()
    int i = 0;
    char * s1, * s2;
    TViewData * attr = 0;
-   
+
    if (count <= 1) return;
-   
+
    doReOrder();
    void * tmp;
    do {
@@ -392,7 +392,7 @@ void TLinkList::linkChangedName(char * oldName, char * newName)
    int i;
 
    pack();
-   
+
    for (i = 0; i < count; i++)
    {
       TDsgLink * d = (TDsgLink *)items[i];
@@ -435,7 +435,7 @@ TInPlaceEdit::TInPlaceEdit(const TRect& bounds, ushort aMaxLen,
                            TValidator * aValidator):
                            TInputLine(bounds, aMaxLen)
                            { SetValidator(aValidator); }
-                           
+
 void TInPlaceEdit::handleEvent(TEvent& event)
 {
    if (event.what == evKeyDown)
@@ -467,15 +467,15 @@ TPalette& TInPlaceEdit::getPalette() const
 ushort TInPlaceEdit::execute()
 {
    TEvent e;
-   
+
    endState = 0;
-   
+
    do
    {
      getEvent(e);
      handleEvent(e);
    } while (endState == 0);
-   
+
    return endState;
 }
 
@@ -488,13 +488,13 @@ bool IntegerEditor(int& value, TPoint place, TGroup * host)
 
    TRect r(place.x, place.y, place.x +
            (host->size.x - place.x - 1), place.y + 1);
-   
+
    sprintf(strval, "%i", value);
 
    TFilterValidator * val = new TFilterValidator("-0123456789");
-   
+
    TInPlaceEdit * editor = new TInPlaceEdit(r, 6, val);
-       
+
    editor->setData(&strval);
    rst = ( host->execView(editor) == cmOK );
    if (rst)
@@ -512,9 +512,9 @@ bool StringEditor(char * string, TPoint place, TGroup * host, ushort aMaxLen)
 
    TRect r(place.x, place.y, place.x +
            (host->size.x - place.x - 1), place.y + 1);
-   
+
    TInPlaceEdit * editor = new TInPlaceEdit(r, aMaxLen, 0);
-       
+
    editor->setData(string);
    rst = ( host->execView(editor) == cmOK );
    if (rst) editor->getData(string);
@@ -535,7 +535,7 @@ public:
             bool ReadOnly = false,
             TStructMap *Next = 0);
    ~TStructMap();
-   
+
    TStructMap * prev;
    TStructMap * next;
    int index;
@@ -655,7 +655,7 @@ static const TStructMap * TStaticMap = &(
      _viewmap_()+
      _separator_("TStaticText data") +
      *new TStructMap("Text", sizeof(char *), etCharPtrEditor, 0) );
-     
+
 static const TStructMap * TButtonMap = &(
      _viewmap_()+
      _separator_("TButton data") +
@@ -750,7 +750,7 @@ void TObjEditView::editItem(const TStructMap * map)
           chg = (execDialog(editor(), &rec) == cmOK);                        \
           if (chg) strcpy((char *)ldata, (char *)list->at(rec.selection));   \
           break;
-          
+
 #define _do_(editor) chg = (execDialog(editor(), ldata) == cmOK); break;
 #define _constsel_(list, editor)                                             \
           rec.items = list();                                                \
@@ -764,10 +764,10 @@ void TObjEditView::editItem(const TStructMap * map)
        messageBox("Ops! Read only value.", mfOKButton);
        return;
    }
-  
+
    void * ldata = (void *)((char *)data + map->offset);
    bool chg = false;
-  
+
    switch(map->editorType)
    {
        case etStringEditor:
@@ -887,10 +887,10 @@ const char * TObjEditView::getValueFor(const TStructMap * map)
   static int intval;
   static void * ptrval;
   static void * ldata;
-  
+
   ldata = data;
   ldata = (void *)((char *)ldata + map->offset);
-  
+
   strcpy(buf, "<none>");
 
   if (map->editorType == etIntegerEditor)
@@ -955,11 +955,11 @@ void TObjEditView::draw()
    char lstr[100], rstr[100];
    char lfmt[10], rfmt[10];
    ushort attr;
-   
+
    if (separator > size.x) separator = size.x / 2;
    r = (size.x - separator) + separator;
    l = separator;
-   
+
    curMap = currentMap;
    if ((curMap) && size.y > 0)
    {
@@ -987,7 +987,7 @@ void TObjEditView::draw()
             if (tmp && strlen(tmp)>=(size_t)r)
                tmp[r-1]=0;
             sprintf(rstr, rfmt, tmp ? tmp : "ERROR");
-            DeleteArray(tmp);
+            delete [] tmp;
             if (cur == curMap)
               attr = 0x71; else attr = 0x1f;
             b.moveBuf(0, lstr, attr, l);
@@ -1015,7 +1015,7 @@ void TObjEditView::draw()
 const TStructMap * itemForLine(int line, const TStructMap * Map)
 {
    ushort i = 1;
-   
+
    if (line == 0 || Map == 0) return 0;
    while (Map->next)
    {
@@ -1034,11 +1034,11 @@ void TObjEditView::handleEvent(TEvent& event)
 {
    const TStructMap * t;
    ushort i;
-   
+
    TView::handleEvent(event);
-   
+
    if (!currentMap) return;
-   
+
    TPoint Locate;
    if (event.what == evBroadcast &&
        event.message.command == cmScrollBarChanged &&
@@ -1170,13 +1170,13 @@ void TObjEdit::handleEvent(TEvent& event)
 void TObjEdit::setObjData(TDsgObj * Obj)
 {
    const TStructMap * Map = 0;
-   
+
    if ((!Obj) || object == Obj) return;
 
    dataView->setMap(0, 0);
-   
+
    object = Obj;
-   
+
    switch (Obj->viewType)
    {
       case vtLabel: Map = TLabelMap; break;
@@ -1196,7 +1196,7 @@ void TObjEdit::setObjData(TDsgObj * Obj)
       dataView->setMap(0, 0);
       return;
    }
-   
+
 #if 0
    int i = 0;
    TStructMap * m = Map;

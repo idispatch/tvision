@@ -226,7 +226,7 @@ TView *TGroup::firstMatch(ushort aState, ushort aOptions) {
 
 void TGroup::freeBuffer() {
     if ((options & ofBuffered) != 0 && buffer != 0) {
-        DeleteArray(buffer);
+        delete [] buffer;
         buffer = 0;
     }
 }

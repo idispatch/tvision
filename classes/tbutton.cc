@@ -29,7 +29,7 @@ TButton::TButton(const TRect& bounds, const char *aTitle, ushort aCommand, ushor
 }
 
 TButton::~TButton() {
-    DeleteArray((char *)title);
+    delete [] title;
     // SET
     TVIntl::freeSt(intlTitle);
 }
@@ -281,7 +281,7 @@ TButtonRef::TButtonRef(const TRect& bounds, const char *aTitle,
         ushort aCommand, ushort aFlags) :
 TButton(bounds,aTitle,aCommand,aFlags)
 {
-    DeleteArray((char *)title);
+    delete [] (char *title);
     title=aTitle;
 }
 

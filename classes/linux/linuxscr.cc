@@ -628,9 +628,9 @@ int TScreenLinux::GuessCodePageFromLANG()
 
   Description:
   Determines if the console is in UTF-8 or single char mode.
-  
+
   Return: 1 UTF-8, 0 single char, -1 error.
-  
+
 ***************************************************************************/
 
 int TScreenLinux::isInUTF8()
@@ -660,7 +660,7 @@ int TScreenLinux::isInUTF8()
          LOG("Error, can't determine UTF-8 state, column: " << x);
          return -1;
    }
-  
+
  return x;
 }
 
@@ -844,22 +844,22 @@ void TScreenLinux::DetectVCS()
    {
     int dev;
     int ppid;
- 
+
     /* TTYs have 4 as major number */
     /* virtual consoles have minor numbers <= 63 */
     fscanf(statfile, "%*d %*s %*c %d %*d %*d %d", &ppid, &dev);
- 
+
     LOG("ppid: " << ppid << " device: " << dev << "(" << (dev & 0xff) << ")");
     /* Be a little bit smart, we don't want to bypass X */
     /* X terminals are attached to 0 (unknown) terminal */
     if (dev==0) break;
-    
+
     if ((dev & 0xff00)==0x0400 && (dev & 0xff)<=63)
       {
        LOG("virtual console detected");
        sprintf(path, "/dev/vcsa%d",dev & 0xff);
        found_vcsa = true;
-  
+
        // SET: Open it with two files, one for write and the other for read.
        // Doing it the administrator can give write access to some users,
        // but not read, that's very secure.
@@ -1020,7 +1020,7 @@ TScreenLinux::TScreenLinux()
     TScreenFont256 *font=frCB(0,linuxFont.width,linuxFont.height);
     SetFont(1,font,0,NULL);
     if (font)
-       DeleteArray(font->data);
+       delete [] font->data;
     delete font;
 
     #if 1
@@ -1032,7 +1032,7 @@ TScreenLinux::TScreenLinux()
        if (font2)
          {
           SetFont(0,NULL,1,font2);
-          DeleteArray(font2->data);
+          delete [] font2->data;
           delete font2;
          }
       }
@@ -1086,7 +1086,7 @@ void TScreenLinux::DeallocateResources()
  // Now release allocated resources
  if (screenBuffer)
    {
-    DeleteArray(screenBuffer);
+    delete [] screenBuffer;
     screenBuffer=NULL;
    }
  if (vcsWfd>=0)
@@ -1241,7 +1241,7 @@ void TScreenLinux::CheckSizeBuffer(int oldWidth, int oldHeight)
     // Realloc screen buffer only if actually needed (it doesn't exist
     // or screen size is changed)
     if (screenBuffer)
-       DeleteArray(screenBuffer);
+       delete [] screenBuffer;
     screenBuffer=new ushort[screenWidth*screenHeight];
    }
  memset(screenBuffer,0,screenWidth*screenHeight*sizeof(ushort));
@@ -1366,7 +1366,7 @@ void TScreenLinux::SetCharactersTerm(unsigned dst, ushort *src, unsigned len)
        old++;
        src++;
       }
- 
+
     /* remove unchanged characters from right to left */
     while (len>0 && *old_right==*src_right)
       {
@@ -1395,7 +1395,7 @@ void TScreenLinux::writeBlock(int dst, int len, ushort *old, ushort *src)
    {
     int code  =CLY_Low16(*src);
     int newcol=CLY_High16(*src);
-  
+
     *old++=*src++;
     if (col!=newcol) /* change color ? */
       {
@@ -1532,7 +1532,7 @@ int TScreenLinux::System(const char *command, pid_t *pidChild, int in,
        dup2(out,STDOUT_FILENO);
     if (err!=-1)
        dup2(err,STDERR_FILENO);
-   
+
     argv[0]=getenv("SHELL");
     if (!argv[0])
        argv[0]="/bin/sh";
@@ -1939,5 +1939,5 @@ enabled, that's because if they are printed you can't use the terminal
 
  In Eterm only Graphics (VT100) and Latin 1 are supported.
  In xterm a simple program have troubles to print anything above 127.
-    
+
 *****************************************************************************/

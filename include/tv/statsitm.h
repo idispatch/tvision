@@ -20,7 +20,7 @@ public:
 
     TStatusItem(const char *aText, ushort key, ushort cmd, TStatusItem *aNext = 0);
     ~TStatusItem() {
-        DeleteArray(text);
+        delete [] text;
         TVIntl::freeSt(intlText);
     }
     ;
