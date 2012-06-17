@@ -131,6 +131,7 @@ void TDisplayQNX::SetCrtMode(ushort mode) {
         console_set_font(g_console, FONT_8x8);
         break;
     }
+    console_refresh(g_console);
 }
 
 void TDisplayQNX::Beep() {

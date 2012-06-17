@@ -14,7 +14,7 @@
   * The palette map could be changed during suspend. Currently not
   suported. But is a really bizarre case and is restored if VGA state saving
   is used.
-  
+
 ***************************************************************************/
 
 #include <tv/configtv.h>
@@ -86,7 +86,7 @@ void OutMDA(unsigned char i,unsigned char b)
 
 void TDisplayDOS::SetCursorPos(unsigned x, unsigned y)
 {
- if (dual_display || TScreenDOS::screenMode==7)
+ if (TScreenDOS::screenMode==7)
    {
     unsigned loc=y*80+x;
     OutMDA(mdaCursorLocationHigh,loc>>8);
@@ -104,28 +104,18 @@ void TDisplayDOS::SetCursorPos(unsigned x, unsigned y)
 
 void TDisplayDOS::GetCursorPos(unsigned &x, unsigned &y)
 {
- if (dual_display)
-   {
-    unsigned pos=(InMDA(mdaCursorLocationHigh)<<8) |
-                 InMDA(mdaCursorLocationLow);
-    y=pos/80;
-    x=pos%80;
-   }
- else
-   {
     AH=GET_CURSOR_POSITION_AND_SIZE;
     BH=GetPage();
     videoInt();
     y=DH;
     x=DL;
-   }
 }
 
 void TDisplayDOS::GetCursorShape(unsigned &start, unsigned &end)
 {
  static int searchedXP=0, detectedXP;
 
- if (dual_display || TScreenDOS::screenMode==7)
+ if (TScreenDOS::screenMode==7)
    {
     start=InMDA(mdaCursorStart)*100/charLines;
     end  =InMDA(mdaCursorEnd)*100/charLines;
@@ -169,7 +159,7 @@ void TDisplayDOS::SetCursorShape(unsigned start, unsigned end)
  unsigned lStart=(start*charLines+50)/100;
  unsigned lEnd=(end*charLines+50)/100;
 
- if (dual_display || TScreenDOS::screenMode==7)
+ if (TScreenDOS::screenMode==7)
    {
     if (start<=end) // cursor off
       {// Is that really needed?
@@ -203,12 +193,12 @@ void TDisplayDOS::ClearScreen(uchar , uchar)
 
 ushort TDisplayDOS::GetRows()
 {
- return dual_display ? 25 : ScreenRows();
+ return ScreenRows();
 }
 
 ushort TDisplayDOS::GetCols()
 {
- return dual_display ? 80 : ScreenCols();
+ return ScreenCols();
 }
 
 ushort TDisplayDOS::GetCrtMode()
@@ -286,7 +276,7 @@ void TDisplayDOS::setVideoModeInt()
  unsigned long v1=_farpeekl(_dos_ds,0x46C);
 
  videoInt();
- 
+
  unsigned long v2=_farpeekl(_dos_ds,0x46C);
  if (v2-v1>65536)
    { // Come on, switching video modes can't take 1 hour ;-)))
@@ -397,10 +387,10 @@ int TDisplayDOS::setTweakedMode(int tmode)
 {
  int i;
  volatile int junk;
- 
+
  if (tmode>=numTweakedModes)
     return -1;
- 
+
  AX=0x3 | 0x80; // do not clear the screen
  setVideoModeInt();
 
@@ -514,13 +504,13 @@ void TDisplayDOS::setExtendedMode(int mode)
 
 /**[txh]********************************************************************
 
-  Description: 
+  Description:
   Used to test if a mode that we don't know can be handled by the driver
 or not. If the mode uses an unknown memory region we just assume that's
 a graphics mode and revert to 80x25. It could be enhanced a lot specially to
 support VESA video modes when implemented in a way that the video memory
 isn't located at the usual address.
-  
+
 ***************************************************************************/
 
 void TDisplayDOS::testForSupport()
@@ -563,7 +553,7 @@ mode 1, that's 80x28. Also note that regular VGA 80x25 mode is the
   Any other value is assumed to be a user provided video mode and is
 accepted only if we are sure that's really text mode and we know how to
 handle it.
-  
+
 ***************************************************************************/
 
 void TDisplayDOS::SetCrtMode(ushort mode)

@@ -221,8 +221,6 @@ TScreenDOS::TScreenDOS()
 
 void TScreenDOS::Resume()
 {
- if (!dual_display)
-   {
     GetDisPaletteColors(0,16,OriginalPalette);
     SaveScreen();
     //if (screenMode == 0xffff)
@@ -235,12 +233,7 @@ void TScreenDOS::Resume()
        setIntenseState();
     ResumeFonts();
     SetDisPaletteColors(0,16,ActualPalette);
-   }
- else
-   {
-    THWMouseDOS::setEmulation(1);
-   }
- setCrtData();
+    setCrtData();
 }
 
 TScreenDOS::~TScreenDOS()
@@ -253,26 +246,14 @@ TScreenDOS::~TScreenDOS()
 
 void TScreenDOS::Suspend()
 {
- if (!dual_display)
-   {
     wasBlink=getBlinkState();
     SuspendFonts();
     RestoreScreen();
     SetDisPaletteColors(0,16,OriginalPalette);
-   }
 }
 
 void TScreenDOS::setCrtData()
 {
- if (dual_display)
-   {
-    screenMode  =7;
-    screenWidth =80;
-    screenHeight=25;
-    cursorLines =0x0b0c;
-   }
- else
-   {
     screenMode  =getCrtMode();
     screenWidth =getCols();
     screenHeight=getRows();
@@ -282,20 +263,16 @@ void TScreenDOS::setCrtData()
     else
        cursorLines=getCursorType();
     setCursorType(0);
-   }
 }
 
 void TScreenDOS::clearScreen()
 {
- if (dual_display)
-    _mono_clear(); // djgpp's libc
- else
     TDisplay::clearScreen(screenWidth,screenHeight);
 }
 
 ushort TScreenDOS::getCharacter(unsigned offset)
 {
- return _farpeekw(_dos_ds,(dual_display ? mdaBaseAddress : ScreenPrimary)+offset*2);
+ return _farpeekw(_dos_ds,ScreenPrimary+offset*2);
 }
 
 void TScreenDOS::getCharacters(unsigned offset,ushort *buf,unsigned count)
@@ -303,7 +280,7 @@ void TScreenDOS::getCharacters(unsigned offset,ushort *buf,unsigned count)
  if (slowScreen)
    {
     _farsetsel(_dos_ds);
-    int ofs=(dual_display ? mdaBaseAddress : ScreenPrimary)+offset*2;
+    int ofs= ScreenPrimary+offset*2;
     while (count--)
       {
        *buf++=_farnspeekw(ofs);
@@ -312,14 +289,14 @@ void TScreenDOS::getCharacters(unsigned offset,ushort *buf,unsigned count)
    }
  else
    {
-    movedata(_dos_ds,(dual_display ? mdaBaseAddress : ScreenPrimary)+offset*2,
+    movedata(_dos_ds,ScreenPrimary+offset*2,
              _my_ds(),(int)buf,count*2);
    }
 }
 
 void TScreenDOS::setCharacter(unsigned offset,uint32 value)
 {
- _farpokew(_dos_ds,(dual_display ? mdaBaseAddress : ScreenPrimary)+offset*2,value);
+ _farpokew(_dos_ds, ScreenPrimary+offset*2,value);
 }
 
 void TScreenDOS::setCharacters(unsigned offset,ushort *values,unsigned count)
@@ -327,7 +304,7 @@ void TScreenDOS::setCharacters(unsigned offset,ushort *values,unsigned count)
  if (slowScreen)
    {
     _farsetsel(_dos_ds);
-    int ofs = dual_display ? mdaBaseAddress : ScreenPrimary+offset*2;
+    int ofs = ScreenPrimary+offset*2;
     while (count--)
       {
        _farnspokew(ofs,*values++);
@@ -337,7 +314,7 @@ void TScreenDOS::setCharacters(unsigned offset,ushort *values,unsigned count)
  else
    {
     movedata(_my_ds(),(int)values,_dos_ds,
-             (dual_display ? mdaBaseAddress : ScreenPrimary)+offset*2,count*2);
+             ScreenPrimary+offset*2,count*2);
    }
 }
 

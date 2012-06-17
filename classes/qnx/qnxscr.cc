@@ -15,6 +15,7 @@ int TScreenQNX::InitOnce() {
     if(!initialized) {
         TDisplayQNX::Init();
 
+        TScreen::setVideoMode = TScreenQNX::SetVideoMode;
         TScreen::System_p = TScreenQNX::System;
         TScreen::getCharacters = TScreenQNX::GetCharacters;
         TScreen::getCharacter = TScreenQNX::GetCharacter;
@@ -95,6 +96,11 @@ void TScreenQNX::SetCharacter(unsigned offset, uint32 c) {
                                                   offset,
                                                   (unsigned char)(c & 0xff),
                                                   (unsigned char)((c & 0xff00) >> 8));
+}
+
+void TScreenQNX::SetVideoMode(ushort mode) {
+    TScreen::defaultSetVideoMode(mode);
+    screenBuffer = console_get_raw_buffer(g_console);
 }
 
 TScreen *TV_QNXDriverCheck() {

@@ -45,6 +45,7 @@ protected:
                        int in,
                        int out,
                        int err);
+    static void SetVideoMode(ushort mode);
     int InitOnce();
 private:
     static bool initialized;

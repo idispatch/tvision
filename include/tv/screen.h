@@ -201,9 +201,6 @@ public:
     // This flag indicates the user wants to avoid characters that produce moire artifacts
     static char avoidMoire;
 
-    // We must remove it
-    static int dual_display;
-
 protected:
     // SET: Those are more complex so now they aren't inline
     TDisplay();

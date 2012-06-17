@@ -13,16 +13,6 @@
 #ifndef __EVENT_CODES
 #define __EVENT_CODES
 
-/* If this variable is set to nonzero, TV uses for the screen
-   output the monochrome monitor. All attempts to set an video
-   mode are ignored, the user screen is not saved and/or restored
-   and there is checking done, if the monochrome monitor is
-   valid. That means, you have to set this variable ONLY if you
-   know what you do.
-*/
-
-extern int dual_display;
-
 /* Event codes */
 
 const ushort evMouseDown = 0x0001;

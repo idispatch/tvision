@@ -17,8 +17,6 @@
 
 #include <tv.h>
 
-int TDisplay::dual_display = 0;
-
 void (*TDisplay::clearScreen)(uchar, uchar)   = TDisplay::defaultClearScreen;
 ushort (*TDisplay::getRows)()                 = TDisplay::defaultGetRows;
 ushort (*TDisplay::getCols)()                 = TDisplay::defaultGetCols;

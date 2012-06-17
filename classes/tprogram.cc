@@ -202,7 +202,7 @@ TMenuBar *TProgram::initMenuBar(TRect r) {
 }
 
 void TProgram::initScreen() {
-    if (!TDisplay::dual_display && (TScreen::screenMode & 0x00FF) != TDisplay::smMono) {
+    if ((TScreen::screenMode & 0x00FF) != TDisplay::smMono) {
         if ((TScreen::screenMode & TDisplay::smFont8x8) != 0)
             shadowSize.x = 1;
         else
@@ -242,20 +242,17 @@ void TProgram::run() {
 
 void TProgram::setScreenMode(ushort mode, char *command) {
     TRect r;
-
     TMouse::hide();
-    if (!TDisplay::dual_display) {
-        if (mode == 0xFFFF && command)
-            TScreen::setVideoModeExt(command);
-        else
-            TScreen::setVideoMode(mode);
-    }
+    if (mode == 0xFFFF && command)
+        TScreen::setVideoModeExt(command);
+    else
+        TScreen::setVideoMode(mode);
     initScreen();
     syncScreenBuffer();
     r = TRect(0, 0, TScreen::screenWidth, TScreen::screenHeight);
     changeBounds(r);
     setState(sfExposed, False);
-    redraw();
+    Redraw();
     setState(sfExposed, True);
     TMouse::show();
 }

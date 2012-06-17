@@ -103,17 +103,17 @@ Moverlo a un flag en la inicialización
 
   Description:
   Finds if this terminal have variable code page of that's fixed.
-  
-  Return: 
+
+  Return:
   True if the terminal have a variable code page.
-  
+
 Boolean TScreen::codePageVariable()
 {
  return (TerminalType==GENER_TERMINAL ||
          TerminalType==XTERM_TERMINAL) ? False : True;
 }
 ***************************************************************************/
- 
+
 
 /**[txh]********************************************************************
 
@@ -128,7 +128,7 @@ void TScreenUNIX::SendToTerminal(const char *value)
 {
  if (!tty_file || !value)
     return;
-    
+
  fputs(value,tty_file);
  fflush(tty_file);
 }
@@ -479,7 +479,7 @@ void TScreenUNIX::writeBlock(int dst, int len, ushort *old, ushort *src)
     {
      int code  =CLY_Low16(*src);
      int newcol=CLY_High16(*src);
-   
+
      *old++=*src++;
      if (col!=newcol) /* change color ? */
        {
@@ -496,7 +496,7 @@ void TScreenUNIX::writeBlock(int dst, int len, ushort *old, ushort *src)
                 safeput(p, enter_reverse_mode);
           }
        }
- 
+
      switch (TerminalType)
        {
         case XTERM_TERMINAL:
@@ -626,7 +626,7 @@ TScreenUNIX::TScreenUNIX()
   /* Don't need special rights anymore */
   seteuid(getuid());
   setegid(getgid());
-  
+
   initialized=1;
   if (dCB) dCB();
 
@@ -765,7 +765,7 @@ TScreenUNIX::~TScreenUNIX()
      fclose(tty_file);
      tty_file=0;
     }
-  
+
   #ifdef SAVE_TERMIOS
   if (termAttrsSaved)
     {
@@ -792,11 +792,9 @@ TScreenUNIX::~TScreenUNIX()
 
 void TScreenUNIX::Suspend()
 {
-  old_col = old_back = old_fore = -1;
-  // FIXME: When I know, how to get the cursor state
-  setCursorType(startupCursor);
-  if (!dual_display)
-  {
+    old_col = old_back = old_fore = -1;
+    // FIXME: When I know, how to get the cursor state
+    setCursorType(startupCursor);
     // SET: According to "man initscr" we must do endwin() to temporally stop
     // the ncurses engine, I tried it using tty mode (xterm) and vcs mode and
     // seems to work.
@@ -806,13 +804,12 @@ void TScreenUNIX::Suspend()
     /* for the user screen */
     tcsetattr (STDOUT_FILENO, TCSANOW, &old_term);
     #endif
-    
+
     #ifdef TVOSf_FreeBSD
     // Enable autowrapping
     SendToTerminal("\e[?7h");
     #endif
     RestoreScreen();
-  }
 }
 
 void TScreenUNIX::setCrtData()
@@ -979,7 +976,7 @@ int TScreenUNIX::System(const char *command, pid_t *pidChild, int in,
     if (setsid()==-1)
        _exit(127);
     char *argv[4];
-   
+
     // If the caller asks for redirection replace the requested handles
     if (in!=-1)
        dup2(in,STDIN_FILENO);
@@ -987,7 +984,7 @@ int TScreenUNIX::System(const char *command, pid_t *pidChild, int in,
        dup2(out,STDOUT_FILENO);
     if (err!=-1)
        dup2(err,STDERR_FILENO);
-       
+
     argv[0]=getenv("SHELL");
     if (!argv[0])
        argv[0]="/bin/sh";
@@ -1104,5 +1101,5 @@ enabled, that's because if they are printed you can't use the terminal
 
  In Eterm only Graphics (VT100) and Latin 1 are supported.
  In xterm a simple program have troubles to print anything above 127.
-    
+
 *****************************************************************************/

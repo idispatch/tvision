@@ -58,7 +58,7 @@ void TDisplayUNIX::SetCursorPos(unsigned x, unsigned y)
 void TDisplayUNIX::GetCursorPos(unsigned &x, unsigned &y)
 {
  char s[40];
- 
+
  // write/read are better here, because other functions might be buffered
  write(tty_fd,"\e[6n",4); // Request cursor position from terminal
  read(tty_fd,s,sizeof(s)); // Should never overflow...
@@ -95,7 +95,6 @@ void TDisplayUNIX::GetCursorShape(unsigned &start, unsigned &end)
 
 ushort TDisplayUNIX::GetRows()
 {
- if (dual_display) return 25;
  winsize win;
  win.ws_row=0xFFFF;
  ioctl(tty_fd,TIOCGWINSZ,&win);
@@ -104,7 +103,6 @@ ushort TDisplayUNIX::GetRows()
 
 ushort TDisplayUNIX::GetCols()
 {
- if (dual_display) return 80;
  winsize win;
  win.ws_col=0xFFFF;
  ioctl(tty_fd,TIOCGWINSZ,&win);
