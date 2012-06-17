@@ -40,7 +40,7 @@ void TNSCollection::atRemove(ccIndex index) {
         error(1, 0);
 
     count--;
-    CLY_memcpy( &items[index], &items[index+1], (count-index)*sizeof(void *));
+    memmove( &items[index], &items[index+1], (count-index)*sizeof(void *));
 }
 
 void TNSCollection::atFree(ccIndex index) {

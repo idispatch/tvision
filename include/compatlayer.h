@@ -1681,13 +1681,6 @@ typedef long ssize_t;
 #if defined(TVOSf_QNXRtP)
 #include <strings.h> // QNX RtP requires this include for functions strcasecmp, etc.
 #endif // TVOSf_QNXRtP
-#ifndef CLY_memcpy
-#if CLY_SAFE_MEMCPY
-#define CLY_memcpy(a,b,c) memcpy(a,b,c)
-#else
-#define CLY_memcpy(a,b,c) memmove(a,b,c)
-#endif
-#endif
 #endif
 
 #ifndef Included_limits

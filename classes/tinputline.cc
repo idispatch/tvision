@@ -19,7 +19,7 @@
  */
 #include <tv.h>
 
-unsigned TInputLineBase::defaultModeOptions = 0;
+unsigned TInputLine::defaultModeOptions = 0;
 
 // TODO: Not used here should be moved away
 char hotKey(const char *s) {
@@ -31,54 +31,37 @@ char hotKey(const char *s) {
         return 0;
 }
 
-// TODO: Also this
-inline
-unsigned StrLen(const char *s) {
-    return strlen(s);
-}
-
-inline
-unsigned StrLen(const uint16 *s) {
-    unsigned l;
-    for (l = 0; s[l]; l++)
-        ;
-    return l;
-}
-
 #define cpInputLine "\x13\x13\x14\x15"
 
-TInputLineBase::TInputLineBase(const TRect& bounds, int aMaxLen) :
-        TView(bounds), curPos(0), firstPos(0), selStart(0), selEnd(0), validator(NULL), maxLen(
-                aMaxLen - 1), dataLen(0) {
+TInputLine::TInputLine(const TRect& bounds, int aMaxLen) :
+                TView(bounds),
+                curPos(0),
+                firstPos(0),
+                selStart(0),
+                selEnd(0),
+                validator(NULL),
+                maxLen(aMaxLen - 1),
+                dataLen(0) {
     state |= sfCursorVis;
     options |= ofSelectable | ofFirstClick;
     modeOptions = defaultModeOptions;
+    data = new char[aMaxLen];
+    *data = EOS;
 }
 
-template class TInputLineBaseT<char, TDrawBuffer> ;
-template class TInputLineBaseT<uint16, TDrawBufferU16> ;
-
-template<typename T, typename D>
-TInputLineBaseT<T, D>::TInputLineBaseT(const TRect& bounds, int aMaxLen) :
-        TInputLineBase(bounds, aMaxLen) {
-    data = (char *) new T[aMaxLen];
-    *((T *) data) = EOS;
-    cellSize = sizeof(T);
-}
-
-void TInputLineBase::SetValidator(TValidator * aValidator) {
+void TInputLine::SetValidator(TValidator * aValidator) {
     destroy(validator);
     validator = aValidator;
     if (validator)
         validator->SetOwner(this);
 }
 
-TInputLineBase::~TInputLineBase() {
+TInputLine::~TInputLine() {
     delete[] data;
     destroy(validator);
 }
 
-Boolean TInputLineBase::canScroll(int delta) {
+Boolean TInputLine::canScroll(int delta) {
     if (delta < 0)
         return Boolean(firstPos > 0);
     else if (delta > 0)
@@ -89,47 +72,20 @@ Boolean TInputLineBase::canScroll(int delta) {
 
 // Optimized for size, it could be 2 specialized members avoiding a generic
 // multiply.
-uint32 TInputLineBase::dataSize() {
-    return (maxLen + 1) * cellSize;
+uint32 TInputLine::dataSize() {
+    return (maxLen + 1);
 }
 
-// TODO: avoid hardcoded arrows
-template<typename T, typename D>
-void TInputLineBaseT<T, D>::draw() {
-    int l, r;
-    D b;
-
-    uchar color = (state & sfFocused) ? getColor(2) : getColor(1);
-
-    b.moveChar(0, ' ', color, size.x);
-    b.moveStr(1, ((T *) data) + firstPos, color, size.x - 2);
-
-    if (canScroll(1))
-        b.moveChar(size.x - 1, sizeof(T) == 1 ? rightArrow : 0x25b6, (uchar) getColor(4), 1);
-    if (canScroll(-1))
-        b.moveChar(0, sizeof(T) == 1 ? leftArrow : 0x25c0, (uchar) getColor(4), 1);
-    if (state & sfSelected) {
-        l = selStart - firstPos;
-        r = selEnd - firstPos;
-        l = max(0, l);
-        r = min(size.x - 2, r);
-        if (l < r)
-            b.moveChar(l + 1, 0, (uchar) getColor(3), r - l);
-    }
-    writeLine(0, 0, size.x, size.y, b);
-    setCursor(curPos - firstPos + 1, 0);
-}
-
-void TInputLineBase::getData(void *rec) {
+void TInputLine::getData(void *rec) {
     memcpy(rec, data, dataSize());
 }
 
-TPalette& TInputLineBase::getPalette() const {
+TPalette& TInputLine::getPalette() const {
     static TPalette palette(cpInputLine, sizeof(cpInputLine) - 1);
     return palette;
 }
 
-int TInputLineBase::mouseDelta(TEvent& event) {
+int TInputLine::mouseDelta(TEvent& event) {
     TPoint mouse = makeLocal(event.mouse.where);
 
     if (mouse.x <= 0)
@@ -140,7 +96,7 @@ int TInputLineBase::mouseDelta(TEvent& event) {
         return 0;
 }
 
-int TInputLineBase::mousePos(TEvent& event) {
+int TInputLine::mousePos(TEvent& event) {
     TPoint mouse = makeLocal(event.mouse.where);
     mouse.x = max(mouse.x, 1);
     int pos = mouse.x + firstPos - 1;
@@ -150,17 +106,12 @@ int TInputLineBase::mousePos(TEvent& event) {
 }
 
 // Also optimize for size
-void TInputLineBase::deleteSelect() {
+void TInputLine::deleteSelect() {
     if (selStart < selEnd) {
-        CLY_memcpy(data+selStart*cellSize, data+selEnd*cellSize, (dataLen-selEnd+1)*cellSize);
+        memcpy(data+selStart, data+selEnd, (dataLen-selEnd+1));
         dataLen -= selEnd - selStart;
         curPos = selStart;
     }
-}
-
-template<typename T, typename D>
-void TInputLineBaseT<T, D>::assignPos(int index, unsigned val) {
-    ((T *) data)[index] = val;
 }
 
 /**[txh]********************************************************************
@@ -179,7 +130,7 @@ void TInputLineBaseT<T, D>::assignPos(int index, unsigned val) {
  ***************************************************************************/
 // TODO: The validator can't be 8 bits for an Unicode class.
 //       I think IsValidInput should support one char.
-Boolean TInputLineBase::insertChar(unsigned value) {
+Boolean TInputLine::insertChar(unsigned value) {
     if (validator) {
         char tmp[2];
         tmp[0] = value;
@@ -193,8 +144,9 @@ Boolean TInputLineBase::insertChar(unsigned value) {
         resizeData();
     if (insertModeOn()) {
         if (!lineIsFull()) {
-            memmove(data + (curPos + 1) * cellSize, data + curPos * cellSize,
-                    ((dataLen - curPos) + 1) * cellSize);
+            memmove(data + curPos + 1,
+                    data + curPos,
+                    dataLen - curPos + 1);
             dataLen++;
             if (firstPos > curPos)
                 firstPos = curPos;
@@ -222,16 +174,6 @@ Boolean TInputLine::insertCharEv(TEvent &event) {
     return False;
 }
 
-Boolean TInputLineU16::insertCharEv(TEvent &event) {
-    TGKey::fillCharCode(event);
-    if (event.keyDown.charCode >= ' ' && event.keyDown.charCode < 0xFF00) {
-        if (!insertChar(event.keyDown.charCode))
-            clearEvent(event);
-        return True;
-    }
-    return False;
-}
-
 /**[txh]********************************************************************
 
  Description:
@@ -240,7 +182,7 @@ Boolean TInputLineU16::insertCharEv(TEvent &event) {
 
  ***************************************************************************/
 
-void TInputLineBase::makeVisible() {
+void TInputLine::makeVisible() {
     selStart = 0;
     selEnd = 0;
     if (firstPos > curPos)
@@ -251,34 +193,7 @@ void TInputLineBase::makeVisible() {
     drawView();
 }
 
-// TODO: Get the clipboard in unicode format
-template<typename T, typename D>
-Boolean TInputLineBaseT<T, D>::pasteFromOSClipboard() {
-    if (sizeof(T) != 1)
-        return False;
-    unsigned size, i;
-    T *p = (T *) TVOSClipboard::paste(1, size);
-    if (p) {
-        for (i = 0; i < size; i++) {
-            insertChar(p[i]);
-            selStart = selEnd = 0; // Reset the selection or we will delete the last insertion
-        }
-        delete [] p;
-        makeVisible();
-        return True;
-    }
-    return False;
-}
-
-template<typename T, typename D>
-void TInputLineBaseT<T, D>::copyToOSClipboard() {
-    if (sizeof(T) == 1)
-        TVOSClipboard::copy(1, data + selStart, selEnd - selStart);
-    // else if 2 ....
-    // TODO: Put to the clipboard in unicode format
-}
-
-void TInputLineBase::handleEvent(TEvent& event) {
+void TInputLine::handleEvent(TEvent& event) {
     TView::handleEvent(event);
 
     int delta, anchor;
@@ -372,7 +287,7 @@ void TInputLineBase::handleEvent(TEvent& event) {
         }
 }
 
-void TInputLineBase::selectAll(Boolean enable) {
+void TInputLine::selectAll(Boolean enable) {
     selStart = 0;
     if (enable)
         curPos = selEnd = dataLen;
@@ -384,27 +299,7 @@ void TInputLineBase::selectAll(Boolean enable) {
     drawView();
 }
 
-template<typename T, typename D>
-void TInputLineBaseT<T, D>::setData(void *rec) {
-    uint32 ds = dataSize() - sizeof(T);
-    memcpy(data, rec, ds);
-    *((T *) (data + ds)) = EOS;
-    dataLen = StrLen((T *) data);
-    selectAll(True);
-}
-
-template<typename T, typename D>
-void TInputLineBaseT<T, D>::setDataFromStr(void *str) {
-    unsigned ds = dataSize() / sizeof(T) - 1, i;
-    T *s = (T *) str;
-    T *d = (T *) data;
-    for (i = 0; i < ds && s[i]; i++)
-        d[i] = s[i];
-    d[i] = EOS;
-    dataLen = i;
-}
-
-void TInputLineBase::setState(ushort aState, Boolean enable) {
+void TInputLine::setState(ushort aState, Boolean enable) {
     if (validator && // We have a validator
             (modeOptions & ilValidatorBlocks) && // We want to block if invalid
             owner && (owner->state & sfActive) && // The owner is visible
@@ -423,7 +318,7 @@ void TInputLineBase::setState(ushort aState, Boolean enable) {
 }
 
 #if !defined( NO_STREAM )
-void TInputLineBase::write(opstream& os)
+void TInputLine::write(opstream& os)
 {
     TView::write(os);
     os << maxLen << curPos << firstPos
@@ -432,13 +327,12 @@ void TInputLineBase::write(opstream& os)
     os << validator;
 }
 
-template <typename T, typename D>
-void TInputLineBaseT<T,D>::writeData(opstream& os)
+void TInputLine::writeData(opstream& os)
 {
     os.writeString((T *)data);
 }
 
-void *TInputLineBase::read(ipstream& is)
+void *TInputLine::read(ipstream& is)
 {
     TView::read(is);
     is >> maxLen >> curPos >> firstPos
@@ -449,8 +343,7 @@ void *TInputLineBase::read(ipstream& is)
     return this;
 }
 
-template <typename T, typename D>
-void *TInputLineBaseT<T,D>::readData(ipstream& is)
+void *TInputLine::readData(ipstream& is)
 {
     cellSize=sizeof(T);
     data=(char *)new T[maxLen+1];
@@ -463,19 +356,15 @@ TStreamable *TInputLine::build()
     return new TInputLine(streamableInit);
 }
 
-TStreamable *TInputLineU16::build()
-{
-    return new TInputLineU16(streamableInit);
-}
-
-TInputLineBase::TInputLineBase(StreamableInit) :
-TView(streamableInit),
-validator(NULL)
+TInputLine::TInputLine(StreamableInit) :
+        TView(streamableInit),
+        validator(NULL)
 {
 }
 
 #endif // NO_STREAM
-Boolean TInputLineBase::valid(ushort) {
+
+Boolean TInputLine::valid(ushort) {
     Boolean ret = True;
     if (validator) {
         ret = validator->Valid(data);
@@ -485,5 +374,71 @@ Boolean TInputLineBase::valid(ushort) {
         }
     }
     return ret;
+}
+
+void TInputLine::setData(void *rec) {
+    uint32 ds = dataSize() - sizeof(char);
+    memcpy(data, rec, ds);
+    *(data + ds) = EOS;
+    dataLen = strlen(data);
+    selectAll(True);
+}
+
+void TInputLine::setDataFromStr(void *str) {
+    unsigned ds = dataSize() / sizeof(char) - 1, i;
+    char *s = (char *) str;
+    char *d = data;
+    for (i = 0; i < ds && s[i]; i++)
+        d[i] = s[i];
+    d[i] = EOS;
+    dataLen = i;
+}
+
+void TInputLine::assignPos(int index, unsigned val) {
+    data[index] = val;
+}
+
+Boolean TInputLine::pasteFromOSClipboard() {
+    unsigned size, i;
+    char *p = (char *) TVOSClipboard::paste(1, size);
+    if (p) {
+        for (i = 0; i < size; i++) {
+            insertChar(p[i]);
+            selStart = selEnd = 0; // Reset the selection or we will delete the last insertion
+        }
+        delete [] p;
+        makeVisible();
+        return True;
+    }
+    return False;
+}
+
+void TInputLine::copyToOSClipboard() {
+    TVOSClipboard::copy(1, data + selStart, selEnd - selStart);
+}
+
+void TInputLine::draw() {
+    int l, r;
+    TDrawBuffer b;
+
+    uchar color = (state & sfFocused) ? getColor(2) : getColor(1);
+
+    b.moveChar(0, ' ', color, size.x);
+    b.moveStr(1, data + firstPos, color, size.x - 2);
+
+    if (canScroll(1))
+        b.moveChar(size.x - 1, rightArrow, (uchar) getColor(4), 1);
+    if (canScroll(-1))
+        b.moveChar(0, leftArrow, (uchar) getColor(4), 1);
+    if (state & sfSelected) {
+        l = selStart - firstPos;
+        r = selEnd - firstPos;
+        l = max(0, l);
+        r = min(size.x - 2, r);
+        if (l < r)
+            b.moveChar(l + 1, 0, (uchar) getColor(3), r - l);
+    }
+    writeLine(0, 0, size.x, size.y, b);
+    setCursor(curPos - firstPos + 1, 0);
 }
 

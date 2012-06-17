@@ -29,7 +29,7 @@ typedef enum {
   vtGetData
 } TVTransfer;
 
-class TInputLineBase;
+class TInputLine;
 
 // Abstract TValidator object
 class TValidator : public TObject
@@ -47,9 +47,9 @@ public:
   virtual ushort Transfer(char *,void *,TVTransfer);
   virtual void Format(char *source);
   Boolean Valid(const char *);
-  void SetOwner(TInputLineBase *owner) { Owner = owner; }
+  void SetOwner(TInputLine *owner) { Owner = owner; }
 protected:
-  TInputLineBase *Owner;
+  TInputLine *Owner;
 #if !defined( NO_STREAM )
 private:
   virtual const char *streamableName() const

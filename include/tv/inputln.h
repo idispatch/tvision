@@ -5,16 +5,6 @@
  *      All Rights Reserved.
  *
  * Modified by Robert H”hne to be used for RHIDE.
- Heavily modified by Salvador E. Tropea to support multibyte encodings.
- Now the original TInputLine is composed by:
-
- TInputLineBase -> TInputLineBaseT<T,D> |-> TInputLine
- |-> TInputLineU16
-
- The template class is used to avoid maintaining two versions of the same
- code.
- Added: TInput1Line class by SET (based on TVTools idea).
-
  *
  *
  */
@@ -35,10 +25,10 @@
 const unsigned ilValidatorBlocks = 1; // Don't pass the focus if the validator indicates
 // the data isn't valid. by SET.
 
-class TInputLineBase: public TView {
+class TInputLine: public TView {
 public:
-    TInputLineBase(const TRect& bounds, int aMaxLen);
-    ~TInputLineBase();
+    TInputLine(const TRect& bounds, int aMaxLen);
+    ~TInputLine();
 
     virtual uint32 dataSize();
     virtual void getData(void *rec);
@@ -47,17 +37,16 @@ public:
     void selectAll(Boolean enable);
     virtual void setState(ushort aState, Boolean enable);
     void SetValidator(TValidator *);
-    virtual Boolean valid(ushort);
-    virtual Boolean insertChar(unsigned val); // Added by SET
-    virtual Boolean insertCharEv(TEvent &event)=0;
-    virtual void assignPos(int index, unsigned val)=0;
-    virtual Boolean pasteFromOSClipboard()=0;
-    virtual void copyToOSClipboard()=0;
-    virtual void setDataFromStr(void *str)=0;
-    const void *getData() {
-        return data;
-    }
-    ;
+    Boolean valid(ushort);
+    Boolean insertChar(unsigned val); // Added by SET
+    Boolean insertCharEv(TEvent &event);
+    void assignPos(int index, unsigned val);
+    Boolean pasteFromOSClipboard();
+    void copyToOSClipboard();
+    void setDataFromStr(void *str);
+    const void *getData() { return data; }
+    virtual void setData(void *rec);
+    void draw();
 
     // Functions to fine tune the behavior. by SET.
     unsigned setModeOptions(unsigned newOps) {
@@ -88,8 +77,7 @@ public:
     static char oleftArrow;
 
 protected:
-    virtual void resizeData() {
-    }
+    virtual void resizeData() {}
     TValidator * validator;
     void deleteSelect();
     void makeVisible(); // Added by SET
@@ -107,7 +95,6 @@ protected:
     char *data;
     int maxLen;
 
-    int cellSize;
     int dataLen;
 
     // To fine tune the behavior. SET.
@@ -148,64 +135,21 @@ inline opstream& operator << ( opstream& os, TInputLineBase& cl )
 inline opstream& operator << ( opstream& os, TInputLineBase* cl )
 {   return os << (TStreamable *)cl;}
 #endif // NO_STREAM
+
 inline
-int TInputLineBase::insertModeOn() {
+int TInputLine::insertModeOn() {
     return (state & sfCursorIns) == 0;
 }
 
 inline
-int TInputLineBase::lineIsFull() {
+int TInputLine::lineIsFull() {
     return dataLen >= maxLen;
 }
 
 inline
-int TInputLineBase::posIsEnd() {
+int TInputLine::posIsEnd() {
     return curPos >= dataLen;
 }
-
-template<typename T, typename D>
-class TInputLineBaseT: public TInputLineBase {
-public:
-    TInputLineBaseT(const TRect& bounds, int aMaxLen);
-
-    virtual void setData(void *rec);
-    virtual void setDataFromStr(void *str);
-    virtual void assignPos(int index, unsigned val);
-    virtual Boolean pasteFromOSClipboard();
-    virtual void copyToOSClipboard();
-    virtual void draw();
-
-#if !defined( NO_STREAM )
-protected:
-    TInputLineBaseT(StreamableInit) : TInputLineBase(streamableInit) {}
-
-    virtual void writeData(opstream&);
-    virtual void *readData(ipstream&);
-#endif // NO_STREAM
-};
-
-class TInputLine: public TInputLineBaseT<char, TDrawBuffer> {
-public:
-    TInputLine(const TRect& bounds, int aMaxLen) :
-            TInputLineBaseT<char, TDrawBuffer>(bounds, aMaxLen) {
-    }
-    ;
-
-    virtual Boolean insertCharEv(TEvent &event);
-
-#if !defined( NO_STREAM )
-    virtual const char *streamableName() const
-    {   return name;}
-
-protected:
-    TInputLine::TInputLine(StreamableInit) :
-    TInputLineBaseT<char,TDrawBuffer>(streamableInit) {}
-
-public:
-    static const char * const name;
-    static TStreamable *build();
-#endif // NO_STREAM
-};
 
 #if !defined( NO_STREAM )
 inline ipstream& operator >> ( ipstream& is, TInputLine& cl )
@@ -219,42 +163,6 @@ inline opstream& operator << ( opstream& os, TInputLine* cl )
 {   return os << (TStreamable *)cl;}
 #endif // NO_STREAM
 
-class TInputLineU16: public TInputLineBaseT<uint16, TDrawBufferU16> {
-public:
-    TInputLineU16(const TRect& bounds, int aMaxLen) :
-            TInputLineBaseT<uint16, TDrawBufferU16>(bounds, aMaxLen) {
-    }
-    ;
-
-    virtual Boolean insertCharEv(TEvent &event);
-
-#if !defined( NO_STREAM )
-    virtual const char *streamableName() const
-    {   return name;}
-
-protected:
-    TInputLineU16(StreamableInit) :
-    TInputLineBaseT<uint16,TDrawBufferU16>(streamableInit) {}
-
-public:
-    static const char * const name;
-    static TStreamable *build();
-#endif // NO_STREAM
-};
-
-#if !defined( NO_STREAM )
-inline ipstream& operator >> ( ipstream& is, TInputLineU16& cl )
-{   return is >> (TStreamable&)cl;}
-inline ipstream& operator >> ( ipstream& is, TInputLineU16*& cl )
-{   return is >> (void *&)cl;}
-
-inline opstream& operator << ( opstream& os, TInputLineU16& cl )
-{   return os << (TStreamable&)cl;}
-inline opstream& operator << ( opstream& os, TInputLineU16* cl )
-{   return os << (TStreamable *)cl;}
-#endif // NO_STREAM
-#endif
-
 #if 0
 #ifndef TInput1Line_defined
 #define TInput1Line_defined
@@ -265,11 +173,7 @@ public:
     TInput1Line(int x, int y, int max) :
     TInputLine(TRect(x,y,x+max+2,y+1), max)) {};
 };
-
-class TInput1LineU16: public TInputLineU16 {
-public:
-    TInput1LineU16(int x, int y, int max) :
-    TInputLineU16(TRect(x,y,x+max+2,y+1), max)) {};
-}
 #endif
+#endif
+
 #endif
