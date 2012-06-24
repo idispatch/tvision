@@ -56,11 +56,14 @@ void TFileViewer::changeBounds(const TRect & bounds) {
 
 TFileViewer::TFileViewer(const TRect& bounds, TScrollBar *aHScrollBar, TScrollBar *aVScrollBar,
         const char *aFileName) :
-        TScroller(bounds, aHScrollBar, aVScrollBar), buffer(NULL), real_bufsize(0), width(0), count(
-                0) {
+        TScroller(bounds, aHScrollBar, aVScrollBar),
+        buffer(NULL),
+        real_bufsize(0),
+        width(0), count(0) {
     growMode = gfGrowHiX | gfGrowHiY;
     isValid = True;
     fileName = 0;
+    fileLines = NULL;
     helpCtx = hcFileViewer;
     readFile(aFileName);
     delta.x = delta.y = 0;
@@ -70,8 +73,10 @@ TFileViewer::~TFileViewer() {
     if (buffer)
         free(buffer);
     delete[] fileName;
-    fileLines->removeAll();
-    destroy(fileLines);
+    if(fileLines!=NULL) {
+        fileLines->removeAll();
+        destroy(fileLines);
+    }
 }
 
 void TFileViewer::draw() {
@@ -211,7 +216,7 @@ Boolean TFileViewer::valid(ushort) {
 }
 
 const char * const TFileViewer::operator [](int index) {
-    if (index >= count)
+    if (index >= count || fileLines == NULL)
         return NULL;
     return (const char *) (buffer + (long) fileLines->at(index));
 }
