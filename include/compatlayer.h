@@ -2138,14 +2138,6 @@ int CLY_HaveLFNs()
 }
 #endif
 
-#if defined(OS_HaveLFNs) && !defined(OS_HaveLFNs_Defined)
-#define OS_HaveLFNs_Defined 1
-inline
-int CLY_HaveLFNs() {
-    return 1;
-}
-#endif
-
 /* Is that an EOL char? */
 /* Ask for no */
 #undef  CLY_IsntEOL

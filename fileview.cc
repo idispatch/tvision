@@ -11,8 +11,6 @@
  *
  *
  */
-// SET: Moved the standard headers here because according to DJ
-// they can unconditionally declare symbols like NULL
 #include <tv.h>
 
 #if !defined( NO_STREAM )
@@ -139,9 +137,13 @@ void TFileViewer::readFile(const char *fName) {
         }
         isValid = True;
     }
-    count = fileLines->getCount();
-    setLimit(size.x + width, size.y + count);
-    close(fileToView);
+    if(fileLines!=NULL) {
+        count = fileLines->getCount();
+        setLimit(size.x + width, size.y + count);
+    }
+    if(fileToView!=-1) {
+        close(fileToView);
+    }
 }
 
 void TFileViewer::saveFile(const char *fname) {
@@ -217,13 +219,16 @@ const char * const TFileViewer::operator [](int index) {
 static int winNumber = 0;
 
 TFileWindow::TFileWindow(const char *fileName) :
-        TWindowInit(&TFileWindow::initFrame), TWindow(TProgram::deskTop->getExtent(), fileName,
+        TWindowInit(&TFileWindow::initFrame),
+        TWindow(TProgram::deskTop->getExtent(),
+                fileName,
                 winNumber++) {
     options |= ofTileable;
     TRect r(getExtent());
     r.grow(-1, -1);
-    insert(
-            new TFileViewer(r, standardScrollBar(sbHorizontal | sbHandleKeyboard),
-                    standardScrollBar(sbVertical | sbHandleKeyboard), fileName));
+    insert(new TFileViewer(r,
+                           standardScrollBar(sbHorizontal | sbHandleKeyboard),
+                           standardScrollBar(sbVertical | sbHandleKeyboard),
+                           fileName));
 }
 

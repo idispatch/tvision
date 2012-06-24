@@ -36,8 +36,7 @@
 
 TFileList::TFileList(const TRect& bounds, TScrollBar *aScrollBar) :
         TSortedListBox(bounds, 2, aScrollBar) {
-    if (CLY_HaveLFNs())
-        setNumCols(1);
+    setNumCols(1);
 }
 
 TFileList::~TFileList() {
@@ -84,20 +83,6 @@ void TFileList::getText(char *dest, ccIndex item, short maxChars) {
     if (f->attr & FA_DIREC)
         strcat(dest, DIRSEPARATOR_);
 }
-
-/* SET: Moved (TV 2.0)
- void TFileList::handleEvent( TEvent & event )
- {
- if ( event.what == evMouseDown && event.mouse.doubleClick )
- {
- event.what = evCommand;
- event.message.command = cmOK;
- putEvent( event );
- clearEvent( event );
- }
- else
- TSortedListBox::handleEvent( event );
- }*/
 
 void TFileList::readDirectory(const char *dir, const char *wildCard) {
     char path[PATH_MAX];

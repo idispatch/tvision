@@ -17,8 +17,6 @@
 // File dialog flags
 const int ffOpen = 0x0001, ffSaveAs = 0x0002;
 
-const ushort cmOpenDialogOpen = 100, cmOpenDialogReplace = 101;
-
 TFileDialog::TFileDialog(const char *aWildCard, const char *aTitle, const char *inputName,
         ushort aOptions, uchar histId) :
         TWindowInit(&TFileDialog::initFrame), TDialog(TRect(15, 1, 64, 21), aTitle), directory(0) { // SET: Enlarged the window 1 line and added 1 line to the list moving
@@ -40,7 +38,7 @@ TFileDialog::TFileDialog(const char *aWildCard, const char *aTitle, const char *
     his->growMode = gfGrowLoX | gfGrowHiX;
     insert(his);
 
-    int longNames = CLY_HaveLFNs(); // SET
+    int longNames = 1;
     TScrollBar *sb =
             longNames ? new TScrollBar(TRect(34, 5, 35, 16)) : new TScrollBar(TRect(3, 15, 34, 16));
     insert(sb);

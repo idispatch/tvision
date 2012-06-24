@@ -15,22 +15,20 @@ the size of the memo structure because the old code uses 4Gb ;-)
 
 #define cpMemo      "\x1A\x1B"
 
-TMemo::TMemo( const TRect& bounds,
-                  TScrollBar *aHScrollBar,
-                  TScrollBar *aVScrollBar,
-                  TIndicator *aIndicator,
-                  uint32 aBufSize ) :
-    TEditor( bounds, aHScrollBar, aVScrollBar, aIndicator, aBufSize )
-{
+TMemo::TMemo(const TRect& bounds,
+             TScrollBar *aHScrollBar,
+             TScrollBar *aVScrollBar,
+             TIndicator *aIndicator,
+             uint32 aBufSize ) :
+    TEditor( bounds, aHScrollBar, aVScrollBar, aIndicator, aBufSize ){
+
 }
 
-uint32 TMemo::dataSize()
-{
+uint32 TMemo::dataSize() {
     return bufSize + sizeof( ushort );
 }
 
-void TMemo::getData( void *rec )
-{
+void TMemo::getData( void *rec ) {
     TMemoData *data = (TMemoData *)rec;
 
     data->length = bufLen;
@@ -39,22 +37,19 @@ void TMemo::getData( void *rec )
     memset(&data->buffer[bufLen], 0, bufSize - bufLen);
 }
 
-void TMemo::setData( void *rec )
-{
+void TMemo::setData( void *rec ) {
     TMemoData *data = (TMemoData *)rec;
 
     memcpy(&buffer[bufSize - data->length], data->buffer, data->length);
     setBufLen(data->length);
 }
 
-TPalette& TMemo::getPalette() const
-{
+TPalette& TMemo::getPalette() const {
     static TPalette palette( cpMemo, sizeof( cpMemo )-1 );
     return palette;
 }
 
-void TMemo::handleEvent( TEvent& event )
-{
+void TMemo::handleEvent( TEvent& event ) {
     if( event.what != evKeyDown || event.keyDown.keyCode != kbTab )
         TEditor::handleEvent(event);
 }
